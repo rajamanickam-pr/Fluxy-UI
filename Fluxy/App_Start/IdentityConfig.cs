@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Fluxy.Models;
+using Fluxy.Data;
 
 namespace Fluxy
 {
@@ -42,7 +43,7 @@ namespace Fluxy
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<FluxyContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {

@@ -5,6 +5,14 @@ VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxy", "Fluxy\Fluxy.csproj", "{14ACE8C0-788B-4CFB-825B-BECB56CAB5E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxy.Core", "Fluxy.Core\Fluxy.Core.csproj", "{51BF2DCF-5CF5-4BE5-B6BE-2CB395507D07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxy.Data", "Fluxy.Data\Fluxy.Data.csproj", "{D1E1E91C-FEF2-4B80-A971-7B17B7778B4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxy.Repositories", "Fluxy.Repositories\Fluxy.Repositories.csproj", "{E2802966-A68A-47B9-8437-982A097E64F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxy.Services", "Fluxy.Services\Fluxy.Services.csproj", "{2CCD1FC1-C410-4603-8905-DB1A0A03CAFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{14ACE8C0-788B-4CFB-825B-BECB56CAB5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14ACE8C0-788B-4CFB-825B-BECB56CAB5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14ACE8C0-788B-4CFB-825B-BECB56CAB5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51BF2DCF-5CF5-4BE5-B6BE-2CB395507D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51BF2DCF-5CF5-4BE5-B6BE-2CB395507D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51BF2DCF-5CF5-4BE5-B6BE-2CB395507D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51BF2DCF-5CF5-4BE5-B6BE-2CB395507D07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1E1E91C-FEF2-4B80-A971-7B17B7778B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1E1E91C-FEF2-4B80-A971-7B17B7778B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1E1E91C-FEF2-4B80-A971-7B17B7778B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1E1E91C-FEF2-4B80-A971-7B17B7778B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2802966-A68A-47B9-8437-982A097E64F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2802966-A68A-47B9-8437-982A097E64F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2802966-A68A-47B9-8437-982A097E64F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2802966-A68A-47B9-8437-982A097E64F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CCD1FC1-C410-4603-8905-DB1A0A03CAFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CCD1FC1-C410-4603-8905-DB1A0A03CAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CCD1FC1-C410-4603-8905-DB1A0A03CAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CCD1FC1-C410-4603-8905-DB1A0A03CAFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

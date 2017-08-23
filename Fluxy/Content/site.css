@@ -29,13 +29,18 @@ body {
 }
 
 .card p {
+    font-weight:600;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: normal;
     text-overflow: ellipsis;
 }
 
-.card span{
-    font-size:smaller;
+.card span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+    font-size: smaller;
 }
 
 .alert-info {
@@ -43,9 +48,11 @@ body {
     color: #FFF;
 }
 
+.navbar-inverse .navbar-nav .nav-link{
+    color:white !important;
+}
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
-
 /* Carousel base class */
 .carousel {
     margin-bottom: 4rem;
