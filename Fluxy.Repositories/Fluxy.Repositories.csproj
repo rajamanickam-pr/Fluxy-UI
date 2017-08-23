@@ -51,6 +51,12 @@
     <Compile Include="Common\IGenericRepository.cs" />
     <Compile Include="Common\IUnitOfWork.cs" />
     <Compile Include="Common\UnitOfWork.cs" />
+    <Compile Include="Menu\IMainMenuRepository.cs" />
+    <Compile Include="Menu\IMenuAttributeRepository.cs" />
+    <Compile Include="Menu\ISubMenuRepository.cs" />
+    <Compile Include="Menu\MainMenuRepository.cs" />
+    <Compile Include="Menu\MenuAttributeRepository.cs" />
+    <Compile Include="Menu\SubMenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

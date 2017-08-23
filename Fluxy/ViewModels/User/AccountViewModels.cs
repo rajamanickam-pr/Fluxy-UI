@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Fluxy.Models
+namespace Fluxy.ViewModels.User
 {
     public class ExternalLoginConfirmationViewModel
     {

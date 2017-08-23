@@ -43,6 +43,12 @@
     <Compile Include="Common\EntityService.cs" />
     <Compile Include="Common\IEntityService.cs" />
     <Compile Include="Common\IService.cs" />
+    <Compile Include="Menu\MainMenuService.cs" />
+    <Compile Include="Menu\IMainMenuService.cs" />
+    <Compile Include="Menu\MenuAttributeService.cs" />
+    <Compile Include="Menu\IMenuAttributeService.cs" />
+    <Compile Include="Menu\SubMenuService.cs" />
+    <Compile Include="Menu\ISubMenuService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

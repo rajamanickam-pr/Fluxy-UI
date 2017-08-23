@@ -16,7 +16,6 @@ namespace Fluxy.Modules
             builder.RegisterModule(new RepositoryModule());
             builder.RegisterType(typeof(FluxyContext)).As(typeof(DbContext)).InstancePerLifetimeScope();
             builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerRequest();
-
         }
     }
 }

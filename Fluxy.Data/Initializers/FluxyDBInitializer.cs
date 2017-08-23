@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
 namespace Fluxy.Data.Initializers
 {
-    public class FluxyDBInitializer : CreateDatabaseIfNotExists<FluxyContext>
+    public class FluxyDBInitializer : DropCreateDatabaseIfModelChanges<FluxyContext>
     {
         protected override void Seed(FluxyContext context)
         {

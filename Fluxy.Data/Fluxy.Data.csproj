@@ -57,6 +57,9 @@
     <Compile Include="Initializers\FluxyConfiguration.cs" />
     <Compile Include="Initializers\FluxyDBInitializer.cs" />
     <Compile Include="Mappings\FluxyEntityTypeConfiguration.cs" />
+    <Compile Include="Mappings\Menu\MenuAttributeMap.cs" />
+    <Compile Include="Mappings\Menu\MainMenuMap.cs" />
+    <Compile Include="Mappings\Menu\SubMenuMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

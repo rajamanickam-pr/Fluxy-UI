@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace Fluxy.Models
+namespace Fluxy.ViewModels.User
 {
     public class IndexViewModel
     {

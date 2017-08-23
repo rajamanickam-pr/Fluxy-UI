@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Fluxy.Models;
+using Fluxy.ViewModels.User;
 using Fluxy.Data;
 
 namespace Fluxy.Controllers

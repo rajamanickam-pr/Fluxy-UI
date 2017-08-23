@@ -49,7 +49,7 @@ namespace Fluxy
                 var user = new ApplicationUser();
                 user.UserName = "Rajadityan";
                 user.Email = "rajamanickam.rp@gmail.com";
-                string userPassword = "Manickam2206@";
+                string userPassword = "Mani2206@";
 
                 var chkUser = UserManager.Create(user, userPassword);
 
