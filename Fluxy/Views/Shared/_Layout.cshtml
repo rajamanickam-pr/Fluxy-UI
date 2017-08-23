@@ -1,0 +1,21 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    @Html.Partial("_NavigationBar")
+    @RenderBody()
+    @Html.Partial("_Footer")
+</body>
+</html>
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)

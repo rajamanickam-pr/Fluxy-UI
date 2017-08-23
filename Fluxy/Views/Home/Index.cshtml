@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@Html.Partial("_MainSlide")
+<div class="container">
+    <div class="alert alert-info" role="alert">
+        <strong>Recent Videos</strong> This alert needs your attention, but it's not super important.
+    </div>
+    <div class="row">
+        @for(int i = 0; i < 6; i++)
+        {
+            @Html.Partial("_VideoBox")
+        }
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        <strong>Popular Videos</strong> This alert needs your attention, but it's not super important.
+    </div>
+    <div class="row">
+
+        @for (int i = 0; i < 6; i++)
+        {
+            @Html.Partial("_VideoBox")
+        }
+    </div>
+
+</div>
