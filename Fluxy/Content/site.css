@@ -1,11 +1,16 @@
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
-
 body {
     padding-top: 3rem;
     padding-bottom: 3rem;
-    color: #5a5a5a;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #151b1e;
+    background-color: #e4e5e6;
 }
 
 .container {
@@ -13,6 +18,30 @@ body {
 }
 
 .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #c2cfd6;
+}
+
+    .card > img {
+        margin-bottom: .75rem;
+    }
+
+.card-body, .card-block {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.card-text {
+    font-size: 85%;
+}
+
+.video-card {
     float: left;
     width: 33.333%;
     padding: .75rem;
@@ -20,36 +49,28 @@ body {
     border: 0;
 }
 
-    .card > img {
-        margin-bottom: .75rem;
+    .video-card p {
+        font-weight: 600;
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
     }
 
-.card-text {
-    font-size: 85%;
-}
-
-.card p {
-    font-weight:600;
-    overflow: hidden;
-    white-space: normal;
-    text-overflow: ellipsis;
-}
-
-.card span {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: block;
-    overflow: hidden;
-    font-size: smaller;
-}
+    .video-card span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;
+        font-size: smaller;
+    }
 
 .alert-info {
     background-color: #0275D8 !important;
     color: #FFF;
 }
 
-.navbar-inverse .navbar-nav .nav-link{
-    color:white !important;
+.navbar-inverse .navbar-nav .nav-link {
+    color: white !important;
 }
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
