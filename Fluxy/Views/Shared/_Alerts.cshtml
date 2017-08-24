@@ -1,0 +1,56 @@
+﻿@using Fluxy.Core.Helpers
+
+@{
+    var alerts = TempData.ContainsKey(Alert.TempDataKey)
+                ? (List<Alert>)TempData[Alert.TempDataKey]
+                : new List<Alert>();
+
+    foreach (var alert in alerts)
+    {
+        if (alert.AlertStyle == "danger")
+        {
+            <div class="alertmsg alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>@alert.Message</strong>
+            </div>
+        }
+        else if (alert.AlertStyle == "success")
+        {
+            <div class="alertmsg alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>@alert.Message</strong>
+            </div>
+        }
+        else if (alert.AlertStyle == "warning")
+        {
+            <div class="alertmsg alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>@alert.Message</strong>
+            </div>
+        }
+        else
+        {
+            <div class="alertmsg alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>@alert.Message</strong>
+            </div>
+        }
+
+    }
+}
+<script>
+    window.setTimeout(function () {
+        $(".alertmsg").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+
+</script>

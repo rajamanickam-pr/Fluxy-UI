@@ -10,11 +10,12 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Fluxy.ViewModels.User;
 using Fluxy.Data;
+using Fluxy.Core.Mvc.Controllers;
 
 namespace Fluxy.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -87,7 +88,7 @@ namespace Fluxy.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    Danger("Invalid login attempt.", true);
                     return View(model);
             }
         }
@@ -152,7 +153,7 @@ namespace Fluxy.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -440,6 +441,7 @@ namespace Fluxy.Controllers
         {
             foreach (var error in result.Errors)
             {
+                Danger(error, true);
                 ModelState.AddModelError("", error);
             }
         }

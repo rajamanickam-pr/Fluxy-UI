@@ -10,10 +10,11 @@ using Fluxy.Data;
 using Fluxy.ViewModels.Menu;
 using Fluxy.Services.Menu;
 using AutoMapper;
+using Fluxy.Core.Mvc.Controllers;
 
 namespace Fluxy.Controllers
 {
-    public class MenuController : Controller
+    public class MenuController : BaseController
     {
         private readonly IMainMenuService _mainMenuService;
         private readonly IMapper _mapper;

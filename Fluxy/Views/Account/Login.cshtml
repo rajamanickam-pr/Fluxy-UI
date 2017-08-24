@@ -13,12 +13,14 @@
                             <div class="card-body">
                                 <h1>Login</h1>
                                 <p class="text-muted">Sign In to your account</p>
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                 <div class="input-group mb-3">
                                     <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                     </span>
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Username" })
                                 </div>
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                 <div class="input-group mb-4">
                                     <span class="input-group-addon">
                                         <i class="fa fa-lock"></i>
@@ -50,3 +52,6 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

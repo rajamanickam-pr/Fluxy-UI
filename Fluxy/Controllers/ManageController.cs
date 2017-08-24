@@ -7,11 +7,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Fluxy.ViewModels.User;
+using Fluxy.Core.Mvc.Controllers;
 
 namespace Fluxy.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
