@@ -22,11 +22,15 @@ namespace Fluxy
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/tether.min.js",
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/holder.min.js"
+                      "~/Scripts/holder.min.js",
+                      "~/Scripts/pace.min.js"
                        ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"
+                      "~/Content/site.css",
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/pace-theme-flash.css"
                       ));
         }
     }
