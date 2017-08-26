@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Fluxy.ViewModels.Menu.MainMenuViewModel>
+
+<div class="container">
+    <div style="width:90%; margin:0 auto" class="tablecontainer">
+        <a class="popup btn btn-primary" href="Menu/Create/0" style="margin-bottom:20px; margin-top:20px;">Add New Employee</a>
+        <table id="myDatatable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ShortName</th>
+                    <th>LinkText</th>
+                    <th>ActionName</th>
+                    <th>ControllerName</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script>
+      $(document).ready(function () {
+          var oTable = $('#myDatatable').DataTable({
+              "ajax": {
+                  "url": 'Menu/GetMainMenuItems',
+                  "type": "get",
+                  "datatype": "json"
+              },
+              "columns": [
+                  { "data": "Name", "autoWidth": true },
+                  { "data": "ShortName", "autoWidth": true },
+                  { "data": "LinkText", "autoWidth": true },
+                  { "data": "ActionName", "autoWidth": true },
+                  { "data": "ControllerName", "autoWidth": true },
+                  {
+                      "data": "Id", "width": "50px", "render": function (data) {
+                          return '<a class="popup" href="Menu/Create/' + data + '">Edit</a>';
+                      }
+                  },
+                  {
+                      "data": "Id", "width": "50px", "render": function (data) {
+                          return '<a class="popup" href="Menu/Delete/' + data + '">Delete</a>';
+                      }
+                  }
+              ]
+          })
+          $('.tablecontainer').on('click', 'a.popup', function (e) {
+              e.preventDefault();
+              OpenPopup($(this).attr('href'));
+          })
+          function OpenPopup(pageUrl) {
+              var $pageContent = $('<div/>');
+              $pageContent.load(pageUrl, function () {
+                  $('#popupForm', $pageContent).removeData('validator');
+                  $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                  $.validator.unobtrusive.parse('form');
+
+              });
+
+              $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                  .html($pageContent)
+                  .dialog({
+                      draggable: false,
+                      autoOpen: false,
+                      resizable: false,
+                      model: true,
+                      title: 'Popup Dialog',
+                      height: 550,
+                      width: 600,
+                      close: function () {
+                          $dialog.dialog('destroy').remove();
+                      }
+                  })
+
+              $('.popupWindow').on('submit', '#popupForm', function (e) {
+                  var url = $('#popupForm')[0].action;
+                  $.ajax({
+                      type: "POST",
+                      url: url,
+                      data: $('#popupForm').serialize(),
+                      success: function (data) {
+                          if (data.status) {
+                              $dialog.dialog('close');
+                              oTable.ajax.reload();
+                          }
+                      }
+                  })
+
+                  e.preventDefault();
+              })
+
+              $dialog.dialog('open');
+          }
+      })
+</script>

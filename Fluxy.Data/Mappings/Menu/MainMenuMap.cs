@@ -13,7 +13,7 @@ namespace Fluxy.Data.Mappings.Menu
             this.Property(sm => sm.LinkText).IsRequired().HasMaxLength(200);
             this.Property(sm => sm.ActionName).IsRequired().HasMaxLength(200);
             this.Property(sm => sm.ControllerName).IsRequired().HasMaxLength(200);
-            this.Property(sm => sm.MenuAttributeId).IsRequired();
+            this.Property(sm => sm.MenuAttributeId);
         }
     }
 }

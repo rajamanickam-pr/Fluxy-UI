@@ -25,9 +25,9 @@ namespace Fluxy.Modules
 
         private void CreateMapping(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<MainMenuViewModel, MainMenu>();
-            cfg.CreateMap<SubMenuViewModel, SubMenu>();
-            cfg.CreateMap<MenuAttributeViewModel, MenuAttribute>();
+            cfg.CreateMap<MainMenuViewModel, MainMenu>().ReverseMap();
+            cfg.CreateMap<SubMenuViewModel, SubMenu>().ReverseMap();
+            cfg.CreateMap<MenuAttributeViewModel, MenuAttribute>().ReverseMap();
         }
     }
 }
