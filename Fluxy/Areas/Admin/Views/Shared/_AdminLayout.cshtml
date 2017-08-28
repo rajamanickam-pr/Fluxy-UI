@@ -40,8 +40,8 @@
                     <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-film"></i> <span class="d-none d-md-inline">User Management</span></a>
                     <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-book"></i> <span class="d-none d-md-inline">Configuration</span></a>
                     <div class="collapse" id="menu3">
-                        <a href="Menu" class="list-group-item" data-parent="#menu3">Main Menu</a>
-                        <a href="#menu3sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">3.2 </a>
+                        @Html.RouteLink("Menu", new { action = "Index", controller = "Menu", area = "Admin" }, new { @class = "list-group-item" })
+                        @Html.RouteLink("Submenu", new { action = "Index", controller = "SubMenu", area = "Admin" }, new { @class = "list-group-item" })
                         <div class="collapse" id="menu3sub2">
                             <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 a</a>
                             <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 b</a>

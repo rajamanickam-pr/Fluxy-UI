@@ -12,7 +12,6 @@ using Fluxy.Core.Mvc.Security.Attributes;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
-    [RoutePrefix("Menu")]
     //[Authorize(Roles ="Admin")]
     public class MenuController : BaseController
     {
@@ -68,6 +67,14 @@ namespace Fluxy.Areas.Admin.Controllers
             var mainMenuDto = _mainMenuService.GetAll().FirstOrDefault(i => i.Id == id);
             var mainMenu = _mapper.Map<MainMenuViewModel>(mainMenuDto);
             return Json(mainMenu, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetList()
+        {
+            var mainMenuDto = _mainMenuService.GetAll();
+            var mainMenuList = _mapper.Map<List<MainMenuViewModel>>(mainMenuDto);
+            return Json(mainMenuList, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

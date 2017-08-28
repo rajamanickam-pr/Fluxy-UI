@@ -1,6 +1,27 @@
-﻿function Add(url) {
+﻿$('#subMenuModal').on('show.bs.modal', function () {
+    var url = 'Menu/GetList';
+    $.ajax({
+        url: url,
+        typr: "GET",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        success: function (data) {
+            $.each(data, function (i) {
+                var optionhtml = '<option value="' +
+                    data[i].Id + '">' + data[i].Name + '</option>';
+                $("#SelectedMainMenu").append(optionhtml);
+            });
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+})
+
+function Add(url) {
     var menuObj = {
         Id: $('#Id').val(),
+        MainMenuId: $('#SelectedMainMenu').val(),
         MenuAttributeId: $('#MenuAttributeId').val(),
         Name: $('#Name').val(),
         ShortName: $('#ShortName').val(),
@@ -23,6 +44,7 @@
     });
 }
 
+
 function getbyID(url) {
     $.ajax({
         url: url,
@@ -31,13 +53,14 @@ function getbyID(url) {
         dataType: "json",
         success: function (result) {
             $('#Id').val(result.Id);
+            $('#SelectedMainMenu').val(result.MainMenuId);
             $('#MenuAttributeId').val(result.MenuAttributeId);
             $('#Name').val(result.Name);
             $('#ShortName').val(result.ShortName);
             $('#LinkText').val(result.LinkText);
             $('#ActionName').val(result.ActionName);
             $('#ControllerName').val(result.ControllerName);
-            $('#myModal').modal('show');
+            $('#subMenuModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
         },
@@ -48,11 +71,13 @@ function getbyID(url) {
     return false;
 }
 
-function Update(url) {
 
+
+function Update(url) {
     var url = url;
     var menuObj = {
         Id: $('#Id').val(),
+        MainMenuId: $('#SelectedMainMenu').val(),
         MenuAttributeId: $('#MenuAttributeId').val(),
         Name: $('#Name').val(),
         ShortName: $('#ShortName').val(),
@@ -94,4 +119,3 @@ function Delele(url) {
         });
     }
 }
-

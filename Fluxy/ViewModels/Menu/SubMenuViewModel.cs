@@ -9,6 +9,8 @@ namespace Fluxy.ViewModels.Menu
 {
     public class SubMenuViewModel
     {
+        [Key]
+        public long Id { get; set; }
         [Required]
         public long MainMenuId { get; set; }
         [ForeignKey("MainMenuId")]
@@ -24,5 +26,9 @@ namespace Fluxy.ViewModels.Menu
         public string ActionName { get; set; }
         [Required]
         public string ControllerName { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

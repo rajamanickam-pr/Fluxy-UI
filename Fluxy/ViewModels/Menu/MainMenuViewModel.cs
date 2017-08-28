@@ -12,6 +12,7 @@ namespace Fluxy.ViewModels.Menu
         public long Id { get; set; }
         public long MenuAttributeId { get; set; }
         [Required]
+        [Display(Name="MainMenuName")]
         public string Name { get; set; }
         public string ShortName { get; set; }
         [Required]
