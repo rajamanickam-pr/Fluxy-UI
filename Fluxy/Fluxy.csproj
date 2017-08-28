@@ -208,7 +208,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,8 +257,6 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Menu\Delete.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\g3.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -319,11 +316,6 @@
     <Content Include="Views\Shared\_MainSlide.cshtml" />
     <Content Include="Views\Shared\_NavigationBar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Menu\Create.cshtml" />
-    <Content Include="Views\Menu\Delete.cshtml" />
-    <Content Include="Views\Menu\Details.cshtml" />
-    <Content Include="Views\Menu\Edit.cshtml" />
-    <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
   </ItemGroup>
   <ItemGroup>
