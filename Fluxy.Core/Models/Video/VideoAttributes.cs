@@ -18,6 +18,7 @@ namespace Fluxy.Core.Models.Video
         public int FrameHeight { get; set; }
         public int ViewCount { get; set; }
         public string Tags { get; set; }
+        public string Description { get; set; }
         public Bitmap Thumbunail { get; set; }
 
         public int SubcategoryId { get; set; }

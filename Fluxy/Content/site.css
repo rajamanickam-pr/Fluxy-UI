@@ -10,7 +10,6 @@ body {
     font-weight: normal;
     line-height: 1.5;
     color: #151b1e;
-    background-color: #e4e5e6;
 }
 
 .text-xs-center {
@@ -20,42 +19,53 @@ body {
 .m-t-2 {
     margin-top: 1.5rem !important;
 }
+
 .m-y-2 {
     margin-top: 1.5rem !important;
     margin-bottom: 1.5rem !important;
 }
+
 .m-x-auto {
     margin-right: auto !important;
     margin-left: auto !important;
 }
+
 .table td, .table th {
     padding: .75rem;
     vertical-align: top;
     border-top: 1px solid #eceeef;
 }
+
 .pull-xs-right {
     float: right !important;
 }
+
 .img-circle {
     border-radius: 50%;
 }
+
 .tag-primary {
     background-color: #0275d8;
 }
+
 .tag-default {
     background-color: #818a91;
 }
+
 .tag-success {
     background-color: #5cb85c;
 }
+
 .tag-danger {
     background-color: #d9534f;
 }
+
 .tag-pill {
     padding-right: .6em;
     padding-left: .6em;
     border-radius: 10rem;
 }
+
 .tag {
     display: inline-block;
     padding: .25em .4em;
@@ -68,6 +78,7 @@ body {
     vertical-align: baseline;
     border-radius: .25rem;
 }
+
 .container {
     margin-top: 3rem !important;
 }
@@ -97,11 +108,10 @@ body {
 }
 
 .video-card {
-    float: left;
-    width: 33.333%;
     padding: .75rem;
     margin-bottom: 2rem;
-    border: 0;
+    border: 0 !important;
+    border-radius: 0 !important;
 }
 
     .video-card p {

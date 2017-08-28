@@ -6,10 +6,12 @@
     <div class="alert alert-info" role="alert">
         <strong>Recent Videos</strong>
     </div>
-    <div class="row">
-        @for(int i = 0; i < 6; i++)
+    <div class="row ">
+        @for (int i = 0; i < 6; i++)
         {
-            @Html.Partial("_VideoBox")
+            <div class="col-md-4">
+                @Html.Partial("_VideoBox")
+            </div>
         }
     </div>
 
@@ -17,11 +19,11 @@
         <strong>Popular Videos</strong>
     </div>
     <div class="row">
-
         @for (int i = 0; i < 6; i++)
-        {
-            @Html.Partial("_VideoBox")
+            {
+            <div class="col-md-4">
+                @Html.Partial("_VideoBox")
+            </div>
         }
     </div>
-
 </div>
