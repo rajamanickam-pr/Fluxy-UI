@@ -1,96 +1,107 @@
 ﻿@model IEnumerable<Fluxy.ViewModels.Menu.MainMenuViewModel>
-
 <div class="container">
-    <div style="width:90%; margin:0 auto" class="tablecontainer">
-        <a class="popup btn btn-primary" href="Menu/Create/0" style="margin-bottom:20px; margin-top:20px;">Add New Employee</a>
-        <table id="myDatatable">
-            <thead>
+    <h2>Main Menu Items</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Menu</button><br /><br />
+    <table class="table table-hover">
+        <thead class="thead-inverse ">
+            <tr>
+                <th scope="row">
+                    ID
+                </th>
+                <th scope="row">
+                    Name
+                </th>
+                <th scope="row">
+                    Short Name
+                </th>
+                <th scope="row">
+                    Link Text
+                </th>
+                <th scope="row">
+                    Action Name
+                </th>
+                <th scope="row">
+                    Controller Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>Name</th>
-                    <th>ShortName</th>
-                    <th>LinkText</th>
-                    <th>ActionName</th>
-                    <th>ControllerName</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShortName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LinkText)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActionName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControllerName)
+                    </td>
+                    <td>
+                        <a href="#" onclick="return getbyID('menu/getbyID/'+@item.Id)">Edit</a> |
+                        <a href="#" onclick="Delele('menu/Delete/'+@item.Id)">Delete</a>|
+                        <a href="#" onclick="">Sub Menu</a>
+                    </td>   
                 </tr>
-            </thead>
-        </table>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="MenuAttributeId" placeholder="MenuAttributeId" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Name" placeholder="Name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="ShortName" placeholder="Short Name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="LinkText" placeholder="Link Text" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="ActionName" placeholder="Action Name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="ControllerName" placeholder="Controller Name" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add('menu/Create');">Add</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update('menu/Create');">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<script>
-      $(document).ready(function () {
-          var oTable = $('#myDatatable').DataTable({
-              "ajax": {
-                  "url": 'Menu/GetMainMenuItems',
-                  "type": "get",
-                  "datatype": "json"
-              },
-              "columns": [
-                  { "data": "Name", "autoWidth": true },
-                  { "data": "ShortName", "autoWidth": true },
-                  { "data": "LinkText", "autoWidth": true },
-                  { "data": "ActionName", "autoWidth": true },
-                  { "data": "ControllerName", "autoWidth": true },
-                  {
-                      "data": "Id", "width": "50px", "render": function (data) {
-                          return '<a class="popup" href="Menu/Create/' + data + '">Edit</a>';
-                      }
-                  },
-                  {
-                      "data": "Id", "width": "50px", "render": function (data) {
-                          return '<a class="popup" href="Menu/Delete/' + data + '">Delete</a>';
-                      }
-                  }
-              ]
-          })
-          $('.tablecontainer').on('click', 'a.popup', function (e) {
-              e.preventDefault();
-              OpenPopup($(this).attr('href'));
-          })
-          function OpenPopup(pageUrl) {
-              var $pageContent = $('<div/>');
-              $pageContent.load(pageUrl, function () {
-                  $('#popupForm', $pageContent).removeData('validator');
-                  $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
-                  $.validator.unobtrusive.parse('form');
-
-              });
-
-              $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
-                  .html($pageContent)
-                  .dialog({
-                      draggable: false,
-                      autoOpen: false,
-                      resizable: false,
-                      model: true,
-                      title: 'Popup Dialog',
-                      height: 550,
-                      width: 600,
-                      close: function () {
-                          $dialog.dialog('destroy').remove();
-                      }
-                  })
-
-              $('.popupWindow').on('submit', '#popupForm', function (e) {
-                  var url = $('#popupForm')[0].action;
-                  $.ajax({
-                      type: "POST",
-                      url: url,
-                      data: $('#popupForm').serialize(),
-                      success: function (data) {
-                          if (data.status) {
-                              $dialog.dialog('close');
-                              oTable.ajax.reload();
-                          }
-                      }
-                  })
-
-                  e.preventDefault();
-              })
-
-              $dialog.dialog('open');
-          }
-      })
-</script>
+<script src="~/Areas/Admin/Scripts/MenuScripts.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

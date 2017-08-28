@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Fluxy.Core.Mvc.Security.Attributes;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
@@ -27,30 +28,23 @@ namespace Fluxy.Areas.Admin.Controllers
         // GET: Admin/Menu
         public ActionResult Index()
         {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult GetMainMenuItems()
-        {
-            var mainMenus = _mainMenuService.GetAll();
-            var menuList = _mapper.Map<List<MainMenuViewModel>>(mainMenus);
-            return Json(new { data = menuList }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public ActionResult Create(int id)
-        {
-            var mainMenus = _mainMenuService.GetAll().FirstOrDefault(i => i.Id == id);
-            var menu = _mapper.Map<MainMenuViewModel>(mainMenus);
-            return PartialView(menu);
+            try
+            {
+                var mainMenus = _mainMenuService.GetAll();
+                var menuList = _mapper.Map<List<MainMenuViewModel>>(mainMenus);
+                return View(menuList);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]
+        [JsonErrorHandler]
         public ActionResult Create(MainMenuViewModel mainMenuViewModel)
         {
-            bool status = false;
-            if (ModelState.IsValid)
+            try
             {
                 var mainMenuDto = _mapper.Map<MainMenu>(mainMenuViewModel);
                 if (mainMenuDto.Id > 0)
@@ -61,31 +55,39 @@ namespace Fluxy.Areas.Admin.Controllers
                 {
                     _mainMenuService.Create(mainMenuDto);
                 }
-                status = true;
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            return new JsonResult { Data = new { status = status } };
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
-        [HttpGet]
-        public ActionResult Delete(int id)
+        public JsonResult GetbyID(int id)
         {
-            var mainMenus = _mainMenuService.GetAll().FirstOrDefault(i => i.Id == id);
-            var menu = _mapper.Map<MainMenuViewModel>(mainMenus);
-            return PartialView(menu);
+            var mainMenuDto = _mainMenuService.GetAll().FirstOrDefault(i => i.Id == id);
+            var mainMenu = _mapper.Map<MainMenuViewModel>(mainMenuDto);
+            return Json(mainMenu, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        [ActionName("Delete")]
-        public JsonResult DeleteMainMenu(MainMenuViewModel mainMenuViewModel)
+        public JsonResult Delete(int id)
         {
-            bool status = false;
-            var mainMenuDto = _mapper.Map<MainMenu>(mainMenuViewModel);
-            if (mainMenuDto != null)
+            try
             {
-                _mainMenuService.Delete(mainMenuDto);
-                status = true;
+                bool status = false;
+                var mainMenuDto = _mainMenuService.GetAll().FirstOrDefault(i => i.Id == id);
+                if (mainMenuDto != null)
+                {
+                    _mainMenuService.Delete(mainMenuDto);
+                    status = true;
+                }
+                return Json(status, JsonRequestBehavior.AllowGet);
             }
-            return new JsonResult { Data = new { status = status } };
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
