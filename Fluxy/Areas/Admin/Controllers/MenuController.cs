@@ -12,7 +12,7 @@ using Fluxy.Core.Mvc.Security.Attributes;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
-    //[Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class MenuController : BaseController
     {
         private readonly IMainMenuService _mainMenuService;

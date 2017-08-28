@@ -49,8 +49,7 @@ namespace Fluxy.ViewModels.User
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Display(Name = "Username/Email")]
         public string Email { get; set; }
 
         [Required]

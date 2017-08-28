@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -68,9 +69,13 @@
     <Compile Include="Common\IAuditableEntity.cs" />
     <Compile Include="Common\IEntity.cs" />
     <Compile Include="Helpers\Alerts.cs" />
+    <Compile Include="Models\Common\Category.cs" />
+    <Compile Include="Models\Common\SubCategory.cs" />
+    <Compile Include="Models\Localization\Language.cs" />
     <Compile Include="Models\Menu\MenuAttribute.cs" />
     <Compile Include="Models\Menu\SubMenu.cs" />
     <Compile Include="Models\Menu\MainMenu.cs" />
+    <Compile Include="Models\Video\VideoAttributes.cs" />
     <Compile Include="Mvc\Controllers\BaseController.cs" />
     <Compile Include="Mvc\Security\Attributes\JsonErrorHandlerAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

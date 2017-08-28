@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Fluxy.ViewModels.User;
 using Fluxy.Data;
 using Fluxy.Core.Mvc.Controllers;
+using System.Text.RegularExpressions;
 
 namespace Fluxy.Controllers
 {
@@ -70,6 +71,30 @@ namespace Fluxy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
+            if (model.Email.IndexOf('@') > -1)
+            {
+                //Validate email format
+                string emailRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                                       @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                                          @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+                Regex re = new Regex(emailRegex);
+                if (!re.IsMatch(model.Email))
+                {
+                    Danger("Email is not valid");
+                }
+            }
+            else
+            {
+                //validate Username format
+                string emailRegex = @"^[a-zA-Z0-9]*$";
+                Regex re = new Regex(emailRegex);
+                if (!re.IsMatch(model.Email))
+                {
+                    Danger("Username is not valid");
+                }
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -77,7 +102,21 @@ namespace Fluxy.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var userName = model.Email;
+            if (userName.IndexOf('@') > -1)
+            {
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    Danger("Invalid login attempt.");
+                    return View(model);
+                }
+                else
+                {
+                    userName = user.UserName;
+                }
+            }
+            var result = await SignInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:

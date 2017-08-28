@@ -16,6 +16,7 @@ using Fluxy.Core.Models.Menu;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SubMenuController : BaseController
     {
         private FluxyContext db = new FluxyContext();

@@ -8,9 +8,9 @@ using System.Web.Mvc;
 namespace Fluxy.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AdminHomeController : BaseController
+    public class AttributeController : BaseController
     {
-        // GET: Admin/AdminHome
+        // GET: Admin/Attribute
         public ActionResult Index()
         {
             return View();

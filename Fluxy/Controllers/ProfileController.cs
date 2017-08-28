@@ -5,12 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Fluxy.Areas.Admin.Controllers
+namespace Fluxy.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class AdminHomeController : BaseController
+    public class ProfileController : BaseController
     {
-        // GET: Admin/AdminHome
+        // GET: Profile
         public ActionResult Index()
         {
             return View();
