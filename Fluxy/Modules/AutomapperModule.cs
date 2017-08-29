@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using AutoMapper;
+using Fluxy.Core.Models.Logging;
 using Fluxy.Core.Models.Menu;
+using Fluxy.ViewModels.Logging;
 using Fluxy.ViewModels.Menu;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,7 @@ namespace Fluxy.Modules
             cfg.CreateMap<MainMenuViewModel, MainMenu>().ReverseMap();
             cfg.CreateMap<SubMenuViewModel, SubMenu>().ReverseMap();
             cfg.CreateMap<MenuAttributeViewModel, MenuAttribute>().ReverseMap();
+            cfg.CreateMap<LogViewModel, Log>().ReverseMap();
         }
     }
 }

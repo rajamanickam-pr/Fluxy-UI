@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Fluxy.Core.Mvc.Controllers
 {
-    public class BaseController : Controller
+    public class BaseAlertController : Controller
     {
         public void Success(string message, bool dismissable = false)
         {

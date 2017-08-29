@@ -9,6 +9,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Fluxy.Core.Mvc.Security.Attributes;
+using Fluxy.Infrastructure;
+using Fluxy.Services.Logging;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
@@ -18,7 +20,8 @@ namespace Fluxy.Areas.Admin.Controllers
         private readonly IMainMenuService _mainMenuService;
         private readonly IMapper _mapper;
 
-        public MenuController(IMainMenuService mainMenuService, IMapper mapper)
+        public MenuController(IMainMenuService mainMenuService, ILogService logService, IMapper mapper)
+            : base(logService, mapper)
         {
             _mainMenuService = mainMenuService;
             _mapper = mapper;

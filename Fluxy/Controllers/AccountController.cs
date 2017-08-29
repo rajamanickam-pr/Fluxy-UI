@@ -12,6 +12,9 @@ using Fluxy.ViewModels.User;
 using Fluxy.Data;
 using Fluxy.Core.Mvc.Controllers;
 using System.Text.RegularExpressions;
+using Fluxy.Infrastructure;
+using AutoMapper;
+using Fluxy.Services.Logging;
 
 namespace Fluxy.Controllers
 {
@@ -21,11 +24,13 @@ namespace Fluxy.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController(ILogService logService, IMapper mapper)
+             : base(logService, mapper)
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,ILogService logService, IMapper mapper) 
+            : base(logService, mapper)
         {
             UserManager = userManager;
             SignInManager = signInManager;

@@ -13,6 +13,8 @@ using Fluxy.Services.Menu;
 using AutoMapper;
 using Fluxy.Core.Mvc.Security.Attributes;
 using Fluxy.Core.Models.Menu;
+using Fluxy.Infrastructure;
+using Fluxy.Services.Logging;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
@@ -24,7 +26,8 @@ namespace Fluxy.Areas.Admin.Controllers
         private readonly ISubMenuService _subMenuService;
         private readonly IMapper _mapper;
 
-        public SubMenuController(ISubMenuService subMenuService, IMapper mapper)
+        public SubMenuController(ILogService logService, ISubMenuService subMenuService, IMapper mapper)
+            : base(logService, mapper)
         {
             _subMenuService = subMenuService;
             _mapper = mapper;

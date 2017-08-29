@@ -72,6 +72,8 @@
     <Compile Include="Models\Categories\Category.cs" />
     <Compile Include="Models\Categories\SubCategory.cs" />
     <Compile Include="Models\Localization\Language.cs" />
+    <Compile Include="Models\Logging\Log.cs" />
+    <Compile Include="Models\Logging\LogLevel.cs" />
     <Compile Include="Models\Menu\MenuAttribute.cs" />
     <Compile Include="Models\Menu\SubMenu.cs" />
     <Compile Include="Models\Menu\MainMenu.cs" />
@@ -81,7 +83,7 @@
     <Compile Include="Models\Video\PrivateVideo.cs" />
     <Compile Include="Models\Video\VideoAttributes.cs" />
     <Compile Include="Models\Video\VideoSettings.cs" />
-    <Compile Include="Mvc\Controllers\BaseController.cs" />
+    <Compile Include="Mvc\Controllers\BaseAlertController.cs" />
     <Compile Include="Mvc\Security\Attributes\JsonErrorHandlerAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

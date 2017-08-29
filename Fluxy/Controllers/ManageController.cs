@@ -8,6 +8,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Fluxy.ViewModels.User;
 using Fluxy.Core.Mvc.Controllers;
+using Fluxy.Infrastructure;
+using AutoMapper;
+using Fluxy.Services.Logging;
 
 namespace Fluxy.Controllers
 {
@@ -17,14 +20,17 @@ namespace Fluxy.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
-        {
-        }
-
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ILogService logService, IMapper mapper,ApplicationUserManager userManager, 
+            ApplicationSignInManager signInManager)
+            : base(logService, mapper)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+        public ManageController(ILogService logService, IMapper mapper) 
+            : base(logService, mapper)
+        {
         }
 
         public ApplicationSignInManager SignInManager

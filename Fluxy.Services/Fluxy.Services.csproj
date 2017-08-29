@@ -43,6 +43,8 @@
     <Compile Include="Common\EntityService.cs" />
     <Compile Include="Common\IEntityService.cs" />
     <Compile Include="Common\IService.cs" />
+    <Compile Include="Logging\ILogService.cs" />
+    <Compile Include="Logging\LogService.cs" />
     <Compile Include="Menu\MainMenuService.cs" />
     <Compile Include="Menu\IMainMenuService.cs" />
     <Compile Include="Menu\MenuAttributeService.cs" />

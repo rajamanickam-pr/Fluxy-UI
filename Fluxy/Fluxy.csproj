@@ -215,7 +215,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Modules\AutomapperModule.cs" />
+    <Compile Include="ViewModels\Logging\LogViewModel.cs" />
     <Compile Include="ViewModels\Menu\MenuAttributeViewModel.cs" />
     <Compile Include="ViewModels\Menu\SubMenuViewModel.cs" />
     <Compile Include="ViewModels\Menu\MainMenuViewModel.cs" />
@@ -333,6 +335,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Attribute\" />
     <Folder Include="Scripts\Custom\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
