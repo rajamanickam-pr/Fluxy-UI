@@ -49,7 +49,15 @@
                         </div>
                         <a href="#" class="list-group-item" data-parent="#menu3">3.3</a>
                     </div>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-heart"></i> <span class="d-none d-md-inline">Item 4</span></a>
+                    <a href="#VideoMangementMenu" class="list-group-item d-inline-block collapsed" data-toggle="collapse" aria-expanded="false" sdata-parent="#sidebar"><i class="fa fa-heart"></i> <span class="d-none d-md-inline">Video Management</span></a>
+                    <div class="collapse" id="VideoMangementMenu">
+                        @Html.RouteLink("Language", new { action = "Index", controller = "Language", area = "Admin" }, new { @class = "list-group-item" })
+                        <a href="#VideoMangementSub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Category Settings</a>
+                        <div class="collapse" id="VideoMangementSub1">
+                            @Html.RouteLink("Category", new { action = "Index", controller = "Category", area = "Admin" }, new { @class = "list-group-item" })
+                            @Html.RouteLink("SubCategory", new { action = "Index", controller = "SubCategory", area = "Admin" }, new { @class = "list-group-item" })
+                        </div>
+                    </div>
                     <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-list"></i> <span class="d-none d-md-inline">Item 5</span></a>
                     <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-clock-o"></i> <span class="d-none d-md-inline">Link</span></a>
                     <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-th"></i> <span class="d-none d-md-inline">Link</span></a>
@@ -70,9 +78,9 @@
                 <hr />
                 <footer class="main-footer">
                     <div class="pull-right hidden-xs">
-                        <b>Version</b> 2.4.0
+                        <b>Version</b> 1.0
                     </div>
-                    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+                    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Aditya Studio</a>.</strong> All rights
                     reserved.
                 </footer>
             </main>

@@ -1,13 +1,8 @@
 ﻿using Fluxy.Data.ExtentedDTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fluxy.Data.Mappings.Messages
 {
-   public class PrivateMessagesMap : FluxyEntityTypeConfiguration<PrivateMessagesExtend>
+    public class PrivateMessagesMap : FluxyEntityTypeConfiguration<PrivateMessagesExtend>
     {
         public PrivateMessagesMap()
         {

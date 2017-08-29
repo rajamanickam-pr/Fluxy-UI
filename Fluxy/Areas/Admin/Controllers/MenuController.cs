@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using Fluxy.Core.Models.Menu;
-using Fluxy.Core.Mvc.Controllers;
 using Fluxy.Services.Menu;
 using Fluxy.ViewModels.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Fluxy.Core.Mvc.Security.Attributes;
 using Fluxy.Infrastructure;
 using Fluxy.Services.Logging;
 
@@ -43,13 +40,12 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [JsonErrorHandler]
         public ActionResult Create(MainMenuViewModel mainMenuViewModel)
         {
             try
             {
                 var mainMenuDto = _mapper.Map<MainMenu>(mainMenuViewModel);
-                if (mainMenuDto.Id > 0)
+                if (!string.IsNullOrEmpty(mainMenuDto.Id))
                 {
                     _mainMenuService.Update(mainMenuDto);
                 }
@@ -59,13 +55,13 @@ namespace Fluxy.Areas.Admin.Controllers
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(ex.Message);
+                throw;
             }
         }
 
-        public JsonResult GetbyID(int id)
+        public JsonResult GetbyID(string id)
         {
             var mainMenuDto = _mainMenuService.GetAll().FirstOrDefault(i => i.Id == id);
             var mainMenu = _mapper.Map<MainMenuViewModel>(mainMenuDto);
@@ -81,7 +77,7 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult Delete(int id)
+        public JsonResult Delete(string id)
         {
             try
             {

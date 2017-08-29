@@ -1,9 +1,4 @@
-﻿using Fluxy.Core.Mvc.Controllers;
-using Fluxy.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Fluxy.Infrastructure;
 using System.Web.Mvc;
 using AutoMapper;
 using Fluxy.Services.Logging;

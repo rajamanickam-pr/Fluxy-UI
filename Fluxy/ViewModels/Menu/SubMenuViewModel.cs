@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Fluxy.ViewModels.Menu
 {
     public class SubMenuViewModel
     {
         [Key]
-        public long Id { get; set; }
+        public string Id { get; set; }
         [Required]
-        public long MainMenuId { get; set; }
+        public string MainMenuId { get; set; }
         [ForeignKey("MainMenuId")]
         public virtual MainMenuViewModel MainMenu { get; set; }
         [Required]
-        public long MenuAttributeId { get; set; }
+        public string MenuAttributeId { get; set; }
         [Required]
         public string Name { get; set; }
         public string ShortName { get; set; }

@@ -1,14 +1,9 @@
 ﻿using Fluxy.Core.Common;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fluxy.Core.Models.Video
 {
-    public class PrivateVideo : AuditableEntity<long>
+    public class PrivateVideo : AuditableEntity<string>
     {
         public string Message { get; set; }
         public string VideoAttributeId { get; set; }

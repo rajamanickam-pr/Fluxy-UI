@@ -1,11 +1,7 @@
 ﻿using Autofac;
 using Fluxy.Data;
 using Fluxy.Repositories.Common;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace Fluxy.Modules
 {

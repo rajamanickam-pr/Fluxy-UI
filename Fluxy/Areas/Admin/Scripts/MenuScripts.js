@@ -49,8 +49,6 @@ function getbyID(url) {
 }
 
 function Update(url) {
-
-    var url = url;
     var menuObj = {
         Id: $('#Id').val(),
         MenuAttributeId: $('#MenuAttributeId').val(),

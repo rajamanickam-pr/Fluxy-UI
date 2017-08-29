@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Fluxy.ViewModels.Menu
 {
     public class MainMenuViewModel
     {
         [Key]
-        public long Id { get; set; }
-        public long MenuAttributeId { get; set; }
+        public string Id { get; set; }
+        public string MenuAttributeId { get; set; }
         [Required]
         [Display(Name="MainMenuName")]
         public string Name { get; set; }

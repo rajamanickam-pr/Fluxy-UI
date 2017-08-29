@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-using System.Web;
 
 namespace Fluxy.ViewModels.Logging
 {
     public class LogViewModel
     {
         [Key]
-        public long Id { get; set; }
+        public string Id { get; set; }
         public int LogLevelId { get; set; }
         public string ApplicationObject { get; set; }
         public string FullMessage { get; set; }

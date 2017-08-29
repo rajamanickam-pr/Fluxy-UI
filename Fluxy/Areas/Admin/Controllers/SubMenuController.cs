@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Fluxy.Data;
 using Fluxy.ViewModels.Menu;
-using Fluxy.Core.Mvc.Controllers;
 using Fluxy.Services.Menu;
 using AutoMapper;
-using Fluxy.Core.Mvc.Security.Attributes;
 using Fluxy.Core.Models.Menu;
 using Fluxy.Infrastructure;
 using Fluxy.Services.Logging;
@@ -49,13 +43,12 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [JsonErrorHandler]
         public ActionResult Create(SubMenuViewModel subMenuViewModel)
         {
             try
             {
                 var subMenuDto = _mapper.Map<SubMenu>(subMenuViewModel);
-                if (subMenuDto.Id > 0)
+                if (!string.IsNullOrWhiteSpace(subMenuDto.Id))
                 {
                     _subMenuService.Update(subMenuDto);
                 }
@@ -65,13 +58,13 @@ namespace Fluxy.Areas.Admin.Controllers
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(ex.Message);
+                throw;
             }
         }
 
-        public JsonResult GetbyID(int id)
+        public JsonResult GetbyID(string id)
         {
             var subMenuDto = _subMenuService.GetAll().FirstOrDefault(i => i.Id == id);
             var subMenu = _mapper.Map<SubMenuViewModel>(subMenuDto);
@@ -79,7 +72,7 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult Delete(int id)
+        public JsonResult Delete(string id)
         {
             try
             {

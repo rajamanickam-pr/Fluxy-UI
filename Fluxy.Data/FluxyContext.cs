@@ -1,4 +1,5 @@
 ﻿using FleetTracker.Core.Common;
+using Fluxy.Core.Common;
 using Fluxy.Data.ExtentedDTO;
 using Fluxy.Data.Initializers;
 using Fluxy.Data.Mappings;
@@ -66,25 +67,27 @@ namespace Fluxy.Data
 
             foreach (var entry in modifiedEntries)
             {
-                IAuditableEntity entity = entry.Entity as IAuditableEntity;
-                if (entity != null)
+                IAuditableEntity auditableEntity = entry.Entity as IAuditableEntity;
+                IEntity<string> Entity = entry.Entity as IEntity<string>;
+                if (auditableEntity != null)
                 {
                     string identityName = Thread.CurrentPrincipal.Identity.Name;
                     DateTime now = DateTime.UtcNow;
 
                     if (entry.State == System.Data.Entity.EntityState.Added)
                     {
-                        entity.CreatedBy = identityName;
-                        entity.CreatedDate = now;
+                        Entity.Id = Guid.NewGuid().ToString();
+                        auditableEntity.CreatedBy = identityName;
+                        auditableEntity.CreatedDate = now;
                     }
                     else
                     {
-                        base.Entry(entity).Property(x => x.CreatedBy).IsModified = false;
-                        base.Entry(entity).Property(x => x.CreatedDate).IsModified = false;
+                        base.Entry(auditableEntity).Property(x => x.CreatedBy).IsModified = false;
+                        base.Entry(auditableEntity).Property(x => x.CreatedDate).IsModified = false;
                     }
 
-                    entity.UpdatedBy = identityName;
-                    entity.UpdatedDate = now;
+                    auditableEntity.UpdatedBy = identityName;
+                    auditableEntity.UpdatedDate = now;
                 }
             }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -10,7 +7,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Fluxy.ViewModels.User;
 using Fluxy.Data;
-using Fluxy.Core.Mvc.Controllers;
 using System.Text.RegularExpressions;
 using Fluxy.Infrastructure;
 using AutoMapper;

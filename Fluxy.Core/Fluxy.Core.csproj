@@ -84,7 +84,6 @@
     <Compile Include="Models\Video\VideoAttributes.cs" />
     <Compile Include="Models\Video\VideoSettings.cs" />
     <Compile Include="Mvc\Controllers\BaseAlertController.cs" />
-    <Compile Include="Mvc\Security\Attributes\JsonErrorHandlerAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mvc\Infrastructure\" />
+    <Folder Include="Mvc\Security\Attributes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
