@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,13 +54,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtentedDTO\PrivateMessagesExtend.cs" />
+    <Compile Include="ExtentedDTO\PrivateVideoExtend.cs" />
+    <Compile Include="ExtentedDTO\UserProfileExtend.cs" />
+    <Compile Include="ExtentedDTO\VideoAttributesExtend.cs" />
     <Compile Include="FluxyContext.cs" />
     <Compile Include="Initializers\FluxyConfiguration.cs" />
     <Compile Include="Initializers\FluxyDBInitializer.cs" />
+    <Compile Include="Mappings\Categories\CategoryMap.cs" />
+    <Compile Include="Mappings\Categories\SubcategoryMap.cs" />
     <Compile Include="Mappings\FluxyEntityTypeConfiguration.cs" />
+    <Compile Include="Mappings\Localization\LanguageMap.cs" />
     <Compile Include="Mappings\Menu\MenuAttributeMap.cs" />
     <Compile Include="Mappings\Menu\MainMenuMap.cs" />
     <Compile Include="Mappings\Menu\SubMenuMap.cs" />
+    <Compile Include="Mappings\Messages\PrivateMessagesMap.cs" />
+    <Compile Include="Mappings\Users\UserProfileMap.cs" />
+    <Compile Include="Mappings\Users\UserSettingsMap.cs" />
+    <Compile Include="Mappings\Video\PrivateVideoMap.cs" />
+    <Compile Include="Mappings\Video\VideoAttributesMap.cs" />
+    <Compile Include="Mappings\Video\VideoSettingsMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

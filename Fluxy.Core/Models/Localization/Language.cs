@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fluxy.Core.Models.Localization
 {
-    public class Language:AuditableEntity<long>
+    public class Language:AuditableEntity<string>
     {
         public string Name { get; set; }
         public string LanguageCulture { get; set; }

@@ -9,7 +9,7 @@
             <li class="nav-item">
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Profile", routeValues: null, htmlAttributes: new { title = "Profile", @class = "nav-link" })
             </li>
-            @if (User.Identity.IsAuthenticated)
+            @if (HttpContext.Current.User.IsInRole("Admin"))
             {
                 <li class="nav-item">
                     @Html.RouteLink("Admininstration!", new { action = "Index", controller = "AdminHome", area = "Admin" }, new { title = "Administration", @class = "nav-link" })

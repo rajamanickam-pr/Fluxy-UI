@@ -1,4 +1,5 @@
 ﻿using FleetTracker.Core.Common;
+using Fluxy.Data.ExtentedDTO;
 using Fluxy.Data.Initializers;
 using Fluxy.Data.Mappings;
 using Microsoft.AspNet.Identity;
@@ -15,6 +16,11 @@ namespace Fluxy.Data
 {
     public class ApplicationUser : IdentityUser
     {
+        public virtual PrivateMessagesExtend PrivateMessagesExtend { get; set; }
+        public virtual UserProfileExtend UserProfileExtend { get; set; }
+        public virtual PrivateVideoExtend PrivateVideoExtend { get; set; }
+        public virtual VideoAttributesExtend VideoAttributesExtend { get; set; }
+        
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
