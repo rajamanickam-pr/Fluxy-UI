@@ -66,6 +66,10 @@
     <Compile Include="Menu\MenuAttributeRepository.cs" />
     <Compile Include="Menu\SubMenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Video\IVideoAttributesRepository.cs" />
+    <Compile Include="Video\IVideoSettingsRepository.cs" />
+    <Compile Include="Video\VideoAttributesRepository.cs" />
+    <Compile Include="Video\VideoSettingsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -75,6 +79,10 @@
     <ProjectReference Include="..\Fluxy.Core\Fluxy.Core.csproj">
       <Project>{51BF2DCF-5CF5-4BE5-B6BE-2CB395507D07}</Project>
       <Name>Fluxy.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fluxy.Data\Fluxy.Data.csproj">
+      <Project>{D1E1E91C-FEF2-4B80-A971-7B17B7778B4E}</Project>
+      <Name>Fluxy.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
