@@ -237,6 +237,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\AdminStyles.css" />
+    <Content Include="Areas\Admin\Scripts\CategoryScripts.js" />
+    <Content Include="Areas\Admin\Scripts\SubCategoryScripts.js" />
     <Content Include="Areas\Admin\Scripts\LanguageScripts.js" />
     <Content Include="Areas\Admin\Scripts\MenuScripts.js" />
     <Content Include="Areas\Admin\Scripts\SubMenuScripts.js" />
@@ -273,6 +275,8 @@
     <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SubMenu\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Language\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategory\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\g3.jpg" />
     <Content Include="Scripts\bootstrap.js" />

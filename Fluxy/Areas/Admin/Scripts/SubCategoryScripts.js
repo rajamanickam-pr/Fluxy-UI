@@ -1,14 +1,35 @@
-﻿function Add(url) {
-    var languageObj = {
+﻿$('#SubCategoryModal').on('show.bs.modal', function () {
+    var url = 'Category/GetList';
+    $.ajax({
+        url: url,
+        typr: "GET",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        success: function (data) {
+            $("#SelectedCategory").empty();
+            $.each(data, function (i) {
+                var optionhtml = '<option value="' +
+                    data[i].Id + '">' + data[i].Name + '</option>';
+                $("#SelectedCategory").append(optionhtml);
+            });
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+})
+
+
+function Add(url) {
+    var subCategoryObj = {
         Id: $('#Id').val(),
         Name: $('#Name').val(),
-        LanguageCulture: $('#LanguageCulture').val(),
-        Rtl: $('#Rtl').is(':checked'),
-        DefaultCurrency: $('#DefaultCurrency').val()
+        CategoryId: $('#SelectedCategory').val(),
+        Description: $('#Description').val()
     }
     $.ajax({
         url: url,
-        data: JSON.stringify(languageObj),
+        data: JSON.stringify(subCategoryObj),
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
@@ -30,10 +51,9 @@ function getbyID(url) {
         success: function (result) {
             $('#Id').val(result.Id);
             $('#Name').val(result.Name);
-            $('#LanguageCulture').val(result.LanguageCulture);
-            $('#Rtl').prop('checked', result.Rtl);
-            $('#DefaultCurrency').val(result.DefaultCurrency);
-            $('#myModal').modal('show');
+            $("#SelectedCategory selected").val(result.CategoryId);
+            $('#Description').val(result.Description); 
+            $('#SubCategoryModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
         },
@@ -45,17 +65,16 @@ function getbyID(url) {
 }
 
 function Update(url) {
-    var languageObj = {
+    var subCategoryObj = {
         Id: $('#Id').val(),
         Name: $('#Name').val(),
-        LanguageCulture: $('#LanguageCulture').val(),
-        Rtl: $('#Rtl').is(':checked'),
-        DefaultCurrency: $('#DefaultCurrency').val()
+        CategoryId: $('#SelectedCategory').val(),
+        Description: $('#Description').val()
     }
     debugger;
     $.ajax({
         url: url,
-        data: JSON.stringify(languageObj),
+        data: JSON.stringify(subCategoryObj),
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",

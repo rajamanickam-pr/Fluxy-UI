@@ -29,8 +29,8 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             try
             {
-                var mainMenus = _languageService.GetAll();
-                var menuList = _mapper.Map<List<LanguageViewModel>>(mainMenus);
+                var languages = _languageService.GetAll();
+                var menuList = _mapper.Map<List<LanguageViewModel>>(languages);
                 return View(menuList);
             }
             catch (Exception ex)
@@ -44,14 +44,14 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             try
             {
-                var mainMenuDto = _mapper.Map<Language>(LanguageViewModel);
-                if (!string.IsNullOrEmpty(mainMenuDto.Id))
+                var languageDto = _mapper.Map<Language>(LanguageViewModel);
+                if (!string.IsNullOrEmpty(languageDto.Id))
                 {
-                    _languageService.Update(mainMenuDto);
+                    _languageService.Update(languageDto);
                 }
                 else
                 {
-                    _languageService.Create(mainMenuDto);
+                    _languageService.Create(languageDto);
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
@@ -63,17 +63,17 @@ namespace Fluxy.Areas.Admin.Controllers
 
         public JsonResult GetbyID(string id)
         {
-            var mainMenuDto = _languageService.GetAll().FirstOrDefault(i => i.Id == id);
-            var mainMenu = _mapper.Map<LanguageViewModel>(mainMenuDto);
-            return Json(mainMenu, JsonRequestBehavior.AllowGet);
+            var languageDto = _languageService.GetAll().FirstOrDefault(i => i.Id == id);
+            var language = _mapper.Map<LanguageViewModel>(languageDto);
+            return Json(language, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetList()
         {
-            var mainMenuDto = _languageService.GetAll();
-            var mainMenuList = _mapper.Map<List<LanguageViewModel>>(mainMenuDto);
-            return Json(mainMenuList, JsonRequestBehavior.AllowGet);
+            var languageDto = _languageService.GetAll();
+            var languageList = _mapper.Map<List<LanguageViewModel>>(languageDto);
+            return Json(languageList, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -82,10 +82,10 @@ namespace Fluxy.Areas.Admin.Controllers
             try
             {
                 bool status = false;
-                var mainMenuDto = _languageService.GetAll().FirstOrDefault(i => i.Id == id);
-                if (mainMenuDto != null)
+                var languageDto = _languageService.GetAll().FirstOrDefault(i => i.Id == id);
+                if (languageDto != null)
                 {
-                    _languageService.Delete(mainMenuDto);
+                    _languageService.Delete(languageDto);
                     status = true;
                 }
                 return Json(status, JsonRequestBehavior.AllowGet);

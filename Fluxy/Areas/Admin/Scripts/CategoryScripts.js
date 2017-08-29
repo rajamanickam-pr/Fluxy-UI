@@ -1,14 +1,12 @@
 ﻿function Add(url) {
-    var languageObj = {
+    var categoryObj = {
         Id: $('#Id').val(),
         Name: $('#Name').val(),
-        LanguageCulture: $('#LanguageCulture').val(),
-        Rtl: $('#Rtl').is(':checked'),
-        DefaultCurrency: $('#DefaultCurrency').val()
+        Description: $('#Description').val()
     }
     $.ajax({
         url: url,
-        data: JSON.stringify(languageObj),
+        data: JSON.stringify(categoryObj),
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
@@ -30,9 +28,7 @@ function getbyID(url) {
         success: function (result) {
             $('#Id').val(result.Id);
             $('#Name').val(result.Name);
-            $('#LanguageCulture').val(result.LanguageCulture);
-            $('#Rtl').prop('checked', result.Rtl);
-            $('#DefaultCurrency').val(result.DefaultCurrency);
+            $('#Description').val(result.Description);
             $('#myModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
@@ -45,17 +41,15 @@ function getbyID(url) {
 }
 
 function Update(url) {
-    var languageObj = {
+    var categoryObj = {
         Id: $('#Id').val(),
         Name: $('#Name').val(),
-        LanguageCulture: $('#LanguageCulture').val(),
-        Rtl: $('#Rtl').is(':checked'),
-        DefaultCurrency: $('#DefaultCurrency').val()
+        Description: $('#Description').val()
     }
     debugger;
     $.ajax({
         url: url,
-        data: JSON.stringify(languageObj),
+        data: JSON.stringify(categoryObj),
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",

@@ -6,6 +6,7 @@
         contentType: "application/json;charset=UTF-8",
         dataType: "json",
         success: function (data) {
+            $("#SelectedMainMenu").empty();
             $.each(data, function (i) {
                 var optionhtml = '<option value="' +
                     data[i].Id + '">' + data[i].Name + '</option>';
@@ -53,7 +54,7 @@ function getbyID(url) {
         dataType: "json",
         success: function (result) {
             $('#Id').val(result.Id);
-            $('#SelectedMainMenu').val(result.MainMenuId);
+            $('#SelectedMainMenu select').val(result.MainMenuId);
             $('#MenuAttributeId').val(result.MenuAttributeId);
             $('#Name').val(result.Name);
             $('#ShortName').val(result.ShortName);
