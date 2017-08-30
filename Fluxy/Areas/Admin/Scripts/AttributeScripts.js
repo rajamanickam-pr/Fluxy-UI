@@ -1,14 +1,12 @@
-﻿$('#categoryTable').dataTable();
-
-function Add(url) {
-    var categoryObj = {
+﻿function Add(url) {
+    var menuAttributeObj = {
         Id: $('#Id').val(),
-        Name: $('#Name').val(),
-        Description: $('#Description').val()
+        AttributeKey: $('#AttributeKey').val(),
+        AttributeValue: $('#AttributeValue').val()
     }
     $.ajax({
         url: url,
-        data: JSON.stringify(categoryObj),
+        data: JSON.stringify(menuAttributeObj),
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
@@ -21,7 +19,7 @@ function Add(url) {
     });
 }
 
-$('#categoryModal').on('hide.bs.modal', function () {
+$('#attributeModal').on('hide.bs.modal', function () {
     $(this)
         .find('input,textarea')
         .val('')
@@ -43,9 +41,9 @@ function getbyID(url) {
         dataType: "json",
         success: function (result) {
             $('#Id').val(result.Id);
-            $('#Name').val(result.Name);
-            $('#Description').val(result.Description);
-            $('#categoryModal').modal('show');
+            $('#AttributeValue').val(result.AttributeValue);
+            $('#AttributeKey').val(result.AttributeKey);
+            $('#attributeModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
         },
@@ -57,15 +55,15 @@ function getbyID(url) {
 }
 
 function Update(url) {
-    var categoryObj = {
+    var menuAttributeObj = {
         Id: $('#Id').val(),
-        Name: $('#Name').val(),
-        Description: $('#Description').val()
+        AttributeKey: $('#AttributeKey').val(),
+        AttributeValue: $('#AttributeValue').val()
     }
     debugger;
     $.ajax({
         url: url,
-        data: JSON.stringify(categoryObj),
+        data: JSON.stringify(menuAttributeObj),
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",

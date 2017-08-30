@@ -11,11 +11,13 @@
     @Styles.Render("~/Content/vendorcss")
     @Styles.Render("~/Content/admincss")
     @Scripts.Render("~/bundles/jquery")
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container-fluid">
         <div class="row d-flex d-md-block flex-nowrap wrapper">
-            <div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width show" id="sidebar">
+            <div class="col-md-2 float-left col-1 pl-0 pr-0 collapse width show" id="sidebar">
                 <div class="list-group border-0 card text-center text-md-left">
                     <a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-dashboard"></i> <span class="d-none d-md-inline">Dashboard</span> </a>
                     <div class="collapse" id="menu1">
@@ -41,6 +43,7 @@
                     <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-film"></i> <span class="d-none d-md-inline">User Management</span></a>
                     <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-book"></i> <span class="d-none d-md-inline">Configuration</span></a>
                     <div class="collapse" id="menu3">
+                        @Html.RouteLink("Attributes", new { action = "Index", controller = "Attribute", area = "Admin" }, new { @class = "list-group-item" })
                         @Html.RouteLink("Menu", new { action = "Index", controller = "Menu", area = "Admin" }, new { @class = "list-group-item" })
                         @Html.RouteLink("Submenu", new { action = "Index", controller = "SubMenu", area = "Admin" }, new { @class = "list-group-item" })
                         <div class="collapse" id="menu3sub2">
@@ -74,7 +77,7 @@
                     <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
                 </div>
             </div>
-            <main class="col-md-9 float-left col px-5 pl-md-2 pt-2 main">
+            <main class="col-md-10 float-left col px-5 pl-md-2 pt-2 main">
                 <a href="#" data-target="#sidebar" data-toggle="collapse"><i class="fa fa-navicon fa-2x py-2 p-1"></i></a>
                 @*<div class="page-header">
                         <h1>Bootstrap 4 Sidebar Menu</h1>
@@ -95,5 +98,6 @@
 </body>
 </html>
 <script src="~/Areas/Admin/Scripts/Helpers.js"></script>
+
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)

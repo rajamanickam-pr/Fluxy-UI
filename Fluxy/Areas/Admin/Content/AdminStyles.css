@@ -87,7 +87,6 @@ label, label + * {
 }
 
     #sidebar .list-group {
-        min-width: 400px;
         background-color: #0275D8;
         min-height: 100vh;
     }

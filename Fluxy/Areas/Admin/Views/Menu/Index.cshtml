@@ -6,9 +6,6 @@
         <thead class="thead-inverse ">
             <tr>
                 <th scope="row">
-                    ID
-                </th>
-                <th scope="row">
                     Name
                 </th>
                 <th scope="row">
@@ -32,9 +29,6 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>

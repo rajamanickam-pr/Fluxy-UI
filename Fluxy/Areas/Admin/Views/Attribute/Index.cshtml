@@ -1,16 +1,16 @@
-﻿@model IEnumerable<Fluxy.ViewModels.Categories.CategoryViewModel>
+﻿@model IEnumerable<Fluxy.ViewModels.Menu.MenuAttributeViewModel>
 
 <div class="container">
-    <h2>Category</h2>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">Add New Category</button><br /><br />
-    <table id="categoryTable" class="table table-hover">
+    <h2>Attribute</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#attributeModal">Add New Attribute</button><br /><br />
+    <table class="table table-hover">
         <thead class="thead-inverse ">
             <tr>
                 <th scope="row">
-                    Name
+                    AttributeKey
                 </th>
                 <th scope="row">
-                    Description
+                    AttributeValue
                 </th>
                 <th>
                     Action
@@ -22,23 +22,22 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.DisplayFor(modelItem => item.AttributeKey)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Description)
+                        @Html.DisplayFor(modelItem => item.AttributeValue)
                     </td>
                     <td>
-                        <a href="#" onclick="return getbyID('category/getbyID/'+'@item.Id')">Edit</a> |
-                        <a href="#" onclick="Delele('category/Delete/'+'@item.Id')">Delete</a>
+                        <a href="#" onclick="return getbyID('attribute/getbyID/'+'@item.Id')">Edit</a> |
+                        <a href="#" onclick="Delele('attribute/Delete/'+'@item.Id')">Delete</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <br />
 </div>
 
-<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="attributeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -50,23 +49,23 @@
                         <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="Name" placeholder="Name" />
+                        <input type="text" class="form-control" id="AttributeKey" placeholder="AttributeKey" />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="Description" placeholder="Description" />
+                        <input type="text" class="form-control" id="AttributeValue" placeholder="AttributeValue" />
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add('category/Create');">Add</button>
-                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update('category/Create');">Update</button>
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add('attribute/Create');">Add</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update('attribute/Create');">Update</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<script src="~/Areas/Admin/Scripts/CategoryScripts.js"></script>
+<script src="~/Areas/Admin/Scripts/AttributeScripts.js"></script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }   

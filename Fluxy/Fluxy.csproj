@@ -116,6 +116,12 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -241,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\AdminStyles.css" />
+    <Content Include="Areas\Admin\Scripts\AttributeScripts.js" />
     <Content Include="Areas\Admin\Scripts\CategoryScripts.js" />
     <Content Include="Areas\Admin\Scripts\Helpers.js" />
     <Content Include="Areas\Admin\Scripts\VideoAttributesScripts.js" />
@@ -257,6 +264,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\pace-theme-flash.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -286,6 +294,7 @@
     <Content Include="Areas\Admin\Views\SubCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\VideoSettings\Index.cshtml" />
     <Content Include="Areas\Admin\Views\VideoAttributes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\g3.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -354,7 +363,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Attribute\" />
     <Folder Include="Scripts\Custom\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
