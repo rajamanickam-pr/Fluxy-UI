@@ -1,4 +1,6 @@
-﻿$('#SubCategoryModal').on('show.bs.modal', function () {
+﻿$('#subCategoryTable').dataTable();
+
+$('#SubCategoryModal').on('show.bs.modal', function () {
     var url = 'Category/GetList';
     $.ajax({
         url: url,

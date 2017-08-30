@@ -1,4 +1,6 @@
-﻿$('#videoAttributesModal').on('show', function () {
+﻿$('#videoAttributesTable').dataTable();
+
+$('#videoAttributesModal').on('show', function () {
     var urlList = ['SubCategory/GetList', 'Language/GetList', 'VideoSettings/GetList'];
     var dropdownList = ['SelectedSubCategory', 'SelectedLanguage', 'SelectedSettings'];
     for (var i = 0; i < 3; i++) {

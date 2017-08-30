@@ -11,8 +11,7 @@
     @Styles.Render("~/Content/vendorcss")
     @Styles.Render("~/Content/admincss")
     @Scripts.Render("~/bundles/jquery")
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/adminScript")
 </head>
 <body>
     <div class="container-fluid">
@@ -97,7 +96,5 @@
     </div>
 </body>
 </html>
-<script src="~/Areas/Admin/Scripts/Helpers.js"></script>
-
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)

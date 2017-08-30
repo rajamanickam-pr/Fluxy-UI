@@ -1,4 +1,6 @@
-﻿function Add(url) {
+﻿$('#videoSettingsTable').dataTable();
+
+function Add(url) {
     var videoSettingsObj = {
         Id: $('#Id').val(),
         Name: $('#Name').val(),

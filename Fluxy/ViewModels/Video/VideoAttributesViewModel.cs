@@ -13,11 +13,14 @@ namespace Fluxy.ViewModels.Video
     {
         [Key]
         public string Id { get; set; }
+        [Required]
         public string Title { get; set; }
         public string ShortName { get; set; }
+        [Required]
         public string Url { get; set; }
         public string Length { get; set; }
         public string Tags { get; set; }
+        [Required]
         public string Description { get; set; }
         public string VideoId { get; set; }
         

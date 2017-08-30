@@ -1,4 +1,6 @@
-﻿$('#subMenuModal').on('show.bs.modal', function () {
+﻿$('#subMenuTable').dataTable();
+
+$('#subMenuModal').on('show.bs.modal', function () {
     var url = 'Menu/GetList';
     $.ajax({
         url: url,

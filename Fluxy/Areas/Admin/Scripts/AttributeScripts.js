@@ -1,4 +1,5 @@
-﻿function Add(url) {
+﻿$('#attributeTable').dataTable();
+function Add(url) {
     var menuAttributeObj = {
         Id: $('#Id').val(),
         AttributeKey: $('#AttributeKey').val(),

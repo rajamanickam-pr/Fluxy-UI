@@ -47,20 +47,26 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             try
             {
-                var videoSettingsDto = _mapper.Map<VideoAttributesExtend>(videoSettingsViewModel);
-                if (!string.IsNullOrEmpty(videoSettingsDto.Id))
+                if (ModelState.IsValid)
                 {
-                    videoSettingsDto.Thumbunail = getYouTubeThumbnail(videoSettingsViewModel.VideoId);
-                    videoSettingsDto.UserId = User.Identity.GetUserId();
-                    _videoAttributesService.Update(videoSettingsDto);
+
+                    var videoSettingsDto = _mapper.Map<VideoAttributesExtend>(videoSettingsViewModel);
+                    if (!string.IsNullOrEmpty(videoSettingsDto.Id))
+                    {
+                        videoSettingsDto.Thumbunail = getYouTubeThumbnail(videoSettingsViewModel.VideoId);
+                        videoSettingsDto.UserId = User.Identity.GetUserId();
+                        _videoAttributesService.Update(videoSettingsDto);
+                    }
+                    else
+                    {
+                        videoSettingsDto.Thumbunail = getYouTubeThumbnail(videoSettingsViewModel.VideoId);
+                        videoSettingsDto.UserId = User.Identity.GetUserId();
+                        _videoAttributesService.Create(videoSettingsDto);
+                    }
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    videoSettingsDto.Thumbunail = getYouTubeThumbnail(videoSettingsViewModel.VideoId);
-                    videoSettingsDto.UserId = User.Identity.GetUserId();
-                    _videoAttributesService.Create(videoSettingsDto);
-                }
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return Json(false, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception)
             {

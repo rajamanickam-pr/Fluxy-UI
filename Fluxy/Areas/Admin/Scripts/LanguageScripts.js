@@ -1,4 +1,6 @@
-﻿function Add(url) {
+﻿$('#languageTable').dataTable();
+
+function Add(url) {
     var languageObj = {
         Id: $('#Id').val(),
         Name: $('#Name').val(),
