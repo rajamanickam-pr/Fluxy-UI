@@ -30,9 +30,9 @@ namespace Fluxy.Areas.Admin.Controllers
                 var menuList = _mapper.Map<List<CategoryViewModel>>(category);
                 return View(menuList);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
 
@@ -87,9 +87,9 @@ namespace Fluxy.Areas.Admin.Controllers
                 }
                 return Json(status, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
     }

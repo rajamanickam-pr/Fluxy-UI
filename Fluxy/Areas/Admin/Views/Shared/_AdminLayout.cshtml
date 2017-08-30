@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -57,6 +58,11 @@
                             @Html.RouteLink("Category", new { action = "Index", controller = "Category", area = "Admin" }, new { @class = "list-group-item" })
                             @Html.RouteLink("SubCategory", new { action = "Index", controller = "SubCategory", area = "Admin" }, new { @class = "list-group-item" })
                         </div>
+                        <a href="#VideoMangementSub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Video</a>
+                        <div class="collapse" id="VideoMangementSub2">
+                            @Html.RouteLink("Video Settings", new { action = "Index", controller = "VideoSettings", area = "Admin" }, new { @class = "list-group-item" })
+                            @Html.RouteLink("Video Attributes", new { action = "Index", controller = "VideoAttributes", area = "Admin" }, new { @class = "list-group-item" })
+                        </div>
                     </div>
                     <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-list"></i> <span class="d-none d-md-inline">Item 5</span></a>
                     <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-clock-o"></i> <span class="d-none d-md-inline">Link</span></a>
@@ -88,5 +94,6 @@
     </div>
 </body>
 </html>
+<script src="~/Areas/Admin/Scripts/Helpers.js"></script>
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)

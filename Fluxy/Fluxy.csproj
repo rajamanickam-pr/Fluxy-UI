@@ -242,6 +242,8 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Content\AdminStyles.css" />
     <Content Include="Areas\Admin\Scripts\CategoryScripts.js" />
+    <Content Include="Areas\Admin\Scripts\Helpers.js" />
+    <Content Include="Areas\Admin\Scripts\VideoAttributesScripts.js" />
     <Content Include="Areas\Admin\Scripts\VideoSettingsScripts.js" />
     <Content Include="Areas\Admin\Scripts\SubCategoryScripts.js" />
     <Content Include="Areas\Admin\Scripts\LanguageScripts.js" />
@@ -283,6 +285,7 @@
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SubCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\VideoSettings\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VideoAttributes\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\g3.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -352,7 +355,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Attribute\" />
-    <Folder Include="Areas\Admin\Views\VideoAttributes\" />
     <Folder Include="Scripts\Custom\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

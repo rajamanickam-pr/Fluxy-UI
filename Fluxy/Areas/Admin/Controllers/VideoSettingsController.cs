@@ -12,6 +12,7 @@ using Fluxy.Core.Models.Video;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class VideoSettingsController : BaseController
     {
         private readonly IVideoSettingsService _videoSettingsService;
@@ -34,9 +35,9 @@ namespace Fluxy.Areas.Admin.Controllers
                 var menuList = _mapper.Map<List<VideoSettingsViewModel>>(videoSettings);
                 return View(menuList);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
 
@@ -91,9 +92,9 @@ namespace Fluxy.Areas.Admin.Controllers
                 }
                 return Json(status, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
     }

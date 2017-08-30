@@ -19,7 +19,8 @@ namespace Fluxy.ViewModels.Video
         public string Length { get; set; }
         public string Tags { get; set; }
         public string Description { get; set; }
-
+        public string VideoId { get; set; }
+        
         public byte[] Thumbunail { get; set; }
 
         public bool IsPublicVideo { get; set; }

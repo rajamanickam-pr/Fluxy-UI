@@ -10,6 +10,7 @@ namespace Fluxy.ViewModels.Video
     {
         [Key]
         public string Id { get; set; }
+        public string Name { get; set; }
         public int FrameWidth { get; set; }
         public int FrameHeight { get; set; }
         public string FrameFilters { get; set; }

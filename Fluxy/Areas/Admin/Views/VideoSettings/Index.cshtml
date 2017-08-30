@@ -9,6 +9,9 @@
                     ID
                 </th>
                 <th scope="row">
+                    Name
+                </th>
+                <th scope="row">
                     Frame Width
                 </th>
                 <th scope="row">
@@ -28,6 +31,9 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FrameWidth)
@@ -58,6 +64,9 @@
                 <form>
                     <div class="form-group">
                         <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Name" placeholder="Name" />
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="FrameWidth" placeholder="Frame Width" />

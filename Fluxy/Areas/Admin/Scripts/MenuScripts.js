@@ -23,6 +23,20 @@
     });
 }
 
+$('#menuModal').on('hide.bs.modal', function () {
+    $(this)
+        .find('input,textarea')
+        .val('')
+        .end()
+        .find('input[type=checkbox],input[type=radio]')
+        .prop('checked', '')
+        .end()
+        .find('select')
+        .find('option')
+        .remove()
+        .end();
+})
+
 function getbyID(url) {
     $.ajax({
         url: url,
@@ -37,7 +51,7 @@ function getbyID(url) {
             $('#LinkText').val(result.LinkText);
             $('#ActionName').val(result.ActionName);
             $('#ControllerName').val(result.ControllerName);
-            $('#myModal').modal('show');
+            $('#menuModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
         },

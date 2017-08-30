@@ -1,6 +1,7 @@
 ﻿function Add(url) {
     var videoSettingsObj = {
         Id: $('#Id').val(),
+        Name: $('#Name').val(),
         FrameWidth: $('#FrameWidth').val(),
         FrameHeight: $('#FrameHeight').val(),
         FrameFilters: $('#FrameFilters').val()
@@ -20,6 +21,20 @@
     });
 }
 
+$('#videoSettingsModal').on('hide.bs.modal', function () {
+    $(this)
+        .find('input,textarea')
+        .val('')
+        .end()
+        .find('input[type=checkbox],input[type=radio]')
+        .prop('checked', '')
+        .end()
+        .find('select')
+        .find('option')
+        .remove()
+        .end();
+})
+
 function getbyID(url) {
     $.ajax({
         url: url,
@@ -28,6 +43,7 @@ function getbyID(url) {
         dataType: "json",
         success: function (result) {
             $('#Id').val(result.Id);
+            $('#Name').val(result.Names);
             $('#FrameWidth').val(result.FrameWidth);
             $('#FrameHeight').val(result.FrameHeight);
             $('#ShortName').val(result.ShortName);
@@ -46,6 +62,7 @@ function getbyID(url) {
 function Update(url) {
     var videoSettingsObj = {
         Id: $('#Id').val(),
+        Name: $('#Name').val(),
         FrameWidth: $('#FrameWidth').val(),
         FrameHeight: $('#FrameHeight').val(),
         FrameFilters: $('#FrameFilters').val()

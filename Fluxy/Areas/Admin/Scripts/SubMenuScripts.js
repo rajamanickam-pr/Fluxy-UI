@@ -19,6 +19,21 @@
     });
 })
 
+
+$('#subMenuModal').on('hide.bs.modal', function () {
+    $(this)
+        .find('input,textarea')
+        .val('')
+        .end()
+        .find('input[type=checkbox],input[type=radio]')
+        .prop('checked', '')
+        .end()
+        .find('select')
+        .find('option')
+        .remove()
+        .end();
+})
+
 function Add(url) {
     var menuObj = {
         Id: $('#Id').val(),

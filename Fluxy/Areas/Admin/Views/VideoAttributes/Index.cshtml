@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Fluxy.ViewModels.Video.VideoAttributesViewModel>
+
+<div class="container">
+    <h2>Video Attributes</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#videoAttributesModal">Add New Video</button><br /><br />
+    <table class="table table-hover">
+        <thead class="thead-inverse ">
+            <tr>
+                <th scope="row">
+                    Title
+                </th>
+                <th scope="row">
+                    Short Name
+                </th>
+                <th scope="row">
+                    Url
+                </th>
+                <th scope="row">
+                    Tags
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShortName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Url)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tags)
+                    </td>
+                    
+                    <td>
+                        <a href="#" onclick="return getbyID('videoAttributes/getbyID/'+'@item.Id')">Edit</a> |
+                        <a href="#" onclick="Delele('videoAttributes/Delete/'+'@item.Id')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="videoAttributesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Id" placeholder="Id" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" required id="Title" placeholder="Title" />
+                    </div>
+                    <div class="form-group">
+                        <label>Shortname</label>
+                        <input type="text" class="form-control" id="ShortName" placeholder="Shortname" />
+                    </div>
+                    <div class="form-group">
+                        <label>Embed Url</label>
+                        <input type="text" class="form-control" required id="Url" placeholder="Url" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tags</label>
+                        <input type="text" class="form-control" id="Tags" placeholder="Tags" />
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" required id="Description" placeholder="Description" />
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="IsPublicVideo" class="form-check-input">
+                            IsPublic Video
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="IsAdultContent" class="form-check-input">
+                            IsAdult Content
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="IsAllowFullScreen" class="form-check-input">
+                            IsAllow FullScreen
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Subcategory</label>
+                        <select class="form-control" required id="SelectedSubCategory"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Language</label>
+                        <select class="form-control" id="SelectedLanguage"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Settings</label>
+                        <select class="form-control" id="SelectedSettings"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnAdd" onclick="return Add('videoAttributes/Create');">Add</button>
+                <button type="submit" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update('videoAttributes/Create');">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Areas/Admin/Scripts/VideoAttributesScripts.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
