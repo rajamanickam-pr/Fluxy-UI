@@ -44,16 +44,20 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             try
             {
-                var languageDto = _mapper.Map<Language>(LanguageViewModel);
-                if (!string.IsNullOrEmpty(languageDto.Id))
+                if (ModelState.IsValid)
                 {
-                    _languageService.Update(languageDto);
+                    var languageDto = _mapper.Map<Language>(LanguageViewModel);
+                    if (!string.IsNullOrEmpty(languageDto.Id))
+                    {
+                        _languageService.Update(languageDto);
+                    }
+                    else
+                    {
+                        _languageService.Create(languageDto);
+                    }
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    _languageService.Create(languageDto);
-                }
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {

@@ -41,14 +41,18 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             try
             {
-                var subCategoryDto = _mapper.Map<SubCategory>(SubCategoryViewModel);
-                if (!string.IsNullOrEmpty(subCategoryDto.Id))
+                if (ModelState.IsValid)
                 {
-                    _subCategoryService.Update(subCategoryDto);
-                }
-                else
-                {
-                    _subCategoryService.Create(subCategoryDto);
+                    var subCategoryDto = _mapper.Map<SubCategory>(SubCategoryViewModel);
+                    if (!string.IsNullOrEmpty(subCategoryDto.Id))
+                    {
+                        _subCategoryService.Update(subCategoryDto);
+                    }
+                    else
+                    {
+                        _subCategoryService.Create(subCategoryDto);
+                    }
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
             }

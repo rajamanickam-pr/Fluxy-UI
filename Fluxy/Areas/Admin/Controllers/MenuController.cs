@@ -44,16 +44,21 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             try
             {
-                var mainMenuDto = _mapper.Map<MainMenu>(mainMenuViewModel);
-                if (!string.IsNullOrEmpty(mainMenuDto.Id))
+                if (ModelState.IsValid)
                 {
-                    _mainMenuService.Update(mainMenuDto);
+                    var mainMenuDto = _mapper.Map<MainMenu>(mainMenuViewModel);
+                    if (!string.IsNullOrEmpty(mainMenuDto.Id))
+                    {
+                        _mainMenuService.Update(mainMenuDto);
+                    }
+                    else
+                    {
+                        _mainMenuService.Create(mainMenuDto);
+                    }
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    _mainMenuService.Create(mainMenuDto);
-                }
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return Json(false, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception)
             {

@@ -46,16 +46,20 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             try
             {
-                var videoSettingsDto = _mapper.Map<VideoSettings>(videoSettingsViewModel);
-                if (!string.IsNullOrEmpty(videoSettingsDto.Id))
+                if (ModelState.IsValid)
                 {
-                    _videoSettingsService.Update(videoSettingsDto);
+                    var videoSettingsDto = _mapper.Map<VideoSettings>(videoSettingsViewModel);
+                    if (!string.IsNullOrEmpty(videoSettingsDto.Id))
+                    {
+                        _videoSettingsService.Update(videoSettingsDto);
+                    }
+                    else
+                    {
+                        _videoSettingsService.Create(videoSettingsDto);
+                    }
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    _videoSettingsService.Create(videoSettingsDto);
-                }
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {

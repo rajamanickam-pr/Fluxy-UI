@@ -3,6 +3,7 @@
 $('#videoAttributesModal').on('show', function () {
     var urlList = ['SubCategory/GetList', 'Language/GetList', 'VideoSettings/GetList'];
     var dropdownList = ['SelectedSubCategory', 'SelectedLanguage', 'SelectedSettings'];
+    debugger;
     for (var i = 0; i < 3; i++) {
         var url = urlList[i];
         var dropdown = dropdownList[i];

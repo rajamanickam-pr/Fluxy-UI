@@ -6,7 +6,9 @@ namespace Fluxy.ViewModels.Menu
     {
         [Key]
         public string Id { get; set; }
+        [Required]
         public string AttributeKey { get; set; }
+        [Required]
         public string AttributeValue { get; set; }
     }
 }

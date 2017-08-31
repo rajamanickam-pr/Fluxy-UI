@@ -47,16 +47,20 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             try
             {
-                var subMenuDto = _mapper.Map<SubMenu>(subMenuViewModel);
-                if (!string.IsNullOrWhiteSpace(subMenuDto.Id))
+                if (ModelState.IsValid)
                 {
-                    _subMenuService.Update(subMenuDto);
+                    var subMenuDto = _mapper.Map<SubMenu>(subMenuViewModel);
+                    if (!string.IsNullOrWhiteSpace(subMenuDto.Id))
+                    {
+                        _subMenuService.Update(subMenuDto);
+                    }
+                    else
+                    {
+                        _subMenuService.Create(subMenuDto);
+                    }
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    _subMenuService.Create(subMenuDto);
-                }
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {

@@ -7,6 +7,7 @@ namespace Fluxy.ViewModels.Localization
     {
         [Key]
         public string Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public string LanguageCulture { get; set; }
         public bool Rtl { get; set; }
