@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity;
 using System.Web;
 using System.IO;
 using System.Net;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace Fluxy.Controllers
 {
@@ -32,7 +34,7 @@ namespace Fluxy.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var userProfileDetails = _userProfileService.GetAll().FirstOrDefault(i => i.UserId == userId);
+            var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == userId);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
             return View(userProfile);
         }
@@ -44,12 +46,12 @@ namespace Fluxy.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var userProfileDetails = _userProfileService.GetAll().FirstOrDefault(i => i.Id == UserProfileId);
+            var userProfileDetails = _userProfileService.GetSingle(i => i.Id == UserProfileId);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
             return View(userProfile);
         }
 
-       [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserMangementViewModel userMangementViewModel, HttpPostedFileBase fileBase)
         {
@@ -91,24 +93,39 @@ namespace Fluxy.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var userProfileDetails = _userSettingsService.GetAll().FirstOrDefault(i => i.UserProfile.Id == UserProfileId);
-            var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
+            var profile = _userProfileService.GetSingle(i => i.Id == UserProfileId);
+
+            var userProfile = _mapper.Map<UserMangementViewModel>(profile);
+            TempData["ProfileId"] = UserProfileId;
             return View(userProfile);
         }
 
         [HttpPost]
         public ActionResult Privacy(UserMangementViewModel userMangementViewModel)
         {
+            var profileId = TempData["ProfileId"];
             var userSettingsDto = _mapper.Map<UserSettings>(userMangementViewModel);
+            var profileSettings = default(UserSettings);
             if (!string.IsNullOrEmpty(userSettingsDto.Id))
             {
-                _userSettingsService.Update(userSettingsDto);
+                profileSettings = _userSettingsService.Update(userSettingsDto);
             }
             else
             {
-                _userSettingsService.Create(userSettingsDto);
+                profileSettings = _userSettingsService.Create(userSettingsDto);
             }
-            return View(userMangementViewModel);
+            var sql = "UPDATE UserProfile SET UserSettingsId=@UserSettingsId where id=@id";
+            List<SqlParameter> parameterList = new List<SqlParameter>
+            {
+                new SqlParameter("@UserSettingsId", profileSettings.Id),
+                new SqlParameter("@id", profileId)
+            };
+
+            var profile = _userProfileService.GetSingle(i => i.Id == profileId.ToString());
+            _userProfileService.ExecuteNonQuery(sql, parameterList.ToArray());
+
+            var updatedprofileDto = _userProfileService.GetSingle(i => i.Id == profileId.ToString());
+            return View(_mapper.Map<UserMangementViewModel>(updatedprofileDto));
         }
 
         public ActionResult UpsertUserValues(UserMangementViewModel userMangementViewModel)

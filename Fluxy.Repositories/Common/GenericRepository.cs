@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -34,7 +35,7 @@ namespace Fluxy.Repositories.Common
             return list;
         }
 
-        public virtual IEnumerable<T> GetList(Func<T, bool> where, params Expression<Func<T, object>>[] properties)
+        public virtual IEnumerable<T> GetList(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] properties)
         {
             List<T> list = new List<T>();
 
@@ -50,7 +51,7 @@ namespace Fluxy.Repositories.Common
             return list;
         }
 
-        public T GetSingle(Func<T, bool> where, params Expression<Func<T, object>>[] properties)
+        public T GetSingle(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] properties)
         {
             T item = null;
             IQueryable<T> dbQuery = _entities.Set<T>();
@@ -75,9 +76,15 @@ namespace Fluxy.Repositories.Common
             return entity;
         }
 
-        public virtual void Edit(T entity)
+        public virtual T Edit(T entity)
         {
             _entities.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            return entity;
+        }
+
+        public virtual void ExecuteNonQuery(string query, SqlParameter[] param)
+        {
+             _entities.Database.ExecuteSqlCommand(sql: query, parameters: param);
         }
 
         public virtual void Save()

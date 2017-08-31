@@ -6,12 +6,12 @@
 
 <div class="container">
 
-    @using (Html.BeginForm("Privacy", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Privacy", "Profile", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Id)
         <div class="form-horizontal">
-            <h4>General Settings</h4>
+            <h4>Privacy Settings</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
