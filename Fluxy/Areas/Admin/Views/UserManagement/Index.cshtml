@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Fluxy.ViewModels.User.UserViewModel>
+<div class="container">
+    <h2>Main Menu Items</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#usersModal">Add New User</button><br /><br />
+    <table id="usersTable" class="table table-hover">
+        <thead class="thead-inverse ">
+            <tr>
+                <th scope="row">
+                    UserName
+                </th>
+                <th scope="row">
+                    Email
+                </th>
+                <th scope="row">
+                    Role
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    <td>
+                        @* @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                        @* @Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                        <a href="#" onclick="return FindRoleById('UserManagement/FindRole/'+'@item.Id')">Details</a>|
+                        <a href="#" onclick="return FindRoleById('UserManagement/FindRole/'+'@item.Id')">Delete</a>|
+                        <a href="#" onclick="return FindRoleById('UserManagement/FindRole/'+'@item.Id')">Change Role</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Areas/Admin/Scripts/UserManageScript.js"></script>

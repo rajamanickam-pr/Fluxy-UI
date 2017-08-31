@@ -7,7 +7,7 @@
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Profile", routeValues: null, htmlAttributes: new { title = "Profile", @class = "nav-link" })
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Profile", routeValues: new {userId= User.Identity.GetUserId() }, htmlAttributes: new { title = "Profile", @class = "nav-link" })
             </li>
             @if (HttpContext.Current.User.IsInRole("Admin"))
             {

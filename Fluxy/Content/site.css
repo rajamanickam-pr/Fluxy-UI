@@ -12,6 +12,59 @@ body {
     color: #151b1e;
 }
 
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea, select {
+    height: 36px; /*safari padding fix*/
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: middle;
+}
+
+input, textarea, select {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #777;
+}
+
+textarea {
+    min-height: 150px;
+}
+
+select {
+    min-width: 50px;
+    height: 32px; /*safari padding fix*/
+    padding: 6px;
+}
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    input[type="password"]:focus,
+    textarea:focus, select:focus {
+        border-color: #ccc;
+        color: #444;
+    }
+
+input[type="checkbox"],
+input[type="radio"],
+input[type="checkbox"] + *,
+input[type="radio"] + * {
+    vertical-align: middle;
+}
+
+input[type="button"], input[type="submit"],
+button, .button-1, .button-2 {
+    cursor: pointer;
+}
+
+label, label + * {
+    vertical-align: middle;
+}
+
 .text-xs-center {
     text-align: center !important;
 }
@@ -42,6 +95,8 @@ body {
 
 .img-circle {
     border-radius: 50%;
+    margin-bottom: 15px;
+    margin-top: 35px !important;
 }
 
 .tag-primary {

@@ -58,6 +58,10 @@
     <Compile Include="Menu\SubMenuService.cs" />
     <Compile Include="Menu\ISubMenuService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users\IUserProfileService.cs" />
+    <Compile Include="Users\IUserSettingsService.cs" />
+    <Compile Include="Users\UserProfileService.cs" />
+    <Compile Include="Users\UserSettingsService.cs" />
     <Compile Include="Video\IVideoAttributesService.cs" />
     <Compile Include="Video\IVideoSettingsService.cs" />
     <Compile Include="Video\VideoAttributesService.cs" />

@@ -21,7 +21,7 @@ namespace Fluxy.Data
         public virtual UserProfileExtend UserProfileExtend { get; set; }
         public virtual PrivateVideoExtend PrivateVideoExtend { get; set; }
         public virtual VideoAttributesExtend VideoAttributesExtend { get; set; }
-        
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -61,37 +61,45 @@ namespace Fluxy.Data
 
         public override int SaveChanges()
         {
-            var modifiedEntries = ChangeTracker.Entries()
-                .Where(x => x.Entity is IAuditableEntity
-                    && (x.State == System.Data.Entity.EntityState.Added || x.State == System.Data.Entity.EntityState.Modified));
-
-            foreach (var entry in modifiedEntries)
+            try
             {
-                IAuditableEntity auditableEntity = entry.Entity as IAuditableEntity;
-                IEntity<string> Entity = entry.Entity as IEntity<string>;
-                if (auditableEntity != null)
+                var modifiedEntries = ChangeTracker.Entries()
+                        .Where(x => x.Entity is IAuditableEntity
+                            && (x.State == System.Data.Entity.EntityState.Added || x.State == System.Data.Entity.EntityState.Modified));
+
+                foreach (var entry in modifiedEntries)
                 {
-                    string identityName = Thread.CurrentPrincipal.Identity.Name;
-                    DateTime now = DateTime.UtcNow;
-
-                    if (entry.State == System.Data.Entity.EntityState.Added)
+                    IAuditableEntity auditableEntity = entry.Entity as IAuditableEntity;
+                    IEntity<string> Entity = entry.Entity as IEntity<string>;
+                    if (auditableEntity != null)
                     {
-                        Entity.Id = Guid.NewGuid().ToString();
-                        auditableEntity.CreatedBy = identityName;
-                        auditableEntity.CreatedDate = now;
-                    }
-                    else
-                    {
-                        base.Entry(auditableEntity).Property(x => x.CreatedBy).IsModified = false;
-                        base.Entry(auditableEntity).Property(x => x.CreatedDate).IsModified = false;
-                    }
+                        string identityName = Thread.CurrentPrincipal.Identity.Name;
+                        DateTime now = DateTime.UtcNow;
 
-                    auditableEntity.UpdatedBy = identityName;
-                    auditableEntity.UpdatedDate = now;
+                        if (entry.State == System.Data.Entity.EntityState.Added)
+                        {
+                            Entity.Id = Guid.NewGuid().ToString();
+                            auditableEntity.CreatedBy = identityName;
+                            auditableEntity.CreatedDate = now;
+                        }
+                        else
+                        {
+                            base.Entry(auditableEntity).Property(x => x.CreatedBy).IsModified = false;
+                            base.Entry(auditableEntity).Property(x => x.CreatedDate).IsModified = false;
+                        }
+
+                        auditableEntity.UpdatedBy = identityName;
+                        auditableEntity.UpdatedDate = now;
+                    }
                 }
-            }
 
-            return base.SaveChanges();
+                return base.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
