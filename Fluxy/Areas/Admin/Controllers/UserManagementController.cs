@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Fluxy.Data;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Fluxy.ViewModels.User;
+using Fluxy.Services.Users;
+using System.Net;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
@@ -15,12 +17,16 @@ namespace Fluxy.Areas.Admin.Controllers
     {
         private readonly FluxyContext context;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IUserProfileService _userProfileService;
         private readonly UserManager<ApplicationUser> UserManager;
+        private readonly IMapper _mapper;
 
-        public UserManagementController(ILogService logService, IMapper mapper)
+        public UserManagementController(IUserProfileService userProfileService, ILogService logService, IMapper mapper)
              : base(logService, mapper)
         {
             context = new FluxyContext();
+            _userProfileService = userProfileService;
+            _mapper = mapper;
             roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
         }
@@ -43,14 +49,15 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult FindRole(string id)
+        public ActionResult Details(string userId)
         {
-            var UserRole = UserManager.Users
-                    .Where(u => u.Id == id)
-                    .SelectMany(u => u.Roles)
-                    .Join(context.Roles, ur => ur.RoleId, r => r.Id, (ur, r) => r)
-                    .ToList();
-            return Json(UserRole, JsonRequestBehavior.AllowGet);
+            if (userId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == userId);
+            var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
+            return View(userProfile);
         }
     }   
 }
