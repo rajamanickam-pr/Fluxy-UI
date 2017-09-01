@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Fluxy.ViewModels.User
+﻿namespace Fluxy.ViewModels.User
 {
     public class UserViewModel
     {

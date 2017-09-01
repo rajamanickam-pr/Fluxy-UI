@@ -3,16 +3,12 @@ using System.Web.Mvc;
 using AutoMapper;
 using Fluxy.Services.Logging;
 using Fluxy.Services.Users;
-using System.Linq;
 using Fluxy.ViewModels.User;
 using Fluxy.Data.ExtentedDTO;
-using Fluxy.Core.Models.Users;
 using Microsoft.AspNet.Identity;
 using System.Web;
 using System.IO;
 using System.Net;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace Fluxy.Controllers
 {
@@ -39,14 +35,13 @@ namespace Fluxy.Controllers
             return View(userProfile);
         }
 
-        public ActionResult Edit(string UserProfileId)
+        public ActionResult Edit(string userId)
         {
-            if (UserProfileId == null)
+            if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var userProfileDetails = _userProfileService.GetSingle(i => i.Id == UserProfileId);
+            var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == userId);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
             return View(userProfile);
         }
@@ -55,10 +50,6 @@ namespace Fluxy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserMangementViewModel userMangementViewModel, HttpPostedFileBase fileBase)
         {
-            if (userMangementViewModel.Id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             if (fileBase != null)
             {
@@ -72,40 +63,44 @@ namespace Fluxy.Controllers
                     }
                 }
             }
-
+            var profile = default(UserProfileExtend);
             var userProfileDto = _mapper.Map<UserProfileExtend>(userMangementViewModel);
             userProfileDto.UserId = User.Identity.GetUserId();
             if (!string.IsNullOrEmpty(userProfileDto.Id))
             {
-                _userProfileService.Update(userProfileDto);
+                var oldPicture = _userProfileService.GetSingle(i => i.Id == userProfileDto.Id).DisplayPicture;
+                if (oldPicture.Length > 0 && userProfileDto.DisplayPicture.Length <= 0)
+                {
+                    userProfileDto.DisplayPicture = oldPicture;
+                }
+                profile= _userProfileService.Update(userProfileDto);
             }
             else
             {
-                _userProfileService.Create(userProfileDto);
+                profile= _userProfileService.Create(userProfileDto);
             }
-            return View(userMangementViewModel);
+            var userProfile = _mapper.Map<UserMangementViewModel>(profile);
+            return View(userProfile);
         }
 
-        public ActionResult Privacy(string UserProfileId)
+        public ActionResult Privacy(string userId)
         {
-            if (UserProfileId == null)
+            if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var profile = _userProfileService.GetSingle(i => i.Id == UserProfileId);
-
+            var profile = _userSettingsService.GetSingle(i => i.UserId == userId);
             var userProfile = _mapper.Map<UserMangementViewModel>(profile);
-            TempData["ProfileId"] = UserProfileId;
             return View(userProfile);
         }
 
         [HttpPost]
         public ActionResult Privacy(UserMangementViewModel userMangementViewModel)
         {
-            var profileId = TempData["ProfileId"];
-            var userSettingsDto = _mapper.Map<UserSettings>(userMangementViewModel);
-            var profileSettings = default(UserSettings);
+            var userSettingsDto = _mapper.Map<UserSettingsExtend>(userMangementViewModel);
+            userSettingsDto.UserId = User.Identity.GetUserId();
+            var profileSettings = default(UserSettingsExtend);
             if (!string.IsNullOrEmpty(userSettingsDto.Id))
             {
                 profileSettings = _userSettingsService.Update(userSettingsDto);
@@ -114,78 +109,8 @@ namespace Fluxy.Controllers
             {
                 profileSettings = _userSettingsService.Create(userSettingsDto);
             }
-            var sql = "UPDATE UserProfile SET UserSettingsId=@UserSettingsId where id=@id";
-            List<SqlParameter> parameterList = new List<SqlParameter>
-            {
-                new SqlParameter("@UserSettingsId", profileSettings.Id),
-                new SqlParameter("@id", profileId)
-            };
-
-            var profile = _userProfileService.GetSingle(i => i.Id == profileId.ToString());
-            _userProfileService.ExecuteNonQuery(sql, parameterList.ToArray());
-
-            var updatedprofileDto = _userProfileService.GetSingle(i => i.Id == profileId.ToString());
-            return View(_mapper.Map<UserMangementViewModel>(updatedprofileDto));
-        }
-
-        public ActionResult UpsertUserValues(UserMangementViewModel userMangementViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var userProfileDto = _mapper.Map<UserProfileExtend>(userMangementViewModel);
-                userProfileDto.UserId = User.Identity.GetUserId();
-                if (!string.IsNullOrEmpty(userProfileDto.Id))
-                {
-                    _userProfileService.Update(userProfileDto);
-                }
-                else
-                {
-                    _userProfileService.Create(userProfileDto);
-                }
-            }
-            return View("Index");
-        }
-
-        public ActionResult UpsertUserSettings(UserMangementViewModel userMangementViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var userSettingsDto = _mapper.Map<UserSettings>(userMangementViewModel);
-                if (!string.IsNullOrEmpty(userSettingsDto.Id))
-                {
-                    _userSettingsService.Update(userSettingsDto);
-                }
-                else
-                {
-                    _userSettingsService.Create(userSettingsDto);
-                }
-            }
-            return View("Index");
-        }
-
-        public ActionResult UpsertProfilePicture(UserMangementViewModel userMangementViewModel, HttpPostedFileBase fileBase)
-        {
-            if (fileBase.ContentLength > 0)
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    fileBase.InputStream.CopyTo(ms);
-                    byte[] fileArray = ms.GetBuffer();
-                    userMangementViewModel.DisplayPicture = fileArray;
-                }
-            }
-
-            var userProfileDto = _mapper.Map<UserProfileExtend>(userMangementViewModel);
-            userProfileDto.UserId = User.Identity.GetUserId();
-            if (!string.IsNullOrEmpty(userProfileDto.Id))
-            {
-                _userProfileService.Update(userProfileDto);
-            }
-            else
-            {
-                _userProfileService.Create(userProfileDto);
-            }
-            return View("Index");
+            var userMangementVm = _mapper.Map<UserMangementViewModel>(profileSettings);
+            return View(userMangementVm);
         }
     }
 }

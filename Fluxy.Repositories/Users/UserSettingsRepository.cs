@@ -1,15 +1,10 @@
-﻿using Fluxy.Core.Models.Users;
-using Fluxy.Repositories.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fluxy.Repositories.Common;
 using System.Data.Entity;
+using Fluxy.Data.ExtentedDTO;
 
 namespace Fluxy.Repositories.Users
 {
-    public class UserSettingsRepository : GenericRepository<UserSettings>, IUserSettingsRepository
+    public class UserSettingsRepository : GenericRepository<UserSettingsExtend>, IUserSettingsRepository
     {
         public UserSettingsRepository(DbContext context) 
             : base(context)

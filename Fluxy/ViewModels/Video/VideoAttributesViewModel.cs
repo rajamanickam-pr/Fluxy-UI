@@ -1,11 +1,8 @@
 ﻿using Fluxy.ViewModels.Categories;
 using Fluxy.ViewModels.Localization;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Fluxy.ViewModels.Video
 {

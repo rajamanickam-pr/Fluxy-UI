@@ -1,5 +1,5 @@
 ﻿@model Fluxy.ViewModels.User.UserMangementViewModel
-
+@using Microsoft.AspNet.Identity;
 @{
     var imgSrc = string.Empty;
     if (Model != null)
@@ -15,15 +15,22 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-xs-center">
-            <img src="@imgSrc" data-src="holder.js/140x140" alt='Avatar' class="img-thumbnail img-thumbnail-custom img-circle m-x-auto img-fluid  img-responsive">
-            @Html.ActionLink("Change Settings", "Edit", "Profile", routeValues: new { UserProfileId = Model.Id }, htmlAttributes: new { @type = "button", @class = "btn btn-secondary" })
+            @if (!string.IsNullOrEmpty(imgSrc))
+            {
+                <img src="@imgSrc" data-src="holder.js/140x140" alt='Avatar' class="img-thumbnail img-thumbnail-custom img-circle m-x-auto img-fluid img-responsive">
+            }
+            else
+            {
+                <img src="//placehold.it/150" data-src="holder.js/140x140" class="img-thumbnail img-thumbnail-custom img-circle m-x-auto img-fluid img-responsive" alt="avatar">
+            }
+            @Html.ActionLink("Change Settings", "Edit", "Profile", routeValues: new { userId = User.Identity.GetUserId() }, htmlAttributes: new { @type = "button", @class = "btn btn-custom btn-secondary" })
         </div>
         <div class="col-md-9">
             <h5 class="text-center">Welcome @User.Identity.Name!</h5>
             <hr />
             <h6>Firstname</h6>
             <p>
-                @Html.DisplayFor(i=>i.Firstname)
+                @Html.DisplayFor(i => i.Firstname)
             </p>
             <h6>Lastname</h6>
             <p>
@@ -31,7 +38,7 @@
             </p>
             <h6>About</h6>
             <p>
-               @Html.DisplayFor(i => i.About)
+                @Html.DisplayFor(i => i.About)
             </p>
             <h6>Hobbies</h6>
             <p>

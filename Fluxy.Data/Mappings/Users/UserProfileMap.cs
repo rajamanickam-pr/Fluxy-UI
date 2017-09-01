@@ -12,7 +12,6 @@ namespace Fluxy.Data.Mappings.Users
             this.Property(pm => pm.Firstname).HasMaxLength(100);
             this.Property(pm => pm.Lastname).HasMaxLength(100);
             this.HasOptional(pm => pm.ApplicationUser).WithMany().HasForeignKey(b => b.UserId);
-            this.HasOptional(pm => pm.UserSettings).WithMany().HasForeignKey(b => b.UserSettingsId);
         }
     }
 }

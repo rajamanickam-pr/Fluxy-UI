@@ -34,6 +34,10 @@ textarea {
     min-height: 150px;
 }
 
+btn-custom {
+    margin-bottom: 10px !important;
+}
+
 select {
     min-width: 50px;
     height: 32px; /*safari padding fix*/

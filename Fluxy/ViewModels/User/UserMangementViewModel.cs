@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Fluxy.ViewModels.User
 {
@@ -15,9 +11,11 @@ namespace Fluxy.ViewModels.User
         public string Firstname { get; set; }
         [Required]
         public string Lastname { get; set; }
+        public string Gender { get; set; }
         public string About { get; set; }
         public string Hobbies { get; set; }
         public bool CanAnyoneSendMessage { get; set; }
         public bool CanAnyoneSendVideo { get; set; }
+        public bool IsMyDpPublic { get; set; }
     }
 }

@@ -6,7 +6,6 @@ namespace Fluxy.Core.Models.Users
     {
         public bool CanAnyoneSendMessage { get; set; }
         public bool CanAnyoneSendVideo { get; set; }
-
-        public virtual UserProfile UserProfile { get; set; }
+        public bool IsMyDpPublic { get; set; }
     }
 }

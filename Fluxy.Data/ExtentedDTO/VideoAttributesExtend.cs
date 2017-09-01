@@ -1,7 +1,6 @@
 ﻿using Fluxy.Core.Models.Common;
 using Fluxy.Core.Models.Localization;
 using Fluxy.Core.Models.Video;
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fluxy.Data.ExtentedDTO

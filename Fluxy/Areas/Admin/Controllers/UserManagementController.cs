@@ -1,12 +1,8 @@
 ﻿using Fluxy.Infrastructure;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Fluxy.Services.Logging;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using Fluxy.Data;
 using Microsoft.AspNet.Identity.EntityFramework;
