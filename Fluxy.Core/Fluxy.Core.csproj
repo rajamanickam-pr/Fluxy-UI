@@ -74,6 +74,8 @@
     <Compile Include="Models\Localization\Language.cs" />
     <Compile Include="Models\Logging\Log.cs" />
     <Compile Include="Models\Logging\LogLevel.cs" />
+    <Compile Include="Models\Mail\ContactUs.cs" />
+    <Compile Include="Models\Mail\Newsletter.cs" />
     <Compile Include="Models\Menu\MenuAttribute.cs" />
     <Compile Include="Models\Menu\SubMenu.cs" />
     <Compile Include="Models\Menu\MainMenu.cs" />
