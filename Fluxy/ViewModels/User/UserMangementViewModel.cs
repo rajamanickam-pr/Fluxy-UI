@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Fluxy.Data;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Fluxy.ViewModels.User
 {
@@ -17,5 +19,14 @@ namespace Fluxy.ViewModels.User
         public bool CanAnyoneSendMessage { get; set; }
         public bool CanAnyoneSendVideo { get; set; }
         public bool IsMyDpPublic { get; set; }
+        public string DisplayPictureString
+        {
+            get
+            {
+                return Convert.ToBase64String(this.DisplayPicture);
+            }
+        }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Fluxy.ViewModels.User;
 using Fluxy.Services.Users;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
@@ -32,32 +33,83 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         // GET: Admin/UserManagement
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var users = from u in UserManager.Users
                         from ur in u.Roles
                         join r in roleManager.Roles on ur.RoleId equals r.Id
                         select new UserViewModel
                         {
-                            Id=u.Id,
+                            Id = u.Id,
                             Username = u.UserName,
                             Role = r.Name,
-                            Email=u.Email
+                            Email = u.Email
                         };
 
             return View(users);
         }
 
-        [HttpGet]
-        public ActionResult Details(string userId)
+        public JsonResult Details(string id)
         {
-            if (userId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == userId);
+            var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == id);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
-            return View(userProfile);
+            return Json(userProfile, JsonRequestBehavior.AllowGet);
         }
-    }   
+
+        [HttpGet, ActionName("Delete")]
+        public async Task<ActionResult> DeleteConfirmed(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var user = await UserManager.FindByIdAsync(id);
+                var logins = user.Logins;
+                var rolesForUser = await UserManager.GetRolesAsync(id);
+
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    foreach (var login in logins.ToList())
+                    {
+                        await UserManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+                    }
+
+                    if (rolesForUser.Count() > 0)
+                    {
+                        foreach (var item in rolesForUser.ToList())
+                        {
+                            var result = await UserManager.RemoveFromRoleAsync(user.Id, item);
+                        }
+                    }
+
+                    await UserManager.DeleteAsync(user);
+                    transaction.Commit();
+                }
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public virtual ActionResult ChangeRole(string id, string role)
+        {
+            var oldUser = UserManager.FindById(id);
+            var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
+            var oldRoleName = roleManager.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+
+            if (oldRoleName != role)
+            {
+                UserManager.RemoveFromRole(id, oldRoleName);
+                UserManager.AddToRole(id, role);
+            }
+            return Json("Success", JsonRequestBehavior.AllowGet);
+        }
+    }
 }
