@@ -253,6 +253,7 @@
     <Content Include="Areas\Admin\Scripts\CategoryScripts.js" />
     <Content Include="Areas\Admin\Scripts\Helpers.js" />
     <Content Include="Areas\Admin\Scripts\jquery.dataTables.min.js" />
+    <Content Include="Areas\Admin\Scripts\LoggingScripts.js" />
     <Content Include="Areas\Admin\Scripts\UserManageScript.js" />
     <Content Include="Areas\Admin\Scripts\VideoAttributesScripts.js" />
     <Content Include="Areas\Admin\Scripts\VideoSettingsScripts.js" />
@@ -299,6 +300,7 @@
     <Content Include="Areas\Admin\Views\VideoAttributes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
     <Content Include="Areas\Admin\Views\UserManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Log\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\g3.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -369,7 +371,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Log\" />
     <Folder Include="Scripts\Custom\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ErrorHandler\" />

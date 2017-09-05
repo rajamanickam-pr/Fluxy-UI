@@ -36,7 +36,7 @@ namespace Fluxy.Infrastructure
             };
             var logDto = _mapper.Map<Log>(log);
             _logService.Create(logDto);
-            filterContext.Result = RedirectToAction("Index", "ErrorHandler",routeValues: new { log= logDto });
+            filterContext.Result = RedirectToAction("Index", "ErrorHandler",new { log= logDto });
         }
     }
 }

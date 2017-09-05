@@ -89,7 +89,7 @@ function Update(url) {
         }
     });
 }
-//function for deleting employee's record
+
 function Delele(url) {
 
     var ans = confirm("Are you sure you want to delete this Record?");
