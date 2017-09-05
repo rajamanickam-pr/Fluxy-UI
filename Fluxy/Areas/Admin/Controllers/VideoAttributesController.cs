@@ -1,5 +1,4 @@
 ﻿using Fluxy.Infrastructure;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -29,51 +28,36 @@ namespace Fluxy.Areas.Admin.Controllers
         // GET: Admin/VideoAttributes
         public ActionResult Index()
         {
-            try
-            {
-                var videoSettings = _videoAttributesService.GetAll();
-                var menuList = _mapper.Map<List<VideoAttributesViewModel>>(videoSettings);
-                return View(menuList);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var videoSettings = _videoAttributesService.GetAll();
+            var menuList = _mapper.Map<List<VideoAttributesViewModel>>(videoSettings);
+            return View(menuList);
         }
 
         [HttpPost]
         public ActionResult Create(VideoAttributesViewModel videoSettingsViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+
+                var videoSettingsDto = _mapper.Map<VideoAttributesExtend>(videoSettingsViewModel);
+                if (!string.IsNullOrEmpty(videoSettingsDto.Id))
                 {
-
-                    var videoSettingsDto = _mapper.Map<VideoAttributesExtend>(videoSettingsViewModel);
-                    if (!string.IsNullOrEmpty(videoSettingsDto.Id))
-                    {
-                        videoSettingsDto.Thumbunail = getYouTubeThumbnail(videoSettingsViewModel.VideoId);
-                        videoSettingsDto.UserId = User.Identity.GetUserId();
-                        _videoAttributesService.Update(videoSettingsDto);
-                    }
-                    else
-                    {
-                        videoSettingsDto.Thumbunail = getYouTubeThumbnail(videoSettingsViewModel.VideoId);
-                        videoSettingsDto.UserId = User.Identity.GetUserId();
-                        _videoAttributesService.Create(videoSettingsDto);
-                    }
-                    return Json(true, JsonRequestBehavior.AllowGet);
+                    videoSettingsDto.Thumbunail = GetYouTubeThumbnail(videoSettingsViewModel.VideoId);
+                    videoSettingsDto.UserId = User.Identity.GetUserId();
+                    _videoAttributesService.Update(videoSettingsDto);
                 }
-                return Json(false, JsonRequestBehavior.AllowGet);
-
+                else
+                {
+                    videoSettingsDto.Thumbunail = GetYouTubeThumbnail(videoSettingsViewModel.VideoId);
+                    videoSettingsDto.UserId = User.Identity.GetUserId();
+                    _videoAttributesService.Create(videoSettingsDto);
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
 
-        public byte[] getYouTubeThumbnail(string videoId)
+        public byte[] GetYouTubeThumbnail(string videoId)
         {
             if (!string.IsNullOrWhiteSpace(videoId))
             {
@@ -103,21 +87,14 @@ namespace Fluxy.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult Delete(string id)
         {
-            try
+            bool status = false;
+            var videoSettingsDto = _videoAttributesService.GetAll().FirstOrDefault(i => i.Id == id);
+            if (videoSettingsDto != null)
             {
-                bool status = false;
-                var videoSettingsDto = _videoAttributesService.GetAll().FirstOrDefault(i => i.Id == id);
-                if (videoSettingsDto != null)
-                {
-                    _videoAttributesService.Delete(videoSettingsDto);
-                    status = true;
-                }
-                return Json(status, JsonRequestBehavior.AllowGet);
+                _videoAttributesService.Delete(videoSettingsDto);
+                status = true;
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return Json(status, JsonRequestBehavior.AllowGet);
         }
     }
 }

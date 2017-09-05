@@ -1,5 +1,4 @@
 ﻿using Fluxy.Infrastructure;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -28,42 +27,28 @@ namespace Fluxy.Areas.Admin.Controllers
         // GET: Admin/Menu
         public ActionResult Index()
         {
-            try
-            {
-                var videoSettings = _videoSettingsService.GetAll();
-                var menuList = _mapper.Map<List<VideoSettingsViewModel>>(videoSettings);
-                return View(menuList);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var videoSettings = _videoSettingsService.GetAll();
+            var menuList = _mapper.Map<List<VideoSettingsViewModel>>(videoSettings);
+            return View(menuList);
         }
 
         [HttpPost]
         public ActionResult Create(VideoSettingsViewModel videoSettingsViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var videoSettingsDto = _mapper.Map<VideoSettings>(videoSettingsViewModel);
+                if (!string.IsNullOrEmpty(videoSettingsDto.Id))
                 {
-                    var videoSettingsDto = _mapper.Map<VideoSettings>(videoSettingsViewModel);
-                    if (!string.IsNullOrEmpty(videoSettingsDto.Id))
-                    {
-                        _videoSettingsService.Update(videoSettingsDto);
-                    }
-                    else
-                    {
-                        _videoSettingsService.Create(videoSettingsDto);
-                    }
-                    return Json(true, JsonRequestBehavior.AllowGet);
+                    _videoSettingsService.Update(videoSettingsDto);
                 }
-                return Json(false, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    _videoSettingsService.Create(videoSettingsDto);
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetbyID(string id)
@@ -84,21 +69,14 @@ namespace Fluxy.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult Delete(string id)
         {
-            try
+            bool status = false;
+            var videoSettingsDto = _videoSettingsService.GetAll().FirstOrDefault(i => i.Id == id);
+            if (videoSettingsDto != null)
             {
-                bool status = false;
-                var videoSettingsDto = _videoSettingsService.GetAll().FirstOrDefault(i => i.Id == id);
-                if (videoSettingsDto != null)
-                {
-                    _videoSettingsService.Delete(videoSettingsDto);
-                    status = true;
-                }
-                return Json(status, JsonRequestBehavior.AllowGet);
+                _videoSettingsService.Delete(videoSettingsDto);
+                status = true;
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return Json(status, JsonRequestBehavior.AllowGet);
         }
     }
 }

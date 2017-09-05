@@ -16,28 +16,28 @@ namespace Fluxy.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class UserManagementController : BaseController
     {
-        private readonly FluxyContext context;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly FluxyContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserProfileService _userProfileService;
-        private readonly UserManager<ApplicationUser> UserManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
         public UserManagementController(IUserProfileService userProfileService, ILogService logService, IMapper mapper)
              : base(logService, mapper)
         {
-            context = new FluxyContext();
+            _context = new FluxyContext();
             _userProfileService = userProfileService;
             _mapper = mapper;
-            roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
+            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
         }
 
         // GET: Admin/UserManagement
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var users = from u in UserManager.Users
+            var users = from u in _userManager.Users
                         from ur in u.Roles
-                        join r in roleManager.Roles on ur.RoleId equals r.Id
+                        join r in _roleManager.Roles on ur.RoleId equals r.Id
                         select new UserViewModel
                         {
                             Id = u.Id,
@@ -59,55 +59,49 @@ namespace Fluxy.Areas.Admin.Controllers
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return RedirectToAction("Index");
+            if (id == null)
             {
-                if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            var logins = user.Logins;
+            var rolesForUser = await _userManager.GetRolesAsync(id);
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                foreach (var login in logins.ToList())
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    await _userManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
                 }
 
-                var user = await UserManager.FindByIdAsync(id);
-                var logins = user.Logins;
-                var rolesForUser = await UserManager.GetRolesAsync(id);
-
-                using (var transaction = context.Database.BeginTransaction())
+                if (rolesForUser.Any())
                 {
-                    foreach (var login in logins.ToList())
+                    foreach (var item in rolesForUser.ToList())
                     {
-                        await UserManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+                        await _userManager.RemoveFromRoleAsync(user.Id, item);
                     }
-
-                    if (rolesForUser.Count() > 0)
-                    {
-                        foreach (var item in rolesForUser.ToList())
-                        {
-                            var result = await UserManager.RemoveFromRoleAsync(user.Id, item);
-                        }
-                    }
-
-                    await UserManager.DeleteAsync(user);
-                    transaction.Commit();
                 }
 
-                return RedirectToAction("Index");
+                await _userManager.DeleteAsync(user);
+                transaction.Commit();
             }
-            else
-            {
-                return View();
-            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public virtual ActionResult ChangeRole(string id, string role)
         {
-            var oldUser = UserManager.FindById(id);
-            var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
-            var oldRoleName = roleManager.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+            var oldUser = _userManager.FindById(id);
+            var oldRoleId = oldUser.Roles.SingleOrDefault()?.RoleId;
+            var oldRoleName = _roleManager.Roles.SingleOrDefault(r => r.Id == oldRoleId)?.Name;
 
             if (oldRoleName != role)
             {
-                UserManager.RemoveFromRole(id, oldRoleName);
-                UserManager.AddToRole(id, role);
+                _userManager.RemoveFromRole(id, oldRoleName);
+                _userManager.AddToRole(id, role);
             }
             return Json("Success", JsonRequestBehavior.AllowGet);
         }

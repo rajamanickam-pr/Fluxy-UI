@@ -32,28 +32,16 @@ namespace Fluxy.Controllers
             SignInManager = signInManager;
         }
 
-        public ApplicationSignInManager SignInManager
+        private ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
+            get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            set => _signInManager = value;
         }
 
-        public ApplicationUserManager UserManager
+        private ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get => _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            set => _userManager = value;
         }
 
         //
@@ -88,7 +76,7 @@ namespace Fluxy.Controllers
             else
             {
                 //validate Username format
-                string emailRegex = @"^[a-zA-Z0-9]*$";
+                const string emailRegex = @"^[a-zA-Z0-9]*$";
                 Regex re = new Regex(emailRegex);
                 if (!re.IsMatch(model.Email))
                 {

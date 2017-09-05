@@ -63,7 +63,7 @@ namespace Fluxy.Controllers
                     }
                 }
             }
-            var profile = default(UserProfileExtend);
+            UserProfileExtend profile;
             var userProfileDto = _mapper.Map<UserProfileExtend>(userMangementViewModel);
             userProfileDto.UserId = User.Identity.GetUserId();
             if (!string.IsNullOrEmpty(userProfileDto.Id))
@@ -100,15 +100,9 @@ namespace Fluxy.Controllers
         {
             var userSettingsDto = _mapper.Map<UserSettingsExtend>(userMangementViewModel);
             userSettingsDto.UserId = User.Identity.GetUserId();
-            var profileSettings = default(UserSettingsExtend);
-            if (!string.IsNullOrEmpty(userSettingsDto.Id))
-            {
-                profileSettings = _userSettingsService.Update(userSettingsDto);
-            }
-            else
-            {
-                profileSettings = _userSettingsService.Create(userSettingsDto);
-            }
+            var profileSettings = !string.IsNullOrEmpty(userSettingsDto.Id) 
+                ? _userSettingsService.Update(userSettingsDto) 
+                : _userSettingsService.Create(userSettingsDto);
             var userMangementVm = _mapper.Map<UserMangementViewModel>(profileSettings);
             return View(userMangementVm);
         }
