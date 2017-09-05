@@ -5,6 +5,7 @@ using Fluxy.Services.Logging;
 using Fluxy.ViewModels.Logging;
 using System;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Fluxy.Infrastructure
 {
@@ -22,7 +23,7 @@ namespace Fluxy.Infrastructure
         protected override void OnException(ExceptionContext filterContext)
         {
             filterContext.ExceptionHandled = true;
-            var log = new LogViewModel
+            var logViewModel = new LogViewModel
             {
                 FullMessage = filterContext.Exception.Message,
                 ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString(),
@@ -34,9 +35,10 @@ namespace Fluxy.Infrastructure
                 HelpLink = filterContext.Exception.HelpLink,
                 InnerException = filterContext.Exception.InnerException?.Message
             };
-            var logDto = _mapper.Map<Log>(log);
-            _logService.Create(logDto);
-            filterContext.Result = RedirectToAction("Index", "ErrorHandler",new { log= logDto });
+            var logDto = _mapper.Map<Log>(logViewModel);
+           var result= _logService.Create(logDto);
+            filterContext.Result = RedirectToAction("Index" ,new RouteValueDictionary(
+                new { controller = "ErrorHandler", action = "Index", exceptionId = result.Id }));
         }
     }
 }
