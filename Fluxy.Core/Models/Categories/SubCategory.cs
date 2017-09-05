@@ -1,7 +1,7 @@
-﻿using Fluxy.Core.Common;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Fluxy.Core.Common;
 
-namespace Fluxy.Core.Models.Common
+namespace Fluxy.Core.Models.Categories
 {
     public class SubCategory : AuditableEntity<string>
     {

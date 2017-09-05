@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Banners\BannerDetailsRepository.cs" />
+    <Compile Include="Banners\IBannerDetailsRepository.cs" />
     <Compile Include="Categories\CategoryRepository.cs" />
     <Compile Include="Categories\ICategoryRepository.cs" />
     <Compile Include="Categories\ISubCategoryRepository.cs" />

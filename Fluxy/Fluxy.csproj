@@ -205,6 +205,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
@@ -225,6 +226,7 @@
     </Compile>
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Modules\AutomapperModule.cs" />
+    <Compile Include="ViewModels\Banners\BannerDetailsViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Categories\SubCategoryViewModel.cs" />
     <Compile Include="ViewModels\Localization\LanguageViewModel.cs" />
@@ -250,6 +252,7 @@
     <Content Include="Areas\Admin\Content\AdminStyles.css" />
     <Content Include="Areas\Admin\Content\jquery.dataTables.min.css" />
     <Content Include="Areas\Admin\Scripts\AttributeScripts.js" />
+    <Content Include="Areas\Admin\Scripts\BannerScripts.js" />
     <Content Include="Areas\Admin\Scripts\CategoryScripts.js" />
     <Content Include="Areas\Admin\Scripts\Helpers.js" />
     <Content Include="Areas\Admin\Scripts\jquery.dataTables.min.js" />
@@ -301,6 +304,7 @@
     <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
     <Content Include="Areas\Admin\Views\UserManagement\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Log\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\fp-logo.png" />
     <Content Include="Images\g3.jpg" />
@@ -374,7 +378,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Scripts\Custom\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -6,8 +6,8 @@ using Fluxy.Services.Categories;
 using Fluxy.ViewModels.Categories;
 using System.Collections.Generic;
 using System;
-using Fluxy.Core.Models.Common;
 using System.Linq;
+using Fluxy.Core.Models.Categories;
 
 namespace Fluxy.Areas.Admin.Controllers
 {

@@ -4,10 +4,10 @@ using AutoMapper;
 using Fluxy.Services.Logging;
 using Fluxy.Services.Categories;
 using Fluxy.ViewModels.Categories;
-using Fluxy.Core.Models.Common;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Fluxy.Core.Models.Categories;
 
 namespace Fluxy.Areas.Admin.Controllers
 {

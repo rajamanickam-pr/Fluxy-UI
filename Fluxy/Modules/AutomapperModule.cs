@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using AutoMapper;
-using Fluxy.Core.Models.Common;
+using Fluxy.Core.Models.Banners;
+using Fluxy.Core.Models.Categories;
 using Fluxy.Core.Models.Localization;
 using Fluxy.Core.Models.Logging;
 using Fluxy.Core.Models.Menu;
 using Fluxy.Core.Models.Video;
 using Fluxy.Data.ExtentedDTO;
+using Fluxy.ViewModels.Banners;
 using Fluxy.ViewModels.Categories;
 using Fluxy.ViewModels.Localization;
 using Fluxy.ViewModels.Logging;
@@ -42,6 +44,7 @@ namespace Fluxy.Modules
             cfg.CreateMap<VideoAttributesViewModel, VideoAttributesExtend>().ReverseMap();
             cfg.CreateMap<UserMangementViewModel, UserProfileExtend>().ReverseMap();
             cfg.CreateMap<UserMangementViewModel, UserSettingsExtend>().ReverseMap();
+            cfg.CreateMap<BannerDetailsViewModel, BannerDetails>().ReverseMap();
         }
     }
 }

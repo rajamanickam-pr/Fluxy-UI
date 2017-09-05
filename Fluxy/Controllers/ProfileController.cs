@@ -71,7 +71,7 @@ namespace Fluxy.Controllers
                 var oldPicture = _userProfileService.GetSingle(i => i.Id == userProfileDto.Id).DisplayPicture;
                 if (oldPicture.Length > 0 && userProfileDto.DisplayPicture.Length <= 0)
                 {
-                    userProfileDto.DisplayPicture = oldPicture;
+                    userProfileDto.DisplayPicture = oldPicture; 
                 }
                 profile= _userProfileService.Update(userProfileDto);
             }

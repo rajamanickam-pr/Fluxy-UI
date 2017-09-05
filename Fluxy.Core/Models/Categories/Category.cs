@@ -1,7 +1,7 @@
-﻿using Fluxy.Core.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Fluxy.Core.Common;
 
-namespace Fluxy.Core.Models.Common
+namespace Fluxy.Core.Models.Categories
 {
     public class Category : AuditableEntity<string>
     {

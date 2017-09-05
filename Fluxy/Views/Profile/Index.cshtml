@@ -2,13 +2,9 @@
 @using Microsoft.AspNet.Identity;
 @{
     var imgSrc = string.Empty;
-    if (Model != null)
+    if (Model?.DisplayPicture != null)
     {
-        if (Model.DisplayPicture != null)
-        {
-            var base64 = Convert.ToBase64String(Model.DisplayPicture);
-            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-        }
+        imgSrc = $"data:image/gif;base64,{Model.DisplayPictureString}";
     }
 }
 

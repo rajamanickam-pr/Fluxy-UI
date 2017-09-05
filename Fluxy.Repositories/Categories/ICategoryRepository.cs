@@ -1,4 +1,4 @@
-﻿using Fluxy.Core.Models.Common;
+﻿using Fluxy.Core.Models.Categories;
 using Fluxy.Repositories.Common;
 
 namespace Fluxy.Repositories.Categories

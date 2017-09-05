@@ -1,15 +1,18 @@
 ﻿using Fluxy.Infrastructure;
 using System.Web.Mvc;
 using AutoMapper;
+using Fluxy.Services.Banners;
 using Fluxy.Services.Logging;
 
 namespace Fluxy.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController(ILogService logService, IMapper mapper) 
+        private readonly IBannerDetailsService _bannerDetailsService;
+        public HomeController(ILogService logService, IMapper mapper, IBannerDetailsService bannerDetailsService) 
             : base(logService, mapper)
         {
+            _bannerDetailsService = bannerDetailsService;
         }
 
         public ActionResult Index()

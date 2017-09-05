@@ -1,6 +1,6 @@
-﻿using Fluxy.Core.Models.Common;
-using Fluxy.Repositories.Common;
+﻿using Fluxy.Repositories.Common;
 using System.Data.Entity;
+using Fluxy.Core.Models.Categories;
 
 namespace Fluxy.Repositories.Categories
 {
