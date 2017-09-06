@@ -11,7 +11,6 @@
         {
             // Loop through each of the results and append the option to the dropdown
             $.each(result, function (k, v) {
-                debugger
                 dropdown.append('<option value="' + v.Id + '">' + v.Name + '</option>');
             });
         }

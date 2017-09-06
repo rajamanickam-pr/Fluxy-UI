@@ -1,6 +1,6 @@
 ﻿$('#videoAttributesTable').dataTable();
 
-$('#videoAttributesModal').on('show', function () {
+$('#videoAttributesModal').on('show.bs.modal', function () {
     var urlList = ['SubCategory/GetList', 'Language/GetList', 'VideoSettings/GetList'];
     var dropdownList = ['SelectedSubCategory', 'SelectedLanguage', 'SelectedSettings'];
     debugger;

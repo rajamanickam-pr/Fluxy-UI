@@ -8,12 +8,10 @@ $('#SubCategoryModal').on('show.bs.modal', function () {
         contentType: "application/json;charset=UTF-8",
         dataType: "json",
         success: function (data) {
-            $("#SelectedCategory").empty();
-            $.each(data, function (i) {
-                var optionhtml = '<option value="' +
-                    data[i].Id + '">' + data[i].Name + '</option>';
-                $("#SelectedCategory").append(optionhtml);
-            });
+            helpers.buildDropdown(data,
+                $("#SelectedCategory"),
+                'Select an option'
+            );
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -58,6 +56,7 @@ function Add(url) {
 }
 
 function getbyID(url) {
+    $('#SubCategoryModal').modal('show');
     $.ajax({
         url: url,
         typr: "GET",
@@ -66,9 +65,8 @@ function getbyID(url) {
         success: function (result) {
             $('#Id').val(result.Id);
             $('#Name').val(result.Name);
-            $("#SelectedCategory selected").val(result.CategoryId);
+            $("#SelectedCategory").val(result.CategoryId);
             $('#Description').val(result.Description); 
-            $('#SubCategoryModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
         },

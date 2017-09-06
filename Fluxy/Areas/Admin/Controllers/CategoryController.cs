@@ -64,7 +64,7 @@ namespace Fluxy.Areas.Admin.Controllers
 
         public JsonResult GetbyID(string id)
         {
-            var categoryDto = _categoryService.GetAll().FirstOrDefault(i => i.Id == id);
+            var categoryDto = _categoryService.GetSingle(i => i.Id == id);
             var category = _mapper.Map<CategoryViewModel>(categoryDto);
             return Json(category, JsonRequestBehavior.AllowGet);
         }
@@ -72,7 +72,7 @@ namespace Fluxy.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult GetList()
         {
-            var categoryDto = _categoryService.GetAll();
+            var categoryDto = _categoryService.GetAll().OrderBy(i=>i.Name);
             var categoryList = _mapper.Map<List<CategoryViewModel>>(categoryDto);
             return Json(categoryList, JsonRequestBehavior.AllowGet);
         }
@@ -83,7 +83,7 @@ namespace Fluxy.Areas.Admin.Controllers
             try
             {
                 bool status = false;
-                var categoryDto = _categoryService.GetAll().FirstOrDefault(i => i.Id == id);
+                var categoryDto = _categoryService.GetSingle(i => i.Id == id);
                 if (categoryDto != null)
                 {
                     _categoryService.Delete(categoryDto);

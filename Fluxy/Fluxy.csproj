@@ -251,6 +251,12 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Content\AdminStyles.css" />
     <Content Include="Areas\Admin\Content\jquery.dataTables.min.css" />
+    <Content Include="Areas\Admin\Scripts\AttributeScripts.es5.js">
+      <DependentUpon>AttributeScripts.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\AttributeScripts.es5.min.js">
+      <DependentUpon>AttributeScripts.es5.js</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Scripts\AttributeScripts.js" />
     <Content Include="Areas\Admin\Scripts\BannerScripts.js" />
     <Content Include="Areas\Admin\Scripts\CategoryScripts.js" />
@@ -306,6 +312,10 @@
     <Content Include="Areas\Admin\Views\Log\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Banner\Index.cshtml" />
     <None Include="bundleconfig.json" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\fp-logo.png" />
     <Content Include="Images\g3.jpg" />
