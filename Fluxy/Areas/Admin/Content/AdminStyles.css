@@ -87,7 +87,7 @@ label, label + * {
 }
 
     #sidebar .list-group {
-        background-color: #0275D8;
+        background-color: #563d7c;
         min-height: 112vh;
     }
 
@@ -97,7 +97,7 @@ label, label + * {
 
     #sidebar .list-group-item {
         border-radius: 0;
-        background-color: #0275D8;
+        background-color: #563d7c;
         color: #fff;
         border-left: 0;
         border-right: 0;

@@ -103,7 +103,7 @@ label, label + * {
 }
 
 .tag-primary {
-    background-color: #0275d8;
+    background-color: #563d7c;
 }
 
 .tag-default {
@@ -188,7 +188,7 @@ label, label + * {
     }
 
 .alert-info {
-    background-color: #0275D8 !important;
+    background-color: #563d7c !important;
     color: #FFF !important;
 }
 
@@ -330,6 +330,20 @@ label, label + * {
     #myFooter .twitter:hover {
         color: #00aced;
     }
+
+/* BUTTON CSS
+-------------------------------------------------- */
+.btn-bd-yellow {
+    font-weight: 500 !important;
+    color: #ffe484 !important;
+    border-color: #ffe484 !important;
+}
+
+    .btn-bd-yellow:active, .btn-bd-yellow:hover {
+        color: #2a2730 !important;
+        background-color: #ffe484 !important;
+        border-color: #ffe484 !important;
+    }
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
@@ -359,3 +373,4 @@ label, label + * {
         font-size: 75%;
     }
 }
+

@@ -21,6 +21,8 @@ namespace Fluxy.Controllers
         // GET: Video
         public ActionResult Index()
         {
+            var values = _videoAttributesService.GetAll();
+            var values1= _videoAttributesService.GetList(i => i.Category.Name == "Sports");
             return View();
         }
     }

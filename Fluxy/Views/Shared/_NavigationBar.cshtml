@@ -15,8 +15,36 @@
            })
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="alerts.html">Alerts</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="alerts.html" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Categories</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="dropdown-item" href="#">Autos and Vehicles</a>
+                                <a class="dropdown-item" href="#">Film & Animation</a>
+                                <a class="dropdown-item" href="#">Travel & Events</a>
+                                <a class="dropdown-item" href="#">People & Blogs</a>
+                                <a class="dropdown-item" href="#">Pets & Animals</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="dropdown-item" href="#">Science & Technology</a>
+                                <a class="dropdown-item" href="#">News & Politics</a>
+                                <a class="dropdown-item" href="#">Health</a>
+                                <a class="dropdown-item" href="#">Devotional</a>
+                                <a class="dropdown-item" href="#">Education</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="dropdown-item" href="#">Music</a>
+                                <a class="dropdown-item" href="#">Gaming</a>
+                                <a class="dropdown-item" href="#">Sports</a>
+                                <a class="dropdown-item" href="#">Entertainment</a>
+                                <a class="dropdown-item" href="#">Documentary</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="videobox.html">Box</a>
@@ -26,17 +54,12 @@
             </li>
         </ul>
         @Html.Partial("_LoginPartial")
+
         <form class="form-inline mt-2 mt-md-0">
-            <div class="form-group row">
-                <div class="col-md-12">
-                    <div class="input-group">
-                        <input type="text" id="input1-group2" name="input1-group2" class="form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
-                        </span>
-                    </div>
-                </div>
+            <div class="form-group mx-sm-3">
+                <input type="text" id="input1-group2" name="input1-group2" class="form-control" placeholder="Search">
             </div>
+            <button type="submit" class="btn btn-outline-warning btn-bd-yellow"><i class="fa fa-search"></i>Search</button>
         </form>
     </div>
 </nav>
