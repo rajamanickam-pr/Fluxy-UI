@@ -3,7 +3,7 @@
 
 <div class="container">
     <h2>Main Menu Items</h2>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#usersModal">Add New User</button><br /><br />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddUserModal">Add New User</button><br /><br />
     <table id="usersTable" class="table table-hover">
         <thead class="thead-inverse ">
             <tr>
@@ -53,6 +53,50 @@
     </table>
 </div>
 
+<div class="modal fade" id="AddUserModal" tabindex="-1" role="dialog" aria-labelledby="AddUserModal-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="AddUserModalForm">
+                    <div class="card-body p-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="Username" id="Username" required placeholder="Username">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="Email" id="Email" required placeholder="Email">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="Password" id="Password" required placeholder="Password">
+                        </div>
+                        <div class="input-group mb-4">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control" name="ConfirmPassword" required id="ConfirmPassword" placeholder="ConfirmPassword">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="AddUser('UserManagement/Register')">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="userRoleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -70,13 +114,13 @@
                         <label>Firstname</label>
                         <input type="text" class="form-control" required id="Firstname" />
                     </div>
-                    
+
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary" id="btnAdd" onclick="return Add('videoAttributes/Create');">Add</button>
                 <button type="submit" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update('videoAttributes/Create');">Update</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -93,49 +137,47 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="Id" placeholder="Id" />
+                        <input type="text" class="form-control" readonly="readonly" id="Id" placeholder="Id" />
                     </div>
                     <div class="form-group">
                         <label>Firstname</label>
-                        <input type="text" class="form-control" required id="Firstname" />
+                        <input type="text" class="form-control" readonly="readonly" required id="Firstname" />
                     </div>
                     <div class="form-group">
                         <label>Lastname</label>
-                        <input type="text" class="form-control" id="Lastname" />
+                        <input type="text" class="form-control" readonly="readonly" id="Lastname" />
                     </div>
                     <div class="form-group">
                         <label>Gender</label>
-                        <input type="text" class="form-control" required id="Gender" />
+                        <input type="text" class="form-control" readonly="readonly" required id="Gender" />
                     </div>
                     <div class="form-group">
                         <label>Hobbies</label>
-                        <input type="text" class="form-control" id="Hobbies" />
+                        <input type="text" class="form-control" readonly="readonly" id="Hobbies" />
                     </div>
                     <div class="form-group">
                         <label>About</label>
-                        <input type="text" class="form-control" required id="About" />
+                        <input type="text" class="form-control" readonly="readonly" required id="About" />
                     </div>
                     <div class="form-check">
                         <label>Avatar</label>
-                        <img data-src="holder.js/140x140" alt='Avatar' id="displayPicture" class="img-thumbnail  m-x-auto img-fluid img-responsive">
+                        <img data-src="holder.js/140x140" alt='Avatar' id="displayPicture" class="img-thumbnail m-x-auto img-fluid img-responsive">
                     </div>
                     <div class="form-check">
                         <label>Username</label>
-                        <input type="text" class="form-control" required id="UserName" />
+                        <input type="text" class="form-control" readonly="readonly" required id="UserName" />
                     </div>
                     <div class="form-check">
                         <label>Email</label>
-                        <input type="text" class="form-control" required id="Email" />
+                        <input type="text" class="form-control" readonly="readonly" required id="Email" />
                     </div>
                     <div class="form-check">
                         <label>PhoneNumber</label>
-                        <input type="text" class="form-control" required id="PhoneNumber" />
+                        <input type="text" class="form-control" readonly="readonly" required id="PhoneNumber" />
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="btnAdd" onclick="return Add('videoAttributes/Create');">Add</button>
-                <button type="submit" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update('videoAttributes/Create');">Update</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>

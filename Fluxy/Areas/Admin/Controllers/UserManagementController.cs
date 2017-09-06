@@ -10,6 +10,9 @@ using Fluxy.ViewModels.User;
 using Fluxy.Services.Users;
 using System.Net;
 using System.Threading.Tasks;
+using Fluxy.Data.ExtentedDTO;
+using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
@@ -49,9 +52,48 @@ namespace Fluxy.Areas.Admin.Controllers
             return View(users);
         }
 
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
+                var result = _userManager.Create(user, model.Password);
+                if (result.Succeeded)
+                {
+                    _userManager.AddToRole(user.Id, "Users");
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    AddErrors(result);
+                    return Json(new { success = false, responseText = "Error occured" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new { success = false, responseText = "Model is not valid" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                Danger(error, true);
+            }
+        }
+
         public JsonResult Details(string id)
         {
             var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == id);
+            if (userProfileDetails == null)
+            {
+                userProfileDetails = new UserProfileExtend
+                {
+                    ApplicationUser = _userManager.Users.FirstOrDefault(i => i.Id == id)
+                };
+            }
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
             return Json(userProfile, JsonRequestBehavior.AllowGet);
         }
