@@ -7,9 +7,9 @@ namespace Fluxy.Data.ExtentedDTO
 {
     public class VideoAttributesExtend : VideoAttributes
     {
-        public string SubcategoryId { get; set; }
-        [ForeignKey("SubcategoryId"), Column(Order = 1)]
-        public virtual SubCategory SubCategory { get; set; }
+        public string CategoryId { get; set; }
+        [ForeignKey("CategoryId"), Column(Order = 1)]
+        public virtual Category Category { get; set; }
 
         public string LanguageId { get; set; }
         [ForeignKey("LanguageId"), Column(Order = 2)]

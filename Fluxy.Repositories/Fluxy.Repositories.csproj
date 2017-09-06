@@ -51,8 +51,6 @@
     <Compile Include="Banners\IBannerDetailsRepository.cs" />
     <Compile Include="Categories\CategoryRepository.cs" />
     <Compile Include="Categories\ICategoryRepository.cs" />
-    <Compile Include="Categories\ISubCategoryRepository.cs" />
-    <Compile Include="Categories\SubCategoryRepository.cs" />
     <Compile Include="Common\GenericRepository.cs" />
     <Compile Include="Common\IGenericRepository.cs" />
     <Compile Include="Common\IUnitOfWork.cs" />

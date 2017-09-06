@@ -64,7 +64,6 @@
     <Compile Include="Initializers\FluxyDBInitializer.cs" />
     <Compile Include="Mappings\Banners\BannerDetailsMap.cs" />
     <Compile Include="Mappings\Categories\CategoryMap.cs" />
-    <Compile Include="Mappings\Categories\SubcategoryMap.cs" />
     <Compile Include="Mappings\FluxyEntityTypeConfiguration.cs" />
     <Compile Include="Mappings\Localization\LanguageMap.cs" />
     <Compile Include="Mappings\Logging\LogMap.cs" />

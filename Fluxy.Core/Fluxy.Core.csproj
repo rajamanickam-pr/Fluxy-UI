@@ -71,7 +71,6 @@
     <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Models\Banners\BannerDetails.cs" />
     <Compile Include="Models\Categories\Category.cs" />
-    <Compile Include="Models\Categories\SubCategory.cs" />
     <Compile Include="Models\Localization\Language.cs" />
     <Compile Include="Models\Logging\Log.cs" />
     <Compile Include="Models\Logging\LogLevel.cs" />

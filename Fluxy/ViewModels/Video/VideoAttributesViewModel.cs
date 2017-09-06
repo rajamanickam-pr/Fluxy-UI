@@ -28,9 +28,9 @@ namespace Fluxy.ViewModels.Video
         public bool IsAllowFullScreen { get; set; }
         public long ViewCount { get; set; }
 
-        public string SubcategoryId { get; set; }
-        [ForeignKey("SubcategoryId")]
-        public virtual SubCategoryViewModel SubCategory { get; set; }
+        public string CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public virtual CategoryViewModel Category { get; set; }
 
         public string LanguageId { get; set; }
         [ForeignKey("LanguageId")]

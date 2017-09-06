@@ -44,8 +44,6 @@
     <Compile Include="Banners\IBannerDetailsService.cs" />
     <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Categories\ICategoryService.cs" />
-    <Compile Include="Categories\ISubCategoryService.cs" />
-    <Compile Include="Categories\SubCategoryService.cs" />
     <Compile Include="Common\EntityService.cs" />
     <Compile Include="Common\IEntityService.cs" />
     <Compile Include="Common\IService.cs" />

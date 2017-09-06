@@ -207,7 +207,6 @@
     <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
     <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\LanguageController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
@@ -228,7 +227,6 @@
     <Compile Include="Modules\AutomapperModule.cs" />
     <Compile Include="ViewModels\Banners\BannerDetailsViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoryViewModel.cs" />
-    <Compile Include="ViewModels\Categories\SubCategoryViewModel.cs" />
     <Compile Include="ViewModels\Localization\LanguageViewModel.cs" />
     <Compile Include="ViewModels\Logging\LogViewModel.cs" />
     <Compile Include="ViewModels\Mail\ContactUsViewModel.cs" />
@@ -304,7 +302,6 @@
     <Content Include="Areas\Admin\Views\SubMenu\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Language\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\SubCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\VideoSettings\Index.cshtml" />
     <Content Include="Areas\Admin\Views\VideoAttributes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />

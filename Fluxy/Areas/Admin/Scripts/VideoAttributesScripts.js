@@ -1,8 +1,8 @@
 ﻿$('#videoAttributesTable').dataTable();
 
 $('#videoAttributesModal').on('show.bs.modal', function () {
-    var urlList = ['SubCategory/GetList', 'Language/GetList', 'VideoSettings/GetList'];
-    var dropdownList = ['SelectedSubCategory', 'SelectedLanguage', 'SelectedSettings'];
+    var urlList = ['Category/GetList', 'Language/GetList', 'VideoSettings/GetList'];
+    var dropdownList = ['SelectedCategory', 'SelectedLanguage', 'SelectedSettings'];
     for (var i = 0; i < 3; i++) {
         var url = urlList[i];
         var dropdown = dropdownList[i];
@@ -50,7 +50,7 @@ function Add(url) {
         IsPublicVideo: $('#IsPublicVideo').is(':checked'),
         IsAdultContent: $('#IsAdultContent').is(':checked'),
         IsAllowFullScreen: $('#IsAllowFullScreen').is(':checked'),
-        SubCategoryId: $('#SelectedSubCategory').val(),
+        CategoryId: $('#SelectedCategory').val(),
         LanguageId: $('#SelectedLanguage').val(),
         VideoSettingsId: $('#SelectedSettings').val(),
         VideoId: Getvideoid($('#Url').val())
@@ -90,7 +90,7 @@ function getbyID(url) {
             $('#IsPublicVideo').prop('checked',result.IsPublicVideo);
             $('#IsAdultContent').prop('checked',result.IsAdultContent);
             $('#IsAllowFullScreen').prop('checked', result.IsAllowFullScreen);
-            $('#SelectedSubCategory').val(result.SubcategoryId);
+            $('#SelectedCategory').val(result.CategoryId);
             $('#SelectedLanguage').val(result.LanguageId);
             $('#SelectedSettings').val(result.VideoSettingsId);
             $('#btnUpdate').show();
@@ -116,7 +116,7 @@ function Update(url) {
         IsPublicVideo: $('#IsPublicVideo').is(':checked'),
         IsAdultContent: $('#IsAdultContent').is(':checked'),
         IsAllowFullScreen: $('#IsAllowFullScreen').is(':checked'),
-        SubCategoryId: $('#SelectedSubCategory').val(),
+        CategoryId: $('#SelectedCategory').val(),
         LanguageId: $('#SelectedLanguage').val(),
         VideoSettingsId: $('#SelectedSettings').val(),
         VideoId: Getvideoid($('#Url').val())

@@ -39,7 +39,6 @@ namespace Fluxy.Modules
             cfg.CreateMap<LogViewModel, Log>().ReverseMap();
             cfg.CreateMap<LanguageViewModel, Language>().ReverseMap();
             cfg.CreateMap<CategoryViewModel, Category>().ReverseMap();
-            cfg.CreateMap<SubCategoryViewModel, SubCategory>().ReverseMap();
             cfg.CreateMap<VideoSettingsViewModel, VideoSettings>().ReverseMap();
             cfg.CreateMap<VideoAttributesViewModel, VideoAttributesExtend>().ReverseMap();
             cfg.CreateMap<UserMangementViewModel, UserProfileExtend>().ReverseMap();
