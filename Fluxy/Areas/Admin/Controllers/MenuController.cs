@@ -68,7 +68,7 @@ namespace Fluxy.Areas.Admin.Controllers
 
         public JsonResult GetbyID(string id)
         {
-            var mainMenuDto = _mainMenuService.GetAll().FirstOrDefault(i => i.Id == id);
+            var mainMenuDto = _mainMenuService.GetSingle(i => i.Id == id);
             var mainMenu = _mapper.Map<MainMenuViewModel>(mainMenuDto);
             return Json(mainMenu, JsonRequestBehavior.AllowGet);
         }
@@ -87,7 +87,7 @@ namespace Fluxy.Areas.Admin.Controllers
             try
             {
                 bool status = false;
-                var mainMenuDto = _mainMenuService.GetAll().FirstOrDefault(i => i.Id == id);
+                var mainMenuDto = _mainMenuService.GetSingle(i => i.Id == id);
                 if (mainMenuDto != null)
                 {
                     _mainMenuService.Delete(mainMenuDto);

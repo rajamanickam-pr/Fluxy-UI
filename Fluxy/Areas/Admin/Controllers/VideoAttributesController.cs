@@ -61,7 +61,7 @@ namespace Fluxy.Areas.Admin.Controllers
         {
             if (!string.IsNullOrWhiteSpace(videoId))
             {
-                var url = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
+                var url = $"https://img.youtube.com/vi/{videoId}/hqdefault.jpg";
                 WebClient wc = new WebClient();
                 byte[] originalData = wc.DownloadData(url);
                 return originalData;
@@ -71,7 +71,7 @@ namespace Fluxy.Areas.Admin.Controllers
 
         public JsonResult GetbyID(string id)
         {
-            var videoSettingsDto = _videoAttributesService.GetAll().FirstOrDefault(i => i.Id == id);
+            var videoSettingsDto = _videoAttributesService.GetSingle(i => i.Id == id);
             var videoSettings = _mapper.Map<VideoAttributesViewModel>(videoSettingsDto);
             return Json(videoSettings, JsonRequestBehavior.AllowGet);
         }
@@ -88,7 +88,7 @@ namespace Fluxy.Areas.Admin.Controllers
         public JsonResult Delete(string id)
         {
             bool status = false;
-            var videoSettingsDto = _videoAttributesService.GetAll().FirstOrDefault(i => i.Id == id);
+            var videoSettingsDto = _videoAttributesService.GetSingle(i => i.Id == id);
             if (videoSettingsDto != null)
             {
                 _videoAttributesService.Delete(videoSettingsDto);

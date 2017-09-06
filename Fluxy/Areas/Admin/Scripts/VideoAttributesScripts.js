@@ -3,7 +3,6 @@
 $('#videoAttributesModal').on('show.bs.modal', function () {
     var urlList = ['SubCategory/GetList', 'Language/GetList', 'VideoSettings/GetList'];
     var dropdownList = ['SelectedSubCategory', 'SelectedLanguage', 'SelectedSettings'];
-    debugger;
     for (var i = 0; i < 3; i++) {
         var url = urlList[i];
         var dropdown = dropdownList[i];
@@ -74,6 +73,8 @@ function Add(url) {
 
 
 function getbyID(url) {
+    $('#videoAttributesModal').modal('show');
+
     $.ajax({
         url: url,
         typr: "GET",
@@ -88,12 +89,10 @@ function getbyID(url) {
             $('#Description').val(result.Description);
             $('#IsPublicVideo').prop('checked',result.IsPublicVideo);
             $('#IsAdultContent').prop('checked',result.IsAdultContent);
-            $('#IsAllowFullScreen').prop('checked',result.IsAllowFullScreen);
-            $('#SelectedSubCategory').val(result.SubCategoryId);
+            $('#IsAllowFullScreen').prop('checked', result.IsAllowFullScreen);
+            $('#SelectedSubCategory').val(result.SubcategoryId);
             $('#SelectedLanguage').val(result.LanguageId);
             $('#SelectedSettings').val(result.VideoSettingsId);
-
-            $('#videoAttributesModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
         },

@@ -64,7 +64,7 @@ namespace Fluxy.Areas.Admin.Controllers
 
         public JsonResult GetbyID(string id)
         {
-            var subCategoryDto = _subCategoryService.GetAll().FirstOrDefault(i => i.Id == id);
+            var subCategoryDto = _subCategoryService.GetSingle(i => i.Id == id);
             var subCategory = _mapper.Map<SubCategoryViewModel>(subCategoryDto);
             return Json(subCategory, JsonRequestBehavior.AllowGet);
         }
@@ -83,7 +83,7 @@ namespace Fluxy.Areas.Admin.Controllers
             try
             {
                 bool status = false;
-                var subCategoryDto = _subCategoryService.GetAll().FirstOrDefault(i => i.Id == id);
+                var subCategoryDto = _subCategoryService.GetSingle(i => i.Id == id);
                 if (subCategoryDto != null)
                 {
                     _subCategoryService.Delete(subCategoryDto);

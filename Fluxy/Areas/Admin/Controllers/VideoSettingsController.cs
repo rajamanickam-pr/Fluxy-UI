@@ -53,7 +53,7 @@ namespace Fluxy.Areas.Admin.Controllers
 
         public JsonResult GetbyID(string id)
         {
-            var videoSettingsDto = _videoSettingsService.GetAll().FirstOrDefault(i => i.Id == id);
+            var videoSettingsDto = _videoSettingsService.GetSingle(i => i.Id == id);
             var videoSettings = _mapper.Map<VideoSettingsViewModel>(videoSettingsDto);
             return Json(videoSettings, JsonRequestBehavior.AllowGet);
         }
@@ -70,7 +70,7 @@ namespace Fluxy.Areas.Admin.Controllers
         public JsonResult Delete(string id)
         {
             bool status = false;
-            var videoSettingsDto = _videoSettingsService.GetAll().FirstOrDefault(i => i.Id == id);
+            var videoSettingsDto = _videoSettingsService.GetSingle(i => i.Id == id);
             if (videoSettingsDto != null)
             {
                 _videoSettingsService.Delete(videoSettingsDto);

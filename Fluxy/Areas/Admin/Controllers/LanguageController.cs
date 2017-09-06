@@ -67,7 +67,7 @@ namespace Fluxy.Areas.Admin.Controllers
 
         public JsonResult GetbyID(string id)
         {
-            var languageDto = _languageService.GetAll().FirstOrDefault(i => i.Id == id);
+            var languageDto = _languageService.GetSingle(i => i.Id == id);
             var language = _mapper.Map<LanguageViewModel>(languageDto);
             return Json(language, JsonRequestBehavior.AllowGet);
         }
@@ -86,7 +86,7 @@ namespace Fluxy.Areas.Admin.Controllers
             try
             {
                 bool status = false;
-                var languageDto = _languageService.GetAll().FirstOrDefault(i => i.Id == id);
+                var languageDto = _languageService.GetSingle(i => i.Id == id);
                 if (languageDto != null)
                 {
                     _languageService.Delete(languageDto);
