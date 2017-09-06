@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
@@ -18,6 +19,15 @@ namespace Fluxy.Repositories.Common
         {
             _entities = context;
             _dbset = context.Set<T>();
+        }
+
+        protected string GetFullErrorText(DbEntityValidationException exc)
+        {
+            var msg = string.Empty;
+            foreach (var validationErrors in exc.EntityValidationErrors)
+                foreach (var error in validationErrors.ValidationErrors)
+                    msg += $"Property: {error.PropertyName} Error: {error.ErrorMessage}" + Environment.NewLine;
+            return msg;
         }
 
         public virtual IEnumerable<T> GetAll(params Expression<Func<T, object>>[] properties)
@@ -66,25 +76,52 @@ namespace Fluxy.Repositories.Common
 
         public virtual T Add(T entity)
         {
-            return _dbset.Add(entity);
+            try
+            {
+                if (entity == null)
+                    throw new ArgumentNullException("entity");
+                return _dbset.Add(entity);
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                throw new Exception(GetFullErrorText(dbEx), dbEx);
+            }
         }
 
         public virtual T Delete(T entity)
         {
-            _entities.Entry(entity).State = EntityState.Deleted;
-            _entities.SaveChanges();
-            return entity;
+            try
+            {
+                if (entity == null)
+                    throw new ArgumentNullException("entity");
+                _entities.Entry(entity).State = EntityState.Deleted;
+                _entities.SaveChanges();
+                return entity;
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                throw new Exception(GetFullErrorText(dbEx), dbEx);
+            }
         }
 
         public virtual T Edit(T entity)
         {
-            _entities.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            return entity;
+            try
+            {
+                if (entity == null)
+                    throw new ArgumentNullException("entity");
+                _entities.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                return entity;
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                throw new Exception(GetFullErrorText(dbEx), dbEx);
+            }
         }
 
         public virtual void ExecuteNonQuery(string query, SqlParameter[] param)
         {
-             _entities.Database.ExecuteSqlCommand(sql: query, parameters: param);
+            _entities.Database.ExecuteSqlCommand(sql: query, parameters: param);
         }
 
         public virtual void Save()
