@@ -67,21 +67,12 @@ namespace Fluxy.Areas.Admin.Controllers
                 }
                 else
                 {
-                    AddErrors(result);
                     return Json(new { success = false, responseText = "Error occured" }, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
                 return Json(new { success = false, responseText = "Model is not valid" }, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                Danger(error, true);
             }
         }
 
@@ -134,7 +125,15 @@ namespace Fluxy.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public virtual JsonResult GetRoleList()
+        {
+            var roleList= _roleManager.Roles.ToList();
+            return Json(roleList, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public virtual ActionResult ChangeRole(string id, string role)
         {
             var oldUser = _userManager.FindById(id);
@@ -146,7 +145,7 @@ namespace Fluxy.Areas.Admin.Controllers
                 _userManager.RemoveFromRole(id, oldRoleName);
                 _userManager.AddToRole(id, role);
             }
-            return Json("Success", JsonRequestBehavior.AllowGet);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

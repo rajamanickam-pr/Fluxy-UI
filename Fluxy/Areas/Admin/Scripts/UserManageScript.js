@@ -15,7 +15,7 @@ function FindDetailsById(url) {
             $('#About').val(result.About);
             $("#displayPicture").attr("src", "data:image/png;base64," + result.DisplayPictureString);
             $('#UserName').val(result.ApplicationUser.UserName);
-            debugger    
+            debugger
             $('#EmailDetail').val(result.ApplicationUser.Email);
             $('#PhoneNumber').val(result.ApplicationUser.PhoneNumber);
             $('#userModal').modal('show');
@@ -59,3 +59,54 @@ function AddUser(url) {
     });
 }
 
+$('#userRoleModal').on('show.bs.modal', function () {
+    var url = "UserManagement/GetRoleList";
+    $.get(url)
+        .done(function (data) {
+            helpers.buildDropdown(data,
+                $("#SelectedRole"),
+                'Select an option'
+            );
+        })
+        .fail(function (errormessage) {
+            alert(errormessage.responseText);
+        })
+})
+
+function ShowRoleModal(userExistingRole, userId)
+{
+    $('#userRoleModal').modal('show');
+    $('#Id').val(userId);
+    $('#userRoleModal').on('shown.bs.modal', function () {
+        $("#SelectedRole option").filter(function () {
+            return this.text == userExistingRole;
+        }).attr('selected', true);
+    })
+}
+
+function ChangeRole(url)
+{
+    var form = $('#UserRoleModalForm');
+    var token = $('input[name="__RequestVerificationToken"]', form).val();
+    var userId = $('#Id').val();
+    var userRole = $('#SelectedRole option:selected').text();
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            __RequestVerificationToken: token,
+            id: userId,
+            role: userRole
+        },
+        success: function (response) {
+            if (response != null && response.success) {
+                location.reload();
+            } else {
+                alert(response.responseText);
+            }
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+}

@@ -35,17 +35,16 @@
                         @Html.DisplayFor(modelItem => item.Role)
                     </td>
                     <td>
-                        @* @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
-                        @* @Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
                         @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
                         @if (User.Identity.GetUserId() != item.Id)
                         {
                             <a href="#" onclick="return FindRoleById('UserManagement/FindRole/'+'@item.Id')">Send Message</a><span>|</span>
-                            <a href="#" onclick="return ChangeRole('UserManagement/FindRole/'+'@item.Id')"> Change Role </a><span>|</span>
-                            @Html.ActionLink("Delete", "Delete", routeValues: new { id = item.Id }, htmlAttributes: null)<span>|</span>
+                            <a href="#" onclick="return ShowRoleModal('@item.Role','@item.Id')"> Change Role </a><span>|</span>
+                            @Html.ActionLink("Delete", "Delete", routeValues: new { id = item.Id }, htmlAttributes: new { onclick = "return confirm('Are you sure you wish to delete this User?');" })<span>|</span>
                         }
                         <a href="#" onclick="return FindDetailsById('UserManagement/Details/'+'@item.Id')">Details</a>
-
                     </td>
                 </tr>
             }
@@ -107,21 +106,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="UserRoleModalForm">
+                    @Html.AntiForgeryToken()
                     <div class="form-group">
                         <input type="text" class="form-control" id="Id" placeholder="Id" />
                     </div>
                     <div class="form-group">
-                        <label>Firstname</label>
-                        <input type="text" class="form-control" required id="Firstname" />
+                        <label>Roles</label>
+                        <select id="SelectedRole"></select>
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" id="btnAdd" onclick="return Add('videoAttributes/Create');">Add</button>
-                <button type="submit" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update('videoAttributes/Create');">Update</button>
+                <button type="submit" class="btn btn-primary" id="btnAdd" onclick="return ChangeRole('UserManagement/ChangeRole');">Change Role</button>
             </div>
         </div>
     </div>
