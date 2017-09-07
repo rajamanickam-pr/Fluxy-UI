@@ -61,6 +61,7 @@
             </div>
             <div class="modal-body">
                 <form id="AddUserModalForm">
+                    @Html.AntiForgeryToken()
                     <div class="card-body p-4">
                         <div class="input-group mb-3">
                             <span class="input-group-addon">
@@ -169,7 +170,7 @@
                     </div>
                     <div class="form-check">
                         <label>Email</label>
-                        <input type="text" class="form-control" readonly="readonly" required id="Email" />
+                        <input type="text" class="form-control" readonly="readonly" required id="EmailDetail" />
                     </div>
                     <div class="form-check">
                         <label>PhoneNumber</label>

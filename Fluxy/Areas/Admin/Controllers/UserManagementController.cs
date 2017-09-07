@@ -53,6 +53,7 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)

@@ -15,7 +15,8 @@ function FindDetailsById(url) {
             $('#About').val(result.About);
             $("#displayPicture").attr("src", "data:image/png;base64," + result.DisplayPictureString);
             $('#UserName').val(result.ApplicationUser.UserName);
-            $('#Email').val(result.ApplicationUser.Email);
+            debugger    
+            $('#EmailDetail').val(result.ApplicationUser.Email);
             $('#PhoneNumber').val(result.ApplicationUser.PhoneNumber);
             $('#userModal').modal('show');
             $('#btnUpdate').show();
@@ -29,14 +30,22 @@ function FindDetailsById(url) {
 }
 
 function AddUser(url) {
-    var formdata = new FormData($("#AddUserModalForm").get(0));
+    var userObj = {
+        Username: $('#Username').val(),
+        Email: $('#Email').val(),
+        Password: $('#Password').val(),
+        ConfirmPassword: $('#ConfirmPassword').val(),
 
+    };
+    var form = $('#AddUserModalForm');
+    var token = $('input[name="__RequestVerificationToken"]', form).val();
     $.ajax({
         url: url,
-        data: formdata,
-        type: "POST",
-        processData: false,
-        contentType: false,
+        type: 'POST',
+        data: {
+            __RequestVerificationToken: token,
+            model: userObj
+        },
         success: function (response) {
             if (response != null && response.success) {
                 location.reload();
