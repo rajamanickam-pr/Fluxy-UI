@@ -30,8 +30,8 @@
                                 <div class="col-6">
                                     <input type="submit" class="btn btn-primary" value="Login" />
                                 </div>
-                                <div class="col-6 text-right">
-                                    <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                                <div class="col-6">
+                                    @Html.ActionLink("Forgot your password?", "ForgotPassword", routeValues: null, htmlAttributes: new { @class = "btn btn-link px-0" })
                                 </div>
                             </div>
                         </div>

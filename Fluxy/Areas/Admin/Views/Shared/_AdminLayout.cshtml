@@ -39,7 +39,7 @@
                         <a href="#" class="list-group-item" data-parent="#menu1">Subitem 2</a>
                         <a href="#" class="list-group-item" data-parent="#menu1">Subitem 3</a>
                     </div>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-film"></i> <span class="d-none d-md-inline">User Management</span></a>
+                    <a href="UserManagement" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-film"></i> <span class="d-none d-md-inline">User Management</span></a>
                     <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-book"></i> <span class="d-none d-md-inline">Configuration</span></a>
                     <div class="collapse" id="menu3">
                         @Html.RouteLink("Attributes", new { action = "Index", controller = "Attribute", area = "Admin" }, new { @class = "list-group-item" })

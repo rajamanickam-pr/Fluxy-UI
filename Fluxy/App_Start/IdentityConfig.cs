@@ -7,15 +7,45 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Fluxy.Data;
+using System.Net.Mail;
+using System.Net;
 
 namespace Fluxy
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var credentialUserName = "fluxypictures@gmail.com";
+            var sentFrom = "noreply@fp.com";
+            var password = "FluxyPictures2206";
+
+            // Configure the client:
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient()
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(credentialUserName, password)
+            };
+
+            // Create the message:
+            try
+            {
+                var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination)
+                {
+                    Subject = message.Subject,
+                    Body = message.Body
+                };
+                await client.SendMailAsync(mail);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 
@@ -36,7 +66,7 @@ namespace Fluxy
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<FluxyContext>()));
             // Configure validation logic for usernames
@@ -77,7 +107,7 @@ namespace Fluxy
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
