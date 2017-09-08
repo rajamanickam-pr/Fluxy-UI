@@ -32,7 +32,6 @@
                     @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-8">
@@ -40,7 +39,6 @@
                     @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="form-check">
@@ -58,14 +56,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(model => model.Dob, "{0:yyyy-MM-dd}" , new {  @class = "form-control", @Onchange = "DateChange(event)", @type = "date" })
+                    @Html.TextBoxFor(model => model.Dob, "{0:yyyy-MM-dd}", new { @class = "form-control", @Onchange = "DateChange(event)", @type = "date" })
                     @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control",@readonly="readonly" } })
+                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -83,7 +81,6 @@
                     @Html.ValidationMessageFor(model => model.Hobbies, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
             <div class="form-group">
                 @Html.LabelFor(model => model.DisplayPicture, htmlAttributes: new { @class = "control-label col-md-2" })
 
@@ -96,17 +93,16 @@
                         <div class="col-md-4">
                             @if (!string.IsNullOrEmpty(imgSrc))
                             {
-                                <img src="@imgSrc" data-src="holder.js/140x140" alt='Avatar' id="displayPicture" class="img-thumbnail  m-x-auto img-fluid img-responsive">
+                            <img src="@imgSrc" data-src="holder.js/140x140" alt='Avatar' id="displayPicture" class="img-thumbnail  m-x-auto img-fluid img-responsive">
                             }
                             else
                             {
-                                <img src="//placehold.it/150" data-src="holder.js/140x140" class="img-thumbnail m-x-auto img-fluid img-responsive" alt="avatar">
+                            <img src="//placehold.it/150" data-src="holder.js/140x140" class="img-thumbnail m-x-auto img-fluid img-responsive" alt="avatar">
                             }
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-primary" />

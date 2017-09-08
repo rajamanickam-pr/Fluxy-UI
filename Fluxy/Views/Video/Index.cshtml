@@ -1,69 +1,81 @@
-﻿
+﻿@model Fluxy.ViewModels.Video.VideoAttributesViewModel
+@{
+    var videoUrl = @Model.Url + Model.VideoSettings.FrameFilters;
+}
 <div class="container">
     <div class="row">
         <div class="col-md-8">
             <div class="alert alert-info" role="alert">
-                <strong>Video Title</strong>
+                <strong>@Model.Title</strong>
             </div>
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" width="720" height="380"
-                        src="https://www.youtube.com/embed/d--SRAjBYgw?modestbranding=1&rel=0&showinfo=0&fs=0" frameborder="0" allowfullscreen></iframe>
+                @if (Model.IsAllowFullScreen)
+                {
+                <iframe class="embed-responsive-item" width="@Model.VideoSettings.FrameWidth" height="@Model.VideoSettings.FrameHeight"
+                        src="@videoUrl" frameborder="0" allowfullscreen></iframe>
+                }
+                else
+                {
+                <iframe class="embed-responsive-item" width="@Model.VideoSettings.FrameWidth" height="@Model.VideoSettings.FrameHeight"
+                        src="@videoUrl" frameborder="0"></iframe>
+                }
             </div>
             <div class="row">
                 <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Added by">
                     <span>
-                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>rajamanick
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>@Model.ApplicationUser.UserName
                     </span>
                 </div>
                 <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Views Count">
-                    <span><i class="fa fa-eye" aria-hidden="true"></i>4155788</span>
+                    <span><i class="fa fa-eye" aria-hidden="true"></i>@Model.ViewCount</span>
                 </div>
                 <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Tags">
-                    <span><i class="fa fa-tags" aria-hidden="true"></i>sdfsadfs sfsdf sf sfdsf sdf</span>
+                    <span><i class="fa fa-tags" aria-hidden="true"></i>@Model.Tags</span>
                 </div>
             </div>
             <div>
                 <blockquote class="blockquote">
                     <p class="mb-0"><strong>Description</strong></p>
                     <small>
-                        This line rendered as italicized textsdfgsdfgCVB SFDGSD GDSFGSFDGSDFGSDFG dffgsfdhgsfdhdsjsdjdajdshs s dsfhs fdhfdsh s h reshrsehfdhzfdhzfdhzdhz
+                        @Model.Description
                     </small>
                 </blockquote>
             </div>
 
-            <div class="alert alert-info" role="alert">
-                <strong>Recent Videos</strong>
-            </div>
-            <div class="row ">
-                @for (int i = 0; i < 8; i++)
-                 {
-                    <div class="col-md-4">
-                        @Html.Partial("_VideoBox")
+            @*<div class="alert alert-info" role="alert">
+                        <strong>Recent Videos</strong>
                     </div>
-                }
-            </div>
-            <div class="alert alert-info" role="alert">
-                <strong>Sports Videos</strong>
-            </div>
-            <div class="row ">
-                @for (int i = 0; i < 8; i++)
-                {
-                    <div class="col-md-4">
-                        @Html.Partial("_VideoBox")
+                    <div class="row ">
+                        @for (int i = 0; i < 8; i++)
+                        {
+                            <div class="col-md-4">
+                                @Html.Partial("_VideoBox")
+                            </div>
+                        }
                     </div>
-                }
-            </div>
+                    <div class="alert alert-info" role="alert">
+                        <strong>Sports Videos</strong>
+                    </div>
+                    <div class="row ">
+                        @for (int i = 0; i < 8; i++)
+                        {
+                            <div class="col-md-4">
+                                @Html.Partial("_VideoBox")
+                            </div>
+                        }
+                    </div>
 
-        </div>
+                </div>
 
-        <div class="col-md-4">
-            <div class="alert alert-info" role="alert">
-                <strong>Most Viewed Videos</strong>
-            </div>
-            @for (int i = 0; i < 3; i++)
-            {
-                @Html.Partial("_VideoBox")
-            }
+                <div class="col-md-4">
+                    <div class="alert alert-info" role="alert">
+                        <strong>Most Viewed Videos</strong>
+                    </div>
+                    @for (int i = 0; i < 3; i++)
+                    {
+                        @Html.Partial("_VideoBox")
+                    }
+                </div>*@
         </div>
     </div>
 </div>

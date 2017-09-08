@@ -1,16 +1,40 @@
-﻿<div class="video-card card">
-    <p class="text-center" data-toggle="tooltip" data-placement="top" title="Video Title">Titlesdfsdf sdffsafsfsfsfsfssfsfsdffsfsfsdfsdfsd fsdfsaewqrrwerwersdfsdfsdfsdfsafsdfsdfgsfrewfrewrwerwerwerwerwerwerfsdvxvx123</p>
-    <a href="#"><img src='~/Images/g3.jpg' data-src="holder.js/140x140" alt='Thumbnail' class="img-thumbnail img-responsive" /></a>
+﻿@model Fluxy.ViewModels.Video.VideoAttributesViewModel
+
+@{
+    var imgSrc = string.Empty;
+    if (Model != null)
+    {
+        if (Model.Thumbunail != null)
+        {
+            var base64 = Convert.ToBase64String(Model.Thumbunail);
+            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+        }
+    }
+}
+
+<div class="video-card card">
+    <p class="text-center" data-toggle="tooltip" data-placement="top" title="Video Title"> @Model.Title</p>
+    <a href="@Url.Action("Index","Video",routeValues:new {videoId=Model.Id })">
+        @if (!string.IsNullOrEmpty(imgSrc))
+        {
+            <img src="@imgSrc" data-src="holder.js/140x140"  alt='Thumbnail' class="img-thumbnail img-responsive">
+        }
+        else
+        {
+            <img src="//placehold.it/150" data-src="holder.js/140x140"  alt='Thumbnail' class="img-thumbnail img-responsive">
+        }
+    </a>
     <div class="row">
         <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Added by">
-            <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>rajamanick
+            <span>
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i> @Model.ApplicationUser.UserName
             </span>
         </div>
         <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Views Count">
-            <span><i class="fa fa-eye" aria-hidden="true"></i>4155788</span>
+            <span><i class="fa fa-eye" aria-hidden="true"></i> @Model.ViewCount</span>
         </div>
         <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Tags">
-            <span><i class="fa fa-tags" aria-hidden="true"></i>sdfsadfs sfsdf sf sfdsf sdf</span>
+            <span><i class="fa fa-tags" aria-hidden="true"></i> @Model.Tags</span>
         </div>
     </div>
 </div>

@@ -3,6 +3,8 @@ using AutoMapper;
 using Fluxy.Infrastructure;
 using Fluxy.Services.Logging;
 using Fluxy.Services.Video;
+using Fluxy.ViewModels.Video;
+using System.Data.SqlClient;
 
 namespace Fluxy.Controllers
 {
@@ -19,11 +21,17 @@ namespace Fluxy.Controllers
         }
 
         // GET: Video
-        public ActionResult Index()
+        public ActionResult Index(string videoId)
         {
-            var values = _videoAttributesService.GetAll();
-            var values1= _videoAttributesService.GetList(i => i.Category.Name == "Sports");
-            return View();
+            SqlParameter[] sqlParam = {
+                new SqlParameter("videoId",videoId)
+            };
+            var query = "UPDATE VideoAttributes SET ViewCount+=1 WHERE Id=@videoId";
+            _videoAttributesService.ExecuteNonQuery(query, sqlParam);
+
+            var videoAttribute = _videoAttributesService.GetSingle(i => i.Id == videoId);
+            var videoAttributeVM = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
+            return View(videoAttributeVM);
         }
     }
 }
