@@ -52,6 +52,11 @@ namespace Fluxy.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -265,7 +270,21 @@ namespace Fluxy.Controllers
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                var path = HostingEnvironment.MapPath(Url.Content("~/App_Data/Templates/ForgotPasswordMailTemplate.txt"));
+                using (var sr = new StreamReader(path))
+                {
+                    var body = sr.ReadToEnd();
+                    try
+                    {
+                        string messageBody = string.Format(body, user.UserName, callbackUrl);
+                        await UserManager.SendEmailAsync(user.Id, "Reset Password", messageBody);
+                    }
+                    catch (System.Exception)
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 

@@ -247,6 +247,7 @@
     <Compile Include="ViewModels\Video\VideoSettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Templates\ForgotPasswordMailTemplate.txt" />
     <Content Include="App_Data\Templates\AccountConfirmationMailTemplate.txt" />
     <Content Include="Areas\Admin\Content\AdminStyles.css" />
     <Content Include="Areas\Admin\Content\jquery.dataTables.min.css" />
