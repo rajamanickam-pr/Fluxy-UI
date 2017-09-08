@@ -43,15 +43,14 @@ namespace Fluxy
             var adminUser = UserManager.FindByName("Rajadityan");
             if (adminUser == null)
             {
-                //Here we create a Admin super user who will maintain the website				
-
-                var user = new ApplicationUser();
-                user.UserName = "Rajadityan";
-                user.Email = "rajamanickam.rp@gmail.com";
+                var user = new ApplicationUser
+                {
+                    UserName = "Rajadityan",
+                    Email = "rajamanickam.rp@gmail.com",
+                    EmailConfirmed = true
+                };
                 string userPassword = "Mani2206@";
-
                 var chkUser = UserManager.Create(user, userPassword);
-
                 //Add default User to Role Admin
                 if (chkUser.Succeeded)
                 {

@@ -14,6 +14,7 @@ namespace Fluxy.ViewModels.Video
         public string Title { get; set; }
         public string ShortName { get; set; }
         [Required]
+        [DataType(DataType.Url)]
         public string Url { get; set; }
         public string Length { get; set; }
         public string Tags { get; set; }

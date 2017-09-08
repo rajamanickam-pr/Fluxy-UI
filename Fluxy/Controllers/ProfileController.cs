@@ -51,7 +51,6 @@ namespace Fluxy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserMangementViewModel userMangementViewModel, HttpPostedFileBase fileBase)
         {
-
             if (fileBase != null)
             {
                 if (fileBase.ContentLength > 0)

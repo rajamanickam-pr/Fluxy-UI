@@ -23,22 +23,32 @@
         <div class="col-md-9">
             <h5 class="text-center">Welcome @User.Identity.Name!</h5>
             <hr />
-            <h6>Firstname</h6>
-            <p>
-                @Html.DisplayFor(i => i.Firstname)
-            </p>
-            <h6>Lastname</h6>
-            <p>
-                @Html.DisplayFor(i => i.Lastname)
-            </p>
-            <h6>About</h6>
-            <p>
-                @Html.DisplayFor(i => i.About)
-            </p>
-            <h6>Hobbies</h6>
-            <p>
-                @Html.DisplayFor(i => i.Hobbies)
-            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Firstname</h6>
+                    <p>
+                        @Html.DisplayFor(i => i.Firstname)
+                    </p>
+                    <h6>Lastname</h6>
+                    <p>
+                        @Html.DisplayFor(i => i.Lastname)
+                    </p>
+                    <h6>Gender</h6>
+                    <p>
+                        @Html.DisplayFor(i => i.Gender)
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h6>About</h6>
+                    <p>
+                        @Html.DisplayFor(i => i.About)
+                    </p>
+                    <h6>Hobbies</h6>
+                    <p>
+                        @Html.DisplayFor(i => i.Hobbies)
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
