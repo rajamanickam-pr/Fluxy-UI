@@ -5,16 +5,16 @@
     {
         @Html.AntiForgeryToken()
 
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="alerts.html" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Hello @User.Identity.GetUserName()!</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li class="dropdown-item"><i class="fa fa-user" aria-hidden="true"></i> @Html.ActionLink("Profile", "Index", "Profile")</li>
-                    <li class="dropdown-item"><i class="fa fa-key" aria-hidden="true"></i> @Html.ActionLink("Change password", "ChangePassword", "Manage")</li>
-                    <li class="dropdown-item"><i class="fa fa-cog" aria-hidden="true"></i> @Html.ActionLink("Settings", "Edit", "Profile")</li>
-                    <li class="dropdown-item"><i class="fa fa-sign-out" aria-hidden="true"></i> <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                </ul>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="@Url.Action("Index", "Profile")"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+                    <a class="dropdown-item" href="@Url.Action("ChangePassword", "Manage")"><i class="fa fa-key" aria-hidden="true"></i> Change password</a>
+                    <a class="dropdown-item" href="@Url.Action("Edit", "Profile")"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                    <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out" aria-hidden="true"></i> Log off</a>
+                </div>
             </li>
             @if (HttpContext.Current.User.IsInRole("Admin"))
             {
