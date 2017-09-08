@@ -354,6 +354,7 @@ namespace Fluxy.Controllers
         {
             foreach (var error in result.Errors)
             {
+                Danger(error);
                 ModelState.AddModelError("", error);
             }
         }

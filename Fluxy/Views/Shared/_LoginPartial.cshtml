@@ -6,8 +6,15 @@
         @Html.AntiForgeryToken()
 
         <ul class="navbar-nav">
-            <li class="nav-item">
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Profile", routeValues: new {userId= User.Identity.GetUserId() }, htmlAttributes: new { title = "Profile", @class = "nav-link" })
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="alerts.html" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Hello @User.Identity.GetUserName()!</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li class="dropdown-item"><i class="fa fa-user" aria-hidden="true"></i> @Html.ActionLink("Profile", "Index", "Profile")</li>
+                    <li class="dropdown-item"><i class="fa fa-key" aria-hidden="true"></i> @Html.ActionLink("Change password", "ChangePassword", "Manage")</li>
+                    <li class="dropdown-item"><i class="fa fa-cog" aria-hidden="true"></i> @Html.ActionLink("Settings", "Edit", "Profile")</li>
+                    <li class="dropdown-item"><i class="fa fa-sign-out" aria-hidden="true"></i> <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                </ul>
             </li>
             @if (HttpContext.Current.User.IsInRole("Admin"))
             {
@@ -15,7 +22,6 @@
                     @Html.RouteLink("Admininstration!", new { action = "Index", controller = "AdminHome", area = "Admin" }, new { title = "Administration", @class = "nav-link" })
                 </li>
             }
-            <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
     }
 }

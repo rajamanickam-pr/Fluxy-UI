@@ -101,9 +101,11 @@ label, label + * {
     color: #FFF !important;
 }
 
+.alertmsg{
+    margin-top:20px;
+}
 /* NAV
 ------------------------- */
-
 .navbar-inverse .navbar-nav .nav-link {
     color: white !important;
 }

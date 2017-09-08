@@ -35,8 +35,9 @@ namespace Fluxy.Controllers
             return View(userProfile);
         }
 
-        public ActionResult Edit(string userId)
+        public ActionResult Edit()
         {
+            var userId = User.Identity.GetUserId();
             if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -83,8 +84,9 @@ namespace Fluxy.Controllers
             return View(userProfile);
         }
 
-        public ActionResult Privacy(string userId)
+        public ActionResult Privacy()
         {
+            var userId = User.Identity.GetUserId();
             if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
