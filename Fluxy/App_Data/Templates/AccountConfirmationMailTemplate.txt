@@ -1,0 +1,102 @@
+﻿<body>
+    <div class="body-wrap">
+        <table cellpadding="0" bgcolor="#563D7C" cellspacing="0" style="vertical-align:top;" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td style="word-break:break-word;font-size:0px;padding:10px 25px;padding-top:30px;" align="center">
+                        <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="center" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="width:80px;">
+                                        <img alt="Zero To Launch" title="" height="auto" src="http://localhost/Fluxy/Images/top-verify.png" style="border:none;border-radius:;display:block;outline:none;text-decoration:none;width:100%;height:auto;"
+                                            width="80">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="word-break:break-word;font-size:0px;padding:0px 20px 20px 20px;" align="center">
+                        <div style="cursor:auto;color:White;font-family:'Avenir Next', Avenir, sans-serif;font-size:32px;line-height:60ps;">
+                            Account Confirmation
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="word-break:break-word;font-size:0px;padding:20px 0px 25px;font-size:18px;font-weight:500;line-height:30px;">
+            Your account information
+        </div>
+
+        <table>
+            <tr>
+                <td style="word-break:break-word;font-size:0px;padding:0px 0px 10px;" align="left">
+                    <div style="cursor:auto;color:#222228;font-family:'Avenir Next', Avenir, sans-serif;font-size:16px;line-height:30px;">
+                        <strong style="font-weight: 500; white-space: nowrap;">Account</strong>
+                    </div>
+                </td>
+
+                <td style="word-break:break-word;font-size:0px;padding:0px 0px 10px;" align="left">
+                    <div style="cursor:auto;color:#222228;font-family:'Avenir Next', Avenir, sans-serif;font-size:16px;line-height:30px;">
+                        {0}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="word-break:break-word;font-size:0px;padding:0px 0px 10px;" align="left">
+                    <div style="cursor:auto;color:#222228;font-family:'Avenir Next', Avenir, sans-serif;font-size:16px;line-height:30px;">
+                        <strong style="font-weight: 500; white-space: nowrap;">Verify Link</strong>
+                    </div>
+                </td>
+
+                <td style="word-break:break-word;font-size:0px;padding:0px 0px 25px;" align="left">
+                    <div style="cursor:auto;color:#222228;font-family:'Avenir Next', Avenir, sans-serif;font-size:16px;line-height:30px;">
+                        <a href="{1}" style="color:#0a84ae; text-decoration:none" target="_blank"><small>{1}</small></a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table cellpadding="0" cellspacing="0" width="100%" border="0">
+            <tbody>
+                <tr>
+                    <td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="center">
+                        <table cellpadding="0" cellspacing="0" align="center" border="0">
+                            <tbody>
+                                <tr>
+                                    <td style="border-radius:3px;color:white;cursor:auto;" align="center" valign="middle" bgcolor="#EB5424">
+                                        <a href="{1}" style="display:inline-block;text-decoration:none;background:#563D7C;border-radius:3px;color:white;font-family:'Avenir Next', Avenir, sans-serif;font-size:14px;font-weight:500;line-height:35px;padding:10px 25px;margin:0px;"
+                                            target="_blank">
+                                            VERIFY YOUR ACCOUNT
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <table class="footer-wrap" style="Color:White;" width="100%" bgcolor="#563D7C">
+        <tr>
+            <td></td>
+            <td class="container">
+                <div class="content">
+                    <table>
+                        <tr>
+                            <td align="center">
+                                <p>You’re receiving this email because you have an account in Fluxy Pictures.If you are not
+                                    sure why you’re receiving this, please contact us. <small style="Color:White;">@Fluxypictures@gmail.com.</small></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</body>

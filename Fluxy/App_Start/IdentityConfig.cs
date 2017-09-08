@@ -18,7 +18,6 @@ namespace Fluxy
         {
             // Plug in your email service here to send an email.
             var credentialUserName = "fluxypictures@gmail.com";
-            var sentFrom = "noreply@fp.com";
             var password = "FluxyPictures2206";
 
             // Configure the client:
@@ -31,14 +30,17 @@ namespace Fluxy
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(credentialUserName, password)
             };
-
+           
             // Create the message:
             try
             {
-                var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination)
+                var mail = new System.Net.Mail.MailMessage("noreply@fp.com", message.Destination)
                 {
                     Subject = message.Subject,
+                    IsBodyHtml=true,
+                    Priority=MailPriority.High,
                     Body = message.Body
+                    
                 };
                 await client.SendMailAsync(mail);
             }

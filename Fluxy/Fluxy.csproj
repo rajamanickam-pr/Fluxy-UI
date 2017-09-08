@@ -247,6 +247,7 @@
     <Compile Include="ViewModels\Video\VideoSettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Templates\AccountConfirmationMailTemplate.txt" />
     <Content Include="Areas\Admin\Content\AdminStyles.css" />
     <Content Include="Areas\Admin\Content\jquery.dataTables.min.css" />
     <Content Include="Areas\Admin\Scripts\AttributeScripts.es5.js">
@@ -316,6 +317,7 @@
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\fp-logo.png" />
     <Content Include="Images\g3.jpg" />
+    <Content Include="Images\top-verify.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js">
       <DependentUpon>bootstrap.js</DependentUpon>
@@ -385,7 +387,6 @@
     <Content Include="Views\ErrorHandler\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Scripts\Custom\" />
   </ItemGroup>

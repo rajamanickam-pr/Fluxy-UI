@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 using Fluxy.Infrastructure;
 using AutoMapper;
 using Fluxy.Services.Logging;
+using System.IO;
+using System;
+using System.Web.Hosting;
 
 namespace Fluxy.Controllers
 {
@@ -195,17 +198,22 @@ namespace Fluxy.Controllers
                     UserManager.AddToRole(user.Id, "Users");
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action(
-                       "ConfirmEmail", "Account",
-                       new { userId = user.Id, code = code },
-                       protocol: Request.Url.Scheme);
-
-                    await UserManager.SendEmailAsync(user.Id,
-                       "Confirm your account",
-                       "Please confirm your account by clicking this link: <a href=\""
-                                                       + callbackUrl + "\">link</a>");
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    var path = HostingEnvironment.MapPath(Url.Content("~/App_Data/Templates/AccountConfirmationMailTemplate.txt"));
+                    using (var sr = new StreamReader(path))
+                    {
+                        var body = sr.ReadToEnd();
+                        try
+                        {
+                            string messageBody = string.Format(body, user.Email, callbackUrl, callbackUrl);
+                            await UserManager.SendEmailAsync(user.Id, "Confirm your account", messageBody);
+                        }
+                        catch (System.Exception ex)
+                        {
+                            throw ex;
+                        }
+                    }
                     // ViewBag.Link = callbackUrl;   // Used only for initial demo.
                     return RedirectToAction("Index", "Home");
                 }
