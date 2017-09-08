@@ -12,7 +12,6 @@ using Fluxy.Infrastructure;
 using AutoMapper;
 using Fluxy.Services.Logging;
 using System.IO;
-using System;
 using System.Web.Hosting;
 
 namespace Fluxy.Controllers

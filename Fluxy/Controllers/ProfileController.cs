@@ -5,7 +5,7 @@ using Fluxy.Services.Logging;
 using Fluxy.Services.Users;
 using Fluxy.ViewModels.User;
 using Fluxy.Data.ExtentedDTO;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;    
 using System.Web;
 using System.IO;
 using System.Net;

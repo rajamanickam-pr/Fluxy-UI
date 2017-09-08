@@ -7,7 +7,6 @@ using Fluxy.ViewModels.Menu;
 using System.Collections.Generic;
 using System;
 using Fluxy.Core.Models.Menu;
-using System.Linq;
 using System.Data.Entity.Validation;
 
 namespace Fluxy.Areas.Admin.Controllers

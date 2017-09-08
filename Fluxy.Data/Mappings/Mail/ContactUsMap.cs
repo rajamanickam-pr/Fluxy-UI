@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fluxy.Core.Models.Mail;
+﻿using Fluxy.Core.Models.Mail;
 
 namespace Fluxy.Data.Mappings.Mail
 {

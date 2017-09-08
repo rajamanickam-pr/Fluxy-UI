@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fluxy.Core.Common;
+﻿using Fluxy.Core.Common;
 
 namespace Fluxy.Core.Models.Banners
 {

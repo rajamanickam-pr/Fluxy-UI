@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Fluxy.Core.Common;
+﻿using Fluxy.Core.Common;
 
 namespace Fluxy.Core.Models.Categories
 {

@@ -1,5 +1,4 @@
-﻿using Fluxy.Core.Models.Logging;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AutoMapper;
 using Fluxy.Infrastructure;
 using Fluxy.Services.Logging;

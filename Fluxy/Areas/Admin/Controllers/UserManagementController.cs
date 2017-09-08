@@ -11,8 +11,6 @@ using Fluxy.Services.Users;
 using System.Net;
 using System.Threading.Tasks;
 using Fluxy.Data.ExtentedDTO;
-using System.ComponentModel.DataAnnotations;
-using System;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
