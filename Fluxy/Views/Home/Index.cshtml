@@ -1,29 +1,26 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model Fluxy.ViewModels.Home.HomeViewModel
+@using PagedList;
+@using PagedList.Mvc;
+
 @Html.Partial("_MainSlide")
 <div class="container">
-    @*<div class="alert alert-info" role="alert">
-        <strong>Recent Videos</strong>
-    </div>
-    <div class="row ">
-        @for (int i = 0; i < 6; i++)
-        {
-            <div class="col-md-4">
-                @Html.Partial("_VideoBox")
-            </div>
-        }
-    </div>
+    @using (Ajax.BeginForm("Index", "Home", null, new AjaxOptions() { LoadingElementId = "", HttpMethod = "Get", UpdateTargetId = "RecentVideosGrid" }))
+    {
+        <div class="alert alert-info" role="alert">
+            <strong>Recent Videos</strong>
+        </div>
+        <div id="RecentVideosGrid">
+            @Html.Partial("_UnobtrusivePartial", Model.RecentVideos)
+        </div>
+    }
 
-    <div class="alert alert-info" role="alert">
-        <strong>Popular Videos</strong>
-    </div>
-    <div class="row">
-        @for (int i = 0; i < 6; i++)
-            {
-            <div class="col-md-4">
-                @Html.Partial("_VideoBox")
-            </div>
-        }
-    </div>*@
+    @using (Ajax.BeginForm("Index", "Home", null, new AjaxOptions() { LoadingElementId = "", HttpMethod = "Get", UpdateTargetId = "PopularVideoGrid" }))
+    {
+        <div class="alert alert-info" role="alert">
+            <strong>Popular Videos</strong>
+        </div>
+        <div class="PopularVideoGrid">
+            @Html.Partial("_UnobtrusivePartial", Model.PopularVideos)
+        </div>
+    }
 </div>

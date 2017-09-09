@@ -234,6 +234,7 @@
     <Compile Include="Modules\AutomapperModule.cs" />
     <Compile Include="ViewModels\Banners\BannerDetailsViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Home\HomeViewModel.cs" />
     <Compile Include="ViewModels\Localization\LanguageViewModel.cs" />
     <Compile Include="ViewModels\Logging\LogViewModel.cs" />
     <Compile Include="ViewModels\Mail\ContactUsViewModel.cs" />
@@ -337,6 +338,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -398,6 +401,7 @@
     <Content Include="Views\VideoCategories\TravelEvents.cshtml" />
     <Content Include="Views\VideoCategories\PeopleBlogs.cshtml" />
     <Content Include="Views\VideoCategories\PetsAnimals.cshtml" />
+    <Content Include="Views\Shared\_UnobtrusivePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

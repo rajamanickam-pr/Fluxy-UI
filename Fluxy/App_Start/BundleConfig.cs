@@ -19,7 +19,8 @@ namespace Fluxy
                      "~/Scripts/tether.min.js",
                      "~/Scripts/bootstrap.js",
                      "~/Scripts/holder.min.js",
-                     "~/Scripts/pace.min.js"
+                     "~/Scripts/pace.min.js",
+                     "~/Scripts/jquery.unobtrusive-ajax.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/adminScript").Include(

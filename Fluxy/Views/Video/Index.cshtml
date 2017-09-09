@@ -1,6 +1,6 @@
 ﻿@model Fluxy.ViewModels.Video.VideoAttributesViewModel
 @{
-    var videoUrl = @Model.Url + Model.VideoSettings.FrameFilters;
+    var videoUrl = @Model.Url + Model?.VideoSettings?.FrameFilters;
 }
 <div class="container">
     <div class="row">

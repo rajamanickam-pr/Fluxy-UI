@@ -1,0 +1,26 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Fluxy.ViewModels.Video.VideoAttributesViewModel>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            @Html.Partial("_VideoBox", item)
+        </div>
+    }
+</div>
+
+<div class="text-center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @Html.PagedListPager(Model, recentPage => Url.Action("Index", "Home", new { recentPage }),
+           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+               new AjaxOptions()
+               {
+                   InsertionMode = InsertionMode.Replace,
+                   HttpMethod = "GET",
+                   UpdateTargetId = "RecentVideosGrid"
+               }))
+</div>
