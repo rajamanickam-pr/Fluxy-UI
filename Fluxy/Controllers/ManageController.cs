@@ -18,7 +18,7 @@ namespace Fluxy.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController(ILogService logService, IMapper mapper,ApplicationUserManager userManager, 
+        public ManageController(ILogService logService, IMapper mapper, ApplicationUserManager userManager,
             ApplicationSignInManager signInManager)
             : base(logService, mapper)
         {
@@ -26,7 +26,7 @@ namespace Fluxy.Controllers
             SignInManager = signInManager;
         }
 
-        public ManageController(ILogService logService, IMapper mapper) 
+        public ManageController(ILogService logService, IMapper mapper)
             : base(logService, mapper)
         {
         }
@@ -37,9 +37,9 @@ namespace Fluxy.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -222,7 +222,14 @@ namespace Fluxy.Controllers
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
-            return View();
+            if (HasPassword())
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("SetPassword");
+            }
         }
 
         //
@@ -265,6 +272,7 @@ namespace Fluxy.Controllers
             if (ModelState.IsValid)
             {
                 var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+                
                 if (result.Succeeded)
                 {
                     var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -338,7 +346,7 @@ namespace Fluxy.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -390,6 +398,6 @@ namespace Fluxy.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

@@ -53,14 +53,14 @@ namespace Fluxy
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1421789451271353",
+               appSecret: "601a5937e071c8af7454951eddea44f5");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
             //    ClientId = "",
-            //    ClientSecret = ""
+            //    ClientSecret = "AIzaSyBmgLzm4-UMqCu81WA935vU_ZO8bx6ZtPk"
             //});
         }
     }
