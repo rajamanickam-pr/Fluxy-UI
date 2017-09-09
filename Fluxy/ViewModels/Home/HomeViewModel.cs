@@ -9,7 +9,10 @@ namespace Fluxy.ViewModels.Home
 {
     public class HomeViewModel
     {
-        public IPagedList<VideoAttributesViewModel> RecentVideos { get; set; }
-        public IPagedList<VideoAttributesViewModel> PopularVideos { get; set; }
+        public IList<VideoAttributesViewModel> RecentVideos { get; set; }
+        public IList<VideoAttributesViewModel> PopularVideos { get; set; }
+        public IList<VideoAttributesViewModel> General { get; set; }
+        public IList<VideoAttributesViewModel> Infotainment { get; set; }
+        public IList<VideoAttributesViewModel> Entertainment { get; set; }
     }
 }

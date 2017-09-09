@@ -1,26 +1,99 @@
 ﻿@model Fluxy.ViewModels.Home.HomeViewModel
-@using PagedList;
-@using PagedList.Mvc;
 
 @Html.Partial("_MainSlide")
 <div class="container">
-    @using (Ajax.BeginForm("Index", "Home", null, new AjaxOptions() { LoadingElementId = "", HttpMethod = "Get", UpdateTargetId = "RecentVideosGrid" }))
-    {
-        <div class="alert alert-info" role="alert">
-            <strong>Recent Videos</strong>
-        </div>
-        <div id="RecentVideosGrid">
-            @Html.Partial("_UnobtrusivePartial", Model.RecentVideos)
-        </div>
-    }
+    <div class="alert alert-info" role="alert">
+        <strong>Recent Videos</strong>
+    </div>
+    <div class="row">
+        @if (Model.RecentVideos.Count == 0)
+        {
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <p class="text-center">Video list is empty, Stay tune for the bang.</p>
+            </div>
+        }
+        @foreach (var item in Model.RecentVideos)
+            {
+            <div class="col-md-4">
+                @Html.Partial("_VideoBox", item)
+            </div>
+        }
+    </div>
 
-    @using (Ajax.BeginForm("Index", "Home", null, new AjaxOptions() { LoadingElementId = "", HttpMethod = "Get", UpdateTargetId = "PopularVideoGrid" }))
-    {
-        <div class="alert alert-info" role="alert">
-            <strong>Popular Videos</strong>
-        </div>
-        <div class="PopularVideoGrid">
-            @Html.Partial("_UnobtrusivePartial", Model.PopularVideos)
-        </div>
-    }
+    <div class="alert alert-info" role="alert">
+        <strong>Popular Videos</strong>
+    </div>
+    <div class="row">
+        @if (Model.PopularVideos.Count == 0)
+        {
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <p class="text-center">Video list is empty, Stay tune for the bang.</p>
+            </div>
+        }
+        @foreach (var item in Model.PopularVideos)
+            {
+            <div class="col-md-4">
+                @Html.Partial("_VideoBox", item)
+            </div>
+        }
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        <strong>General Videos</strong>
+    </div>
+    <div class="row">
+        @if (Model.General.Count == 0)
+        {
+            <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <p class="text-center">Video list is empty, Stay tune for the bang.</p>
+                </div>
+        }
+        @foreach (var item in Model.General)
+        {
+            <div class="col-md-4">
+                @Html.Partial("_VideoBox", item)
+            </div>
+        }
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        <strong>Infotainment Videos</strong>
+    </div>
+    <div class="row">
+        @if (Model.Infotainment.Count == 0)
+        {
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <p class="text-center">Video list is empty, Stay tune for the bang.</p>
+            </div>
+        }
+        @foreach (var item in Model.Infotainment)
+            {
+            <div class="col-md-4">
+                @Html.Partial("_VideoBox", item)
+            </div>
+        }
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        <strong>Entertainment Videos</strong>
+    </div>
+    <div class="row">
+        @if (Model.Entertainment.Count == 0)
+        {
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <p class="text-center">Video list is empty, Stay tune for the bang.</p>
+            </div>
+        }
+        @foreach (var item in Model.Entertainment)
+            {
+            <div class="col-md-4">
+                @Html.Partial("_VideoBox", item)
+            </div>
+        }
+    </div>
 </div>

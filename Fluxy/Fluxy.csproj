@@ -401,7 +401,6 @@
     <Content Include="Views\VideoCategories\TravelEvents.cshtml" />
     <Content Include="Views\VideoCategories\PeopleBlogs.cshtml" />
     <Content Include="Views\VideoCategories\PetsAnimals.cshtml" />
-    <Content Include="Views\Shared\_UnobtrusivePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

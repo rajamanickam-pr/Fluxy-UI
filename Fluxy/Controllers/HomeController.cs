@@ -6,7 +6,6 @@ using Fluxy.Services.Logging;
 using Fluxy.Services.Video;
 using Fluxy.ViewModels.Video;
 using System.Collections.Generic;
-using PagedList;
 using System.Linq;
 using Fluxy.ViewModels.Home;
 
@@ -26,30 +25,34 @@ namespace Fluxy.Controllers
             _bannerDetailsService = bannerDetailsService;
         }
 
-        public ActionResult Index(int? recentPage, int? popularPage)
+        public ActionResult Index()
         {
-            int pageSize = 5;
-            int pageIndex = 1;
-            pageIndex = recentPage ?? 1;
-            var recentlyAdded = _videoAttributesService.GetAll().OrderByDescending(i => i.CreatedDate).Take(10);
-            var recentlyAddedVM = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded).ToPagedList(pageIndex, pageSize);
+            var recentlyAdded = _videoAttributesService.GetAll().OrderByDescending(i => i.CreatedDate).Take(9);
+            var recentlyAddedVM = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded);
 
-            int popularPageIndex = 1;
-            popularPageIndex = popularPage ?? 1;
-            var popularVideos = _videoAttributesService.GetAll().OrderByDescending(i => i.ViewCount).Take(10);
-            var popularVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos).ToPagedList(popularPageIndex, pageSize);
+            var popularVideos = _videoAttributesService.GetAll().OrderByDescending(i => i.ViewCount).Take(9);
+            var popularVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos);
+
+            var generalVideos = _videoAttributesService.GetList(i=>i.Category.Name.Contains("People & Blogs")).OrderByDescending(i => i.ViewCount).Take(9);
+            var generalVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos);
+
+            var infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education")).OrderByDescending(i => i.ViewCount).Take(9);
+            var infoVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(infoVideos);
+
+            var entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Music")).OrderByDescending(i => i.ViewCount).Take(9);
+            var entertainmentVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos);
 
 
             HomeViewModel homeViewModel = new HomeViewModel
             {
                 RecentVideos = recentlyAddedVM,
-                PopularVideos = popularVideosVM
+                PopularVideos = popularVideosVM,
+                General = generalVideosVM,
+                Infotainment = infoVideosVM,
+                Entertainment = entertainmentVideosVM
             };
 
-            return Request.IsAjaxRequest()
-                ? recentPage.HasValue ? (ActionResult)PartialView("_UnobtrusivePartial", homeViewModel.RecentVideos) :
-                 (ActionResult)PartialView("_UnobtrusivePartial", homeViewModel.PopularVideos)
-                : View(homeViewModel);
+            return View(homeViewModel);
         }
 
         public ActionResult About()
