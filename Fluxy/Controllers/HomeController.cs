@@ -8,6 +8,7 @@ using Fluxy.ViewModels.Video;
 using System.Collections.Generic;
 using System.Linq;
 using Fluxy.ViewModels.Home;
+using Fluxy.ViewModels.Banners;
 
 namespace Fluxy.Controllers
 {
@@ -33,7 +34,7 @@ namespace Fluxy.Controllers
             var popularVideos = _videoAttributesService.GetAll().OrderByDescending(i => i.ViewCount).Take(9);
             var popularVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos);
 
-            var generalVideos = _videoAttributesService.GetList(i=>i.Category.Name.Contains("People & Blogs")).OrderByDescending(i => i.ViewCount).Take(9);
+            var generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs")).OrderByDescending(i => i.ViewCount).Take(9);
             var generalVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos);
 
             var infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education")).OrderByDescending(i => i.ViewCount).Take(9);
@@ -42,6 +43,7 @@ namespace Fluxy.Controllers
             var entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Music")).OrderByDescending(i => i.ViewCount).Take(9);
             var entertainmentVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos);
 
+            var bannerList = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll());
 
             HomeViewModel homeViewModel = new HomeViewModel
             {
@@ -49,7 +51,8 @@ namespace Fluxy.Controllers
                 PopularVideos = popularVideosVM,
                 General = generalVideosVM,
                 Infotainment = infoVideosVM,
-                Entertainment = entertainmentVideosVM
+                Entertainment = entertainmentVideosVM,
+                Banners= bannerList
             };
 
             return View(homeViewModel);

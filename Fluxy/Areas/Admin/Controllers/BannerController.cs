@@ -8,9 +8,12 @@ using Fluxy.Services.Banners;
 using Fluxy.Services.Logging;
 using Fluxy.ViewModels.Banners;
 using Fluxy.ViewModels.Menu;
+using System.Web;
+using System;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BannerController : BaseController
     {
         private readonly IMapper _mapper;
@@ -32,25 +35,23 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(BannerDetailsViewModel bannerDetailsViewModel)
+        public ActionResult Create(BannerDetailsViewModel bannerDetailsViewModel, HttpPostedFileBase fileBase)
         {
             if (ModelState.IsValid)
             {
-                var bannerDto = _mapper.Map<BannerDetails>(bannerDetailsViewModel);
-
-                if (bannerDetailsViewModel.fileBase != null)
+                if (fileBase != null)
                 {
-                    if (bannerDetailsViewModel.fileBase.ContentLength > 0)
+                    if (fileBase.ContentLength > 0)
                     {
                         using (MemoryStream ms = new MemoryStream())
                         {
-                            bannerDetailsViewModel.fileBase.InputStream.CopyTo(ms);
+                            fileBase.InputStream.CopyTo(ms);
                             byte[] fileArray = ms.GetBuffer();
-                            bannerDto.Image = fileArray;
+                            bannerDetailsViewModel.Image = fileArray;
                         }
                     }
                 }
-
+                var bannerDto = _mapper.Map<BannerDetails>(bannerDetailsViewModel);
                 if (!string.IsNullOrEmpty(bannerDto.Id))
                 {
                     var oldPicture = _bannerDetailsService.GetSingle(i => i.Id == bannerDto.Id).Image;
@@ -69,19 +70,25 @@ namespace Fluxy.Areas.Admin.Controllers
             return Json(false, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public JsonResult GetbyId(string id)
         {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException("Banner id is null  or empty");
+
             var bannerDto = _bannerDetailsService.GetSingle(i => i.Id == id);
-            var mainMenu = _mapper.Map<MainMenuViewModel>(bannerDto);
-            return Json(mainMenu, JsonRequestBehavior.AllowGet);
+            var banner = _mapper.Map<BannerDetailsViewModel>(bannerDto);
+            var jsonResult= Json(banner, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
 
         [HttpGet]
         public JsonResult GetList()
         {
             var bannerDto = _bannerDetailsService.GetAll();
-            var mainMenuList = _mapper.Map<List<MainMenuViewModel>>(bannerDto);
-            return Json(mainMenuList, JsonRequestBehavior.AllowGet);
+            var bannerList = _mapper.Map<List<BannerDetailsViewModel>>(bannerDto);
+            return Json(bannerList, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

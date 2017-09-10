@@ -8,6 +8,7 @@ using Fluxy.ViewModels.Logging;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LogController : BaseController
     {
         private readonly ILogService _logService;

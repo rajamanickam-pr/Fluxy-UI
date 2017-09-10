@@ -1,4 +1,5 @@
-﻿using Fluxy.ViewModels.Video;
+﻿using Fluxy.ViewModels.Banners;
+using Fluxy.ViewModels.Video;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Fluxy.ViewModels.Home
         public IList<VideoAttributesViewModel> General { get; set; }
         public IList<VideoAttributesViewModel> Infotainment { get; set; }
         public IList<VideoAttributesViewModel> Entertainment { get; set; }
+        public List<BannerDetailsViewModel> Banners { get; set; }
     }
 }

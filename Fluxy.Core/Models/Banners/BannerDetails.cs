@@ -8,6 +8,7 @@ namespace Fluxy.Core.Models.Banners
         public string Headline { get; set; }
         public string Slogans { get; set; }
         public string ButtonText { get; set; }
+        public string ButtonUrl { get; set; }
         public string Name { get; set; }
     }
 }

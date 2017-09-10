@@ -11,6 +11,7 @@ using Fluxy.Core.Models.Categories;
 
 namespace Fluxy.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;

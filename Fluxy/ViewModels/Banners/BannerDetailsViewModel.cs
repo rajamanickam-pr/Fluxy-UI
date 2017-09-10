@@ -8,7 +8,6 @@ namespace Fluxy.ViewModels.Banners
     {
         [Key]
         public string Id { get; set; }
-        [Required]
         public byte[] Image { get; set; }
         [Required]
         public string Headline { get; set; }
@@ -16,8 +15,8 @@ namespace Fluxy.ViewModels.Banners
         public string Slogans { get; set; }
         [Required]
         public string ButtonText { get; set; }
+        public string ButtonUrl { get; set; }
         public string Name { get; set; }
-        public HttpPostedFileBase fileBase { get; set; }
         public string ImageString => Convert.ToBase64String(this.Image);
     }
 }

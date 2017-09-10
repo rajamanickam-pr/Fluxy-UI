@@ -6,7 +6,8 @@ function Add(url) {
         Name: $('#Name').val(),
         Headline: $('#Headline').val(),
         Slogans: $('#Slogans').val(),
-        ButtonText: $('#ButtonText').val()
+        ButtonText: $('#ButtonText').val(),
+        ButtonUrl: $('#ButtonUrl').val()
     }
    
     var formdata = new FormData($("#bannerModalForm").get(0));
@@ -52,11 +53,13 @@ function getbyID(url) {
             $('#Headline').val(result.Headline);
             $('#Slogans').val(result.Slogans);
             $('#ButtonText').val(result.ButtonText);
+            $('#ButtonUrl').val(result.ButtonUrl);
+
             $('#bannerModal').modal('show');
             $('#btnUpdate').show();
             $('#btnAdd').hide();
         },
-        error: function (errormessage) {
+        error: function (errormessage,jquery,xhr) {
             alert(errormessage.responseText);
         }
     });
@@ -69,9 +72,9 @@ function Update(url) {
         Name: $('#Name').val(),
         Headline: $('#Headline').val(),
         Slogans: $('#Slogans').val(),
-        ButtonText: $('#ButtonText').val()
+        ButtonText: $('#ButtonText').val(),
+        ButtonUrl: $('#ButtonUrl').val()
     }
-    var file = Request.Files["file"];
 
     $.ajax({
         url: url,

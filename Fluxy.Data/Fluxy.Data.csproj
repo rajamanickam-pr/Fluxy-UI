@@ -60,7 +60,6 @@
     <Compile Include="ExtentedDTO\UserProfileExtend.cs" />
     <Compile Include="ExtentedDTO\VideoAttributesExtend.cs" />
     <Compile Include="FluxyContext.cs" />
-    <Compile Include="Initializers\FluxyConfiguration.cs" />
     <Compile Include="Initializers\FluxyDBInitializer.cs" />
     <Compile Include="Mappings\Banners\BannerDetailsMap.cs" />
     <Compile Include="Mappings\Categories\CategoryMap.cs" />
@@ -78,9 +77,18 @@
     <Compile Include="Mappings\Video\PrivateVideoMap.cs" />
     <Compile Include="Mappings\Video\VideoAttributesMap.cs" />
     <Compile Include="Mappings\Video\VideoSettingsMap.cs" />
+    <Compile Include="Migrations\201709101056426_InitialCreate.cs" />
+    <Compile Include="Migrations\201709101056426_InitialCreate.Designer.cs">
+      <DependentUpon>201709101056426_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709101056426_InitialCreate.resx">
+      <DependentUpon>201709101056426_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
