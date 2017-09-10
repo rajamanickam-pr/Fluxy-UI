@@ -5,6 +5,7 @@ using Fluxy.Services.Logging;
 using Fluxy.Services.Video;
 using Fluxy.ViewModels.Video;
 using System.Data.SqlClient;
+using System;
 
 namespace Fluxy.Controllers
 {
@@ -24,6 +25,9 @@ namespace Fluxy.Controllers
         [HttpGet]
         public ActionResult Index(string videoId)
         {
+            if(string.IsNullOrEmpty(videoId))
+                 throw new ArgumentNullException("videoId is null or empty");
+
             SqlParameter[] sqlParam = {
                 new SqlParameter("videoId",videoId)
             };

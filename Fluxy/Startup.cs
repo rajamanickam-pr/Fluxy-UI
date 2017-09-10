@@ -28,15 +28,19 @@ namespace Fluxy
             {
 
                 // first we create Admin rool
-                var role = new IdentityRole();
-                role.Name = "Admin";
+                var role = new IdentityRole
+                {
+                    Name = "Admin"
+                };
                 roleManager.Create(role);
             }
 
             if (!roleManager.RoleExists("Users"))
             {
-                var role = new IdentityRole();
-                role.Name = "Users";
+                var role = new IdentityRole
+                {
+                    Name = "Users"
+                };
                 roleManager.Create(role);
 
             }

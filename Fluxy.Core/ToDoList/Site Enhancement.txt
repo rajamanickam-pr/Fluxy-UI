@@ -1,0 +1,17 @@
+﻿1.Logo Creation
+2.SEO Optimization
+3.Caching
+4.Dynamic Menu
+5.Dynamic Banner
+6.Dashboard Admin
+7.Search
+8.Footer functionalities
+9.Newsletter
+10.Contact us
+11.favicon
+12.Soft delete user
+
+1.User Mail confirmation after Set password - External login
+2.Register Confirmation
+
+1.Live Bug fixing

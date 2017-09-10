@@ -95,5 +95,8 @@
     <Folder Include="Mvc\Infrastructure\" />
     <Folder Include="Mvc\Security\Attributes\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ToDoList\Site Enhancement.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
