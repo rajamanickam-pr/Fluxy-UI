@@ -327,3 +327,22 @@ label, label + * {
         float: right;
     }
 }
+
+/* FB 
+-------------------------------------------------- */
+.fb_iframe_widget {
+    display: block;
+}
+
+    .fb_iframe_widget span {
+        margin-top: 10px;
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+    }
+
+#fbcomments, .fb-comments, .fb-comments iframe[style], .fb-comments span {
+    width: 100% !important;
+}

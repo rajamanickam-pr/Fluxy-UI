@@ -11,13 +11,13 @@
             <div class="embed-responsive embed-responsive-16by9">
                 @if (Model.IsAllowFullScreen)
                 {
-                <iframe class="embed-responsive-item" width="@Model.VideoSettings.FrameWidth" height="@Model.VideoSettings.FrameHeight"
-                        src="@videoUrl" frameborder="0" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" width="@Model.VideoSettings.FrameWidth" height="@Model.VideoSettings.FrameHeight"
+                            src="@videoUrl" frameborder="0" allowfullscreen></iframe>
                 }
                 else
                 {
-                <iframe class="embed-responsive-item" width="@Model.VideoSettings.FrameWidth" height="@Model.VideoSettings.FrameHeight"
-                        src="@videoUrl" frameborder="0"></iframe>
+                    <iframe class="embed-responsive-item" width="@Model.VideoSettings.FrameWidth" height="@Model.VideoSettings.FrameHeight"
+                            src="@videoUrl" frameborder="0"></iframe>
                 }
             </div>
             <div class="row">
@@ -33,6 +33,16 @@
                     <span><i class="fa fa-tags" aria-hidden="true"></i>@Model.Tags</span>
                 </div>
             </div>
+
+            <div class="fb-like" 
+                 data-href="http://localhost/Fluxy/Video?videoId='@Model.Id'" 
+                 data-layout="standard" 
+                 data-action="like" 
+                 data-size="small" 
+                 data-show-faces="true" 
+                 data-share="true">
+            </div>
+
             <div>
                 <blockquote class="blockquote">
                     <p class="mb-0"><strong>Description</strong></p>
@@ -40,6 +50,10 @@
                         @Model.Description
                     </small>
                 </blockquote>
+            </div>
+            <div class="fb-comments" 
+                 data-href="http://localhost/Fluxy/Video?videoId='@Model.Id'" 
+                 data-numposts="10">
             </div>
 
             @*<div class="alert alert-info" role="alert">
@@ -77,5 +91,18 @@
                     }
                 </div>*@
         </div>
+        <div class="col-md-4">
+            <div class="fb-page" data-href="https://www.facebook.com/fluxypictures" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/fluxypictures" class="fb-xfbml-parse-ignore">
+                    <a href="https://www.facebook.com/fluxypictures">Fluxy Pictures</a>
+                </blockquote>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    FB.ui({
+        method: 'share',
+        href: 'https://developers.facebook.com/docs/',
+    }, function (response) { });
+</script>

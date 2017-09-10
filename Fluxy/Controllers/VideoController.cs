@@ -21,6 +21,7 @@ namespace Fluxy.Controllers
         }
 
         // GET: Video
+        [HttpGet]
         public ActionResult Index(string videoId)
         {
             SqlParameter[] sqlParam = {
