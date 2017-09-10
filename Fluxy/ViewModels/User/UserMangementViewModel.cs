@@ -1,5 +1,8 @@
 ﻿using Fluxy.Data;
+using Fluxy.ViewModels.Video;
+using PagedList;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Fluxy.ViewModels.User
@@ -33,5 +36,6 @@ namespace Fluxy.ViewModels.User
         }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
+        public int TotalVideo { get; set; }
     }
 }

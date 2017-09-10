@@ -1,0 +1,34 @@
+﻿@model IPagedList<Fluxy.ViewModels.Video.VideoAttributesViewModel>
+@using PagedList;
+@using PagedList.Mvc;
+
+@foreach (var item in Model)
+{
+    <div class="card card-custom">
+        <img class="card-img-top" src="data:image/png;base64,@item.ThumbunailString" alt="Card image cap">
+        <div class="card-block">
+            <h6 class="card-title">@item.Title</h6>
+            <p class="card-text">@item.Description</p>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Added by">
+                    <small>
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i> @item.ApplicationUser.UserName
+                    </small>
+                </div>
+                <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Views Count">
+                    <small><i class="fa fa-eye" aria-hidden="true"></i> @item.ViewCount</small>
+                </div>
+                <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Tags">
+                    <small><i class="fa fa-tags" aria-hidden="true"></i> @item.Tags</small>
+                </div>
+            </div>
+        </div>
+        @*<div class="card-block">
+            @Html.Partial("_VideoBox",item)
+        </div>*@
+    </div>
+}
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

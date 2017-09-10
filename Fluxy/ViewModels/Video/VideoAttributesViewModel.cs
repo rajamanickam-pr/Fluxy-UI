@@ -45,6 +45,14 @@ namespace Fluxy.ViewModels.Video
         [ForeignKey("UserId")]
         public virtual Data.ApplicationUser ApplicationUser { get; set; }
 
+        public string ThumbunailString
+        {
+            get
+            {
+                return Convert.ToBase64String(this.Thumbunail);
+            }
+        }
+
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }

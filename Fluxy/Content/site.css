@@ -178,7 +178,8 @@ label, label + * {
     letter-spacing: -.05rem;
 }
 
-/* Footer */
+/* FOOTER
+-------------------------------------------------- */
 #myFooter {
     background-color: #373a48;
     color: white;
@@ -345,4 +346,11 @@ label, label + * {
 
 #fbcomments, .fb-comments, .fb-comments iframe[style], .fb-comments span {
     width: 100% !important;
+}
+
+
+/* IMAGES
+-------------------------------------------------- */
+.img-thumbnail-custom{
+    padding:5px;
 }

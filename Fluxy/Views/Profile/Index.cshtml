@@ -1,69 +1,119 @@
 ﻿@model Fluxy.ViewModels.User.UserMangementViewModel
 @using Microsoft.AspNet.Identity;
-@{
-    var imgSrc = string.Empty;
-    if (Model?.DisplayPicture != null)
-    {
-        imgSrc = $"data:image/gif;base64,{Model.DisplayPictureString}";
-    }
-}
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3 text-xs-center">
-            @if (!string.IsNullOrEmpty(imgSrc))
-            {
-                <img src="@imgSrc" data-src="holder.js/140x140" alt='Avatar' class="img-thumbnail img-thumbnail-custom img-circle m-x-auto img-fluid img-responsive">
-            }
-            else
-            {
-                <img src="//placehold.it/150" data-src="holder.js/140x140" class="img-thumbnail img-thumbnail-custom img-circle m-x-auto img-fluid img-responsive" alt="avatar">
-            }
-        </div>
-        <div class="col-md-9">
-            <h5 class="text-center">Welcome @User.Identity.Name!</h5>
-            <hr />
-            <div class="row">
-                <div class="col-md-6">
-                    <h6>Firstname</h6>
-                    <p>
-                        @Html.DisplayFor(i => i.Firstname)
-                    </p>
-                    <h6>Lastname</h6>
-                    <p>
-                        @Html.DisplayFor(i => i.Lastname)
-                    </p>
-                    <h6>Gender</h6>
-                    <p>
-                        @Html.DisplayFor(i => i.Gender)
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <h6>About</h6>
-                    <p>
-                        @Html.DisplayFor(i => i.About)
-                    </p>
-                    <h6>Hobbies</h6>
-                    <p>
-                        @Html.DisplayFor(i => i.Hobbies)
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="alert alert-info" role="alert">
-                <strong>Videos posted by you</strong>
-            </div>
-            <div class="row ">
-                @for (int i = 0; i < 6; i++)
+        <div class="col-md-3">
+            <div class="card card-custom">
+                @if (!string.IsNullOrEmpty(Model.DisplayPictureString))
                 {
-                    <div class="col-md-4">
-                        @Html.Partial("_VideoBox")
-                    </div>
+                    <img src="data:image/png;base64,@Model.DisplayPictureString" data-src="holder.js/140x140" alt='Avatar' class="img-thumbnail-custom m-x-auto img-fluid img-responsive">
                 }
+                else
+                {
+                    <img src="//placehold.it/150" data-src="holder.js/140x140" class="img-thumbnail-custom m-x-auto img-fluid img-responsive" alt="avatar">
+                }
+                <div class="card-block">
+                    <h4 class="card-title text-center">@User.Identity.Name</h4>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Total Videos : @Model.TotalVideo</small>
+                </div>
+            </div>
+            <div class="card card-custom">
+                <div class="card-block">
+                    <strong>About</strong>
+                    @{
+                        if (!string.IsNullOrEmpty(Model?.About))
+                        {
+                            var about = Model.About.Split(',');
+                            <p>
+                                @foreach (var item in about)
+                                {
+                                    <span class="label-custom label-custom-about">@item</span>
+                                }
+                            </p>
+                        }
+                        else
+                        {
+                            <small>Add about</small>
+                        }
+                    }
+                    <hr />
+                    <strong>Hobbies</strong>
+                    @{
+                        if (!string.IsNullOrEmpty(Model?.Hobbies))
+                        {
+                            var hobbies = Model.Hobbies.Split(',');
+                            <p>
+                                @foreach (var item in hobbies)
+                                {
+                                    <span class="label-custom label-custom-hobbies">@item</span>
+                                }
+                            </p>
+                        }
+                        else
+                        {
+                            <small>Add Hobbies</small>
+                        }
+                    }
+                    <hr />
+                    <strong>Bio</strong>
+                    <p class="card-text">sdfdsfsdf skanfis adbfuhksadkfuadbsfuhsdbfuadsbfidsbf gdbiudsbfkj</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-custom">
+                <div class="card-block">
+                    <h4 class="card-title">Hello buddy!</h4>
+                    <p class="card-text">Prmote your video here.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary float-right">Post Video</a>
+                </div>
+            </div>
+            <div id="UserPostedVideos">
+                @Html.Action("ProfileVideos", "Profile")
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <div class="card-block">
+                    <h4 class="card-title">Settings</h4>
+                    <a href="@Url.Action("ChangePassword", "Manage")" class="btn btn-link">Change Password</a>
+                    <a href="@Url.Action("Edit", "Profile")" class="btn btn-link">Settings</a>
+                    <a href="@Url.Action("Privacy", "Profile")" class="btn btn-link">Privacy</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .label-custom {
+        display: inline;
+        padding: .2em .6em .3em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25em;
+    }
+
+    .label-custom-hobbies {
+        background-color: #f39c12;
+    }
+
+    .label-custom-about {
+        background-color: #00a65a;
+    }
+
+    .card-custom {
+        border-top: 3px solid #563d7c;
+        margin-top: 10px;
+    }
+</style>

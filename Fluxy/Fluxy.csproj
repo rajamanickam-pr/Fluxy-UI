@@ -402,6 +402,7 @@
     <Content Include="Views\VideoCategories\TravelEvents.cshtml" />
     <Content Include="Views\VideoCategories\PeopleBlogs.cshtml" />
     <Content Include="Views\VideoCategories\PetsAnimals.cshtml" />
+    <Content Include="Views\Profile\_ProfileVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

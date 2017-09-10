@@ -69,6 +69,7 @@
     <Compile Include="Common\IAuditableEntity.cs" />
     <Compile Include="Common\IEntity.cs" />
     <Compile Include="Helpers\Alerts.cs" />
+    <Compile Include="Helpers\Messages.cs" />
     <Compile Include="Models\Banners\BannerDetails.cs" />
     <Compile Include="Models\Categories\Category.cs" />
     <Compile Include="Models\Localization\Language.cs" />

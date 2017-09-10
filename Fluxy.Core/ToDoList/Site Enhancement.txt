@@ -2,7 +2,7 @@
 2.SEO Optimization
 3.Caching
 4.Dynamic Menu
-5.Dynamic Banner
+5.Dynamic Banner -- Completed
 6.Dashboard Admin
 7.Search
 8.Footer functionalities

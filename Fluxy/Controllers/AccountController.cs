@@ -13,6 +13,7 @@ using AutoMapper;
 using Fluxy.Services.Logging;
 using System.IO;
 using System.Web.Hosting;
+using Fluxy.Core.Helpers;
 
 namespace Fluxy.Controllers
 {
@@ -219,7 +220,7 @@ namespace Fluxy.Controllers
                         }
                     }
                     // ViewBag.Link = callbackUrl;   // Used only for initial demo.
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home",new {Message= Messages.RegsitraionConfirmation });
                 }
                 AddErrors(result);
             }

@@ -9,6 +9,12 @@ using Microsoft.AspNet.Identity;
 using System.Web;
 using System.IO;
 using System.Net;
+using Fluxy.Services.Video;
+using System.Collections.Generic;
+using Fluxy.ViewModels.Video;
+using System;
+using PagedList;
+using System.Linq;
 
 namespace Fluxy.Controllers
 {
@@ -17,13 +23,15 @@ namespace Fluxy.Controllers
     {
         private readonly IUserProfileService _userProfileService;
         private readonly IUserSettingsService _userSettingsService;
+        private readonly IVideoAttributesService _videoAttributesService;
         private readonly IMapper _mapper;
 
-        public ProfileController(IUserProfileService userProfileService, IUserSettingsService userSettingsService, ILogService logService, IMapper mapper)
+        public ProfileController(IUserProfileService userProfileService, IVideoAttributesService videoAttributesService, IUserSettingsService userSettingsService, ILogService logService, IMapper mapper)
             : base(logService, mapper)
         {
             _userProfileService = userProfileService;
             _userSettingsService = userSettingsService;
+            _videoAttributesService = videoAttributesService;
             _mapper = mapper;
         }
 
@@ -32,7 +40,19 @@ namespace Fluxy.Controllers
             var userId = User.Identity.GetUserId();
             var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == userId);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
+            userProfile.TotalVideo = _videoAttributesService.GetList(i => i.UserId == userId).Count();
             return View(userProfile);
+        }
+
+        public ActionResult ProfileVideos(int? page)
+        {
+            int pageSize = 5;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var userId = User.Identity.GetUserId();
+            var userPostedVideo = _videoAttributesService.GetList(i=>i.UserId==userId);
+            var userPostedVideoVM = _mapper.Map<List<VideoAttributesViewModel>>(userPostedVideo).ToPagedList(pageIndex,pageSize);
+            return PartialView("_ProfileVideo", userPostedVideoVM);
         }
 
         public ActionResult Edit()

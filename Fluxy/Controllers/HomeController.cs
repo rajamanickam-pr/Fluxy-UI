@@ -26,7 +26,7 @@ namespace Fluxy.Controllers
             _bannerDetailsService = bannerDetailsService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
             var recentlyAdded = _videoAttributesService.GetAll().OrderByDescending(i => i.CreatedDate).Take(9);
             var recentlyAddedVM = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded);
@@ -45,6 +45,9 @@ namespace Fluxy.Controllers
 
             var bannerList = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll());
 
+            if (!string.IsNullOrEmpty(message))
+                Warning(message);
+
             HomeViewModel homeViewModel = new HomeViewModel
             {
                 RecentVideos = recentlyAddedVM,
@@ -52,7 +55,7 @@ namespace Fluxy.Controllers
                 General = generalVideosVM,
                 Infotainment = infoVideosVM,
                 Entertainment = entertainmentVideosVM,
-                Banners= bannerList
+                Banners = bannerList
             };
 
             return View(homeViewModel);
