@@ -2,6 +2,7 @@
 using Fluxy.ViewModels.Localization;
 using Fluxy.ViewModels.Mail;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,7 @@ namespace Fluxy.ViewModels.Video
         public string ShortName { get; set; }
         [Required]
         [DataType(DataType.Url)]
+        [RegularExpression(@"^(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?(?=.*v=((\w|-){11}))(?:\S+)?$", ErrorMessage = "Url should be from youtube.")]
         public string Url { get; set; }
         public string Length { get; set; }
         public string Tags { get; set; }
@@ -58,5 +60,10 @@ namespace Fluxy.ViewModels.Video
         public string CreatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
+
+
+        public virtual IEnumerable<CategoryViewModel> Categories { get; set; }
+        public virtual IEnumerable<LanguageViewModel> Languages { get; set; }
+        public virtual IEnumerable<VideoSettingsViewModel> VideoSettingses { get; set; }
     }
 }

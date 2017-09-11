@@ -20,6 +20,8 @@ using Fluxy.Services.Mail;
 using Fluxy.Services.Categories;
 using Fluxy.ViewModels.Categories;
 using Fluxy.ViewModels.Mail;
+using Fluxy.Services.Localization;
+using Fluxy.ViewModels.Localization;
 
 namespace Fluxy.Controllers
 {
@@ -31,11 +33,14 @@ namespace Fluxy.Controllers
         private readonly IVideoAttributesService _videoAttributesService;
         private readonly INewsletterService _newsletterService;
         private readonly ICategoryService _categoryService;
+        private readonly ILanguageService _languageService;
+        private readonly IVideoSettingsService _videoSettingsService;
         private readonly IMapper _mapper;
 
         public ProfileController(IUserProfileService userProfileService, IVideoAttributesService videoAttributesService,
             IUserSettingsService userSettingsService, ILogService logService, IMapper mapper,
-            INewsletterService newsletterService, ICategoryService categoryService)
+            INewsletterService newsletterService, ICategoryService categoryService,
+            ILanguageService languageService, IVideoSettingsService videoSettingsService)
             : base(logService, mapper)
         {
             _userProfileService = userProfileService;
@@ -44,6 +49,8 @@ namespace Fluxy.Controllers
             _newsletterService = newsletterService;
             _categoryService = categoryService;
             _mapper = mapper;
+            _languageService = languageService;
+            _videoSettingsService = videoSettingsService;
         }
 
         public ActionResult Index(string message)
@@ -184,7 +191,7 @@ namespace Fluxy.Controllers
 
             var userId = User.Identity.GetUserId();
             var newsletterValue = _newsletterService.GetSingle(i => i.UserId == userId);
-            if(newsletterValue!=null)
+            if (newsletterValue != null)
             {
                 newsletterValue.Subscription = newletterVM.Subscription;
                 newsletterValue.Active = newletterVM.Active;
@@ -195,6 +202,61 @@ namespace Fluxy.Controllers
                 _newsletterService.Create(newsletter);
             }
             return RedirectToAction("Index", routeValues: new { message = Messages.NewsletterSubscriptionConfirmation });
+        }
+
+        public virtual ActionResult PostVideos()
+        {
+            var categories = _categoryService.GetAll();
+            var videoSettings = _videoSettingsService.GetAll();
+            var language = _languageService.GetAll();
+            var videoAttribute = new VideoAttributesViewModel
+            {
+                Categories = _mapper.Map<IEnumerable<CategoryViewModel>>(categories),
+                VideoSettingses = _mapper.Map<IEnumerable<VideoSettingsViewModel>>(videoSettings),
+                Languages = _mapper.Map<IEnumerable<LanguageViewModel>>(language)
+            };
+            return View(videoAttribute);
+        }
+
+        [HttpPost]
+        public virtual ActionResult PostVideos(VideoAttributesViewModel videoAttributesViewModel)
+        {
+            var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
+            videoAttributes.UserId = User.Identity.GetUserId();
+            if(!string.IsNullOrEmpty(videoAttributes.Id))
+            {
+                videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                _videoAttributesService.Update(videoAttributes);
+            }
+            else
+            {
+                videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                _videoAttributesService.Create(videoAttributes);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public virtual ActionResult DeleteVideo(string videoId)
+        {
+            var video = _videoAttributesService.GetSingle(i => i.Id == videoId);
+            if (video != null)
+            {
+                _videoAttributesService.Delete(video);
+            }
+            return RedirectToAction("Index", routeValues: new { message = Messages.VideoDeleteConfirmation });
+        }
+
+        public byte[] GetYouTubeThumbnail(string videoId)
+        {
+            if (!string.IsNullOrWhiteSpace(videoId))
+            {
+                var url = $"https://img.youtube.com/vi/{videoId}/hqdefault.jpg";
+                WebClient wc = new WebClient();
+                byte[] originalData = wc.DownloadData(url);
+                return originalData;
+            }
+            return null;
         }
     }
 }

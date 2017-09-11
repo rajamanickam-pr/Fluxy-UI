@@ -1,0 +1,176 @@
+﻿@model Fluxy.ViewModels.Video.VideoAttributesViewModel
+
+@{
+    List<SelectListItem> categoyList = new List<SelectListItem>();
+    foreach (var item in Model.Categories)
+    {
+        categoyList.Add(new SelectListItem
+        {
+            Text = item.Name,
+            Value = item.Id
+        });
+    }
+
+    List<SelectListItem> videoSettingsList = new List<SelectListItem>();
+    foreach (var item in Model.VideoSettingses)
+    {
+        videoSettingsList.Add(new SelectListItem
+        {
+            Text = item.Name,
+            Value = item.Id
+        });
+    }
+
+    List<SelectListItem> languageList = new List<SelectListItem>();
+    foreach (var item in Model.Languages)
+    {
+        languageList.Add(new SelectListItem
+        {
+            Text = item.Name,
+            Value = item.Id
+        });
+    }
+}
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.VideoId)
+        <div class="form-horizontal">
+            <h4>Post Video</h4>
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    <small>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ShortName, new { htmlAttributes = new { @class = "form-control" } })
+                    <small>@Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="urlValidator">@Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
+                    <small>@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    <small>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsPublicVideo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsPublicVideo)
+                        <small>@Html.ValidationMessageFor(model => model.IsPublicVideo, "", new { @class = "text-danger" })</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsAdultContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsAdultContent)
+                        <small>@Html.ValidationMessageFor(model => model.IsAdultContent, "", new { @class = "text-danger" })</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsAllowFullScreen, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsAllowFullScreen)
+                        <small>@Html.ValidationMessageFor(model => model.IsAllowFullScreen, "", new { @class = "text-danger" })</small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CategoryId, categoyList, new { htmlAttributes = new { @class = "form-control" } })
+                    <small>@Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LanguageId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.LanguageId, languageList, new { htmlAttributes = new { @class = "form-control" } })
+                    <small>@Html.ValidationMessageFor(model => model.LanguageId, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VideoSettingsId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.VideoSettingsId, videoSettingsList, new { htmlAttributes = new { @class = "form-control" } })
+                    <small>@Html.ValidationMessageFor(model => model.VideoSettingsId, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $('#Url').change(function () {
+        var urlValue = $(this).val();
+        if (urlValue) {
+            if (urlValue.indexOf("youtube") >= 0) {
+                $('#VideoId').val(Getvideoid(urlValue));
+                return true
+            } else {
+                alert('Url should be from youtube.');
+                return false;
+            }
+        }
+    })
+
+    function Getvideoid(videolink) {
+        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        var match = videolink.match(regExp);
+
+        if (match && match[7].length == 11) {
+            return match[7];
+        }
+        regExp = "vimeo\\.com/(?:.*#|.*/videos/)?([0-9]+)";
+        match = videolink.match(regExp);
+        if (match) {
+            var videoid = videolink.split('/')[videolink.split('/').length - 1];
+            return videoid;
+        }
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

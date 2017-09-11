@@ -404,6 +404,7 @@
     <Content Include="Views\VideoCategories\PetsAnimals.cshtml" />
     <Content Include="Views\Profile\_ProfileVideo.cshtml" />
     <Content Include="Views\Profile\Newsletter.cshtml" />
+    <Content Include="Views\Profile\PostVideos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

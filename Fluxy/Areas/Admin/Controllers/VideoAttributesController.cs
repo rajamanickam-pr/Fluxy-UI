@@ -39,16 +39,16 @@ namespace Fluxy.Areas.Admin.Controllers
             {
 
                 var videoSettingsDto = _mapper.Map<VideoAttributesExtend>(videoSettingsViewModel);
+                videoSettingsDto.UserId = User.Identity.GetUserId();
+
                 if (!string.IsNullOrEmpty(videoSettingsDto.Id))
                 {
                     videoSettingsDto.Thumbunail = GetYouTubeThumbnail(videoSettingsViewModel.VideoId);
-                    videoSettingsDto.UserId = User.Identity.GetUserId();
                     _videoAttributesService.Update(videoSettingsDto);
                 }
                 else
                 {
                     videoSettingsDto.Thumbunail = GetYouTubeThumbnail(videoSettingsViewModel.VideoId);
-                    videoSettingsDto.UserId = User.Identity.GetUserId();
                     _videoAttributesService.Create(videoSettingsDto);
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
