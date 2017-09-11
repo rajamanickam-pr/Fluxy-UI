@@ -1,4 +1,6 @@
 ﻿using Fluxy.Data;
+using Fluxy.ViewModels.Categories;
+using Fluxy.ViewModels.Mail;
 using Fluxy.ViewModels.Video;
 using PagedList;
 using System;

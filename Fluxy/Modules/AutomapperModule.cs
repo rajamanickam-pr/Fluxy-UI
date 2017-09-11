@@ -11,6 +11,7 @@ using Fluxy.ViewModels.Banners;
 using Fluxy.ViewModels.Categories;
 using Fluxy.ViewModels.Localization;
 using Fluxy.ViewModels.Logging;
+using Fluxy.ViewModels.Mail;
 using Fluxy.ViewModels.Menu;
 using Fluxy.ViewModels.User;
 using Fluxy.ViewModels.Video;
@@ -44,6 +45,7 @@ namespace Fluxy.Modules
             cfg.CreateMap<UserMangementViewModel, UserProfileExtend>().ReverseMap();
             cfg.CreateMap<UserMangementViewModel, UserSettingsExtend>().ReverseMap();
             cfg.CreateMap<BannerDetailsViewModel, BannerDetails>().ReverseMap();
+            cfg.CreateMap<NewsletterViewModel, NewsletterExtend>().ReverseMap();
         }
     }
 }

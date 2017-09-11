@@ -1,0 +1,76 @@
+﻿@model Fluxy.ViewModels.Mail.NewsletterViewModel
+<div class="container">
+    @using (Html.BeginForm("Newsletter", "Profile", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-horizontal">
+            <h4>Newsletter Subscription</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            <small>Select your favorite channels for getting instant updates.</small>
+            <div class="row newsletter">
+                @foreach (var item in Model.Categories)
+                {
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input id="@item.Id" name="@item.Name" type="checkbox" class="form-check-input">
+                                @item.Name
+                            </label>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" onclick="return GetAllSubscription()" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Cancel", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-link" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+    $(document).ready(function() {
+        var subscription = @Html.Raw(Json.Encode(Model.SubscriptionArray));
+        if (subscription != null) {
+            $('.newsletter input:checkbox').each(function () {
+                var name = $(this).attr('name');
+                var index = subscription.indexOf(name);
+                if (index>=0) {
+                    $(this).attr('checked', true);
+                }
+            });
+        }
+    })
+
+    var selected = [];
+    function GetAllSubscription() {
+        $('.newsletter input:checked').each(function () {
+            selected.push($(this).attr('name'));
+            console.log($(this).attr('name'));
+        });
+
+        $.post('@Url.Action("Newsletter","Profile")', {"selectedCategories":selected})
+            .done(function (data) {
+                if (selected.length==0)
+                {
+                    alert("Please select any of one channel.")
+                } else {
+                    window.location.href = '@Url.Action("Index", "profile")';
+                }
+            })
+            .fail(function(error) {
+                alert(error.responseTest);
+            })
+    }
+</script>

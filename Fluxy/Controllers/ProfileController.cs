@@ -16,6 +16,10 @@ using System;
 using PagedList;
 using System.Linq;
 using Fluxy.Core.Helpers;
+using Fluxy.Services.Mail;
+using Fluxy.Services.Categories;
+using Fluxy.ViewModels.Categories;
+using Fluxy.ViewModels.Mail;
 
 namespace Fluxy.Controllers
 {
@@ -25,14 +29,20 @@ namespace Fluxy.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IUserSettingsService _userSettingsService;
         private readonly IVideoAttributesService _videoAttributesService;
+        private readonly INewsletterService _newsletterService;
+        private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public ProfileController(IUserProfileService userProfileService, IVideoAttributesService videoAttributesService, IUserSettingsService userSettingsService, ILogService logService, IMapper mapper)
+        public ProfileController(IUserProfileService userProfileService, IVideoAttributesService videoAttributesService,
+            IUserSettingsService userSettingsService, ILogService logService, IMapper mapper,
+            INewsletterService newsletterService, ICategoryService categoryService)
             : base(logService, mapper)
         {
             _userProfileService = userProfileService;
             _userSettingsService = userSettingsService;
             _videoAttributesService = videoAttributesService;
+            _newsletterService = newsletterService;
+            _categoryService = categoryService;
             _mapper = mapper;
         }
 
@@ -54,7 +64,7 @@ namespace Fluxy.Controllers
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var userId = User.Identity.GetUserId();
-            var userPostedVideo = _videoAttributesService.GetList(i => i.UserId == userId);
+            var userPostedVideo = _videoAttributesService.GetList(i => i.UserId == userId).OrderByDescending(i => i.CreatedDate);
             var userPostedVideoVM = _mapper.Map<List<VideoAttributesViewModel>>(userPostedVideo).ToPagedList(pageIndex, pageSize);
             return PartialView("_ProfileVideo", userPostedVideoVM);
         }
@@ -129,7 +139,62 @@ namespace Fluxy.Controllers
                 ? _userSettingsService.Update(userSettingsDto)
                 : _userSettingsService.Create(userSettingsDto);
             var userMangementVm = _mapper.Map<UserMangementViewModel>(profileSettings);
-            return View(userMangementVm);
+            return RedirectToAction("Index", routeValues: new { message = Messages.ProfileEditConfirmation });
+        }
+
+        public ActionResult Newsletter(string message)
+        {
+            var userId = User.Identity.GetUserId();
+            var newsletter = _newsletterService.GetSingle(i => i.UserId == userId);
+            var newsletterVM = _mapper.Map<NewsletterViewModel>(newsletter);
+
+            var categories = _categoryService.GetAll();
+            var categoriesVM = _mapper.Map<List<CategoryViewModel>>(categories);
+
+            if (newsletterVM == null)
+            {
+                newsletterVM = new NewsletterViewModel
+                {
+                    Categories = categoriesVM
+                };
+            }
+            else
+            {
+                newsletterVM.Categories = categoriesVM;
+            }
+
+            if (!string.IsNullOrEmpty(message))
+                Warning(message);
+            return View(newsletterVM);
+        }
+
+        [HttpPost]
+        public ActionResult Newsletter(string[] selectedCategories)
+        {
+            if (selectedCategories == null || selectedCategories.Count() <= 0)
+                return RedirectToAction("Newsletter", routeValues: new { message = Messages.NewsletterSubscription });
+            var categories = string.Join(",", selectedCategories);
+            var newletterVM = new NewsletterViewModel
+            {
+                Active = true,
+                Subscription = categories,
+                UserId = User.Identity.GetUserId()
+            };
+            var newsletter = _mapper.Map<NewsletterExtend>(newletterVM);
+
+            var userId = User.Identity.GetUserId();
+            var newsletterValue = _newsletterService.GetSingle(i => i.UserId == userId);
+            if(newsletterValue!=null)
+            {
+                newsletterValue.Subscription = newletterVM.Subscription;
+                newsletterValue.Active = newletterVM.Active;
+                _newsletterService.Update(newsletterValue);
+            }
+            else
+            {
+                _newsletterService.Create(newsletter);
+            }
+            return RedirectToAction("Index", routeValues: new { message = Messages.NewsletterSubscriptionConfirmation });
         }
     }
 }

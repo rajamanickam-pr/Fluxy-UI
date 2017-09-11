@@ -1,11 +1,6 @@
 ﻿@model Fluxy.ViewModels.User.UserMangementViewModel
 
-@{
-    ViewBag.Title = "Edit";
-}
-
 <div class="container">
-
     @using (Html.BeginForm("Privacy", "Profile", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
