@@ -18,14 +18,8 @@
 
             <div class="form-check">
                 <label class="form-check-label">
-                    @Html.CheckBoxFor(model => model.CanAnyoneSendMessage, new { htmlAttributes = new { @class = "form-control" } })
-                    Can Anyone Send Message
-                </label>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    @Html.CheckBoxFor(model => model.CanAnyoneSendVideo, new { htmlAttributes = new { @class = "form-control" } })
-                    Can Anyone Send Video
+                    @Html.CheckBoxFor(model => model.CanISeeEPContent, new { htmlAttributes = new { @class = "form-control" } })
+                    See 18+ Content
                 </label>
             </div>
             <div class="form-check">

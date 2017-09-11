@@ -51,6 +51,10 @@
     <Compile Include="Localization\LanguageService.cs" />
     <Compile Include="Logging\ILogService.cs" />
     <Compile Include="Logging\LogService.cs" />
+    <Compile Include="Mail\ContactUsService.cs" />
+    <Compile Include="Mail\IContactUsService.cs" />
+    <Compile Include="Mail\INewsletterService.cs" />
+    <Compile Include="Mail\NewsletterService.cs" />
     <Compile Include="Menu\MainMenuService.cs" />
     <Compile Include="Menu\IMainMenuService.cs" />
     <Compile Include="Menu\MenuAttributeService.cs" />

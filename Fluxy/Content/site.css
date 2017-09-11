@@ -64,6 +64,9 @@ label, label + * {
     vertical-align: middle;
 }
 
+
+/* VIDEO CARD
+------------------------- */
 .img-circle {
     border-radius: 50%;
     margin-bottom: 15px;
@@ -104,6 +107,7 @@ label, label + * {
 .alertmsg{
     margin-top:20px;
 }
+
 /* NAV
 ------------------------- */
 .navbar-inverse .navbar-nav .nav-link {
@@ -119,7 +123,8 @@ label, label + * {
     background-color: #563d7c;
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
 }
-    /* CUSTOMIZE THE CAROUSEL
+
+/* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
     .carousel {
     margin-bottom: 4rem;
@@ -144,26 +149,6 @@ label, label + * {
         height: 32rem;
     }
 
-
-/* MARKETING CONTENT
--------------------------------------------------- */
-
-/* Center align the text within the three columns below the carousel */
-.marketing .col-lg-4 {
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.marketing h2 {
-    font-weight: normal;
-}
-
-.marketing .col-lg-4 p {
-    margin-right: .75rem;
-    margin-left: .75rem;
-}
-
-
 /* Featurettes
 ------------------------- */
 
@@ -180,57 +165,57 @@ label, label + * {
 
 /* FOOTER
 -------------------------------------------------- */
-#myFooter {
+#FluxyFooter {
     background-color: #373a48;
     color: white;
 }
 
-    #myFooter .footer-copyright {
+    #FluxyFooter .footer-copyright {
         background-color: #383737;
         padding-top: 3px;
         padding-bottom: 3px;
         text-align: center;
     }
 
-        #myFooter .footer-copyright p {
+        #FluxyFooter .footer-copyright p {
             margin: 10px;
             color: #ccc;
         }
 
-    #myFooter ul {
+    #FluxyFooter ul {
         list-style-type: none;
         padding-left: 0;
         line-height: 1.7;
     }
 
-    #myFooter h5 {
+    #FluxyFooter h5 {
         font-size: 18px;
         color: white;
         font-weight: bold;
         margin-top: 30px;
     }
 
-    #myFooter a {
+    #FluxyFooter a {
         color: #d2d1d1;
         text-decoration: none;
     }
 
-        #myFooter a:hover, #myFooter a:focus {
+        #FluxyFooter a:hover, #FluxyFooter a:focus {
             text-decoration: none;
             color: white;
         }
 
-    #myFooter .myCols {
+    #FluxyFooter .myCols {
         text-align: center;
     }
 
-    #myFooter .social-networks {
+    #FluxyFooter .social-networks {
         text-align: center;
         padding-top: 30px;
         padding-bottom: 38px;
     }
 
-        #myFooter .social-networks a {
+        #FluxyFooter .social-networks a {
             font-size: 32px;
             margin-right: 5px;
             margin-left: 5px;
@@ -239,19 +224,19 @@ label, label + * {
             transition: 0.2s;
         }
 
-            #myFooter .social-networks a:hover {
+            #FluxyFooter .social-networks a:hover {
                 text-decoration: none;
             }
 
-    #myFooter .facebook:hover {
+    #FluxyFooter .facebook:hover {
         color: #0077e2;
     }
 
-    #myFooter .google:hover {
+    #FluxyFooter .google:hover {
         color: #0077e2;
     }
 
-    #myFooter .twitter:hover {
+    #FluxyFooter .twitter:hover {
         color: #00aced;
     }
 
@@ -272,11 +257,39 @@ label, label + * {
 .btn-custom {
     margin-bottom: 10px !important;
 }
+
+/* FB 
+-------------------------------------------------- */
+.fb_iframe_widget {
+    display: block;
+}
+
+    .fb_iframe_widget span {
+        margin-top: 10px;
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+    }
+
+#fbcomments, .fb-comments, .fb-comments iframe[style], .fb-comments span {
+    width: 100% !important;
+}
+
+
+/* IMAGES
+-------------------------------------------------- */
+.img-thumbnail-custom{
+    padding:5px;
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
+@media only screen and (min-width: 33.9em) {
+}
 
-@media (min-width: 40em) {
-    /* Bump up size of carousel content */
+@media only screen and (min-width: 47.9em) {
     .carousel-caption p {
         margin-bottom: 1.25rem;
         font-size: 1.25rem;
@@ -292,7 +305,7 @@ label, label + * {
     }
 }
 
-@media (min-width: 62em) {
+@media only screen and (min-width: 61.9em) {
     .featurette-heading {
         margin-top: 7rem;
     }
@@ -329,28 +342,5 @@ label, label + * {
     }
 }
 
-/* FB 
--------------------------------------------------- */
-.fb_iframe_widget {
-    display: block;
-}
-
-    .fb_iframe_widget span {
-        margin-top: 10px;
-        display: block;
-        position: relative;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: justify;
-    }
-
-#fbcomments, .fb-comments, .fb-comments iframe[style], .fb-comments span {
-    width: 100% !important;
-}
-
-
-/* IMAGES
--------------------------------------------------- */
-.img-thumbnail-custom{
-    padding:5px;
+@media only screen and (min-width: 74.9em) {
 }

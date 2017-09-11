@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtentedDTO\NewsletterExtend.cs" />
     <Compile Include="ExtentedDTO\PrivateMessagesExtend.cs" />
     <Compile Include="ExtentedDTO\PrivateVideoExtend.cs" />
     <Compile Include="ExtentedDTO\UserSettingsExtend.cs" />
@@ -77,17 +78,12 @@
     <Compile Include="Mappings\Video\PrivateVideoMap.cs" />
     <Compile Include="Mappings\Video\VideoAttributesMap.cs" />
     <Compile Include="Mappings\Video\VideoSettingsMap.cs" />
-    <Compile Include="Migrations\201709101056426_InitialCreate.cs" />
-    <Compile Include="Migrations\201709101056426_InitialCreate.Designer.cs">
-      <DependentUpon>201709101056426_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201709110643455_Initial.cs" />
+    <Compile Include="Migrations\201709110643455_Initial.Designer.cs">
+      <DependentUpon>201709110643455_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709101056426_InitialCreate.resx">
-      <DependentUpon>201709101056426_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -98,6 +94,11 @@
       <Project>{51BF2DCF-5CF5-4BE5-B6BE-2CB395507D07}</Project>
       <Name>Fluxy.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709110643455_Initial.resx">
+      <DependentUpon>201709110643455_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

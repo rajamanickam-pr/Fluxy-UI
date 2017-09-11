@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fluxy.ViewModels.Mail
 {
@@ -6,9 +7,10 @@ namespace Fluxy.ViewModels.Mail
     {
         [Key]
         public string Id { get; set; }
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        public string Subscription { get; set; }
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual Data.ApplicationUser ApplicationUser { get; set; }
         public bool Active { get; set; }
     }
 }

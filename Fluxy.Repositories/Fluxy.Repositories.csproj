@@ -59,6 +59,10 @@
     <Compile Include="Localization\LanguageRepository.cs" />
     <Compile Include="Logging\ILogRepository.cs" />
     <Compile Include="Logging\LogRepository.cs" />
+    <Compile Include="Mail\ContactUsRepository.cs" />
+    <Compile Include="Mail\IContactUsRepository.cs" />
+    <Compile Include="Mail\INewsletterRepository.cs" />
+    <Compile Include="Mail\NewsletterRepository.cs" />
     <Compile Include="Menu\IMainMenuRepository.cs" />
     <Compile Include="Menu\IMenuAttributeRepository.cs" />
     <Compile Include="Menu\ISubMenuRepository.cs" />

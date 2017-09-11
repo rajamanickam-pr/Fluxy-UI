@@ -5,7 +5,7 @@ using Fluxy.Services.Logging;
 using Fluxy.Services.Users;
 using Fluxy.ViewModels.User;
 using Fluxy.Data.ExtentedDTO;
-using Microsoft.AspNet.Identity;    
+using Microsoft.AspNet.Identity;
 using System.Web;
 using System.IO;
 using System.Net;
@@ -15,6 +15,7 @@ using Fluxy.ViewModels.Video;
 using System;
 using PagedList;
 using System.Linq;
+using Fluxy.Core.Helpers;
 
 namespace Fluxy.Controllers
 {
@@ -35,12 +36,15 @@ namespace Fluxy.Controllers
             _mapper = mapper;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string message)
         {
             var userId = User.Identity.GetUserId();
             var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == userId);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
-            userProfile.TotalVideo = _videoAttributesService.GetList(i => i.UserId == userId).Count();
+            if (userProfile != null)
+                userProfile.TotalVideo = _videoAttributesService.GetList(i => i.UserId == userId).Count();
+            if (!string.IsNullOrEmpty(message))
+                Warning(message);
             return View(userProfile);
         }
 
@@ -50,8 +54,8 @@ namespace Fluxy.Controllers
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var userId = User.Identity.GetUserId();
-            var userPostedVideo = _videoAttributesService.GetList(i=>i.UserId==userId);
-            var userPostedVideoVM = _mapper.Map<List<VideoAttributesViewModel>>(userPostedVideo).ToPagedList(pageIndex,pageSize);
+            var userPostedVideo = _videoAttributesService.GetList(i => i.UserId == userId);
+            var userPostedVideoVM = _mapper.Map<List<VideoAttributesViewModel>>(userPostedVideo).ToPagedList(pageIndex, pageSize);
             return PartialView("_ProfileVideo", userPostedVideoVM);
         }
 
@@ -91,16 +95,16 @@ namespace Fluxy.Controllers
                 var oldPicture = _userProfileService.GetSingle(i => i.Id == userProfileDto.Id).DisplayPicture;
                 if (oldPicture.Length > 0 && userProfileDto.DisplayPicture.Length <= 0)
                 {
-                    userProfileDto.DisplayPicture = oldPicture; 
+                    userProfileDto.DisplayPicture = oldPicture;
                 }
-                profile= _userProfileService.Update(userProfileDto);
+                profile = _userProfileService.Update(userProfileDto);
             }
             else
             {
-                profile= _userProfileService.Create(userProfileDto);
+                profile = _userProfileService.Create(userProfileDto);
             }
             var userProfile = _mapper.Map<UserMangementViewModel>(profile);
-            return View(userProfile);
+            return RedirectToAction("Index", routeValues: new { message = Messages.ProfileEditConfirmation });
         }
 
         public ActionResult Privacy()
@@ -121,8 +125,8 @@ namespace Fluxy.Controllers
         {
             var userSettingsDto = _mapper.Map<UserSettingsExtend>(userMangementViewModel);
             userSettingsDto.UserId = User.Identity.GetUserId();
-            var profileSettings = !string.IsNullOrEmpty(userSettingsDto.Id) 
-                ? _userSettingsService.Update(userSettingsDto) 
+            var profileSettings = !string.IsNullOrEmpty(userSettingsDto.Id)
+                ? _userSettingsService.Update(userSettingsDto)
                 : _userSettingsService.Create(userSettingsDto);
             var userMangementVm = _mapper.Map<UserMangementViewModel>(profileSettings);
             return View(userMangementVm);

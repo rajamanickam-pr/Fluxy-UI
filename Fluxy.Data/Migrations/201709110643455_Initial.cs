@@ -3,7 +3,7 @@ namespace Fluxy.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -227,10 +227,12 @@ namespace Fluxy.Data.Migrations
                         Firstname = c.String(maxLength: 100),
                         Lastname = c.String(maxLength: 100),
                         Gender = c.String(),
+                        Bio = c.String(),
                         Dob = c.DateTime(nullable: false),
                         Age = c.Int(nullable: false),
                         About = c.String(maxLength: 300),
                         Hobbies = c.String(),
+                        IsActive = c.Boolean(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.String(maxLength: 256),
                         UpdatedDate = c.DateTime(nullable: false),
@@ -248,8 +250,7 @@ namespace Fluxy.Data.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        CanAnyoneSendMessage = c.Boolean(nullable: false),
-                        CanAnyoneSendVideo = c.Boolean(nullable: false),
+                        CanISeeEPContent = c.Boolean(nullable: false),
                         IsMyDpPublic = c.Boolean(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.String(maxLength: 256),
@@ -334,14 +335,17 @@ namespace Fluxy.Data.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Email = c.String(nullable: false),
+                        UserId = c.String(maxLength: 128),
+                        Subscription = c.String(),
                         Active = c.Boolean(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.String(maxLength: 256),
                         UpdatedDate = c.DateTime(nullable: false),
                         UpdatedBy = c.String(maxLength: 256),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.Log",
@@ -386,6 +390,7 @@ namespace Fluxy.Data.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Newsletter", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SubMenu", "MainMenuId", "dbo.MainMenu");
             DropForeignKey("dbo.AspNetUsers", "VideoAttributesExtend_Id", "dbo.VideoAttributes");
             DropForeignKey("dbo.AspNetUsers", "UserProfileExtend_Id", "dbo.UserProfile");
@@ -408,6 +413,7 @@ namespace Fluxy.Data.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropIndex("dbo.Newsletter", new[] { "UserId" });
             DropIndex("dbo.SubMenu", new[] { "MainMenuId" });
             DropIndex("dbo.UserSettings", new[] { "UserId" });
             DropIndex("dbo.UserProfile", new[] { "UserSettings_Id" });

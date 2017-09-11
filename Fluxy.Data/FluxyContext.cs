@@ -97,7 +97,6 @@ namespace Fluxy.Data
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

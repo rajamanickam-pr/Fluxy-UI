@@ -1,5 +1,6 @@
 ﻿using Fluxy.ViewModels.Categories;
 using Fluxy.ViewModels.Localization;
+using Fluxy.ViewModels.Mail;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -44,7 +45,7 @@ namespace Fluxy.ViewModels.Video
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual Data.ApplicationUser ApplicationUser { get; set; }
-
+        public virtual NewsletterViewModel NewsletterViewModel { get; set; }
         public string ThumbunailString
         {
             get

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card card-custom">
-                @if (!string.IsNullOrEmpty(Model.DisplayPictureString))
+                @if (!string.IsNullOrEmpty(Model?.DisplayPictureString))
                 {
                     <img src="data:image/png;base64,@Model.DisplayPictureString" data-src="holder.js/140x140" alt='Avatar' class="img-thumbnail-custom m-x-auto img-fluid img-responsive">
                 }
@@ -17,7 +17,17 @@
                     <h4 class="card-title text-center">@User.Identity.Name</h4>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Total Videos : @Model.TotalVideo</small>
+                    @{
+                        if (Model?.TotalVideo>0)
+                        {
+                            <small class="text-muted">Total Videos : @Model.TotalVideo</small>
+                        }
+                        else
+                        {
+                            <small class="text-muted">Total Videos : 0</small>
+                        }
+                    }
+                    
                 </div>
             </div>
             <div class="card card-custom">
@@ -36,7 +46,9 @@
                         }
                         else
                         {
-                            <small>Add about</small>
+                            <p>
+                                <a class="card-text" href="@Url.Action("Edit","Profile")">Add about</a>
+                            </p>
                         }
                     }
                     <hr />
@@ -54,12 +66,25 @@
                         }
                         else
                         {
-                            <small>Add Hobbies</small>
+                            <p>
+                                <a class="card-text" href="@Url.Action("Edit","Profile")">Add Hobbies</a>
+                            </p>
                         }
                     }
                     <hr />
                     <strong>Bio</strong>
-                    <p class="card-text">sdfdsfsdf skanfis adbfuhksadkfuadbsfuhsdbfuadsbfidsbf gdbiudsbfkj</p>
+                    @{
+                        if (!string.IsNullOrEmpty(Model?.Bio))
+                        {
+                            <p class="card-text">@Model.Bio</p>
+                        }
+                        else
+                        {
+                            <p>
+                                <a class="card-text" href="@Url.Action("Edit","Profile")">Add your Hobbies</a>
+                            </p>
+                        }
+                    }
                 </div>
             </div>
         </div>

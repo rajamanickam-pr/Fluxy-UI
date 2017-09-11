@@ -10,5 +10,6 @@ namespace Fluxy.Core.Helpers
     {
         //General Messages
         public const string RegsitraionConfirmation = "You have successfully registered. The account is not activates until you confirms your Email.";
+        public const string ProfileEditConfirmation = "Your settings has been changed.";
     }
 }

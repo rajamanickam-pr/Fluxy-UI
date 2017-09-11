@@ -4,7 +4,7 @@ namespace Fluxy.Core.Models.Mail
 {
     public class Newsletter : AuditableEntity<string>
     {
-        public string Email { get; set; }
+        public string Subscription { get; set; }
         public bool Active { get; set; }
     }
 }

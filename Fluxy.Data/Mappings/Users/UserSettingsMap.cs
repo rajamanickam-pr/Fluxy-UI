@@ -8,8 +8,7 @@ namespace Fluxy.Data.Mappings.Users
         {
             this.ToTable("UserSettings");
             this.HasKey(pm => pm.Id);
-            this.Property(pm => pm.CanAnyoneSendVideo);
-            this.Property(pm => pm.CanAnyoneSendMessage);
+            this.Property(pm => pm.CanISeeEPContent);
             this.HasOptional(pm => pm.ApplicationUser).WithMany().HasForeignKey(b => b.UserId);
         }
     }
