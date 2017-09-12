@@ -232,6 +232,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\BaseController.cs" />
+    <Compile Include="Infrastructure\NoLowercaseQueryStringAttribute.cs" />
+    <Compile Include="Infrastructure\NoTrailingSlashAttribute.cs" />
+    <Compile Include="Infrastructure\RedirectToCanonicalUrlAttribute.cs" />
     <Compile Include="Modules\AutomapperModule.cs" />
     <Compile Include="ViewModels\Banners\BannerDetailsViewModel.cs" />
     <Compile Include="ViewModels\Categories\CategoryViewModel.cs" />

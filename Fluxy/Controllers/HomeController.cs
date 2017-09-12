@@ -18,6 +18,7 @@ using Fluxy.Services.Mail;
 using Fluxy.Core.Models.Mail;
 using System;
 using Fluxy.Core.Helpers;
+using System.Text;
 
 namespace Fluxy.Controllers
 {
@@ -113,6 +114,26 @@ namespace Fluxy.Controllers
                 throw new ArgumentNullException("Model is null or empty");
             _contactUsService.Create(contact);
             return RedirectToAction("Index",routeValues:new { message=Messages.HelpDesk });
+        }
+
+        [Route("robots.txt", Name = "GetRobotsText"), OutputCache(Duration = 86400)]
+        public ContentResult RobotsText()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine("user-agent: *");
+            stringBuilder.AppendLine("disallow: /error/");
+            stringBuilder.AppendLine("allow: /error/foo");
+            stringBuilder.Append("sitemap: ");
+            stringBuilder.AppendLine(this.Url.RouteUrl("GetSitemapXml", null, this.Request.Url.Scheme).TrimEnd('/'));
+
+            return this.Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
+        }
+
+        [Route("sitemap.xml", Name = "GetSitemapXml"), OutputCache(Duration = 86400)]
+        public ContentResult SitemapXml()
+        {
+            return null;
         }
     }
 }
