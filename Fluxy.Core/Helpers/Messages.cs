@@ -14,5 +14,6 @@ namespace Fluxy.Core.Helpers
         public const string NewsletterSubscription = "Please select any of one channel";
         public const string NewsletterSubscriptionConfirmation = "Thanks, You'll get notifications on subscribed channels.";
         public const string VideoDeleteConfirmation = "Video has been deleted.";
+        public const string HelpDesk = "Thanks for contact us. Your quries will resolved soon";
     }
 }

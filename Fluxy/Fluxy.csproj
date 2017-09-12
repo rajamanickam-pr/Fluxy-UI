@@ -405,6 +405,8 @@
     <Content Include="Views\Profile\_ProfileVideo.cshtml" />
     <Content Include="Views\Profile\Newsletter.cshtml" />
     <Content Include="Views\Profile\PostVideos.cshtml" />
+    <Content Include="Views\Home\HelpDesk.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

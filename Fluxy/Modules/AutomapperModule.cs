@@ -4,6 +4,7 @@ using Fluxy.Core.Models.Banners;
 using Fluxy.Core.Models.Categories;
 using Fluxy.Core.Models.Localization;
 using Fluxy.Core.Models.Logging;
+using Fluxy.Core.Models.Mail;
 using Fluxy.Core.Models.Menu;
 using Fluxy.Core.Models.Video;
 using Fluxy.Data.ExtentedDTO;
@@ -46,6 +47,7 @@ namespace Fluxy.Modules
             cfg.CreateMap<UserMangementViewModel, UserSettingsExtend>().ReverseMap();
             cfg.CreateMap<BannerDetailsViewModel, BannerDetails>().ReverseMap();
             cfg.CreateMap<NewsletterViewModel, NewsletterExtend>().ReverseMap();
+            cfg.CreateMap<ContactUsViewModel, ContactUs>().ReverseMap();
         }
     }
 }

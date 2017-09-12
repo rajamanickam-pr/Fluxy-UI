@@ -13,6 +13,11 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using Fluxy.Services.Users;
+using Fluxy.ViewModels.Mail;
+using Fluxy.Services.Mail;
+using Fluxy.Core.Models.Mail;
+using System;
+using Fluxy.Core.Helpers;
 
 namespace Fluxy.Controllers
 {
@@ -22,14 +27,16 @@ namespace Fluxy.Controllers
         private readonly IMapper _mapper;
         private readonly IVideoAttributesService _videoAttributesService;
         private readonly IUserSettingsService _userSettingsService;
+        private readonly IContactUsService _contactUsService;
 
-        public HomeController(IUserSettingsService userSettingsService, ILogService logService, IMapper mapper, IVideoAttributesService videoAttributesService, IBannerDetailsService bannerDetailsService)
+        public HomeController(IContactUsService contactUsService,IUserSettingsService userSettingsService, ILogService logService, IMapper mapper, IVideoAttributesService videoAttributesService, IBannerDetailsService bannerDetailsService)
             : base(logService, mapper)
         {
             _videoAttributesService = videoAttributesService;
             _mapper = mapper;
             _userSettingsService = userSettingsService;
             _bannerDetailsService = bannerDetailsService;
+            _contactUsService = contactUsService;
         }
 
         public ActionResult Index(string message)
@@ -93,6 +100,26 @@ namespace Fluxy.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public virtual ActionResult FAQ()
+        {
+            return View();
+        }
+
+        public virtual ActionResult HelpDesk()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public virtual ActionResult HelpDesk(ContactUsViewModel contactUsViewModel)
+        {
+            var contact = _mapper.Map<ContactUs>(contactUsViewModel);
+            if (contact == null)
+                throw new ArgumentNullException("Model is null or empty");
+            _contactUsService.Create(contact);
+            return RedirectToAction("Index",routeValues:new { message=Messages.HelpDesk });
         }
     }
 }
