@@ -6,7 +6,7 @@
 6.Dashboard Admin
 7.Search
 8.Footer functionalities
-9.Newsletter
+9.Newsletter -- Completed
 10.Contact us
 11.favicon
 12.Soft delete user
@@ -15,3 +15,9 @@
 2.Register Confirmation
 
 1.Live Bug fixing
+
+
+
+Misc Task Completed
+******************
+1.Profile add video 

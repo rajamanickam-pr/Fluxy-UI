@@ -36,7 +36,6 @@ namespace Fluxy.Controllers
         private readonly ILanguageService _languageService;
         private readonly IVideoSettingsService _videoSettingsService;
         private readonly IMapper _mapper;
-
         public ProfileController(IUserProfileService userProfileService, IVideoAttributesService videoAttributesService,
             IUserSettingsService userSettingsService, ILogService logService, IMapper mapper,
             INewsletterService newsletterService, ICategoryService categoryService,
@@ -53,26 +52,67 @@ namespace Fluxy.Controllers
             _videoSettingsService = videoSettingsService;
         }
 
-        public ActionResult Index(string message)
+        private bool IsProfileOwner(string userId)
         {
-            var userId = User.Identity.GetUserId();
-            var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == userId);
+            var currentUserId = User.Identity.GetUserId();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                if (currentUserId != userId)
+                {
+                    return  false;
+                }else
+                {
+                    return true;
+                }
+            }
+            return true;
+        }
+
+        public ActionResult Index(string message, string userId)
+        {
+            var user = string.Empty;
+            var currentUserId = User.Identity.GetUserId();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                user = userId;
+            }
+            else
+            {
+                user = currentUserId;
+            }
+
+            ViewBag.IsProfileOwner = IsProfileOwner(userId);
+            var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == user);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
             if (userProfile != null)
-                userProfile.TotalVideo = _videoAttributesService.GetList(i => i.UserId == userId).Count();
+            {
+                userProfile.TotalVideo = _videoAttributesService.GetList(i => i.UserId == user).Count();
+            }
+
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
+
             return View(userProfile);
         }
 
-        public ActionResult ProfileVideos(int? page)
+        public ActionResult ProfileVideos(int? page,string userId)
         {
+            var user = string.Empty;
+            if (!string.IsNullOrEmpty(userId))
+            {
+                user = userId;
+            }
+            else
+            {
+                user = User.Identity.GetUserId();
+            }
+
             int pageSize = 5;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var userId = User.Identity.GetUserId();
             var userPostedVideo = _videoAttributesService.GetList(i => i.UserId == userId).OrderByDescending(i => i.CreatedDate);
             var userPostedVideoVM = _mapper.Map<List<VideoAttributesViewModel>>(userPostedVideo).ToPagedList(pageIndex, pageSize);
+            ViewBag.IsProfileOwner = IsProfileOwner(userId);
             return PartialView("_ProfileVideo", userPostedVideoVM);
         }
 
@@ -223,7 +263,7 @@ namespace Fluxy.Controllers
         {
             var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
             videoAttributes.UserId = User.Identity.GetUserId();
-            if(!string.IsNullOrEmpty(videoAttributes.Id))
+            if (!string.IsNullOrEmpty(videoAttributes.Id))
             {
                 videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
                 _videoAttributesService.Update(videoAttributes);
@@ -233,7 +273,7 @@ namespace Fluxy.Controllers
                 videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
                 _videoAttributesService.Create(videoAttributes);
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

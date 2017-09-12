@@ -2,18 +2,12 @@
 
 @if (Model != null)
 {
-    var imgSrc = string.Empty;
-    if (Model.Thumbunail != null)
-    {
-        var base64 = Convert.ToBase64String(Model.Thumbunail);
-        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-    }
     <div class="video-card card">
         <p class="text-center" data-toggle="tooltip" data-placement="top" title="Video Title"> @Model.Title</p>
         <a href="@Url.Action("Index", "Video", routeValues: new { videoId = Model.Id })">
-            @if (!string.IsNullOrEmpty(imgSrc))
+            @if (!string.IsNullOrEmpty(Model.ThumbunailString))
             {
-                <img src="@imgSrc" data-src="holder.js/340x240" alt='Thumbnail' class="img-thumbnail img-responsive">
+                <img src="data:image/png;base64,@Model.ThumbunailString" data-src="holder.js/340x240" alt='Thumbnail' class="img-thumbnail img-responsive">
             }
             else
             {
@@ -21,11 +15,11 @@
             }
         </a>
         <div class="row">
-            <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Added by">
+            <a href="@Url.Action("Index","Profile",routeValues:new {userId=Model.UserId })" class="col-md-4" data-toggle="tooltip" data-placement="top" title="Added by">
                 <span>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i> @Model.ApplicationUser.UserName
                 </span>
-            </div>
+            </a>
             <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Views Count">
                 <span><i class="fa fa-eye" aria-hidden="true"></i> @Model.ViewCount</span>
             </div>

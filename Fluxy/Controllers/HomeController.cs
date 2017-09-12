@@ -9,6 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Fluxy.ViewModels.Home;
 using Fluxy.ViewModels.Banners;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Fluxy.Services.Users;
 
 namespace Fluxy.Controllers
 {
@@ -17,30 +21,46 @@ namespace Fluxy.Controllers
         private readonly IBannerDetailsService _bannerDetailsService;
         private readonly IMapper _mapper;
         private readonly IVideoAttributesService _videoAttributesService;
+        private readonly IUserSettingsService _userSettingsService;
 
-        public HomeController(ILogService logService, IMapper mapper, IVideoAttributesService videoAttributesService, IBannerDetailsService bannerDetailsService)
+        public HomeController(IUserSettingsService userSettingsService, ILogService logService, IMapper mapper, IVideoAttributesService videoAttributesService, IBannerDetailsService bannerDetailsService)
             : base(logService, mapper)
         {
             _videoAttributesService = videoAttributesService;
             _mapper = mapper;
+            _userSettingsService = userSettingsService;
             _bannerDetailsService = bannerDetailsService;
         }
 
         public ActionResult Index(string message)
         {
-            var recentlyAdded = _videoAttributesService.GetAll().OrderByDescending(i => i.CreatedDate).Take(9);
+            var isAdultContent = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                var userSettings = _userSettingsService.GetSingle(i => i.UserId == userId);
+                if (userSettings != null)
+                {
+                    isAdultContent = userSettings.CanISeeEPContent;
+                }
+            }
+
+            var recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
             var recentlyAddedVM = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded);
 
-            var popularVideos = _videoAttributesService.GetAll().OrderByDescending(i => i.ViewCount).Take(9);
+            var popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
             var popularVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos);
 
-            var generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs")).OrderByDescending(i => i.ViewCount).Take(9);
+            var generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs")
+             && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
             var generalVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos);
 
-            var infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education")).OrderByDescending(i => i.ViewCount).Take(9);
+            var infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education")
+             && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
             var infoVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(infoVideos);
 
-            var entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Music")).OrderByDescending(i => i.ViewCount).Take(9);
+            var entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Music")
+             && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
             var entertainmentVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos);
 
             var bannerList = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll());

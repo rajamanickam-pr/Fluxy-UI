@@ -1,6 +1,10 @@
 ﻿@model Fluxy.ViewModels.User.UserMangementViewModel
 @using Microsoft.AspNet.Identity;
 
+@{
+    var IsProfileOwner = ViewBag.IsProfileOwner;
+}
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -18,7 +22,7 @@
                 </div>
                 <div class="card-footer">
                     @{
-                        if (Model?.TotalVideo>0)
+                        if (Model?.TotalVideo > 0)
                         {
                             <small class="text-muted">Total Videos : @Model.TotalVideo</small>
                         }
@@ -27,7 +31,7 @@
                             <small class="text-muted">Total Videos : 0</small>
                         }
                     }
-                    
+
                 </div>
             </div>
             <div class="card card-custom">
@@ -89,30 +93,45 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card card-custom">
-                <div class="card-block">
-                    <h4 class="card-title">Hello buddy!</h4>
-                    <p class="card-text">Prmote your video here.</p>
+            @if (IsProfileOwner)
+            {
+                <div class="card card-custom">
+                    <div class="card-block">
+                        <h4 class="card-title">Hello buddy!</h4>
+                        <p class="card-text">Prmote your video here.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("PostVideos","Profile")" class="btn btn-primary float-right">Post Video</a>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a href="@Url.Action("PostVideos","Profile")" class="btn btn-primary float-right">Post Video</a>
+            }
+            else
+            {
+                <div class="card card-custom">
+                    <div class="card-block">
+                        <h4 class="card-title">Hello there!</h4>
+                        <p class="card-text">Thanks for visiting my profile. Hope you have a good day!</p>
+                    </div>
                 </div>
-            </div>
+            }
             <div id="UserPostedVideos">
-                @Html.Action("ProfileVideos", "Profile")
+                @Html.Action("ProfileVideos", "Profile", routeValues: new { userId = Model?.ApplicationUser.Id })
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card card-custom">
-                <div class="card-block">
-                    <h4 class="card-title">Settings</h4>
-                    <a href="@Url.Action("ChangePassword", "Manage")" class="btn btn-link">Change Password</a>
-                    <a href="@Url.Action("Edit", "Profile")" class="btn btn-link">Settings</a>
-                    <a href="@Url.Action("Newsletter", "Profile")" class="btn btn-link">Newsletter</a>
-                    <a href="@Url.Action("Privacy", "Profile")" class="btn btn-link">Privacy</a>
+        @if (IsProfileOwner)
+        {
+            <div class="col-md-3">
+                <div class="card card-custom">
+                    <div class="card-block">
+                        <h4 class="card-title">Settings</h4>
+                        <a href="@Url.Action("ChangePassword", "Manage")" class="btn btn-link">Change Password</a>
+                        <a href="@Url.Action("Edit", "Profile")" class="btn btn-link">Settings</a>
+                        <a href="@Url.Action("Newsletter", "Profile")" class="btn btn-link">Newsletter</a>
+                        <a href="@Url.Action("Privacy", "Profile")" class="btn btn-link">Parental Control</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </div>
 

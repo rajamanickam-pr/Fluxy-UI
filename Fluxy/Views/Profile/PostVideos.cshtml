@@ -44,7 +44,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.Title,htmlAttributes:new { @class = "form-control" })
                     <small>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ShortName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.ShortName, htmlAttributes:new { @class = "form-control" })
                     <small>@Html.ValidationMessageFor(model => model.ShortName, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
@@ -60,7 +60,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.Url,htmlAttributes: new { @class = "form-control" })
                     <small id="urlValidator">@Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.Tags, htmlAttributes: new { @class = "form-control" })
                     <small>@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
@@ -76,66 +76,58 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextAreaFor(model => model.Description, htmlAttributes:new { @class = "form-control" })
                     <small>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.IsPublicVideo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.IsPublicVideo)
-                        <small>@Html.ValidationMessageFor(model => model.IsPublicVideo, "", new { @class = "text-danger" })</small>
-                    </div>
-                </div>
+                <label class="form-check-label">
+                    @Html.CheckBoxFor(model => model.IsPublicVideo)
+                    Public Video
+                </label>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.IsAdultContent, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.IsAdultContent)
-                        <small>@Html.ValidationMessageFor(model => model.IsAdultContent, "", new { @class = "text-danger" })</small>
-                    </div>
-                </div>
+                <label class="form-check-label">
+                    @Html.CheckBoxFor(model => model.IsAdultContent)
+                    Adult Content
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    @Html.CheckBoxFor(model => model.IsAllowFullScreen)
+                    Full Screen
+                </label>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.IsAllowFullScreen, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Category</label>
                 <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.IsAllowFullScreen)
-                        <small>@Html.ValidationMessageFor(model => model.IsAllowFullScreen, "", new { @class = "text-danger" })</small>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.CategoryId, categoyList, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.CategoryId, categoyList, htmlAttributes: new { @class = "form-control" })
                     <small>@Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.LanguageId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Language</label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.LanguageId, languageList, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.LanguageId, languageList, htmlAttributes: new { @class = "form-control" })
                     <small>@Html.ValidationMessageFor(model => model.LanguageId, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.VideoSettingsId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <label class="control-label col-md-2">Video Settings</label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.VideoSettingsId, videoSettingsList, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.VideoSettingsId, videoSettingsList, htmlAttributes: new { @class = "form-control" })
                     <small>@Html.ValidationMessageFor(model => model.VideoSettingsId, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    @Html.ActionLink("Cancel", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-link" })
                 </div>
             </div>
         </div>

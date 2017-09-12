@@ -17,7 +17,8 @@ namespace Fluxy.ViewModels.Video
         public string ShortName { get; set; }
         [Required]
         [DataType(DataType.Url)]
-        [RegularExpression(@"^(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?(?=.*v=((\w|-){11}))(?:\S+)?$", ErrorMessage = "Url should be from youtube.")]
+        [RegularExpression(@"^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\?.+&v=))((?:\w|-){11})(?:&list=(\S+))?$",
+            ErrorMessage = "Url should be from embed youtube.")]
         public string Url { get; set; }
         public string Length { get; set; }
         public string Tags { get; set; }

@@ -39,5 +39,6 @@ namespace Fluxy.ViewModels.User
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public int TotalVideo { get; set; }
+        public bool IsProfileOwner { get; set; }
     }
 }
