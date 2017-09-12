@@ -1,6 +1,8 @@
 ﻿@model Fluxy.ViewModels.User.UserMangementViewModel
 @using Microsoft.AspNet.Identity;
-
+@{
+    ViewBag.Title = "Account Settings";
+}
 <div class="container">
     @using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @id = "profileForm", @enctype = "multipart/form-data" }))
     {
@@ -69,7 +71,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Bio, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-8">
-                    @Html.TextAreaFor(model => model.Bio, htmlAttributes:new { @class = "textarea-editor form-control" })
+                    @Html.TextAreaFor(model => model.Bio, htmlAttributes:new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Bio, "", new { @class = "text-danger" })
                 </div>
             </div>

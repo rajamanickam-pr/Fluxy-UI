@@ -20,8 +20,7 @@ namespace Fluxy
                      "~/Scripts/bootstrap.js",
                      "~/Scripts/holder.min.js",
                      "~/Scripts/pace.min.js",
-                     "~/Scripts/jquery.unobtrusive-ajax.min.js",
-                     "~/Scripts/summernote.min.js"
+                     "~/Scripts/jquery.unobtrusive-ajax.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/adminScript").Include(
@@ -41,8 +40,7 @@ namespace Fluxy
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css",
-                      "~/Content/PagedList.css",
-                    "~/Content/summernote.min.css"
+                      "~/Content/PagedList.css"
                       ));
         }
     }

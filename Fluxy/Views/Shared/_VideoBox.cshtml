@@ -7,7 +7,7 @@
         <a href="@Url.Action("Index", "Video", routeValues: new { videoId = Model.Id })">
             @if (!string.IsNullOrEmpty(Model.ThumbunailString))
             {
-                <img src="data:image/png;base64,@Model.ThumbunailString" data-src="holder.js/340x240" alt='Thumbnail' class="img-thumbnail img-responsive">
+                <img src="data:image/png;base64,@Model.ThumbunailString" data-src="holder.js/340x240" alt='@Model.Title' class="img-thumbnail img-responsive">
             }
             else
             {

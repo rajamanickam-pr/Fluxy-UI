@@ -289,10 +289,6 @@
     <Content Include="Content\pace-theme-flash.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\site.css" />
-    <Content Include="Content\summernote.css" />
-    <Content Include="Content\summernote.min.css">
-      <DependentUpon>summernote.css</DependentUpon>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -359,16 +355,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\summernote.es5.js">
-      <DependentUpon>summernote.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\summernote.es5.min.js">
-      <DependentUpon>summernote.es5.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\summernote.js" />
-    <Content Include="Scripts\summernote.min.js">
-      <DependentUpon>summernote.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\tether.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

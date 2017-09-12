@@ -1,6 +1,8 @@
 ﻿@using PagedList.Mvc
 @model  PagedList.IPagedList<Fluxy.ViewModels.Video.VideoAttributesViewModel>
-
+@{
+    ViewBag.Title = "Auto and Vehicles";
+}
 <div class="container">
     <div class="row">
         @foreach (var item in Model)

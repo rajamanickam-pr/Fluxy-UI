@@ -1,5 +1,9 @@
 ﻿@model Fluxy.ViewModels.Home.HomeViewModel
 
+@{
+    ViewBag.Title= "Home";
+}
+
 @Html.Partial("_MainSlide",Model.Banners)
 <div class="container">
     <div class="alert alert-info" role="alert">

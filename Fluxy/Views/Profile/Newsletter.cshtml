@@ -1,4 +1,7 @@
 ﻿@model Fluxy.ViewModels.Mail.NewsletterViewModel
+@{
+    ViewBag.Title = "Newsletter Subscription";
+}
 <div class="container">
     @using (Html.BeginForm("Newsletter", "Profile", FormMethod.Post))
     {

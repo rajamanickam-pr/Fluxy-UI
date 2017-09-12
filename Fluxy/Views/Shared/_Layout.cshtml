@@ -1,27 +1,34 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
+    <title>@ViewBag.Title - Fluxy Pictures</title>
     <meta charset="utf-8">
+    <meta name="title" content="FluxyPictures - Videos" />
+    <meta name="keywords" content="music videos,videos,educational videos,entertainment videos,infotainment videos,health videos,travel videos,people videos,sports and politics videos">
+    <meta property="bt:keywords" content="music videos,videos,educational videos,entertainment videos,infotainment videos,health videos,travel videos,people videos,sports and politics videos">
+    <meta name="description" content="A free community for sharing youtube videos and content for all aged peoples. We are an entertainment focused" />
+    <meta name="author" content="fluxypictures.com">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="rating" content="kids,adults,aged peoples">
+    <meta name="distribution" content="global" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="keyword" content="">
+   
     <link rel="icon" href="../../favicon.ico">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/vendorcss")
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     @*<div id="fb-root"></div>
-    <script>
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1421789451271353";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>*@
+        <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1421789451271353";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>*@
 
     @Html.Partial("_NavigationBar")
     @Html.Partial("_Alerts")
@@ -29,15 +36,5 @@
     @Html.Partial("_Footer")
 </body>
 </html>
-<script>
-    $(document).ready(function () {
-        $('.textarea-editor').summernote({
-            height: 300, 
-            minHeight: 300, 
-            maxHeight: 600, 
-            focus: true 
-        });
-    });
-</script>
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)

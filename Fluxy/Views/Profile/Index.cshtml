@@ -1,7 +1,7 @@
 ﻿@model Fluxy.ViewModels.User.UserMangementViewModel
 @using Microsoft.AspNet.Identity;
-
 @{
+    ViewBag.Title = "User Profile";
     var IsProfileOwner = ViewBag.IsProfileOwner;
 }
 
@@ -17,9 +17,17 @@
                 {
                     <img src="//placehold.it/150" data-src="holder.js/140x140" class="img-thumbnail-custom m-x-auto img-fluid img-responsive" alt="avatar">
                 }
-                <div class="card-block">
+                @if (Model != null)
+                {
+                    <div class="card-block">
+                        <h4 class="card-title text-center">@Model.ApplicationUser.UserName</h4>
+                    </div>
+                }
+                else
+                {  <div class="card-block">
                     <h4 class="card-title text-center">@User.Identity.Name</h4>
                 </div>
+                }
                 <div class="card-footer">
                     @{
                         if (Model?.TotalVideo > 0)

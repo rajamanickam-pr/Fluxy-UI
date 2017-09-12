@@ -3,11 +3,11 @@
 3.Caching
 4.Dynamic Menu
 5.Dynamic Banner -- Completed
-6.Dashboard Admin
+6.Dashboard Admin --Completed
 7.Search
 8.Footer functionalities
 9.Newsletter -- Completed
-10.Contact us
+10.Contact us --Completed
 11.favicon
 12.Soft delete user
 
