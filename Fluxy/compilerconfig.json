@@ -2,5 +2,9 @@
   {
     "outputFile": "Areas/Admin/Scripts/AttributeScripts.es5.js",
     "inputFile": "Areas/Admin/Scripts/AttributeScripts.js"
+  },
+  {
+    "outputFile": "Scripts/summernote.es5.js",
+    "inputFile": "Scripts/summernote.js"
   }
 ]

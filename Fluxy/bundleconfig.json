@@ -4,5 +4,17 @@
     "inputFiles": [
       "Scripts/bootstrap.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/summernote.min.js",
+    "inputFiles": [
+      "Scripts/summernote.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/summernote.min.css",
+    "inputFiles": [
+      "Content/summernote.css"
+    ]
   }
 ]

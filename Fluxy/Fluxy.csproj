@@ -288,6 +288,10 @@
     <Content Include="Content\pace-theme-flash.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\site.css" />
+    <Content Include="Content\summernote.css" />
+    <Content Include="Content\summernote.min.css">
+      <DependentUpon>summernote.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -324,6 +328,9 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="fonts\summernote.eot" />
+    <Content Include="fonts\summernote.ttf" />
+    <Content Include="fonts\summernote.woff" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\fp-logo.png" />
@@ -351,6 +358,16 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\summernote.es5.js">
+      <DependentUpon>summernote.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\summernote.es5.min.js">
+      <DependentUpon>summernote.es5.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\summernote.js" />
+    <Content Include="Scripts\summernote.min.js">
+      <DependentUpon>summernote.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tether.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

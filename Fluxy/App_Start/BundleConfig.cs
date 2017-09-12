@@ -20,7 +20,8 @@ namespace Fluxy
                      "~/Scripts/bootstrap.js",
                      "~/Scripts/holder.min.js",
                      "~/Scripts/pace.min.js",
-                     "~/Scripts/jquery.unobtrusive-ajax.min.js"
+                     "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                     "~/Scripts/summernote.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/adminScript").Include(
@@ -28,7 +29,7 @@ namespace Fluxy
                        "~/Areas/Admin/Scripts/jquery.dataTables.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/admincss").Include(
-                    "~/Areas/Admin/Content/AdminStyles.css", 
+                    "~/Areas/Admin/Content/AdminStyles.css",
                     "~/Areas/Admin/Content/jquery.dataTables.min.css"
                      ));
 
@@ -40,7 +41,8 @@ namespace Fluxy
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css",
-                      "~/Content/PagedList.css"
+                      "~/Content/PagedList.css",
+                    "~/Content/summernote.min.css"
                       ));
         }
     }

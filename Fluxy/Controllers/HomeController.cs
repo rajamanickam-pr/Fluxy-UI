@@ -53,36 +53,29 @@ namespace Fluxy.Controllers
             }
 
             var recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
-            var recentlyAddedVM = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded);
 
             var popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-            var popularVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos);
 
             var generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs")
              && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-            var generalVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos);
 
             var infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education")
              && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-            var infoVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(infoVideos);
 
             var entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Music")
              && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-            var entertainmentVideosVM = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos);
-
-            var bannerList = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll());
 
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
 
             HomeViewModel homeViewModel = new HomeViewModel
             {
-                RecentVideos = recentlyAddedVM,
-                PopularVideos = popularVideosVM,
-                General = generalVideosVM,
-                Infotainment = infoVideosVM,
-                Entertainment = entertainmentVideosVM,
-                Banners = bannerList
+                RecentVideos = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded),
+                PopularVideos = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos),
+                General = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos),
+                Infotainment = _mapper.Map<List<VideoAttributesViewModel>>(infoVideos),
+                Entertainment = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos),
+                Banners = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll())
             };
 
             return View(homeViewModel);

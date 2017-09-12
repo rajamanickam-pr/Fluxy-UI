@@ -29,5 +29,15 @@
     @Html.Partial("_Footer")
 </body>
 </html>
+<script>
+    $(document).ready(function () {
+        $('.textarea-editor').summernote({
+            height: 300, 
+            minHeight: 300, 
+            maxHeight: 600, 
+            focus: true 
+        });
+    });
+</script>
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
