@@ -18,62 +18,26 @@
         <div class="row d-flex d-md-block flex-nowrap wrapper">
             <div class="col-md-2 float-left col-1 pl-0 pr-0 collapse width show" id="sidebar">
                 <div class="list-group border-0 card text-center text-md-left">
-                    <a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-dashboard"></i> <span class="d-none d-md-inline">Dashboard</span> </a>
-                    <div class="collapse" id="menu1">
-                        <a href="#menu1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 1 </a>
-                        <div class="collapse" id="menu1sub1">
-                            <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 1 a</a>
-                            <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 2 b</a>
-                            <a href="#menu1sub1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 3 c </a>
-                            <div class="collapse" id="menu1sub1sub1">
-                                <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.1</a>
-                                <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.2</a>
-                            </div>
-                            <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 4 d</a>
-                            <a href="#menu1sub1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 5 e </a>
-                            <div class="collapse" id="menu1sub1sub2">
-                                <a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.1</a>
-                                <a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.2</a>
-                            </div>
-                        </div>
-                        <a href="#" class="list-group-item" data-parent="#menu1">Subitem 2</a>
-                        <a href="#" class="list-group-item" data-parent="#menu1">Subitem 3</a>
-                    </div>
-                    <a href="UserManagement" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-film"></i> <span class="d-none d-md-inline">User Management</span></a>
-                    <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-book"></i> <span class="d-none d-md-inline">Configuration</span></a>
+                    <a href="AdminHome" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-dashboard"></i> <span class="d-none d-md-inline">Dashboard</span> </a>
+                    <a href="UserManagement" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-users"></i> <span class="d-none d-md-inline">User Management</span></a>
+                    <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-cogs"></i> <span class="d-none d-md-inline">Configuration</span></a>
                     <div class="collapse" id="menu3">
                         @Html.RouteLink("Attributes", new { action = "Index", controller = "Attribute", area = "Admin" }, new { @class = "list-group-item" })
                         @Html.RouteLink("Menu", new { action = "Index", controller = "Menu", area = "Admin" }, new { @class = "list-group-item" })
                         @Html.RouteLink("Submenu", new { action = "Index", controller = "SubMenu", area = "Admin" }, new { @class = "list-group-item" })
-                        <div class="collapse" id="menu3sub2">
-                            <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 a</a>
-                            <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 b</a>
-                            <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 c</a>
-                        </div>
-                        <a href="#" class="list-group-item" data-parent="#menu3">3.3</a>
+                        @Html.RouteLink("Banner", new { action = "Index", controller = "Banner", area = "Admin" }, new { @class = "list-group-item" })
                     </div>
-                    <a href="#VideoMangementMenu" class="list-group-item d-inline-block collapsed" data-toggle="collapse" aria-expanded="false" sdata-parent="#sidebar"><i class="fa fa-heart"></i> <span class="d-none d-md-inline">Video Management</span></a>
+                    <a href="#VideoMangementMenu" class="list-group-item d-inline-block collapsed" data-toggle="collapse" aria-expanded="false" sdata-parent="#sidebar"><i class="fa fa-file-video-o"></i> <span class="d-none d-md-inline">Video Management</span></a>
                     <div class="collapse" id="VideoMangementMenu">
                         @Html.RouteLink("Language", new { action = "Index", controller = "Language", area = "Admin" }, new { @class = "list-group-item" })
-                        <a href="#VideoMangementSub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Category Settings</a>
-                        <div class="collapse" id="VideoMangementSub1">
-                            @Html.RouteLink("Category", new { action = "Index", controller = "Category", area = "Admin" }, new { @class = "list-group-item" })
-                            @Html.RouteLink("SubCategory", new { action = "Index", controller = "SubCategory", area = "Admin" }, new { @class = "list-group-item" })
-                        </div>
+                        @Html.RouteLink("Category", new { action = "Index", controller = "Category", area = "Admin" }, new { @class = "list-group-item" })
                         <a href="#VideoMangementSub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Video</a>
                         <div class="collapse" id="VideoMangementSub2">
                             @Html.RouteLink("Video Settings", new { action = "Index", controller = "VideoSettings", area = "Admin" }, new { @class = "list-group-item" })
                             @Html.RouteLink("Video Attributes", new { action = "Index", controller = "VideoAttributes", area = "Admin" }, new { @class = "list-group-item" })
                         </div>
                     </div>
-                    <a href="Log" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-list"></i> <span class="d-none d-md-inline">Error Details</span></a>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-clock-o"></i> <span class="d-none d-md-inline">Link</span></a>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-th"></i> <span class="d-none d-md-inline">Link</span></a>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-gear"></i> <span class="d-none d-md-inline">Link</span></a>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-calendar"></i> <span class="d-none d-md-inline">Link</span></a>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-envelope"></i> <span class="d-none d-md-inline">Link</span></a>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-bar-chart-o"></i> <span class="d-none d-md-inline">Link</span></a>
-                    <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+                    <a href="Log" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-exclamation-triangle"></i> <span class="d-none d-md-inline">Error Details</span></a>
                 </div>
             </div>
             <main class="col-md-10 float-left col px-5 pl-md-2 pt-2 main">

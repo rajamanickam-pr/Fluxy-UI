@@ -188,6 +188,18 @@ label, label + * {
                 #sidebar .list-group > .list-group-item[aria-expanded="false"]::after {
                     display: none;
                 }
+
+    .small-box {
+        text-align: center;
+    }
+
+        .small-box .icon {
+            display: none;
+        }
+
+        .small-box p {
+            font-size: 12px;
+        }
 }
 
 .collapse.show {

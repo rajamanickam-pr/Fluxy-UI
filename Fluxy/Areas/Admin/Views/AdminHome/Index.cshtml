@@ -1,7 +1,161 @@
-﻿<div class="container">
-    <div class="row">
+﻿@model Fluxy.Areas.Admin.Models.AdminViewModel
+
+<div class="container">
+    <header>
         <div class="page-header">
-            <h1>Index</h1>
+            <h2>Dashboard</h2>
         </div>
-    </div>
+    </header>
+    <content>
+        <div class="row">
+            <div class="col-md-3 col-lg-3 col-xs-6">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>@Model.TotalRegisteredUsers</h3>
+                        <p>Total Users</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-6">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>@Model.PublicVideosCount</h3>
+                        <p>Total public Videos</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-file-video-o"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-6">
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>@Model.AdultVideosCount</h3>
+                        <p>Total Adult Videos</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-video-camera"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-6">
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>@Model.PrivateVideosCount</h3>
+                        <p>Total Private Videos</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-th-list"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </content>
 </div>
+<style>
+    .small-box {
+        border-radius: 2px;
+        position: relative;
+        display: block;
+        margin-bottom: 20px;
+        color: white;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+
+        .small-box > .inner {
+            padding: 10px;
+        }
+
+        .small-box > .small-box-footer {
+            position: relative;
+            text-align: center;
+            padding: 3px 0;
+            color: #fff;
+            color: rgba(255, 255, 255, 0.8);
+            display: block;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+            .small-box > .small-box-footer:hover {
+                color: #fff;
+                background: rgba(0, 0, 0, 0.15);
+            }
+
+        .small-box h3 {
+            font-size: 38px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            white-space: nowrap;
+            padding: 0;
+        }
+
+        .small-box p {
+            font-size: 15px;
+        }
+
+            .small-box p > small {
+                display: block;
+                color: #f9f9f9;
+                font-size: 13px;
+                margin-top: 5px;
+            }
+
+        .small-box h3,
+        .small-box p {
+            z-index: 5;
+        }
+
+        .small-box .icon {
+            -webkit-transition: all 0.3s linear;
+            -o-transition: all 0.3s linear;
+            transition: all 0.3s linear;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            z-index: 0;
+            font-size: 90px;
+            color: rgba(0, 0, 0, 0.15);
+        }
+
+        .small-box:hover {
+            text-decoration: none;
+            color: #f9f9f9;
+        }
+
+            .small-box:hover .icon {
+                font-size: 95px;
+            }
+
+    .bg-aqua {
+        background-color: #00c0ef !important;
+    }
+
+    .bg-green {
+        background-color: #00a65a !important;
+    }
+
+    .bg-yellow {
+        background-color: #f39c12 !important;
+    }
+
+    .bg-red {
+        background-color: #dd4b39 !important;
+    }
+</style>

@@ -220,6 +220,7 @@
     <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\VideoAttributesController.cs" />
     <Compile Include="Areas\Admin\Controllers\VideoSettingsController.cs" />
+    <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -426,7 +427,6 @@
     <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Scripts\Custom\" />
   </ItemGroup>
   <ItemGroup>
