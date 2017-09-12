@@ -9,6 +9,9 @@ using Fluxy.ViewModels.User;
 using Fluxy.Infrastructure;
 using AutoMapper;
 using Fluxy.Services.Logging;
+using Fluxy.Core.Helpers;
+using System.Web.Hosting;
+using System.IO;
 
 namespace Fluxy.Controllers
 {
@@ -57,17 +60,9 @@ namespace Fluxy.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(string message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
-
+            ViewBag.StatusMessage = message;
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
@@ -86,7 +81,7 @@ namespace Fluxy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
-            ManageMessageId? message;
+            string message=string.Empty;
             var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
@@ -95,11 +90,11 @@ namespace Fluxy.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                message = ManageMessageId.RemoveLoginSuccess;
+                message = Messages.RemoveLoginSuccess;
             }
             else
             {
-                message = ManageMessageId.Error;
+                message = Messages.Error;
             }
             return RedirectToAction("ManageLogins", new { Message = message });
         }
@@ -192,7 +187,7 @@ namespace Fluxy.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
+                return RedirectToAction("Index", new { Message = Messages.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "Failed to verify phone");
@@ -208,14 +203,14 @@ namespace Fluxy.Controllers
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
             if (!result.Succeeded)
             {
-                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+                return RedirectToAction("Index", new { Message = Messages.Error });
             }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
+            return RedirectToAction("Index", new { Message = Messages.RemovePhoneSuccess });
         }
 
         //
@@ -250,7 +245,7 @@ namespace Fluxy.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index","Profile", new { Message = Messages.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);
@@ -276,11 +271,28 @@ namespace Fluxy.Controllers
                 if (result.Succeeded)
                 {
                     var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    var path = HostingEnvironment.MapPath(Url.Content("~/App_Data/Templates/AccountConfirmationMailTemplate.txt"));
+                    using (var sr = new StreamReader(path))
+                    {
+                        var body = sr.ReadToEnd();
+                        try
+                        {
+                            string messageBody = string.Format(body, user.Email, callbackUrl, callbackUrl);
+                            await UserManager.SendEmailAsync(user.Id, "Confirm your account", messageBody);
+                        }
+                        catch (System.Exception ex)
+                        {
+                            throw ex;
+                        }
+                    }
+
                     if (user != null)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction("Index", "Profile", new { Message = Messages.ChangePasswordSuccess });
                 }
                 AddErrors(result);
             }
@@ -291,12 +303,9 @@ namespace Fluxy.Controllers
 
         //
         // GET: /Manage/ManageLogins
-        public async Task<ActionResult> ManageLogins(ManageMessageId? message)
+        public async Task<ActionResult> ManageLogins(string message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : "";
+            ViewBag.StatusMessage =message;
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)
             {
@@ -329,10 +338,10 @@ namespace Fluxy.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null)
             {
-                return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+                return RedirectToAction("ManageLogins", new { Message = Messages.Error });
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = Messages.Error });
         }
 
         protected override void Dispose(bool disposing)
@@ -386,18 +395,6 @@ namespace Fluxy.Controllers
             }
             return false;
         }
-
-        public enum ManageMessageId
-        {
-            AddPhoneSuccess,
-            ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
-            Error
-        }
-
         #endregion
     }
 }

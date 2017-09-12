@@ -15,5 +15,13 @@ namespace Fluxy.Core.Helpers
         public const string NewsletterSubscriptionConfirmation = "Thanks, You'll get notifications on subscribed channels.";
         public const string VideoDeleteConfirmation = "Video has been deleted.";
         public const string HelpDesk = "Thanks for contact us. Your quries will resolved soon";
+
+        public const string ChangePasswordSuccess = "Your password has been changed.";
+        public const string SetPasswordSuccess = "Your password has been set.";
+        public const string SetTwoFactorSuccess = "Your two-factor authentication provider has been set.";
+        public const string Error = "An error has occurred.";
+        public const string AddPhoneSuccess = "Your phone number was added.";
+        public const string RemovePhoneSuccess = "Your phone number was removed.";
+        public const string RemoveLoginSuccess = "The external login was removed.";
     }
 }
