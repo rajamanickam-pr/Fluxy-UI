@@ -308,6 +308,10 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom\ProfileIndex.css" />
+    <Content Include="Content\Custom\ProfileIndex.min.css">
+      <DependentUpon>ProfileIndex.css</DependentUpon>
+    </Content>
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\pace-theme-flash.css" />
     <Content Include="Content\PagedList.css" />
@@ -362,6 +366,22 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js">
       <DependentUpon>bootstrap.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Custom\Alert.js" />
+    <Content Include="Scripts\Custom\Alert.min.js">
+      <DependentUpon>Alert.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Custom\Login.js" />
+    <Content Include="Scripts\Custom\Login.min.js">
+      <DependentUpon>Login.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Custom\ProfileEdit.js" />
+    <Content Include="Scripts\Custom\ProfileEdit.min.js">
+      <DependentUpon>ProfileEdit.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Custom\ProfileVideos.js" />
+    <Content Include="Scripts\Custom\ProfileVideos.min.js">
+      <DependentUpon>ProfileVideos.js</DependentUpon>
     </Content>
     <Content Include="Scripts\holder.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -438,9 +458,7 @@
     <Content Include="Views\Home\HelpDesk.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Custom\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />

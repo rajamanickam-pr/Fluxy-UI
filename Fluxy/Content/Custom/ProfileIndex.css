@@ -1,0 +1,25 @@
+﻿.label-custom {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.label-custom-hobbies {
+    background-color: #f39c12;
+}
+
+.label-custom-about {
+    background-color: #00a65a;
+}
+
+.card-custom {
+    border-top: 3px solid #563d7c;
+    margin-top: 10px;
+}

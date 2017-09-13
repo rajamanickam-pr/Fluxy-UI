@@ -4,5 +4,41 @@
     "inputFiles": [
       "Scripts/bootstrap.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/Custom/Alert.min.js",
+    "inputFiles": [
+      "Scripts/Custom/Alert.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Custom/ProfileVideos.min.js",
+    "inputFiles": [
+      "Scripts/Custom/ProfileVideos.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Custom/ProfileEdit.min.js",
+    "inputFiles": [
+      "Scripts/Custom/ProfileEdit.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/Custom/ProfileIndex.min.css",
+    "inputFiles": [
+      "Content/Custom/ProfileIndex.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Custom/Newsletter.min.js",
+    "inputFiles": [
+      "Scripts/Custom/Newsletter.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Custom/Login.min.js",
+    "inputFiles": [
+      "Scripts/Custom/Login.js"
+    ]
   }
 ]

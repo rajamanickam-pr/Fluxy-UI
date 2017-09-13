@@ -25,7 +25,7 @@ namespace Fluxy.ViewModels.Video
         [Required]
         public string Description { get; set; }
         public string VideoId { get; set; }
-        
+
         public byte[] Thumbunail { get; set; }
 
         public bool IsPublicVideo { get; set; }
@@ -53,7 +53,14 @@ namespace Fluxy.ViewModels.Video
         {
             get
             {
-                return Convert.ToBase64String(this.Thumbunail);
+                if (Thumbunail?.Length > 0)
+                {
+                    return Convert.ToBase64String(this.Thumbunail);
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 

@@ -1,6 +1,10 @@
 ﻿[
   {
-    "inputFile": "Areas/Admin/Scripts/AttributeScripts.js",
-    "outputFile": "Areas/Admin/Scripts/AttributeScripts.es5.js"
+    "outputFile": "Areas/Admin/Scripts/AttributeScripts.es5.js",
+    "inputFile": "Areas/Admin/Scripts/AttributeScripts.js"
+  },
+  {
+    "outputFile": "Scripts/Custom/Newsletter.es5.js",
+    "inputFile": "Scripts/Custom/Newsletter.js"
   }
 ]
