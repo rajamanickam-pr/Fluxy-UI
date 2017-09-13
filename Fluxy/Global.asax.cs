@@ -29,6 +29,7 @@ namespace Fluxy
             builder.RegisterModule(new AutomapperModule());
             builder.RegisterModule(new ServiceModule());
             builder.RegisterModule(new EFModule());
+            builder.RegisterModule<AutofacWebTypesModule>();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

@@ -22,6 +22,14 @@ using System.Threading.Tasks;
 using System.Threading;
 using Boilerplate.Web.Mvc;
 using Boilerplate.Web.Mvc.Filters;
+using System.Diagnostics;
+using Fluxy.Services.Manifest;
+using Fluxy.Services.Robot;
+using System.Net;
+using Fluxy.Services.Sitemap;
+using Fluxy.Services.OpenSearch;
+using Fluxy.Services.BrowserConfig;
+using Fluxy.Services.Feed;
 
 namespace Fluxy.Controllers
 {
@@ -32,8 +40,25 @@ namespace Fluxy.Controllers
         private readonly IVideoAttributesService _videoAttributesService;
         private readonly IUserSettingsService _userSettingsService;
         private readonly IContactUsService _contactUsService;
+        private readonly IManifestService _manifestService;
+        private readonly IRobotsService _robotsService;
+        private readonly ISitemapService _sitemapService;
+        private readonly IOpenSearchService _openSearchService;
+        private readonly IBrowserConfigService _browserConfigService;
+        private readonly IFeedService _feedService;
 
-        public HomeController(IContactUsService contactUsService,IUserSettingsService userSettingsService, ILogService logService, IMapper mapper, IVideoAttributesService videoAttributesService, IBannerDetailsService bannerDetailsService)
+
+        public HomeController(IRobotsService robotsService,
+            IManifestService manifestService,
+            IContactUsService contactUsService,
+            IUserSettingsService userSettingsService, 
+            ILogService logService, IMapper mapper, 
+            IVideoAttributesService videoAttributesService, 
+            IBannerDetailsService bannerDetailsService,
+            ISitemapService sitemapService,
+            IOpenSearchService openSearchService,
+            IBrowserConfigService browserConfigService,
+            IFeedService feedService)
             : base(logService, mapper)
         {
             _videoAttributesService = videoAttributesService;
@@ -41,6 +66,12 @@ namespace Fluxy.Controllers
             _userSettingsService = userSettingsService;
             _bannerDetailsService = bannerDetailsService;
             _contactUsService = contactUsService;
+            _manifestService = manifestService;
+            _robotsService = robotsService;
+            _sitemapService = sitemapService;
+            _openSearchService = openSearchService;
+            _browserConfigService = browserConfigService;
+            _feedService = feedService;
         }
 
         [Route("", Name = HomeControllerRoute.GetIndex)]
@@ -124,26 +155,92 @@ namespace Fluxy.Controllers
             return RedirectToAction("Index",routeValues:new { message=Messages.HelpDesk });
         }
 
+        [Route("search", Name = HomeControllerRoute.GetSearch)]
+        public ActionResult Search(string query)
+        {
+            // You can implement a proper search function here and add a Search.cshtml page.
+            // return this.View(HomeControllerAction.Search);
+
+            // Or you could use Google Custom Search (https://cse.google.co.uk/cse) to index your site and display your 
+            // search results in your own page.
+
+            // For simplicity we are just assuming your site is indexed on Google and redirecting to it.
+            return this.Redirect(string.Format(
+                "https://www.google.co.uk/?q=site:{0} {1}",
+                this.Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex),
+                query));
+        }
+
+        [OutputCache(CacheProfile = CacheProfileName.Feed)]
+        [Route("feed", Name = HomeControllerRoute.GetFeed)]
+        public async Task<ActionResult> Feed()
+        {
+            // A CancellationToken signifying if the request is cancelled. See
+            // http://www.davepaquette.com/archive/2015/07/19/cancelling-long-running-queries-in-asp-net-mvc-and-web-api.aspx
+            CancellationToken cancellationToken = this.Response.ClientDisconnectedToken;
+            return new AtomActionResult(await this._feedService.GetFeed(cancellationToken));
+        }
+
+        [NoTrailingSlash]
+        [OutputCache(CacheProfile = CacheProfileName.BrowserConfigXml)]
+        [Route("browserconfig.xml", Name = HomeControllerRoute.GetBrowserConfigXml)]
+        public ContentResult BrowserConfigXml()
+        {
+            Trace.WriteLine(string.Format(
+                "browserconfig.xml requested. User Agent:<{0}>.",
+                this.Request.Headers.Get("User-Agent")));
+            string content = this._browserConfigService.GetBrowserConfigXml();
+            return this.Content(content, ContentType.Xml, Encoding.UTF8);
+        }
+
+        [NoTrailingSlash]
+        [OutputCache(CacheProfile = CacheProfileName.ManifestJson)]
+        [Route("manifest.json", Name = HomeControllerRoute.GetManifestJson)]
+        public ContentResult ManifestJson()
+        {
+            Trace.WriteLine(string.Format(
+                "manifest.jsonrequested. User Agent:<{0}>.",
+                this.Request.Headers.Get("User-Agent")));
+            string content = this._manifestService.GetManifestJson();
+            return this.Content(content, ContentType.Json, Encoding.UTF8);
+        }
+
+        [NoTrailingSlash]
+        [OutputCache(CacheProfile = CacheProfileName.OpenSearchXml)]
+        [Route("opensearch.xml", Name = HomeControllerRoute.GetOpenSearchXml)]
+        public ContentResult OpenSearchXml()
+        {
+            Trace.WriteLine(string.Format(
+                "opensearch.xml requested. User Agent:<{0}>.",
+                this.Request.Headers.Get("User-Agent")));
+            string content = this._openSearchService.GetOpenSearchXml();
+            return this.Content(content, ContentType.Xml, Encoding.UTF8);
+        }
+
         [NoTrailingSlash]
         [OutputCache(CacheProfile = CacheProfileName.RobotsText)]
         [Route("robots.txt", Name = HomeControllerRoute.GetRobotsText)]
         public ContentResult RobotsText()
         {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            stringBuilder.AppendLine("user-agent: *");
-            stringBuilder.AppendLine("disallow: /error/");
-            stringBuilder.AppendLine("allow: /error/foo");
-            stringBuilder.Append("sitemap: ");
-            stringBuilder.AppendLine(this.Url.RouteUrl("GetSitemapXml", null, this.Request.Url.Scheme).TrimEnd('/'));
-
-            return this.Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
+            Trace.WriteLine(string.Format(
+               "robots.txt requested. User Agent:<{0}>.",
+               this.Request.Headers.Get("User-Agent")));
+            string content = this._robotsService.GetRobotsText();
+            return this.Content(content, ContentType.Text, Encoding.UTF8);
         }
 
-        [Route("sitemap.xml", Name = "GetSitemapXml"), OutputCache(Duration = 86400)]
-        public ContentResult SitemapXml()
+        [NoTrailingSlash]
+        [Route("sitemap.xml", Name = HomeControllerRoute.GetSitemapXml), OutputCache(Duration = 86400)]
+        public ActionResult SitemapXml(int? index = null)
         {
-            return null;
+            string content = this._sitemapService.GetSitemapXml(index);
+
+            if (content == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Sitemap index is out of range.");
+            }
+
+            return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }
     }
 }
