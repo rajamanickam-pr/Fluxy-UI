@@ -13,7 +13,7 @@ using AutoMapper;
 using Fluxy.Services.Logging;
 using System.IO;
 using System.Web.Hosting;
-using Fluxy.Core.Helpers;
+using Fluxy.Core.Constants;
 
 namespace Fluxy.Controllers
 {

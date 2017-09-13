@@ -3,6 +3,7 @@ using AutoMapper;
 using Fluxy.Infrastructure;
 using Fluxy.Services.Logging;
 using Fluxy.ViewModels.Logging;
+using System;
 
 namespace Fluxy.Controllers
 {
@@ -21,6 +22,8 @@ namespace Fluxy.Controllers
         // GET: ErrorHandler
         public ActionResult Index(string exceptionId)
         {
+            if (string.IsNullOrEmpty(exceptionId))
+                throw new ArgumentNullException("exceptionId is null or empty");
             var log = _logService.GetSingle(i => i.Id == exceptionId);
             var logViewModel = _mapper.Map<LogViewModel>(log);
             return View(logViewModel);

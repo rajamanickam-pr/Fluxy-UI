@@ -7,7 +7,6 @@ using Fluxy.Infrastructure;
 using Fluxy.Services.Banners;
 using Fluxy.Services.Logging;
 using Fluxy.ViewModels.Banners;
-using Fluxy.ViewModels.Menu;
 using System.Web;
 using System;
 

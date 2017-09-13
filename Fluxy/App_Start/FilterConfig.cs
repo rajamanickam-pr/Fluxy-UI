@@ -1,11 +1,9 @@
-﻿using Fluxy.Infrastructure;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
-using System;
 using Boilerplate.Web.Mvc.Filters;
 using NWebsec.Mvc.HttpHeaders;
 using NWebsec.Mvc.HttpHeaders.Csp;
-using Fluxy.Core.Helpers;
+using Fluxy.Core.Constants;
 
 namespace Fluxy
 {

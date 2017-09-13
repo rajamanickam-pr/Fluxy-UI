@@ -3,6 +3,7 @@ using Owin;
 using Microsoft.AspNet.Identity;
 using Fluxy.Data;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Mvc;
 
 [assembly: OwinStartupAttribute(typeof(Fluxy.Startup))]
 namespace Fluxy
@@ -11,11 +12,12 @@ namespace Fluxy
     {
         public void Configuration(IAppBuilder app)
         {
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             ConfigureAuth(app);
-            createRolesandUsers();
+            CreateRolesandUsers();
         }
 
-        private void createRolesandUsers()
+        private void CreateRolesandUsers()
         {
             FluxyContext context = new FluxyContext();
 

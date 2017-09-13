@@ -1,10 +1,5 @@
 ﻿using Fluxy.Data;
-using Fluxy.ViewModels.Categories;
-using Fluxy.ViewModels.Mail;
-using Fluxy.ViewModels.Video;
-using PagedList;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Fluxy.ViewModels.User

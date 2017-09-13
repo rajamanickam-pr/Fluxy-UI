@@ -9,9 +9,9 @@ using Fluxy.ViewModels.User;
 using Fluxy.Infrastructure;
 using AutoMapper;
 using Fluxy.Services.Logging;
-using Fluxy.Core.Helpers;
 using System.Web.Hosting;
 using System.IO;
+using Fluxy.Core.Constants;
 
 namespace Fluxy.Controllers
 {

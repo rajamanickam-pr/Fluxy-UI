@@ -15,13 +15,13 @@ using Fluxy.ViewModels.Video;
 using System;
 using PagedList;
 using System.Linq;
-using Fluxy.Core.Helpers;
 using Fluxy.Services.Mail;
 using Fluxy.Services.Categories;
 using Fluxy.ViewModels.Categories;
 using Fluxy.ViewModels.Mail;
 using Fluxy.Services.Localization;
 using Fluxy.ViewModels.Localization;
+using Fluxy.Core.Constants;
 
 namespace Fluxy.Controllers
 {

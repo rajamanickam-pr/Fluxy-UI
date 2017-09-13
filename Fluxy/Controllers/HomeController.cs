@@ -9,16 +9,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Fluxy.ViewModels.Home;
 using Fluxy.ViewModels.Banners;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using Fluxy.Services.Users;
 using Fluxy.ViewModels.Mail;
 using Fluxy.Services.Mail;
 using Fluxy.Core.Models.Mail;
 using System;
-using Fluxy.Core.Helpers;
 using System.Text;
+using Fluxy.Core.Constants;
+using Fluxy.Core.Constants.HomeController;
+using System.Threading.Tasks;
+using System.Threading;
+using Boilerplate.Web.Mvc;
+using Boilerplate.Web.Mvc.Filters;
 
 namespace Fluxy.Controllers
 {
@@ -40,6 +43,7 @@ namespace Fluxy.Controllers
             _contactUsService = contactUsService;
         }
 
+        [Route("", Name = HomeControllerRoute.GetIndex)]
         public ActionResult Index(string message)
         {
             var isAdultContent = false;
@@ -79,31 +83,35 @@ namespace Fluxy.Controllers
                 Banners = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll())
             };
 
-            return View(homeViewModel);
+            return View(HomeControllerAction.Index,homeViewModel);
         }
 
+        [Route("about", Name = HomeControllerRoute.GetAbout)]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View(HomeControllerAction.About);
         }
 
+        [Route("contact", Name = HomeControllerRoute.GetContact)]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View(HomeControllerAction.Contact);
         }
 
+        [Route("faq", Name = HomeControllerRoute.GetFAQ)]
         public virtual ActionResult FAQ()
         {
-            return View();
+            return View(HomeControllerAction.FAQ);
         }
 
+        [Route("helpdesk", Name = HomeControllerRoute.GetHelpDesk)]
         public virtual ActionResult HelpDesk()
         {
-            return View();
+            return View(HomeControllerAction.HelpDesk);
         }
 
         [HttpPost]
@@ -116,7 +124,9 @@ namespace Fluxy.Controllers
             return RedirectToAction("Index",routeValues:new { message=Messages.HelpDesk });
         }
 
-        [Route("robots.txt", Name = "GetRobotsText"), OutputCache(Duration = 86400)]
+        [NoTrailingSlash]
+        [OutputCache(CacheProfile = CacheProfileName.RobotsText)]
+        [Route("robots.txt", Name = HomeControllerRoute.GetRobotsText)]
         public ContentResult RobotsText()
         {
             StringBuilder stringBuilder = new StringBuilder();
