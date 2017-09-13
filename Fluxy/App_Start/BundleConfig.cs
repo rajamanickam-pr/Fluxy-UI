@@ -1,16 +1,26 @@
-﻿using System.Web.Optimization;
+﻿using Fluxy.Core.Constants;
+using System;
+using System.Web.Optimization;
 
 namespace Fluxy
 {
-    public class BundleConfig
+    public static class BundleConfig
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.1.1.min.js"));
+            bundles.UseCdn = true;
+            AddCss(bundles);
+            AddJavaScript(bundles);
+        }
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+        private static void AddJavaScript(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                     "~/Scripts/jquery-3.1.1.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval",
+                ContentDeliveryNetwork.Microsoft.JQueryValidateUrl).Include(
                         "~/Scripts/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -26,17 +36,24 @@ namespace Fluxy
             bundles.Add(new ScriptBundle("~/bundles/adminScript").Include(
                        "~/Areas/Admin/Scripts/Helpers.js",
                        "~/Areas/Admin/Scripts/jquery.dataTables.min.js"));
+        }
 
+        private static void AddCss(BundleCollection bundles)
+        {
             bundles.Add(new StyleBundle("~/Content/admincss").Include(
-                    "~/Areas/Admin/Content/AdminStyles.css",
-                    "~/Areas/Admin/Content/jquery.dataTables.min.css"
-                     ));
+                       "~/Areas/Admin/Content/AdminStyles.css",
+                       "~/Areas/Admin/Content/jquery.dataTables.min.css"
+                        ));
 
             bundles.Add(new StyleBundle("~/Content/vendorcss").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/font-awesome.min.css",
                       "~/Content/pace-theme-flash.css"
                       ));
+
+            bundles.Add(new StyleBundle(
+               "~/Content/fa",
+               ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl)
+               .Include("~/Content/font-awesome.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css",
