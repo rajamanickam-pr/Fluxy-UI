@@ -76,6 +76,8 @@
     <Compile Include="Constants\ErrorHandler\ErrorHandlerControllerRoute.cs" />
     <Compile Include="Constants\HomeController\HomeControllerAction.cs" />
     <Compile Include="Constants\HomeController\HomeControllerRoute.cs" />
+    <Compile Include="Constants\VideoCategories\VideoCategoriesAction.cs" />
+    <Compile Include="Constants\VideoCategories\VideoCategoriesRoute.cs" />
     <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Constants\ContentDeliveryNetwork.cs" />
     <Compile Include="Constants\Messages.cs" />

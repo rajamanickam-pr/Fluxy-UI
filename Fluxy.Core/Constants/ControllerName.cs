@@ -4,5 +4,6 @@
     {
         public const string ErrorHandler = "ErrorHandler";
         public const string Home = "Home";
+        public const string VideoCategories = "VideoCategories";
     }
 }

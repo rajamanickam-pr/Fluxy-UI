@@ -6,6 +6,7 @@ using Fluxy.Services.Logging;
 using Fluxy.Services.Video;
 using PagedList;
 using Fluxy.ViewModels.Video;
+using Fluxy.Core.Constants.VideoCategories;
 
 namespace Fluxy.Controllers
 {
@@ -23,7 +24,7 @@ namespace Fluxy.Controllers
 
         #region General
 
-        // GET: VideoCategories
+        [Route("AutoVehicles", Name = VideoCategoriesRoute.GetAutoVehicles)]
         public ActionResult AutoVehicles(int? page)
         {
             int pageIndex = 1;
@@ -31,141 +32,158 @@ namespace Fluxy.Controllers
             var autoVehicleList = _videoAttributesService.GetList(i => i.Category.Name == "Autos and Vehicles");
             var autoVehicleVM = _mapper.Map<List<VideoAttributesViewModel>>(autoVehicleList);
             var autoVehiclePagedList = autoVehicleVM.ToPagedList(pageIndex, _pageSize);
-            return View(autoVehiclePagedList);
+            return View(VideoCategoriesAction.AutoVehicles,autoVehiclePagedList);
         }
 
+        [Route("TravelEvents", Name = VideoCategoriesRoute.GetTravelEvents)]
         public ActionResult TravelEvents(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var travelEventsList = _videoAttributesService.GetList(i => i.Category.Name == "Travel & Events");
             var travelEventsVM = _mapper.Map<List<VideoAttributesViewModel>>(travelEventsList).ToPagedList(pageIndex, _pageSize);
-            return View(travelEventsVM);
+            return View(VideoCategoriesAction.TravelEvents, travelEventsVM);
+
         }
 
+        [Route("PeopleBlogs", Name = VideoCategoriesRoute.GetPeopleBlogs)]
         public ActionResult PeopleBlogs(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var peopleBlogsList = _videoAttributesService.GetList(i => i.Category.Name == "People & Blogs");
             var peopleBlogsVM = _mapper.Map<List<VideoAttributesViewModel>>(peopleBlogsList).ToPagedList(pageIndex, _pageSize);
-            return View(peopleBlogsVM);
+            return View(VideoCategoriesAction.PeopleBlogs, peopleBlogsVM);
+
         }
 
+        [Route("PetsAnimals", Name = VideoCategoriesRoute.GetPetsAnimals)]
         public ActionResult PetsAnimals(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var petsAnimalsList = _videoAttributesService.GetList(i => i.Category.Name == "Pets & Animals");
             var petsAnimalsVM = _mapper.Map<List<VideoAttributesViewModel>>(petsAnimalsList).ToPagedList(pageIndex, _pageSize);
-            return View(petsAnimalsVM);
-        } 
+            return View(VideoCategoriesAction.PetsAnimals, petsAnimalsVM);
+        }
 
         #endregion
 
         #region Infotainment
 
+        [Route("ScienceTechnology", Name = VideoCategoriesRoute.GetScienceTechnology)]
         public ActionResult ScienceTechnology(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var scienceTechList = _videoAttributesService.GetList(i => i.Category.Name == "Science & Technology");
             var scienceTechVM = _mapper.Map<List<VideoAttributesViewModel>>(scienceTechList).ToPagedList(pageIndex, _pageSize);
-            return View(scienceTechVM);
+            return View(VideoCategoriesAction.ScienceTechnology, scienceTechVM);
+
         }
 
+        [Route("NewsPolitics", Name = VideoCategoriesRoute.GetNewsPolitics)]
         public ActionResult NewsPolitics(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var newsPoliticsList = _videoAttributesService.GetList(i => i.Category.Name == "News & Politics");
             var newsPoliticsVM = _mapper.Map<List<VideoAttributesViewModel>>(newsPoliticsList).ToPagedList(pageIndex, _pageSize);
-            return View(newsPoliticsVM);
+            return View(VideoCategoriesAction.NewsPolitics, newsPoliticsVM);
         }
 
+        [Route("Health", Name = VideoCategoriesRoute.GetHealth)]
         public ActionResult Health(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var healthist = _videoAttributesService.GetList(i => i.Category.Name == "Health");
             var healthVM = _mapper.Map<List<VideoAttributesViewModel>>(healthist).ToPagedList(pageIndex, _pageSize);
-            return View(healthVM);
+            return View(VideoCategoriesAction.Health, healthVM);
         }
 
+        [Route("Devotional", Name = VideoCategoriesRoute.GetDevotional)]
         public ActionResult Devotional(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var devotionalList = _videoAttributesService.GetList(i => i.Category.Name == "Devotional");
             var devotionalVM = _mapper.Map<List<VideoAttributesViewModel>>(devotionalList).ToPagedList(pageIndex, _pageSize);
-            return View(devotionalVM);
+            return View(VideoCategoriesAction.Devotional, devotionalVM);
         }
 
+        [Route("Documentary", Name = VideoCategoriesRoute.GetDocumentary)]
         public ActionResult Documentary(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var documentaryList = _videoAttributesService.GetList(i => i.Category.Name == "Documentary");
             var documentaryVM = _mapper.Map<List<VideoAttributesViewModel>>(documentaryList).ToPagedList(pageIndex, _pageSize);
-            return View(documentaryVM);
+            return View(VideoCategoriesAction.Documentary, documentaryVM);
         }
 
+        [Route("Education", Name = VideoCategoriesRoute.GetEducation)]
         public ActionResult Education(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var educationList = _videoAttributesService.GetList(i => i.Category.Name == "Education");
             var educationVM = _mapper.Map<List<VideoAttributesViewModel>>(educationList).ToPagedList(pageIndex, _pageSize);
-            return View(educationVM);
+            return View(VideoCategoriesAction.Education, educationVM);
         }
 
         #endregion
 
         #region Entertainment
 
+        [Route("Music", Name = VideoCategoriesRoute.GetMusic)]
         public ActionResult Music(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var musicList = _videoAttributesService.GetList(i => i.Category.Name == "Music");
             var musicVM = _mapper.Map<List<VideoAttributesViewModel>>(musicList).ToPagedList(pageIndex, _pageSize);
-            return View(musicVM);
+            return View(VideoCategoriesAction.Music, musicVM);
         }
 
+        [Route("Gaming", Name = VideoCategoriesRoute.GetGaming)]
         public ActionResult Gaming(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var gamingList = _videoAttributesService.GetList(i => i.Category.Name == "Gaming");
             var gamingVM = _mapper.Map<List<VideoAttributesViewModel>>(gamingList).ToPagedList(pageIndex, _pageSize);
-            return View(gamingVM);
+            return View(VideoCategoriesAction.Gaming, gamingVM);
         }
 
+        [Route("Sports", Name = VideoCategoriesRoute.GetSports)]
         public ActionResult Sports(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var sportsList = _videoAttributesService.GetList(i => i.Category.Name == "Sports");
             var sportsVM = _mapper.Map<List<VideoAttributesViewModel>>(sportsList).ToPagedList(pageIndex, _pageSize);
-            return View(sportsVM);
+            return View(VideoCategoriesAction.Sports, sportsVM);
         }
 
+        [Route("FilmAnimation", Name = VideoCategoriesRoute.GetFilmAnimation)]
         public ActionResult FilmAnimation(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var filmAnimationList = _videoAttributesService.GetList(i => i.Category.Name == "Film & Animation");
             var filmAnimationVM = _mapper.Map<List<VideoAttributesViewModel>>(filmAnimationList).ToPagedList(pageIndex, _pageSize);
-            return View(filmAnimationVM);
+            return View(VideoCategoriesAction.FilmAnimation, filmAnimationVM);
         }
 
+        [Route("Entertainment", Name = VideoCategoriesRoute.GetEntertainment)]
         public ActionResult Entertainment(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
             var entertainmentList = _videoAttributesService.GetList(i => i.Category.Name == "Entertainment");
             var entertainmentVM = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentList).ToPagedList(pageIndex, _pageSize);
-            return View(entertainmentVM);
+            return View(VideoCategoriesAction.Entertainment, entertainmentVM);
         }
 
         #endregion
