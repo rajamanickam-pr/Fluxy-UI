@@ -78,10 +78,14 @@
     <Compile Include="Constants\ErrorHandler\ErrorHandlerControllerRoute.cs" />
     <Compile Include="Constants\HomeController\HomeControllerAction.cs" />
     <Compile Include="Constants\HomeController\HomeControllerRoute.cs" />
+    <Compile Include="Constants\Manage\ManageControllerAction.cs" />
+    <Compile Include="Constants\Manage\ManageControllerRoutes.cs" />
     <Compile Include="Constants\Profile\ProfileControllerAction.cs" />
     <Compile Include="Constants\Profile\ProfileControllerRoute.cs" />
     <Compile Include="Constants\VideoCategories\VideoCategoriesAction.cs" />
     <Compile Include="Constants\VideoCategories\VideoCategoriesRoute.cs" />
+    <Compile Include="Constants\Video\VideoControllerAction.cs" />
+    <Compile Include="Constants\Video\VideoControllerRoutes.cs" />
     <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Constants\ContentDeliveryNetwork.cs" />
     <Compile Include="Constants\Messages.cs" />

@@ -12,10 +12,12 @@ using Fluxy.Services.Logging;
 using System.Web.Hosting;
 using System.IO;
 using Fluxy.Core.Constants;
+using Fluxy.Core.Constants.Manage;
 
 namespace Fluxy.Controllers
 {
     [Authorize]
+    [RoutePrefix("manage")]
     public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
@@ -60,6 +62,8 @@ namespace Fluxy.Controllers
 
         //
         // GET: /Manage/Index
+        [HttpGet]
+        [Route("", Name = ManageControllerRoutes.GetIndex)]
         public async Task<ActionResult> Index(string message)
         {
             ViewBag.StatusMessage = message;
@@ -72,7 +76,7 @@ namespace Fluxy.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
-            return View(model);
+            return View(ManageControllerAction.Index, model);
         }
 
         //
@@ -81,7 +85,7 @@ namespace Fluxy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
-            string message=string.Empty;
+            string message = string.Empty;
             var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
@@ -101,15 +105,18 @@ namespace Fluxy.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
+        [HttpGet]
+        [Route("AddPhoneNumber", Name = ManageControllerRoutes.GetAddPhoneNumber)]
         public ActionResult AddPhoneNumber()
         {
-            return View();
+            return View(ManageControllerAction.AddPhoneNumber);
         }
 
         //
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("AddPhoneNumber", Name = ManageControllerRoutes.PostAddPhoneNumber)]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -127,7 +134,7 @@ namespace Fluxy.Controllers
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+            return RedirectToAction(ManageControllerAction.VerifyPhoneNumber, new { PhoneNumber = model.Number });
         }
 
         //
@@ -162,17 +169,19 @@ namespace Fluxy.Controllers
 
         //
         // GET: /Manage/VerifyPhoneNumber
+        [Route("VerifyPhoneNumber", Name = ManageControllerRoutes.GetVerifyPhoneNumber)]
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
             // Send an SMS through the SMS provider to verify the phone number
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            return phoneNumber == null ? View("Error") : View(ManageControllerAction.VerifyPhoneNumber, new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
         //
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("VerifyPhoneNumber", Name = ManageControllerRoutes.PostVerifyPhoneNumber)]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -187,7 +196,7 @@ namespace Fluxy.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = Messages.AddPhoneSuccess });
+                return RedirectToAction(ManageControllerAction.Index, new { Message = Messages.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "Failed to verify phone");
@@ -215,15 +224,17 @@ namespace Fluxy.Controllers
 
         //
         // GET: /Manage/ChangePassword
+        [HttpGet]
+        [Route("ChangePassword", Name = ManageControllerRoutes.GetChangePassword)]
         public ActionResult ChangePassword()
         {
             if (HasPassword())
             {
-                return View();
+                return View(ManageControllerAction.ChangePassword);
             }
             else
             {
-                return RedirectToAction("SetPassword");
+                return RedirectToAction(ManageControllerAction.SetPassword);
             }
         }
 
@@ -231,6 +242,7 @@ namespace Fluxy.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("ChangePassword", Name = ManageControllerRoutes.PostChangePassword)]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -245,7 +257,7 @@ namespace Fluxy.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index","Profile", new { Message = Messages.ChangePasswordSuccess });
+                return RedirectToAction(ManageControllerAction.Index, "Profile", new { Message = Messages.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);
@@ -253,21 +265,24 @@ namespace Fluxy.Controllers
 
         //
         // GET: /Manage/SetPassword
+        [HttpGet]
+        [Route("SetPassword", Name = ManageControllerRoutes.GetSetPassword)]
         public ActionResult SetPassword()
         {
-            return View();
+            return View(ManageControllerAction.SetPassword);
         }
 
         //
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("SetPassword", Name = ManageControllerRoutes.PostSetPassword)]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-                
+
                 if (result.Succeeded)
                 {
                     var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -303,9 +318,11 @@ namespace Fluxy.Controllers
 
         //
         // GET: /Manage/ManageLogins
+        [HttpGet]
+        [Route("ManageLogins", Name = ManageControllerRoutes.GetManageLogins)]
         public async Task<ActionResult> ManageLogins(string message)
         {
-            ViewBag.StatusMessage =message;
+            ViewBag.StatusMessage = message;
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)
             {
@@ -314,7 +331,7 @@ namespace Fluxy.Controllers
             var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
             var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
             ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
-            return View(new ManageLoginsViewModel
+            return View(ManageControllerAction.ManageLogins, new ManageLoginsViewModel
             {
                 CurrentLogins = userLogins,
                 OtherLogins = otherLogins

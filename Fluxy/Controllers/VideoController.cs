@@ -6,6 +6,7 @@ using Fluxy.Services.Video;
 using Fluxy.ViewModels.Video;
 using System.Data.SqlClient;
 using System;
+using Fluxy.Core.Constants.Video;
 
 namespace Fluxy.Controllers
 {
@@ -24,10 +25,11 @@ namespace Fluxy.Controllers
 
         // GET: Video
         [HttpGet]
+        [Route("", Name = VideoControllerRoutes.GetIndex)]
         public ActionResult Index(string videoId)
         {
-            if(string.IsNullOrEmpty(videoId))
-                 throw new ArgumentNullException("videoId is null or empty");
+            if (string.IsNullOrEmpty(videoId))
+                throw new ArgumentNullException("videoId is null or empty");
 
             SqlParameter[] sqlParam = {
                 new SqlParameter("videoId",videoId)
@@ -37,7 +39,7 @@ namespace Fluxy.Controllers
 
             var videoAttribute = _videoAttributesService.GetSingle(i => i.Id == videoId);
             var videoAttributeVM = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
-            return View(videoAttributeVM);
+            return View(VideoControllerAction.Index, videoAttributeVM);
         }
     }
 }

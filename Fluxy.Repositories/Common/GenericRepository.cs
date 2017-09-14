@@ -15,7 +15,7 @@ namespace Fluxy.Repositories.Common
         protected DbContext _entities;
         protected readonly IDbSet<T> _dbset;
 
-        public GenericRepository(DbContext context)
+        protected GenericRepository(DbContext context)
         {
             _entities = context;
             _dbset = context.Set<T>();

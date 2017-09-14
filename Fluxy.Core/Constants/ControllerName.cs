@@ -7,5 +7,7 @@
         public const string VideoCategories = "VideoCategories";
         public const string Account = "Account";
         public const string Profile = "Profile";
+        public const string Video = "Video";
+        public const string Manage = "Manage";
     }
 }
