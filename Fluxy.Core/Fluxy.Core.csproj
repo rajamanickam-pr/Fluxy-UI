@@ -68,6 +68,8 @@
     <Compile Include="Common\Entity.cs" />
     <Compile Include="Common\IAuditableEntity.cs" />
     <Compile Include="Common\IEntity.cs" />
+    <Compile Include="Constants\Account\AccountControllerAction.cs" />
+    <Compile Include="Constants\Account\AccountControllerRoute.cs" />
     <Compile Include="Constants\Application.cs" />
     <Compile Include="Constants\CacheProfileName.cs" />
     <Compile Include="Constants\CacheSetting.cs" />

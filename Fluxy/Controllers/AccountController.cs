@@ -14,6 +14,7 @@ using Fluxy.Services.Logging;
 using System.IO;
 using System.Web.Hosting;
 using Fluxy.Core.Constants;
+using Fluxy.Core.Constants.Account;
 
 namespace Fluxy.Controllers
 {
@@ -50,6 +51,8 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
+        [HttpGet]
+        [Route("Login", Name = AccountControllerRoute.GetLogin)]
         public ActionResult Login(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
@@ -58,7 +61,7 @@ namespace Fluxy.Controllers
             }
 
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(AccountControllerAction.Login);
         }
 
         //
@@ -66,6 +69,7 @@ namespace Fluxy.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("Login", Name = AccountControllerRoute.PostLogin)]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (model.Email.IndexOf('@') > -1)
@@ -139,6 +143,7 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
+        [Route("VerifyCode", Name = AccountControllerRoute.GetVerifyCode)]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
@@ -146,7 +151,7 @@ namespace Fluxy.Controllers
             {
                 return View("Error");
             }
-            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            return View(AccountControllerAction.VerifyCode,new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
         //
@@ -154,6 +159,7 @@ namespace Fluxy.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("VerifyCode", Name = AccountControllerRoute.PostVerifyCode)]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
             if (!ModelState.IsValid)
@@ -182,9 +188,10 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [Route("Register", Name = AccountControllerRoute.GetRegister)]
         public ActionResult Register()
         {
-            return View();
+            return View(AccountControllerAction.Register);
         }
 
         //
@@ -192,6 +199,7 @@ namespace Fluxy.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("Register", Name = AccountControllerRoute.PostRegister)]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -232,6 +240,7 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
+        [Route("ConfirmEmail", Name = AccountControllerRoute.GetConfirmEmail)]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -239,15 +248,16 @@ namespace Fluxy.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return View(AccountControllerAction.ConfirmEmail, result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
+        [Route("ForgotPassword", Name = AccountControllerRoute.GetForgotPassword)]
         public ActionResult ForgotPassword()
         {
-            return View();
+            return View(AccountControllerAction.ForgotPassword);
         }
 
         //
@@ -255,6 +265,7 @@ namespace Fluxy.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("ForgotPassword", Name = AccountControllerRoute.PostForgotPassword)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -295,17 +306,19 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
+        [Route("ForgotPasswordConfirmation", Name = AccountControllerRoute.GetForgotPasswordConfirmation)]
         public ActionResult ForgotPasswordConfirmation()
         {
-            return View();
+            return View(AccountControllerAction.ForgotPasswordConfirmation);
         }
 
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
+        [Route("ResetPassword", Name = AccountControllerRoute.GetResetPassword)]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            return code == null ? View("Error") : View(AccountControllerAction.ResetPassword);
         }
 
         //
@@ -313,6 +326,7 @@ namespace Fluxy.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("ResetPassword", Name = AccountControllerRoute.PostResetPassword)]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -337,9 +351,10 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
+        [Route("ResetPasswordConfirmation", Name = AccountControllerRoute.GetResetPasswordConfirmation)]
         public ActionResult ResetPasswordConfirmation()
         {
-            return View();
+            return View(AccountControllerAction.ResetPasswordConfirmation);
         }
 
         //
@@ -356,6 +371,7 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/SendCode
         [AllowAnonymous]
+        [Route("SendCode", Name = AccountControllerRoute.GetSendCode)]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
@@ -365,7 +381,7 @@ namespace Fluxy.Controllers
             }
             var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            return View(AccountControllerAction.SendCode, new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
         //
@@ -373,6 +389,7 @@ namespace Fluxy.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("SendCode", Name = AccountControllerRoute.PostSendCode)]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
             if (!ModelState.IsValid)
@@ -385,18 +402,19 @@ namespace Fluxy.Controllers
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction(AccountControllerAction.VerifyCode, new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
+        [Route("ExternalLoginCallback", Name = AccountControllerRoute.GetExternalLoginCallback)]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction(AccountControllerAction.Login);
             }
 
             // Sign in the user with this external login provider if the user already has a login
@@ -408,7 +426,7 @@ namespace Fluxy.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+                    return RedirectToAction(AccountControllerAction.SendCode, new { ReturnUrl = returnUrl, RememberMe = false });
                 case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
@@ -469,9 +487,10 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
+        [Route("ExternalLoginFailure", Name = AccountControllerRoute.GetExternalLoginFailure)]
         public ActionResult ExternalLoginFailure()
         {
-            return View();
+            return View(AccountControllerAction.ExternalLoginFailure);
         }
 
         protected override void Dispose(bool disposing)

@@ -24,6 +24,7 @@ namespace Fluxy.Controllers
 
         #region General
 
+        [HttpGet]
         [Route("AutoVehicles", Name = VideoCategoriesRoute.GetAutoVehicles)]
         public ActionResult AutoVehicles(int? page)
         {
@@ -35,6 +36,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.AutoVehicles,autoVehiclePagedList);
         }
 
+        [HttpGet]
         [Route("TravelEvents", Name = VideoCategoriesRoute.GetTravelEvents)]
         public ActionResult TravelEvents(int? page)
         {
@@ -46,6 +48,7 @@ namespace Fluxy.Controllers
 
         }
 
+        [HttpGet]
         [Route("PeopleBlogs", Name = VideoCategoriesRoute.GetPeopleBlogs)]
         public ActionResult PeopleBlogs(int? page)
         {
@@ -57,6 +60,7 @@ namespace Fluxy.Controllers
 
         }
 
+        [HttpGet]
         [Route("PetsAnimals", Name = VideoCategoriesRoute.GetPetsAnimals)]
         public ActionResult PetsAnimals(int? page)
         {
@@ -71,6 +75,7 @@ namespace Fluxy.Controllers
 
         #region Infotainment
 
+        [HttpGet]
         [Route("ScienceTechnology", Name = VideoCategoriesRoute.GetScienceTechnology)]
         public ActionResult ScienceTechnology(int? page)
         {
@@ -82,6 +87,7 @@ namespace Fluxy.Controllers
 
         }
 
+        [HttpGet]
         [Route("NewsPolitics", Name = VideoCategoriesRoute.GetNewsPolitics)]
         public ActionResult NewsPolitics(int? page)
         {
@@ -92,6 +98,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.NewsPolitics, newsPoliticsVM);
         }
 
+        [HttpGet]
         [Route("Health", Name = VideoCategoriesRoute.GetHealth)]
         public ActionResult Health(int? page)
         {
@@ -102,6 +109,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.Health, healthVM);
         }
 
+        [HttpGet]
         [Route("Devotional", Name = VideoCategoriesRoute.GetDevotional)]
         public ActionResult Devotional(int? page)
         {
@@ -112,6 +120,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.Devotional, devotionalVM);
         }
 
+        [HttpGet]
         [Route("Documentary", Name = VideoCategoriesRoute.GetDocumentary)]
         public ActionResult Documentary(int? page)
         {
@@ -122,6 +131,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.Documentary, documentaryVM);
         }
 
+        [HttpGet]
         [Route("Education", Name = VideoCategoriesRoute.GetEducation)]
         public ActionResult Education(int? page)
         {
@@ -136,6 +146,7 @@ namespace Fluxy.Controllers
 
         #region Entertainment
 
+        [HttpGet]
         [Route("Music", Name = VideoCategoriesRoute.GetMusic)]
         public ActionResult Music(int? page)
         {
@@ -146,6 +157,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.Music, musicVM);
         }
 
+        [HttpGet]
         [Route("Gaming", Name = VideoCategoriesRoute.GetGaming)]
         public ActionResult Gaming(int? page)
         {
@@ -156,6 +168,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.Gaming, gamingVM);
         }
 
+        [HttpGet]
         [Route("Sports", Name = VideoCategoriesRoute.GetSports)]
         public ActionResult Sports(int? page)
         {
@@ -166,6 +179,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.Sports, sportsVM);
         }
 
+        [HttpGet]
         [Route("FilmAnimation", Name = VideoCategoriesRoute.GetFilmAnimation)]
         public ActionResult FilmAnimation(int? page)
         {
@@ -176,6 +190,7 @@ namespace Fluxy.Controllers
             return View(VideoCategoriesAction.FilmAnimation, filmAnimationVM);
         }
 
+        [HttpGet]
         [Route("Entertainment", Name = VideoCategoriesRoute.GetEntertainment)]
         public ActionResult Entertainment(int? page)
         {
