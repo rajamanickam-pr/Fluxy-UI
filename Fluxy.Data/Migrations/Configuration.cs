@@ -48,14 +48,16 @@ namespace Fluxy.Data.Migrations
                 new Language {Name="English(United Kingdom)",Rtl=false,DefaultCurrency="EUR",LanguageCulture="en-GB" },
                 new Language {Name="Hindi",Rtl=false,DefaultCurrency="INR",LanguageCulture="hi-IN"},
                 new Language {Name="Telugu",Rtl=false,DefaultCurrency="INR",LanguageCulture="te-IN" },
-                new Language {Name="Tamil",Rtl=false,DefaultCurrency="INR",LanguageCulture="ta-IN" }
+                new Language {Name="Tamil",Rtl=false,DefaultCurrency="INR",LanguageCulture="ta-IN" },
+                new Language {Name="Malayalam",Rtl=false,DefaultCurrency="INR",LanguageCulture="ma-IN" },
+                new Language {Name="Kannada",Rtl=false,DefaultCurrency="INR",LanguageCulture="ka-IN" }
             };
             foreach (Language lang in defaultLanguage)
                 context.Set<Language>().Add(lang);
 
             IList<VideoSettings> defaultVideoSettings = new List<VideoSettings>
             {
-                new VideoSettings {Name="HalfSetting",FrameFilters="?modestbranding=1&rel=0&showinfo=0&fs=0",FrameHeight=380,FrameWidth=720},
+                new VideoSettings {Name="Half Setting",FrameFilters="?modestbranding=1&rel=0&showinfo=0&fs=0",FrameHeight=380,FrameWidth=720},
             };
             foreach (VideoSettings settings in defaultVideoSettings)
                 context.Set<VideoSettings>().Add(settings);
