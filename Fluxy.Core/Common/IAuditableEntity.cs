@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FleetTracker.Core.Common
+namespace Fluxy.Core.Common
 {
     public interface IAuditableEntity
     {

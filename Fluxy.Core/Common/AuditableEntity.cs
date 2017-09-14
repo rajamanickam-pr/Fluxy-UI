@@ -1,4 +1,4 @@
-﻿using FleetTracker.Core.Common;
+﻿using Fluxy.Core.Common;
 using System;
 using System.ComponentModel.DataAnnotations;
 

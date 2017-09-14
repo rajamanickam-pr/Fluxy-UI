@@ -458,6 +458,17 @@
     <Content Include="Views\Profile\PostVideos.cshtml" />
     <Content Include="Views\Home\HelpDesk.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\VideoCategories\ScienceTechnology.cshtml" />
+    <Content Include="Views\VideoCategories\NewsPolitics.cshtml" />
+    <Content Include="Views\VideoCategories\Health.cshtml" />
+    <Content Include="Views\VideoCategories\Devotional.cshtml" />
+    <Content Include="Views\VideoCategories\Documentary.cshtml" />
+    <Content Include="Views\VideoCategories\Education.cshtml" />
+    <Content Include="Views\VideoCategories\Music.cshtml" />
+    <Content Include="Views\VideoCategories\Gaming.cshtml" />
+    <Content Include="Views\VideoCategories\Sports.cshtml" />
+    <Content Include="Views\VideoCategories\FilmAnimation.cshtml" />
+    <Content Include="Views\VideoCategories\Entertainment.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

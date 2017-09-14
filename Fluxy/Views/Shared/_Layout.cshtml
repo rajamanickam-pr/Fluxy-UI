@@ -1,5 +1,6 @@
 ﻿@using Fluxy.Core.Constants
 @using Fluxy.Core.Constants.HomeController
+@using Boilerplate.Web.Mvc
 @using Boilerplate.Web.Mvc.Twitter
 @using Boilerplate.Web.Mvc.OpenGraph
 <!DOCTYPE HTML>
@@ -29,8 +30,10 @@
     {
         @Html.OpenGraph((OpenGraphMetadata)ViewBag.OpenGraph);
     }
-   
-    <meta name="author" content="fluxypictures.com">
+   @if (ViewBag.ReferrerMode != null)
+   {
+    @Html.ReferrerMeta((ReferrerMode)ViewBag.ReferrerMode)
+   }
     <meta http-equiv="Content-Language" content="en-US">
     <meta name="rating" content="kids,adults,aged peoples">
     <meta name="distribution" content="global" />
@@ -41,7 +44,7 @@
     <link rel="manifest" href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')">
     <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml">
     <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
-
+    @RenderSection("head", required: false)
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/vendorcss")
     @Styles.Render("~/Content/fa")

@@ -1,14 +1,29 @@
 ﻿@using PagedList.Mvc
+@using Boilerplate.Web.Mvc
+@using Boilerplate.Web.Mvc.Twitter
+@using Boilerplate.Web.Mvc.OpenGraph
+@using Fluxy.Core.Constants
 @model  PagedList.IPagedList<Fluxy.ViewModels.Video.VideoAttributesViewModel>
 @{
     ViewBag.Title = "Auto and Vehicles";
+    ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples. In this page Videos abouot Auto and Vehicles.";
+    ViewBag.Author = "Fluxy Pictures";
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard(User.Identity.Name);
+    ViewBag.OpenGraph = new OpenGraphWebsite(
+      ViewBag.Title,
+      new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
+    {
+        Determiner = OpenGraphDeterminer.Auto,
+        SiteName = Application.Name
+    };
 }
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-md-4">
-                @Html.Partial("_VideoBox",item)
+                @Html.Partial("_VideoBox", item)
             </div>
         }
     </div>

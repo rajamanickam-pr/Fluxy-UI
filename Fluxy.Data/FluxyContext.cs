@@ -1,5 +1,4 @@
-﻿using FleetTracker.Core.Common;
-using Fluxy.Core.Common;
+﻿using Fluxy.Core.Common;
 using Fluxy.Data.ExtentedDTO;
 using Fluxy.Data.Initializers;
 using Fluxy.Data.Mappings;
