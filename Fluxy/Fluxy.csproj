@@ -308,6 +308,10 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom\floatingSocialBar.css" />
+    <Content Include="Content\Custom\floatingSocialBar.min.css">
+      <DependentUpon>floatingSocialBar.css</DependentUpon>
+    </Content>
     <Content Include="Content\Custom\ProfileIndex.css" />
     <Content Include="Content\Custom\ProfileIndex.min.css">
       <DependentUpon>ProfileIndex.css</DependentUpon>
@@ -371,6 +375,9 @@
     <Content Include="Scripts\Custom\Alert.min.js">
       <DependentUpon>Alert.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Custom\Layout.min.js">
+      <DependentUpon>Layout.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Custom\Login.js" />
     <Content Include="Scripts\Custom\Login.min.js">
       <DependentUpon>Login.js</DependentUpon>
@@ -395,7 +402,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Layout.js" />
+    <Content Include="Scripts\Custom\Layout.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\pace.min.js" />
     <Content Include="Scripts\respond.js" />
@@ -469,6 +476,8 @@
     <Content Include="Views\VideoCategories\Sports.cshtml" />
     <Content Include="Views\VideoCategories\FilmAnimation.cshtml" />
     <Content Include="Views\VideoCategories\Entertainment.cshtml" />
+    <Content Include="Views\Shared\_MetaTags.cshtml" />
+    <Content Include="Views\Shared\_FloatingSocialBar.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

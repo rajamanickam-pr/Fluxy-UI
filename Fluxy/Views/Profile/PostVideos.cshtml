@@ -1,6 +1,8 @@
 ﻿@model Fluxy.ViewModels.Video.VideoAttributesViewModel
 @{
-    ViewBag.Title = "Post Video";
+    ViewBag.Title = "Share your youtube Video";
+    ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples| Share your youtube Video";
+    
     List<SelectListItem> categoyList = new List<SelectListItem>();
     foreach (var item in Model.Categories)
     {
@@ -39,7 +41,7 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.VideoId)
         <div class="form-horizontal">
-            <h4>Post Video</h4>
+            <h4>Share Video</h4>
             <hr />
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })

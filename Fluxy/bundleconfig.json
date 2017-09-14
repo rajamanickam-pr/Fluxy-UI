@@ -40,5 +40,17 @@
     "inputFiles": [
       "Scripts/Custom/Login.js"
     ]
+  },
+  {
+    "outputFileName": "Content/Custom/floatingSocialBar.min.css",
+    "inputFiles": [
+      "Content/Custom/floatingSocialBar.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Custom/Layout.min.js",
+    "inputFiles": [
+      "Scripts/Custom/Layout.js"
+    ]
   }
 ]

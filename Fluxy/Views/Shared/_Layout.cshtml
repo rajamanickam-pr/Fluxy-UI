@@ -5,55 +5,24 @@
 @using Boilerplate.Web.Mvc.OpenGraph
 <!DOCTYPE HTML>
 <html lang="en">
-<head @(ViewBag.OpenGraph == null ? null : Html.OpenGraphNamespace((OpenGraphMetadata)ViewBag.OpenGraph))>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@ViewBag.Title - @Application.Name</title>
-
-    <meta name="title" content="FluxyPictures - Videos" />
-    <meta name="keywords" content="music videos,videos,educational videos,entertainment videos,infotainment videos,health videos,travel videos,people videos,sports and politics videos">
-    <meta property="bt:keywords" content="music videos,videos,educational videos,entertainment videos,infotainment videos,health videos,travel videos,people videos,sports and politics videos">
-    @*<meta name="description" content="A free community for sharing youtube videos and content for all aged peoples. We are an entertainment focused" />*@
-    <meta name="description" content="@ViewBag.Description">
-
-    @if (ViewBag.Author != null)
+@{
+    ViewBag.Author = "Fluxy Pictures";
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard(User.Identity.Name);
+    ViewBag.OpenGraph = new OpenGraphWebsite(
+      ViewBag.Title,
+      new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
     {
-        <meta name="author" content="@ViewBag.Author">
-    }
-    @* Render Twitter Card meta tags. *@
-    @if (ViewBag.TwitterCard != null)
-    {
-        @Html.TwitterCard((TwitterCard)ViewBag.TwitterCard);
-    }
-    @* Render Facebook Open Graph meta tags. *@
-    @if (ViewBag.OpenGraph != null)
-    {
-        @Html.OpenGraph((OpenGraphMetadata)ViewBag.OpenGraph);
-    }
-   @if (ViewBag.ReferrerMode != null)
-   {
-    @Html.ReferrerMeta((ReferrerMode)ViewBag.ReferrerMode)
-   }
-    <meta http-equiv="Content-Language" content="en-US">
-    <meta name="rating" content="kids,adults,aged peoples">
-    <meta name="distribution" content="global" />
-
-
-    <link rel="icon" href="../../favicon.ico">
-
-    <link rel="manifest" href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')">
-    <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml">
-    <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
-    @RenderSection("head", required: false)
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/vendorcss")
-    @Styles.Render("~/Content/fa")
-    @Scripts.Render("~/bundles/jquery")
-</head>
+        Determiner = OpenGraphDeterminer.Auto,
+        SiteName = Application.Name
+    };
+}
+@Html.Partial("_MetaTags")
 <body>
     <div id="fb-root"></div>
-    <script src="~/Scripts/Custom/Login.min.js"></script>
+    @*<script src="~/Scripts/Custom/Layout.min.js"></script>*@
     @Html.Partial("_NavigationBar")
+    @Html.Partial("_FloatingSocialBar")
     @Html.Partial("_Alerts")
     @RenderBody()
     @Html.Partial("_Footer")
