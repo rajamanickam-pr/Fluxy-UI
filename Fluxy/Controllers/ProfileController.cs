@@ -22,10 +22,12 @@ using Fluxy.ViewModels.Mail;
 using Fluxy.Services.Localization;
 using Fluxy.ViewModels.Localization;
 using Fluxy.Core.Constants;
+using Fluxy.Core.Constants.Profile;
 
 namespace Fluxy.Controllers
 {
     [Authorize]
+    [RoutePrefix("profile")]
     public class ProfileController : BaseController
     {
         private readonly IUserProfileService _userProfileService;
@@ -59,8 +61,9 @@ namespace Fluxy.Controllers
             {
                 if (currentUserId != userId)
                 {
-                    return  false;
-                }else
+                    return false;
+                }
+                else
                 {
                     return true;
                 }
@@ -68,6 +71,8 @@ namespace Fluxy.Controllers
             return true;
         }
 
+        [HttpGet]
+        [Route("", Name = ProfileControllerRoute.GetIndex)]
         public ActionResult Index(string message, string userId)
         {
             var user = string.Empty;
@@ -92,10 +97,12 @@ namespace Fluxy.Controllers
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
 
-            return View(userProfile);
+            return View(ProfileControllerAction.Index, userProfile);
         }
 
-        public ActionResult ProfileVideos(int? page,string userId)
+        [HttpGet]
+        [Route("ProfileVideos", Name = ProfileControllerRoute.GetProfileVideos)]
+        public ActionResult ProfileVideos(int? page, string userId)
         {
             var user = string.Empty;
             if (!string.IsNullOrEmpty(userId))
@@ -116,6 +123,8 @@ namespace Fluxy.Controllers
             return PartialView("_ProfileVideo", userPostedVideoVM);
         }
 
+        [HttpGet]
+        [Route("Edit", Name = ProfileControllerRoute.GetEdit)]
         public ActionResult Edit()
         {
             var userId = User.Identity.GetUserId();
@@ -125,11 +134,12 @@ namespace Fluxy.Controllers
             }
             var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == userId);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
-            return View(userProfile);
+            return View(ProfileControllerAction.Edit, userProfile);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Edit", Name = ProfileControllerRoute.PostEdit)]
         public ActionResult Edit(UserMangementViewModel userMangementViewModel, HttpPostedFileBase fileBase)
         {
             if (fileBase != null)
@@ -161,9 +171,11 @@ namespace Fluxy.Controllers
                 profile = _userProfileService.Create(userProfileDto);
             }
             var userProfile = _mapper.Map<UserMangementViewModel>(profile);
-            return RedirectToAction("Index", routeValues: new { message = Messages.ProfileEditConfirmation });
+            return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.ProfileEditConfirmation });
         }
 
+        [HttpGet]
+        [Route("Privacy", Name = ProfileControllerRoute.GetPrivacy)]
         public ActionResult Privacy()
         {
             var userId = User.Identity.GetUserId();
@@ -174,10 +186,11 @@ namespace Fluxy.Controllers
 
             var profile = _userSettingsService.GetSingle(i => i.UserId == userId);
             var userProfile = _mapper.Map<UserMangementViewModel>(profile);
-            return View(userProfile);
+            return View(ProfileControllerAction.Privacy, userProfile);
         }
 
         [HttpPost]
+        [Route("Privacy", Name = ProfileControllerRoute.PostPrivacy)]
         public ActionResult Privacy(UserMangementViewModel userMangementViewModel)
         {
             var userSettingsDto = _mapper.Map<UserSettingsExtend>(userMangementViewModel);
@@ -186,9 +199,11 @@ namespace Fluxy.Controllers
                 ? _userSettingsService.Update(userSettingsDto)
                 : _userSettingsService.Create(userSettingsDto);
             var userMangementVm = _mapper.Map<UserMangementViewModel>(profileSettings);
-            return RedirectToAction("Index", routeValues: new { message = Messages.ProfileEditConfirmation });
+            return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.ProfileEditConfirmation });
         }
 
+        [HttpGet]
+        [Route("Newsletter", Name = ProfileControllerRoute.GetNewsletter)]
         public ActionResult Newsletter(string message)
         {
             var userId = User.Identity.GetUserId();
@@ -212,10 +227,11 @@ namespace Fluxy.Controllers
 
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
-            return View(newsletterVM);
+            return View(ProfileControllerAction.Newsletter, newsletterVM);
         }
 
         [HttpPost]
+        [Route("Newsletter", Name = ProfileControllerRoute.PostNewsletter)]
         public ActionResult Newsletter(string[] selectedCategories)
         {
             if (selectedCategories == null || selectedCategories.Count() <= 0)
@@ -241,9 +257,11 @@ namespace Fluxy.Controllers
             {
                 _newsletterService.Create(newsletter);
             }
-            return RedirectToAction("Index", routeValues: new { message = Messages.NewsletterSubscriptionConfirmation });
+            return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.NewsletterSubscriptionConfirmation });
         }
 
+        [HttpGet]
+        [Route("PostVideos", Name = ProfileControllerRoute.GetPostVideos)]
         public virtual ActionResult PostVideos()
         {
             var categories = _categoryService.GetAll();
@@ -255,10 +273,11 @@ namespace Fluxy.Controllers
                 VideoSettingses = _mapper.Map<IEnumerable<VideoSettingsViewModel>>(videoSettings),
                 Languages = _mapper.Map<IEnumerable<LanguageViewModel>>(language)
             };
-            return View(videoAttribute);
+            return View(ProfileControllerAction.PostVideos, videoAttribute);
         }
 
         [HttpPost]
+        [Route("PostVideos", Name = ProfileControllerRoute.PostPostVideos)]
         public virtual ActionResult PostVideos(VideoAttributesViewModel videoAttributesViewModel)
         {
             var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
@@ -273,10 +292,11 @@ namespace Fluxy.Controllers
                 videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
                 _videoAttributesService.Create(videoAttributes);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction(ProfileControllerAction.Index);
         }
 
         [HttpGet]
+        [Route("DeleteVideo", Name = ProfileControllerRoute.GetDeleteVideo)]
         public virtual ActionResult DeleteVideo(string videoId)
         {
             var video = _videoAttributesService.GetSingle(i => i.Id == videoId);
@@ -284,7 +304,7 @@ namespace Fluxy.Controllers
             {
                 _videoAttributesService.Delete(video);
             }
-            return RedirectToAction("Index", routeValues: new { message = Messages.VideoDeleteConfirmation });
+            return RedirectToAction(ProfileControllerAction.DeleteVideo, routeValues: new { message = Messages.VideoDeleteConfirmation });
         }
 
         public byte[] GetYouTubeThumbnail(string videoId)

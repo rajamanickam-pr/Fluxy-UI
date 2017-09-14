@@ -6,5 +6,6 @@
         public const string Home = "Home";
         public const string VideoCategories = "VideoCategories";
         public const string Account = "Account";
+        public const string Profile = "Profile";
     }
 }

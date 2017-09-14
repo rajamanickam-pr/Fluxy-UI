@@ -9,6 +9,7 @@ using System;
 
 namespace Fluxy.Controllers
 {
+    [RoutePrefix("video")]
     public class VideoController : BaseController
     {
         private readonly IMapper _mapper;
