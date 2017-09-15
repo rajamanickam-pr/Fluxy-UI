@@ -154,9 +154,9 @@ namespace Fluxy
                     Self = true,
                     // Allow the use of the eval() method to create code from strings. This is unsafe and can open your
                     // site up to XSS vulnerabilities.
-                    // UnsafeEval = true,
+                     UnsafeEval = true,
                     // Allow in-line JavaScript, this is unsafe and can open your site up to XSS vulnerabilities.
-                    // UnsafeInline = true
+                     UnsafeInline = true
                 });
             // media-src - This directive restricts from where the protected resource can load video and audio.
             filters.Add(
