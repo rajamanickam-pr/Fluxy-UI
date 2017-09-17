@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace Fluxy.ViewModels.Banners
 {
@@ -8,6 +9,7 @@ namespace Fluxy.ViewModels.Banners
         [Key]
         public string Id { get; set; }
         public byte[] Image { get; set; }
+        public HttpPostedFileBase File { get; set; }
         [Required]
         public string Headline { get; set; }
         [Required]
@@ -16,6 +18,20 @@ namespace Fluxy.ViewModels.Banners
         public string ButtonText { get; set; }
         public string ButtonUrl { get; set; }
         public string Name { get; set; }
-        public string ImageString => Convert.ToBase64String(this.Image);
+        public string ImageString
+        {
+            get
+            {
+                if (this.Image.Length > 0)
+                {
+                    return Convert.ToBase64String(this.Image);
+
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
     }
 }

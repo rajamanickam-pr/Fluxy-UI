@@ -19,7 +19,7 @@
             @if (HttpContext.Current.User.IsInRole("Admin"))
             {
                 <li class="nav-item">
-                    @Html.RouteLink("Admininstration!", new { action = "Index", controller = "AdminHome", area = "Admin" }, new { title = "Administration", @class = "nav-link" })
+                    @Html.RouteLink("Admininstration!", new { action = "Index", controller = "Admin" }, new { title = "Administration", @class = "nav-link" })
                 </li>
             }
         </ul>

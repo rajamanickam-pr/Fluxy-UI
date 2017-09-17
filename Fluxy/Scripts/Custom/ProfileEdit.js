@@ -15,7 +15,7 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#displayPictureChange').attr('src', e.target.result);
+            $('#displayPicture').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }

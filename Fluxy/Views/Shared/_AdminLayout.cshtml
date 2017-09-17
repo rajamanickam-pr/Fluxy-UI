@@ -1,0 +1,65 @@
+﻿@using Fluxy.Core.Constants
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>@ViewBag.Title - @Application.Name</title>
+    @Styles.Render("~/Content/vendorcss")
+    @Styles.Render("~/Content/admincss")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/adminScript")
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row d-flex d-md-block flex-nowrap wrapper">
+            <div class="col-md-2 float-left col-1 pl-0 pr-0 collapse width show" id="sidebar">
+                <div class="list-group border-0 card text-center text-md-left">
+                    <a href="AdminHome" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-dashboard"></i> <span class="d-none d-md-inline">Dashboard</span> </a>
+                    <a href="UserManagement" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-users"></i> <span class="d-none d-md-inline">User Management</span></a>
+                    <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-cogs"></i> <span class="d-none d-md-inline">Configuration</span></a>
+                    <div class="collapse" id="menu3">
+                        @Html.RouteLink("Attributes", new { action = "Index", controller = "Attribute", area = "Admin" }, new { @class = "list-group-item" })
+                        @Html.RouteLink("Menu", new { action = "Index", controller = "Menu", area = "Admin" }, new { @class = "list-group-item" })
+                        @Html.RouteLink("Submenu", new { action = "Index", controller = "SubMenu", area = "Admin" }, new { @class = "list-group-item" })
+                        @Html.RouteLink("Banner", new { action = "Index", controller = "Banner", area = "Admin" }, new { @class = "list-group-item" })
+                    </div>
+                    <a href="#VideoMangementMenu" class="list-group-item d-inline-block collapsed" data-toggle="collapse" aria-expanded="false" sdata-parent="#sidebar"><i class="fa fa-file-video-o"></i> <span class="d-none d-md-inline">Video Management</span></a>
+                    <div class="collapse" id="VideoMangementMenu">
+                        @Html.RouteLink("Language", new { action = "Index", controller = "Language", area = "Admin" }, new { @class = "list-group-item" })
+                        @Html.RouteLink("Category", new { action = "Index", controller = "Category", area = "Admin" }, new { @class = "list-group-item" })
+                        <a href="#VideoMangementSub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Video</a>
+                        <div class="collapse" id="VideoMangementSub2">
+                            @Html.RouteLink("Video Settings", new { action = "Index", controller = "VideoSettings", area = "Admin" }, new { @class = "list-group-item" })
+                            @Html.RouteLink("Video Attributes", new { action = "Index", controller = "VideoAttributes", area = "Admin" }, new { @class = "list-group-item" })
+                        </div>
+                    </div>
+                    <a href="Log" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-exclamation-triangle"></i> <span class="d-none d-md-inline">Error Details</span></a>
+                </div>
+            </div>
+            <main class="col-md-10 float-left col px-5 pl-md-2 pt-2 main">
+                <a href="#" data-target="#sidebar" data-toggle="collapse"><i class="fa fa-navicon fa-2x py-2 p-1"></i></a>
+                @*<div class="page-header">
+                        <h1>Bootstrap 4 Sidebar Menu</h1>
+                    </div>
+                    <p class="lead">A responsive, multi-level vertical accordion.</p>*@
+                @RenderBody()
+                <hr />
+                <footer class="main-footer">
+                    <div class="pull-right hidden-xs">
+                        <b>Version</b> 1.0
+                    </div>
+                    <strong>Copyright &copy; 2014-2016 <a href="#">Aditya Studio</a>.</strong> All rights
+                    reserved.
+                </footer>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)

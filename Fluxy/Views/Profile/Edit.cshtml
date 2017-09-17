@@ -87,7 +87,7 @@
                         <div class="col-md-4">
                             @if (!string.IsNullOrEmpty(Model?.DisplayPictureString))
                             {
-                            <img src="@Model.DisplayPictureString" data-src="holder.js/140x140" alt='Avatar' id="displayPicture" class="img-thumbnail  m-x-auto img-fluid img-responsive">
+                            <img src="data:image/png;base64,@Model.DisplayPictureString" data-src="holder.js/140x140" alt='Avatar' id="displayPicture" class="img-thumbnail  m-x-auto img-fluid img-responsive">
                             }
                             else
                             {

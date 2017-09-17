@@ -9,5 +9,9 @@
         public const string Profile = "Profile";
         public const string Video = "Video";
         public const string Manage = "Manage";
+
+        //Admin
+        public const string Banner = "Banner";
+        public const string Admin = "Admin";
     }
 }
