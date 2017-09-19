@@ -14,5 +14,6 @@
         public const string Banner = "Banner";
         public const string Admin = "Admin";
         public const string Language = "Language";
+        public const string Log = "Log";
     }
 }

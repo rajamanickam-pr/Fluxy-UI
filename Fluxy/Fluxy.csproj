@@ -233,7 +233,6 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LogController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubMenuController.cs" />
@@ -245,6 +244,7 @@
     <Compile Include="Controllers\Administration\AdminController.cs" />
     <Compile Include="Controllers\Administration\BannerController.cs" />
     <Compile Include="Controllers\Administration\LanguageController.cs" />
+    <Compile Include="Controllers\Administration\LogController.cs" />
     <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -348,7 +348,6 @@
     <Content Include="Areas\Admin\Views\VideoAttributes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
     <Content Include="Areas\Admin\Views\UserManagement\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Log\Index.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -482,6 +481,8 @@
     <Content Include="Views\Language\Index.cshtml" />
     <Content Include="Views\Language\Create.cshtml" />
     <Content Include="Views\Language\Edit.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\Log\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

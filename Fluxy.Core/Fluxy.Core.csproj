@@ -84,6 +84,8 @@
     <Compile Include="Constants\HomeController\HomeControllerRoute.cs" />
     <Compile Include="Constants\Language\LanguageControllerAction.cs" />
     <Compile Include="Constants\Language\LanguageControllerRoute.cs" />
+    <Compile Include="Constants\Log\LogControllerAction.cs" />
+    <Compile Include="Constants\Log\LogControllerRoutes.cs" />
     <Compile Include="Constants\Manage\ManageControllerAction.cs" />
     <Compile Include="Constants\Manage\ManageControllerRoutes.cs" />
     <Compile Include="Constants\Profile\ProfileControllerAction.cs" />

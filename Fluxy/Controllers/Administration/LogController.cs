@@ -5,10 +5,12 @@ using System.Web.Mvc;
 using AutoMapper;
 using Fluxy.Services.Logging;
 using Fluxy.ViewModels.Logging;
+using Fluxy.Core.Constants.Log;
 
-namespace Fluxy.Areas.Admin.Controllers
+namespace Fluxy.Controllers.Administration
 {
     [Authorize(Roles = "Admin")]
+    [RoutePrefix("log")]
     public class LogController : BaseController
     {
         private readonly ILogService _logService;
@@ -21,33 +23,36 @@ namespace Fluxy.Areas.Admin.Controllers
         }
 
         // GET: Admin/Log
+        [HttpGet]
+        [Route("", Name = LogControllerRoutes.GetIndex)]
         public ActionResult Index()
         {
-            var exceptionsDto=_logService.GetAll();
+            var exceptionsDto = _logService.GetAll();
             var exceptions = _mapper.Map<List<LogViewModel>>(exceptionsDto);
-            return View(exceptions);
+            return View(LogControllerAction.Index, exceptions);
         }
 
-        public JsonResult GetbyID(string id)
+        [HttpGet]
+        [Route("Details", Name = LogControllerRoutes.GetDetails)]
+        public ActionResult Details(string id)
         {
             var logDto = _logService.GetSingle(i => i.Id == id);
             var log = _mapper.Map<LogViewModel>(logDto);
-            return Json(log, JsonRequestBehavior.AllowGet);
+            return View(log);
         }
 
-        [HttpPost]
-        public JsonResult Delete(string id)
+        [HttpGet]
+        [Route("Delete", Name = LogControllerRoutes.GetDelete)]
+        public ActionResult Delete(string id)
         {
             try
             {
-                bool status = false;
                 var logDto = _logService.GetSingle(i => i.Id == id);
                 if (logDto != null)
                 {
                     _logService.Delete(logDto);
-                    status = true;
                 }
-                return Json(status, JsonRequestBehavior.AllowGet);
+                return RedirectToAction(LogControllerAction.Index);
             }
             catch (Exception)
             {
