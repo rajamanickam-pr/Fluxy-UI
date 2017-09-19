@@ -235,7 +235,6 @@
     <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LanguageController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubMenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
@@ -245,6 +244,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administration\AdminController.cs" />
     <Compile Include="Controllers\Administration\BannerController.cs" />
+    <Compile Include="Controllers\Administration\LanguageController.cs" />
     <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -343,7 +343,6 @@
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SubMenu\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Language\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\VideoSettings\Index.cshtml" />
     <Content Include="Areas\Admin\Views\VideoAttributes\Index.cshtml" />
@@ -480,6 +479,9 @@
     <Content Include="Views\Banner\Index.cshtml" />
     <Content Include="Views\Banner\Create.cshtml" />
     <Content Include="Views\Banner\Edit.cshtml" />
+    <Content Include="Views\Language\Index.cshtml" />
+    <Content Include="Views\Language\Create.cshtml" />
+    <Content Include="Views\Language\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
