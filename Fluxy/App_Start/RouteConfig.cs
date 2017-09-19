@@ -21,10 +21,10 @@ namespace Fluxy
             routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
-                name: "UserHomePage",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+                     "Default",
+                     "{controller}/{action}",
+                      new { controller = "Home", action = "Index" }
+                    );
         }
     }
 }

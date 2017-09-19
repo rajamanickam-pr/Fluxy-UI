@@ -1,4 +1,5 @@
-﻿using Fluxy.ViewModels.Categories;
+﻿using Boilerplate.Web.Mvc;
+using Fluxy.ViewModels.Categories;
 using Fluxy.ViewModels.Localization;
 using Fluxy.ViewModels.Mail;
 using System;
@@ -66,11 +67,13 @@ namespace Fluxy.ViewModels.Video
             }
         }
 
-        public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime UpdatedDate { get; set; }
-        public string UpdatedBy { get; set; }
-
+        public string Slug
+        {
+            get
+            {
+                return FriendlyUrlHelper.GetFriendlyTitle(this.Title);
+            }
+        }
 
         public virtual IEnumerable<CategoryViewModel> Categories { get; set; }
         public virtual IEnumerable<LanguageViewModel> Languages { get; set; }

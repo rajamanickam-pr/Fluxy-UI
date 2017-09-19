@@ -7,6 +7,7 @@ using Fluxy.ViewModels.Video;
 using System.Data.SqlClient;
 using System;
 using Fluxy.Core.Constants.Video;
+using System.Text.RegularExpressions;
 
 namespace Fluxy.Controllers
 {
@@ -25,12 +26,11 @@ namespace Fluxy.Controllers
 
         // GET: Video
         [HttpGet]
-        [Route("", Name = VideoControllerRoutes.GetIndex)]
-        public ActionResult Index(string videoId)
+        [Route("{videoId}/{title}", Name = VideoControllerRoutes.GetIndex)]
+        public ActionResult Index(string videoId, string title)
         {
-            if (string.IsNullOrEmpty(videoId))
+            if (string.IsNullOrEmpty(title))
                 throw new ArgumentNullException("videoId is null or empty");
-
             SqlParameter[] sqlParam = {
                 new SqlParameter("videoId",videoId)
             };
