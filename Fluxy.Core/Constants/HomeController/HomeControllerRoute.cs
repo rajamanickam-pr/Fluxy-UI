@@ -16,5 +16,8 @@
         public const string GetFAQ = ControllerName.Home + "FAQ";
         public const string GetHelpDesk = ControllerName.Home + "GetHelpDesk";
         public const string PostHelpDesk = ControllerName.Home + "PostHelpDesk";
+
+        public const string GetSiteSearch = ControllerName.Home + "GetSiteSearch";
+        public const string PostSiteSearch = ControllerName.Home + "PostSiteSearch";
     }
 }

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Fluxy.ViewModels.Video.VideoAttributesViewModel>
+@{
+    ViewBag.Title = "Site Search";
+    ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples| Site Search";
+}
+<div class="container">
+
+    <h2>Video Search</h2>
+    <hr />
+    @using (Html.BeginForm("SiteSearch", "Home", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="searchText" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        if (Model != null)
+        {
+
+            <div class="alert alert-info" style="margin-top:20px" role="alert">
+                <strong>Search Result</strong>
+            </div>
+            if (Model.Count() > 0)
+            {
+                <div class="row ">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4">
+                            @Html.Partial("_VideoBox", item)
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No results found. Try another keywords.</p>
+            }
+        }
+        else
+        {
+            <div style="margin-top:165px"></div>
+        }
+    }
+</div>

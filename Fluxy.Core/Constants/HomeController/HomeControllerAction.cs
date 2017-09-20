@@ -11,7 +11,8 @@
         public const string RobotsText = "RobotsText";
         public const string SitemapXml = "SitemapXml";
 
-        public const string FAQ = "FAQ";
+        public const string FAQ = "FAQ"; 
         public const string HelpDesk = "HelpDesk";
+        public const string SiteSearch = "SiteSearch";
     }
 }

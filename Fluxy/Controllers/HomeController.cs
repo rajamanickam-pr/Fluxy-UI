@@ -149,6 +149,23 @@ namespace Fluxy.Controllers
             return View(HomeControllerAction.FAQ);
         }
 
+        [HttpGet]
+        [Route("SiteSearch", Name = HomeControllerRoute.GetSiteSearch)]
+        public virtual ActionResult SiteSearch()
+        {
+            return View(HomeControllerAction.SiteSearch,null);
+        }
+
+        [HttpPost]
+        [Route("SiteSearch", Name = HomeControllerRoute.PostSiteSearch)]
+        public async Task<ActionResult> SiteSearch(FormCollection data)
+        {
+            var searchText = data["searchText"].ToString().ToLower();
+            var videos = await _videoAttributesService.GetListAsync(i => i.Title.ToLower().Contains(searchText));
+            var searchVideos = _mapper.Map<List<VideoAttributesViewModel>>(videos.Take(12));
+            return View(HomeControllerAction.SiteSearch, searchVideos);
+        }
+
         [Route("helpdesk", Name = HomeControllerRoute.GetHelpDesk)]
         public virtual ActionResult HelpDesk()
         {
