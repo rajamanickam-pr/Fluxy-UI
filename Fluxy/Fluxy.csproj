@@ -271,6 +271,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\User\UserMangementViewModel.cs" />
     <Compile Include="ViewModels\User\UserViewModel.cs" />
+    <Compile Include="ViewModels\Video\ShowVideoViewModel.cs" />
     <Compile Include="ViewModels\Video\VideoAttributesViewModel.cs" />
     <Compile Include="ViewModels\Video\VideoSettingsViewModel.cs" />
   </ItemGroup>

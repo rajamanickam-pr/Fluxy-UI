@@ -1,46 +1,47 @@
-﻿@model Fluxy.ViewModels.Video.VideoAttributesViewModel
+﻿@model Fluxy.ViewModels.Video.ShowVideoViewModel
 @{
-    var videoUrl = Model.Url + Model?.VideoSettings?.FrameFilters;
-    ViewBag.Title = Model.ShortName +"Video";
+    var videoUrl = Model.SelectedVideo.Url + Model?.SelectedVideo.VideoSettings?.FrameFilters;
+    ViewBag.Title = Model.SelectedVideo.ShortName + " Video";
+    ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples| " + Model.SelectedVideo.Title;
 }
 <div class="container">
     <div class="row">
         <div class="col-md-8">
             <div class="alert alert-info" role="alert">
-                <strong>@Model.Title</strong>
+                <strong>@Model.SelectedVideo.Title</strong>
             </div>
             <div class="embed-responsive embed-responsive-16by9">
-                @if (Model.IsAllowFullScreen)
+                @if (Model.SelectedVideo.IsAllowFullScreen)
                 {
-                    <iframe class="embed-responsive-item" width="@Model.VideoSettings.FrameWidth" height="@Model.VideoSettings.FrameHeight"
+                    <iframe class="embed-responsive-item" width="@Model.SelectedVideo.VideoSettings.FrameWidth" height="@Model.SelectedVideo.VideoSettings.FrameHeight"
                             src="@videoUrl" frameborder="0" allowfullscreen></iframe>
                 }
                 else
                 {
-                    <iframe class="embed-responsive-item" width="@Model.VideoSettings.FrameWidth" height="@Model.VideoSettings.FrameHeight"
+                    <iframe class="embed-responsive-item" width="@Model.SelectedVideo.VideoSettings.FrameWidth" height="@Model.SelectedVideo.VideoSettings.FrameHeight"
                             src="@videoUrl" frameborder="0"></iframe>
                 }
             </div>
             <div class="row">
                 <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Added by">
                     <span>
-                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>@Model.ApplicationUser.UserName
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>@Model.SelectedVideo.ApplicationUser.UserName
                     </span>
                 </div>
                 <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Views Count">
-                    <span><i class="fa fa-eye" aria-hidden="true"></i>@Model.ViewCount</span>
+                    <span><i class="fa fa-eye" aria-hidden="true"></i>@Model.SelectedVideo.ViewCount</span>
                 </div>
                 <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Tags">
-                    <span><i class="fa fa-tags" aria-hidden="true"></i>@Model.Tags</span>
+                    <span><i class="fa fa-tags" aria-hidden="true"></i>@Model.SelectedVideo.Tags</span>
                 </div>
             </div>
 
-            <div class="fb-like" 
-                 data-href="http://localhost/Fluxy/Video?videoId='@Model.Id'" 
-                 data-layout="standard" 
-                 data-action="like" 
-                 data-size="small" 
-                 data-show-faces="true" 
+            <div class="fb-like"
+                 data-href="http://localhost/Fluxy/Video?videoId='@Model.SelectedVideo.Id'"
+                 data-layout="standard"
+                 data-action="like"
+                 data-size="small"
+                 data-show-faces="true"
                  data-share="true">
             </div>
 
@@ -48,58 +49,56 @@
                 <blockquote class="blockquote">
                     <p class="mb-0"><strong>Description</strong></p>
                     <small>
-                        @Model.Description
+                        @Model.SelectedVideo.Description
                     </small>
                 </blockquote>
             </div>
-            <div class="fb-comments" 
-                 data-href="http://localhost/Fluxy/Video?videoId='@Model.Id'" 
+            <div class="fb-comments"
+                 data-href="http://localhost/Fluxy/Video?videoId='@Model.SelectedVideo.Id'"
                  data-numposts="10">
             </div>
-
-            @*<div class="alert alert-info" role="alert">
-                        <strong>Recent Videos</strong>
+            <div class="alert alert-info" role="alert">
+                <strong>You May Also Like</strong>
+            </div>
+            <div class="row ">
+                @foreach (var item in Model.UserMayLike)
+                {
+                    <div class="col-md-6">
+                        @Html.Partial("_VideoBox", item)
                     </div>
-                    <div class="row ">
-                        @for (int i = 0; i < 8; i++)
-                        {
-                            <div class="col-md-4">
-                                @Html.Partial("_VideoBox")
-                            </div>
-                        }
+                }
+            </div>
+            <div class="alert alert-info" role="alert">
+                <strong>Recent Videos</strong>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.RecentlyAdded)
+                {
+                    <div class="col-md-6">
+                        @Html.Partial("_VideoBox", item)
                     </div>
-                    <div class="alert alert-info" role="alert">
-                        <strong>Sports Videos</strong>
-                    </div>
-                    <div class="row ">
-                        @for (int i = 0; i < 8; i++)
-                        {
-                            <div class="col-md-4">
-                                @Html.Partial("_VideoBox")
-                            </div>
-                        }
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-                    <div class="alert alert-info" role="alert">
-                        <strong>Most Viewed Videos</strong>
-                    </div>
-                    @for (int i = 0; i < 3; i++)
-                    {
-                        @Html.Partial("_VideoBox")
-                    }
-                </div>*@
+                }
+            </div>
         </div>
+
         <div class="col-md-4">
             <div class="fb-page" data-href="https://www.facebook.com/fluxypictures" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                 <blockquote cite="https://www.facebook.com/fluxypictures" class="fb-xfbml-parse-ignore">
                     <a href="https://www.facebook.com/fluxypictures">Fluxy Pictures</a>
                 </blockquote>
             </div>
+
+            <div class="alert alert-info" role="alert">
+                <strong>Most Viewed Videos</strong>
+            </div>
+            @foreach (var item in Model.PopularVideo)
+            {
+                @Html.Partial("_VideoBox", item)
+            }
         </div>
     </div>
+
+</div>
 </div>
 <script>
     FB.ui({

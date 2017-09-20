@@ -16,7 +16,7 @@ namespace Fluxy.ViewModels.User
         public string Gender { get; set; }
         [Required]
         [Display(Name = "Date of Birth")]
-        public DateTime Dob { get; set; }  
+        public DateTime Dob { get; set; }
         public int Age { get; set; }
         public string About { get; set; }
         public string Hobbies { get; set; }
@@ -28,7 +28,14 @@ namespace Fluxy.ViewModels.User
         {
             get
             {
-                return Convert.ToBase64String(this.DisplayPicture);
+                if (this.DisplayPicture.Length > 0)
+                {
+                    return Convert.ToBase64String(this.DisplayPicture);
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 

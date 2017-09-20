@@ -1,7 +1,18 @@
-﻿
+﻿@model  PagedList.IPagedList<Fluxy.ViewModels.Video.VideoAttributesViewModel>
 @{
     ViewBag.Title = "Education";
+    ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples. In this page Videos about " + ViewBag.Title;
 }
-
-<h2>Education</h2>
-
+<div class="container">
+    <div class="alert alert-info" role="alert">
+        <strong>@ViewBag.Title</strong>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                @Html.Partial("_VideoBox", item)
+            </div>
+        }
+    </div>
+</div>

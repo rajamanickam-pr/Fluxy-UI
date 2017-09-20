@@ -2,6 +2,8 @@
 @using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Account Settings";
+    ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples| Account Settings";
+
 }
 <div class="container">
     @using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @id = "profileForm", @enctype = "multipart/form-data" }))

@@ -14,6 +14,7 @@
         public const string GetSitemapXml = ControllerName.Home + "GetSitemapXml";
 
         public const string GetFAQ = ControllerName.Home + "FAQ";
-        public const string GetHelpDesk = ControllerName.Home + "HelpDesk";
+        public const string GetHelpDesk = ControllerName.Home + "GetHelpDesk";
+        public const string PostHelpDesk = ControllerName.Home + "PostHelpDesk";
     }
 }

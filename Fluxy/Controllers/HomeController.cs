@@ -30,6 +30,7 @@ using Fluxy.Services.Sitemap;
 using Fluxy.Services.OpenSearch;
 using Fluxy.Services.BrowserConfig;
 using Fluxy.Services.Feed;
+using Fluxy.Data.ExtentedDTO;
 
 namespace Fluxy.Controllers
 {
@@ -51,9 +52,9 @@ namespace Fluxy.Controllers
         public HomeController(IRobotsService robotsService,
             IManifestService manifestService,
             IContactUsService contactUsService,
-            IUserSettingsService userSettingsService, 
-            ILogService logService, IMapper mapper, 
-            IVideoAttributesService videoAttributesService, 
+            IUserSettingsService userSettingsService,
+            ILogService logService, IMapper mapper,
+            IVideoAttributesService videoAttributesService,
             IBannerDetailsService bannerDetailsService,
             ISitemapService sitemapService,
             IOpenSearchService openSearchService,
@@ -78,6 +79,8 @@ namespace Fluxy.Controllers
         public ActionResult Index(string message)
         {
             var isAdultContent = false;
+            IEnumerable<VideoAttributesExtend> recentlyAdded;
+            IEnumerable<VideoAttributesExtend> popularVideos;
             if (User.Identity.IsAuthenticated)
             {
                 var userId = User.Identity.GetUserId();
@@ -88,9 +91,16 @@ namespace Fluxy.Controllers
                 }
             }
 
-            var recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
-
-            var popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+            if (isAdultContent)
+            {
+                recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.CreatedDate).Take(9);
+                popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
+            }
+            else
+            {
+                recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
+                popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+            }
 
             var generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs")
              && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
@@ -114,7 +124,7 @@ namespace Fluxy.Controllers
                 Banners = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll())
             };
 
-            return View(HomeControllerAction.Index,homeViewModel);
+            return View(HomeControllerAction.Index, homeViewModel);
         }
 
         [Route("about", Name = HomeControllerRoute.GetAbout)]
@@ -146,13 +156,14 @@ namespace Fluxy.Controllers
         }
 
         [HttpPost]
+        [Route("helpdesk", Name = HomeControllerRoute.PostHelpDesk)]
         public virtual ActionResult HelpDesk(ContactUsViewModel contactUsViewModel)
         {
             var contact = _mapper.Map<ContactUs>(contactUsViewModel);
             if (contact == null)
                 throw new ArgumentNullException("Model is null or empty");
             _contactUsService.Create(contact);
-            return RedirectToAction("Index",routeValues:new { message=Messages.HelpDesk });
+            return RedirectToAction("Index", routeValues: new { message = Messages.HelpDesk });
         }
 
         [Route("search", Name = HomeControllerRoute.GetSearch)]

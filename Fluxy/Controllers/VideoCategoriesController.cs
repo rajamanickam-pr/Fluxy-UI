@@ -10,6 +10,7 @@ using Fluxy.Core.Constants.VideoCategories;
 
 namespace Fluxy.Controllers
 {
+    [RoutePrefix("videos")]
     public class VideoCategoriesController : BaseController
     {
         private readonly IMapper _mapper;

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Linq;
 using AutoMapper;
 using Fluxy.Infrastructure;
 using Fluxy.Services.Logging;
@@ -8,6 +9,7 @@ using System.Data.SqlClient;
 using System;
 using Fluxy.Core.Constants.Video;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Fluxy.Controllers
 {
@@ -38,8 +40,23 @@ namespace Fluxy.Controllers
             _videoAttributesService.ExecuteNonQuery(query, sqlParam);
 
             var videoAttribute = _videoAttributesService.GetSingle(i => i.Id == videoId);
+            var recentlyAdded = _videoAttributesService.GetAll().Take(9).OrderByDescending(i => i.CreatedDate);
+            var popularVideo = _videoAttributesService.GetAll().Take(6).OrderBy(i => i.ViewCount);
+            var userMayLike = _videoAttributesService.GetAll().Take(9).OrderBy(i => i.Tags == videoAttribute.Tags);
             var videoAttributeVM = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
-            return View(VideoControllerAction.Index, videoAttributeVM);
+            var recentlyAddedVM = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded);
+            var popularVideoVM = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(popularVideo);
+            var userMayLikeVM = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(userMayLike);
+
+            var showVideoViewModel = new ShowVideoViewModel
+            {
+                SelectedVideo = videoAttributeVM,
+                PopularVideo = popularVideoVM,
+                RecentlyAdded = recentlyAddedVM,
+                UserMayLike = userMayLikeVM
+            };
+
+            return View(VideoControllerAction.Index, showVideoViewModel);
         }
     }
 }
