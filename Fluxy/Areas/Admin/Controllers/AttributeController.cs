@@ -12,11 +12,11 @@ using System.Data.Entity.Validation;
 namespace Fluxy.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AttributeController : BaseController
+    public class AttributesController : BaseController
     {
         private readonly IMenuAttributeService _menuAttributeService;
         private readonly IMapper _mapper;
-        public AttributeController(ILogService logService, IMenuAttributeService menuAttributeService, IMapper mapper)
+        public AttributesController(ILogService logService, IMenuAttributeService menuAttributeService, IMapper mapper)
             : base(logService, mapper)
         {
             _menuAttributeService = menuAttributeService;

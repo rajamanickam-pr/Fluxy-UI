@@ -6,6 +6,7 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Fluxy.Repositories.Common
 {
@@ -30,21 +31,11 @@ namespace Fluxy.Repositories.Common
             return msg;
         }
 
-        public virtual IEnumerable<T> GetAll(params Expression<Func<T, object>>[] properties)
+        public virtual IEnumerable<T> GetAll()
         {
-            List<T> list = new List<T>();
-
-            IQueryable<T> dbQuery = _entities.Set<T>();
-
-            foreach (Expression<Func<T, object>> property in properties)
-                dbQuery = dbQuery.Include<T, object>(property);
-
-            list = dbQuery.AsNoTracking()
-                            .ToList<T>();
-
-            return list;
+            return _entities.Set<T>().AsNoTracking().ToList();
         }
-
+       
         public virtual IEnumerable<T> GetList(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] properties)
         {
             List<T> list = new List<T>();
@@ -128,5 +119,92 @@ namespace Fluxy.Repositories.Common
         {
             _entities.SaveChanges();
         }
+
+        #region  Async calls
+
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        {
+           return await _entities.Set<T>().AsNoTracking()
+                            .ToListAsync<T>();
+        }
+
+        public async Task<T> AddAsync(T entity)
+        {
+            try
+            {
+                if (entity == null)
+                    throw new ArgumentNullException("entity");
+                _entities.Set<T>().Add(entity);
+                await _entities.SaveChangesAsync();
+                return entity;
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                throw new Exception(GetFullErrorText(dbEx), dbEx);
+            }
+        }
+
+        public async Task<T> DeleteAsync(T entity)
+        {
+            try
+            {
+                if (entity == null)
+                    throw new ArgumentNullException("entity");
+                _entities.Entry(entity).State = EntityState.Deleted;
+                await _entities.SaveChangesAsync();
+                return entity;
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                throw new Exception(GetFullErrorText(dbEx), dbEx);
+            }
+        }
+
+        public async Task<T> EditAsync(T entity)
+        {
+            try
+            {
+                if (entity == null)
+                    throw new ArgumentNullException("entity");
+                 _entities.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                await _entities.SaveChangesAsync();
+                return entity;
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                throw new Exception(GetFullErrorText(dbEx), dbEx);
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetListAsync(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] properties)
+        {
+            List<T> list = new List<T>();
+
+            IQueryable<T> dbQuery = _entities.Set<T>();
+
+            foreach (Expression<Func<T, object>> property in properties)
+                dbQuery = dbQuery.Include<T, object>(property);
+
+            list = await dbQuery.AsNoTracking()
+                            .Where(where)
+                            .ToListAsync<T>();
+
+            return list;
+        }
+
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] properties)
+        {
+            T item = null;
+            IQueryable<T> dbQuery = _entities.Set<T>();
+
+            foreach (Expression<Func<T, object>> property in properties)
+                dbQuery = dbQuery.Include<T, object>(property);
+
+            item = await dbQuery.AsNoTracking()
+                            .FirstOrDefaultAsync(where);
+            return item;
+        }
+
+        #endregion
     }
 }

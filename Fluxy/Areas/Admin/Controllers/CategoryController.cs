@@ -12,11 +12,11 @@ using Fluxy.Core.Models.Categories;
 namespace Fluxy.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoryController : BaseController
+    public class CategorysController : BaseController
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
-        public CategoryController(ILogService logService, ICategoryService categoryService, IMapper mapper)
+        public CategorysController(ILogService logService, ICategoryService categoryService, IMapper mapper)
             : base(logService, mapper)
         {
             _mapper = mapper;

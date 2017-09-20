@@ -12,12 +12,12 @@ using System.Net;
 namespace Fluxy.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class VideoAttributesController : BaseController
+    public class VideoAttributessController : BaseController
     {
         private readonly IVideoAttributesService _videoAttributesService;
         private readonly IMapper _mapper;
 
-        public VideoAttributesController(ILogService logService, IVideoAttributesService videoAttributesService, IMapper mapper)
+        public VideoAttributessController(ILogService logService, IVideoAttributesService videoAttributesService, IMapper mapper)
             : base(logService, mapper)
         {
             _videoAttributesService = videoAttributesService;

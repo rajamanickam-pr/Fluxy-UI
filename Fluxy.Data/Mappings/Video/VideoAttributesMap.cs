@@ -13,6 +13,7 @@ namespace Fluxy.Data.Mappings.Video
             this.Property(pm => pm.ShortName).HasMaxLength(100);
             this.Property(pm => pm.Tags).HasMaxLength(100);
             this.HasOptional(pm => pm.ApplicationUser).WithMany().HasForeignKey(b => b.UserId);
+            this.HasOptional(pm => pm.VideoSettings).WithMany().HasForeignKey(b => b.VideoSettingsId);
         }
     }
 }

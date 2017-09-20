@@ -15,7 +15,7 @@ using Fluxy.Data.ExtentedDTO;
 namespace Fluxy.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class UserManagementController : BaseController
+    public class UserManagementsController : BaseController
     {
         private readonly FluxyContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -23,7 +23,7 @@ namespace Fluxy.Areas.Admin.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
-        public UserManagementController(IUserProfileService userProfileService, ILogService logService, IMapper mapper)
+        public UserManagementsController(IUserProfileService userProfileService, ILogService logService, IMapper mapper)
              : base(logService, mapper)
         {
             _context = new FluxyContext();

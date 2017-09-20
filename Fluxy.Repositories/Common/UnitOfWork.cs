@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Fluxy.Repositories.Common
 {
@@ -23,8 +24,6 @@ namespace Fluxy.Repositories.Common
             _dbContext = context;
         }
 
-
-
         /// <summary>
         /// Saves all pending changes
         /// </summary>
@@ -33,6 +32,11 @@ namespace Fluxy.Repositories.Common
         {
             // Save changes with the default options
             return _dbContext.SaveChanges();
+        }
+
+        public async Task<int> CommitAsync()
+        {
+            return await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>

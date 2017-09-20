@@ -241,6 +241,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administration\AdminController.cs" />
     <Compile Include="Controllers\Administration\BannerController.cs" />
+    <Compile Include="Controllers\Administration\CategoryController.cs" />
     <Compile Include="Controllers\Administration\LanguageController.cs" />
     <Compile Include="Controllers\Administration\LogController.cs" />
     <Compile Include="Controllers\Administration\VideoSettingsController.cs" />
@@ -483,6 +484,9 @@
     <Content Include="Views\VideoSettings\Index.cshtml" />
     <Content Include="Views\VideoSettings\Create.cshtml" />
     <Content Include="Views\VideoSettings\Edit.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

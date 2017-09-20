@@ -58,45 +58,62 @@ namespace Fluxy.Data
             base.OnModelCreating(modelBuilder);
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            try
+            {
+                AuditableEntity();
+                return base.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public override int SaveChanges()
         {
             try
             {
-                var modifiedEntries = ChangeTracker.Entries()
-                        .Where(x => x.Entity is IAuditableEntity
-                            && (x.State == System.Data.Entity.EntityState.Added || x.State == System.Data.Entity.EntityState.Modified));
-
-                foreach (var entry in modifiedEntries)
-                {
-                    IAuditableEntity auditableEntity = entry.Entity as IAuditableEntity;
-                    IEntity<string> Entity = entry.Entity as IEntity<string>;
-                    if (auditableEntity != null)
-                    {
-                        string identityName = Thread.CurrentPrincipal.Identity.Name;
-                        DateTime now = DateTime.UtcNow;
-
-                        if (entry.State == System.Data.Entity.EntityState.Added)
-                        {
-                            Entity.Id = Guid.NewGuid().ToString();
-                            auditableEntity.CreatedBy = identityName;
-                            auditableEntity.CreatedDate = now;
-                        }
-                        else
-                        {
-                            base.Entry(auditableEntity).Property(x => x.CreatedBy).IsModified = false;
-                            base.Entry(auditableEntity).Property(x => x.CreatedDate).IsModified = false;
-                        }
-
-                        auditableEntity.UpdatedBy = identityName;
-                        auditableEntity.UpdatedDate = now;
-                    }
-                }
-
+                AuditableEntity();
                 return base.SaveChanges();
             }
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        private void AuditableEntity()
+        {
+            var modifiedEntries = ChangeTracker.Entries()
+                                   .Where(x => x.Entity is IAuditableEntity
+                                       && (x.State == System.Data.Entity.EntityState.Added || x.State == System.Data.Entity.EntityState.Modified));
+
+            foreach (var entry in modifiedEntries)
+            {
+                IAuditableEntity auditableEntity = entry.Entity as IAuditableEntity;
+                IEntity<string> Entity = entry.Entity as IEntity<string>;
+                if (auditableEntity != null)
+                {
+                    string identityName = Thread.CurrentPrincipal.Identity.Name;
+                    DateTime now = DateTime.UtcNow;
+
+                    if (entry.State == System.Data.Entity.EntityState.Added)
+                    {
+                        Entity.Id = Guid.NewGuid().ToString();
+                        auditableEntity.CreatedBy = identityName;
+                        auditableEntity.CreatedDate = now;
+                    }
+                    else
+                    {
+                        base.Entry(auditableEntity).Property(x => x.CreatedBy).IsModified = false;
+                        base.Entry(auditableEntity).Property(x => x.CreatedDate).IsModified = false;
+                    }
+
+                    auditableEntity.UpdatedBy = identityName;
+                    auditableEntity.UpdatedDate = now;
+                }
             }
         }
     }
