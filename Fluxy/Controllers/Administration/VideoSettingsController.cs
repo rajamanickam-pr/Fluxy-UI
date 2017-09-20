@@ -6,9 +6,11 @@ using Fluxy.Services.Logging;
 using Fluxy.Services.Video;
 using Fluxy.ViewModels.Video;
 using Fluxy.Core.Models.Video;
+using Fluxy.Core.Constants.VideoSettings;
 
-namespace Fluxy.Areas.Admin.Controllers
+namespace Fluxy.Controllers.Administration
 {
+    [RoutePrefix("videosettings")]
     [Authorize(Roles = "Admin")]
     public class VideoSettingsController : BaseController
     {
@@ -24,14 +26,24 @@ namespace Fluxy.Areas.Admin.Controllers
 
 
         // GET: Admin/Menu
+        [HttpGet]
+        [Route("", Name = VideoSettingsControllerRoutes.GetIndex)]
         public ActionResult Index()
         {
             var videoSettings = _videoSettingsService.GetAll();
             var menuList = _mapper.Map<List<VideoSettingsViewModel>>(videoSettings);
-            return View(menuList);
+            return View(VideoSettingsControllerAction.Index, menuList);
+        }
+
+        [HttpGet]
+        [Route("Create", Name = VideoSettingsControllerRoutes.GetCreate)]
+        public ActionResult Create()
+        {
+            return View();
         }
 
         [HttpPost]
+        [Route("Create", Name = VideoSettingsControllerRoutes.PostCreate)]
         public ActionResult Create(VideoSettingsViewModel videoSettingsViewModel)
         {
             if (ModelState.IsValid)
@@ -45,37 +57,51 @@ namespace Fluxy.Areas.Admin.Controllers
                 {
                     _videoSettingsService.Create(videoSettingsDto);
                 }
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return RedirectToAction(VideoSettingsControllerAction.Index);
             }
-            return Json(false, JsonRequestBehavior.AllowGet);
+            return View();
         }
 
-        public JsonResult GetbyID(string id)
+
+        [HttpGet]
+        [Route("Edit", Name = VideoSettingsControllerRoutes.GetEdit)]
+        public ActionResult Edit(string id)
         {
             var videoSettingsDto = _videoSettingsService.GetSingle(i => i.Id == id);
             var videoSettings = _mapper.Map<VideoSettingsViewModel>(videoSettingsDto);
-            return Json(videoSettings, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public JsonResult GetList()
-        {
-            var videoSettingsDto = _videoSettingsService.GetAll();
-            var videoSettingsList = _mapper.Map<List<VideoSettingsViewModel>>(videoSettingsDto);
-            return Json(videoSettingsList, JsonRequestBehavior.AllowGet);
+            return View(videoSettings);
         }
 
         [HttpPost]
-        public JsonResult Delete(string id)
+        [Route("Edit", Name = VideoSettingsControllerRoutes.PostEdit)]
+        public ActionResult Edit(VideoSettingsViewModel videoSettingsViewModel)
         {
-            bool status = false;
+            if (ModelState.IsValid)
+            {
+                var videoSettingsDto = _mapper.Map<VideoSettings>(videoSettingsViewModel);
+                if (!string.IsNullOrEmpty(videoSettingsDto.Id))
+                {
+                    _videoSettingsService.Update(videoSettingsDto);
+                }
+                else
+                {
+                    _videoSettingsService.Create(videoSettingsDto);
+                }
+                return RedirectToAction(VideoSettingsControllerAction.Index);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        [Route("Delete", Name = VideoSettingsControllerRoutes.GetDelete)]
+        public ActionResult Delete(string id)
+        {
             var videoSettingsDto = _videoSettingsService.GetSingle(i => i.Id == id);
             if (videoSettingsDto != null)
             {
                 _videoSettingsService.Delete(videoSettingsDto);
-                status = true;
             }
-            return Json(status, JsonRequestBehavior.AllowGet);
+            return RedirectToAction(VideoSettingsControllerAction.Index);
         }
     }
 }
