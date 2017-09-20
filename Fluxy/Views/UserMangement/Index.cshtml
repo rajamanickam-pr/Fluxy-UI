@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Fluxy.ViewModels.User.UserViewModel>
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Users</h2>
+
+<div class="container">
+    <table class="table table-hover admin-table">
+        <thead class="thead-inverse ">
+            <tr>
+                <th scope="row">
+                    UserName
+                </th>
+                <th scope="row">
+                    Email
+                </th>
+                <th scope="row">
+                    Role
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                        @if (User.Identity.GetUserId() != item.Id)
+                        {
+                            @Html.ActionLink("Change Role", "ChangeRole", routeValues: new { id = item.Id })<span>|</span>
+                            @Html.ActionLink("Delete", "Delete", routeValues: new { id = item.Id }, htmlAttributes: new { onclick = "return confirm('Are you sure you wish to delete this User?');" })<span>|</span>
+                        }
+                        @Html.ActionLink("Details", "Details", routeValues: new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

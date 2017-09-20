@@ -230,18 +230,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SubMenuController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
-    <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administration\AdminController.cs" />
     <Compile Include="Controllers\Administration\BannerController.cs" />
     <Compile Include="Controllers\Administration\CategoryController.cs" />
     <Compile Include="Controllers\Administration\LanguageController.cs" />
     <Compile Include="Controllers\Administration\LogController.cs" />
+    <Compile Include="Controllers\Administration\UserMangementController.cs" />
     <Compile Include="Controllers\Administration\VideoManagementController.cs" />
     <Compile Include="Controllers\Administration\VideoSettingsController.cs" />
     <Compile Include="Controllers\ErrorHandlerController.cs" />
@@ -267,6 +262,7 @@
     <Compile Include="ViewModels\Menu\SubMenuViewModel.cs" />
     <Compile Include="ViewModels\Menu\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\User\AccountViewModels.cs" />
+    <Compile Include="ViewModels\User\AdminViewModel.cs" />
     <Compile Include="ViewModels\User\ManageViewModels.cs" />
     <Compile Include="Modules\EFModule.cs" />
     <Compile Include="Modules\RepositoryModule.cs" />
@@ -281,26 +277,9 @@
   <ItemGroup>
     <Content Include="App_Data\Templates\ForgotPasswordMailTemplate.txt" />
     <Content Include="App_Data\Templates\AccountConfirmationMailTemplate.txt" />
-    <Content Include="Areas\Admin\Content\AdminStyles.css" />
-    <Content Include="Areas\Admin\Content\jquery.dataTables.min.css" />
-    <Content Include="Areas\Admin\Scripts\AttributeScripts.es5.js">
-      <DependentUpon>AttributeScripts.js</DependentUpon>
-    </Content>
-    <Content Include="Areas\Admin\Scripts\AttributeScripts.es5.min.js">
-      <DependentUpon>AttributeScripts.es5.js</DependentUpon>
-    </Content>
-    <Content Include="Areas\Admin\Scripts\AttributeScripts.js" />
-    <Content Include="Areas\Admin\Scripts\CategoryScripts.js" />
-    <Content Include="Areas\Admin\Scripts\Helpers.js" />
-    <Content Include="Areas\Admin\Scripts\jquery.dataTables.min.js" />
-    <Content Include="Areas\Admin\Scripts\LoggingScripts.js" />
-    <Content Include="Areas\Admin\Scripts\UserManageScript.js" />
-    <Content Include="Areas\Admin\Scripts\VideoAttributesScripts.js" />
-    <Content Include="Areas\Admin\Scripts\VideoSettingsScripts.js" />
-    <Content Include="Areas\Admin\Scripts\SubCategoryScripts.js" />
-    <Content Include="Areas\Admin\Scripts\LanguageScripts.js" />
-    <Content Include="Areas\Admin\Scripts\MenuScripts.js" />
-    <Content Include="Areas\Admin\Scripts\SubMenuScripts.js" />
+    <Content Include="Content\AdminStyles.css" />
+    <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -336,12 +315,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\SubMenu\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\UserManagement\Index.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -486,6 +459,9 @@
     <Content Include="Views\VideoManagement\Create.cshtml" />
     <Content Include="Views\VideoManagement\Edit.cshtml" />
     <Content Include="Views\VideoManagement\Index.cshtml" />
+    <Content Include="Views\UserMangement\Index.cshtml" />
+    <Content Include="Views\UserMangement\Details.cshtml" />
+    <Content Include="Views\UserMangement\ChangeRole.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

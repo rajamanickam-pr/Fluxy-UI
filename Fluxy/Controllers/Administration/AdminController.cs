@@ -6,8 +6,8 @@ using Microsoft.AspNet.Identity;
 using Fluxy.Data;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Linq;
-using Fluxy.Areas.Admin.Models;
 using Fluxy.Services.Video;
+using Fluxy.ViewModels.User;
 
 namespace Fluxy.Controllers.Administration
 {

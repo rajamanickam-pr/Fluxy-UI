@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "ChangeRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Change Role</h2>
+
+<div class="container">
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                @Html.Label("Role Changed for", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <b>@ViewBag.Username</b>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="hidden" value="@ViewBag.UserId" name="UserId" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Roles", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Roles", null, htmlAttributes: new { @class = "form-control", @name = "RolesSelected" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Change" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

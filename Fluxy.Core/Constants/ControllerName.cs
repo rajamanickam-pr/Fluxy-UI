@@ -18,5 +18,6 @@
         public const string VideoSettings = "VideoSettings";
         public const string Category = "Category";
         public const string VideoManagement = "VideoManagement";
+        public const string UserManagement = "UserManagement";
     }
 }

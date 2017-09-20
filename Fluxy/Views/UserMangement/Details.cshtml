@@ -1,0 +1,50 @@
+﻿@model Fluxy.ViewModels.User.UserMangementViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" readonly="readonly" id="Id" value="Id" />
+        </div>
+        <div class="form-group">
+            <label>Firstname</label>
+            <input type="text" class="form-control" readonly="readonly" value="@Model.Firstname"/>
+        </div>
+        <div class="form-group">
+            <label>Lastname</label>
+            <input type="text" class="form-control" readonly="readonly" value="@Model.Lastname" />
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="text" class="form-control" readonly="readonly" value="@Model.Gender" />
+        </div>
+        <div class="form-group">
+            <label>Hobbies</label>
+            <input type="text" class="form-control" readonly="readonly" value="@Model.Hobbies" />
+        </div>
+        <div class="form-group">
+            <label>About</label>
+            <input type="text" class="form-control" readonly="readonly" value="@Model.About" />
+        </div>
+        <div class="form-check">
+            <label>Avatar</label>
+            <img src="data:image/png;base64,@Model.DisplayPictureString" class="img-thumbnail">
+        </div>
+        <div class="form-check">
+            <label>Username</label>
+            <input type="text" class="form-control" readonly="readonly" value="@Model.ApplicationUser.UserName" />
+        </div>
+        <div class="form-check">
+            <label>Email</label>
+            <input type="text" class="form-control" readonly="readonly" value="@Model.ApplicationUser.Email" />
+        </div>
+        <div class="form-check">
+            <label>PhoneNumber</label>
+            <input type="text" class="form-control" readonly="readonly" value="@Model.ApplicationUser.PhoneNumber" />
+        </div>
+    </form>
+</div>

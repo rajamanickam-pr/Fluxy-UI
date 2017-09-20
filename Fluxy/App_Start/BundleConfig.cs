@@ -34,15 +34,14 @@ namespace Fluxy
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/adminScript").Include(
-                       "~/Areas/Admin/Scripts/Helpers.js",
-                       "~/Areas/Admin/Scripts/jquery.dataTables.min.js"));
+                       "~/Scripts/jquery.dataTables.min.js"));
         }
 
         private static void AddCss(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/Content/admincss").Include(
-                       "~/Areas/Admin/Content/AdminStyles.css",
-                       "~/Areas/Admin/Content/jquery.dataTables.min.css"
+                       "~/Content/AdminStyles.css",
+                       "~/Content/jquery.dataTables.min.css"
                         ));
 
             bundles.Add(new StyleBundle("~/Content/vendorcss").Include(
