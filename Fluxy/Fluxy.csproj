@@ -232,11 +232,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubMenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
-    <Compile Include="Areas\Admin\Controllers\VideoAttributesController.cs" />
     <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administration\AdminController.cs" />
@@ -244,6 +242,7 @@
     <Compile Include="Controllers\Administration\CategoryController.cs" />
     <Compile Include="Controllers\Administration\LanguageController.cs" />
     <Compile Include="Controllers\Administration\LogController.cs" />
+    <Compile Include="Controllers\Administration\VideoManagementController.cs" />
     <Compile Include="Controllers\Administration\VideoSettingsController.cs" />
     <Compile Include="Controllers\ErrorHandlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -339,11 +338,8 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SubMenu\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\VideoAttributes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
     <Content Include="Areas\Admin\Views\UserManagement\Index.cshtml" />
     <None Include="bundleconfig.json" />
@@ -487,6 +483,9 @@
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\VideoManagement\Create.cshtml" />
+    <Content Include="Views\VideoManagement\Edit.cshtml" />
+    <Content Include="Views\VideoManagement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

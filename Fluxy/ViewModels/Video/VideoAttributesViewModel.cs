@@ -44,7 +44,10 @@ namespace Fluxy.ViewModels.Video
         [ForeignKey("LanguageId")]
         public virtual LanguageViewModel Language { get; set; }
 
-       
+        public string VideoSettingsId { get; set; }
+        [ForeignKey("VideoSettingsId")]
+        public virtual VideoSettingsViewModel VideoSettings { get; set; }
+
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual Data.ApplicationUser ApplicationUser { get; set; }
