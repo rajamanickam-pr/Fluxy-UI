@@ -280,19 +280,27 @@ namespace Fluxy.Controllers
         [Route("PostVideos", Name = ProfileControllerRoute.PostPostVideos)]
         public virtual ActionResult PostVideos(VideoAttributesViewModel videoAttributesViewModel)
         {
-            var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
-            videoAttributes.UserId = User.Identity.GetUserId();
-            if (!string.IsNullOrEmpty(videoAttributes.Id))
+            var duplicationCheck = _videoAttributesService.GetSingle(i => i.Url.ToLower().Contains(videoAttributesViewModel.VideoId.ToLower()));
+            if (duplicationCheck == null)
             {
-                videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
-                _videoAttributesService.Update(videoAttributes);
+                var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
+                videoAttributes.UserId = User.Identity.GetUserId();
+                if (!string.IsNullOrEmpty(videoAttributes.Id))
+                {
+                    videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                    _videoAttributesService.Update(videoAttributes);
+                }
+                else
+                {
+                    videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                    _videoAttributesService.Create(videoAttributes);
+                }
+                return RedirectToAction(ProfileControllerAction.Index);
             }
             else
             {
-                videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
-                _videoAttributesService.Create(videoAttributes);
+                return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.VideoDuplication, userId = string.Empty });
             }
-            return RedirectToAction(ProfileControllerAction.Index);
         }
 
         [HttpGet]
@@ -304,7 +312,7 @@ namespace Fluxy.Controllers
             {
                 _videoAttributesService.Delete(video);
             }
-            return RedirectToAction(ProfileControllerAction.DeleteVideo, routeValues: new { message = Messages.VideoDeleteConfirmation });
+            return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.VideoDeleteConfirmation,userId=string.Empty });
         }
 
         public byte[] GetYouTubeThumbnail(string videoId)

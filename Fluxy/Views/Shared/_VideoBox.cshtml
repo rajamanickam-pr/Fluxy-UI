@@ -11,13 +11,13 @@
             }
             else
             {
-                <img src="//placehold.it/150" data-src="holder.js/340x240" alt='Thumbnail' class="img-thumbnail img-responsive">
+                <img src="//placehold.it/340x240" data-src="holder.js/340x240" alt='Thumbnail' class="img-thumbnail img-responsive">
             }
         </a>
         <div class="row">
             <a href="@Url.Action("Index","Profile",routeValues:new {userId=Model.UserId })" class="col-md-4" data-toggle="tooltip" data-placement="top" title="Added by">
                 <span>
-                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> @Model?.ApplicationUser?.UserName
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> @Model.ApplicationUser.UserName
                 </span>
             </a>
             <div class="col-md-4" data-toggle="tooltip" data-placement="top" title="Views Count">

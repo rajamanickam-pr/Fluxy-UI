@@ -14,7 +14,7 @@ namespace Fluxy.ViewModels.Video
         [Key]
         public string Id { get; set; }
         [Required]
-        [RegularExpression(@"^[0-9a-zA-Z'\s-]{1,40}$", ErrorMessage = "special characters are not allowed except hyphen.")]
+        //[RegularExpression(@"^[0-9a-zA-Z'\s-]{1,40}$", ErrorMessage = "special characters are not allowed except hyphen.")]
         public string Title { get; set; }
         [StringLength(240, ErrorMessage = "ShortName cannot be longer than 240 characters.")]
         public string ShortName { get; set; }

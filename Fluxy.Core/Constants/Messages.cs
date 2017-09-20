@@ -8,6 +8,7 @@
         public const string NewsletterSubscription = "Please select any of one channel";
         public const string NewsletterSubscriptionConfirmation = "Thanks, You'll get notifications on subscribed channels.";
         public const string VideoDeleteConfirmation = "Video has been deleted.";
+        public const string VideoDuplication = "Video already there in our database.";
         public const string HelpDesk = "Thanks for contact us. Your quries will resolved soon";
 
         public const string ChangePasswordSuccess = "Your password has been changed.";

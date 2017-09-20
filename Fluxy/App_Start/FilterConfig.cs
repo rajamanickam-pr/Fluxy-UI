@@ -12,8 +12,8 @@ namespace Fluxy
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             AddSearchEngineOptimizationFilters(filters);
-            AddSecurityFilters(filters);
-            AddContentSecurityPolicyFilters(filters);
+            //AddSecurityFilters(filters);
+           // AddContentSecurityPolicyFilters(filters);
         }
 
         private static void AddContentSecurityPolicyFilters(GlobalFilterCollection filters)

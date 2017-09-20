@@ -69,11 +69,23 @@ namespace Fluxy.Controllers.Administration
         {
             if (ModelState.IsValid)
             {
-                var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
-                videoAttributes.UserId = User.Identity.GetUserId();
-                videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
-                await _videoAttributesService.CreateAsync(videoAttributes);
-                return RedirectToAction(VideoManagementControllerActions.Index);
+                var duplicationCheck =await _videoAttributesService.GetSingleAsync(i => i.Url.ToLower().Contains(videoAttributesViewModel.VideoId.ToLower()));
+                if (duplicationCheck == null)
+                {
+                    var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
+                    videoAttributes.UserId = User.Identity.GetUserId();
+                    videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                    await _videoAttributesService.CreateAsync(videoAttributes);
+                    return RedirectToAction(VideoManagementControllerActions.Index);
+                }
+                else
+                {
+                    ViewBag.VideoSettingsId = new SelectList(await _videoSettingsService.GetAllAsync(), "Id", "Name");
+                    ViewBag.CategoryId = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
+                    ViewBag.LanguageId = new SelectList(await _languageService.GetAllAsync(), "Id", "Name");
+                    Danger("Video already there in our database");
+                    return View(VideoManagementControllerActions.Create, videoAttributesViewModel);
+                }
             }
 
             ViewBag.VideoSettingsId = new SelectList(await _videoSettingsService.GetAllAsync(), "Id", "Name");
@@ -109,9 +121,9 @@ namespace Fluxy.Controllers.Administration
             {
                 return HttpNotFound();
             }
-            ViewBag.VideoSettingsId = new SelectList(await _videoSettingsService.GetAllAsync(), "Id", "Name");
-            ViewBag.CategoryId = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
-            ViewBag.LanguageId = new SelectList(await _languageService.GetAllAsync(), "Id", "Name");
+            ViewBag.VideoSettingsId = new SelectList(await _videoSettingsService.GetAllAsync(), "Id", "Name", selectedValue: videoAttributesViewModel.VideoSettingsId);
+            ViewBag.CategoryId = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name",selectedValue: videoAttributesViewModel.CategoryId);
+            ViewBag.LanguageId = new SelectList(await _languageService.GetAllAsync(), "Id", "Name", selectedValue: videoAttributesViewModel.LanguageId);
             return View(VideoManagementControllerActions.Edit,videoAttributesViewModel);
         }
 

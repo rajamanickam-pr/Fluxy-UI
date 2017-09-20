@@ -52,5 +52,11 @@
     "inputFiles": [
       "Scripts/Custom/Layout.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/jquery.blockUI.min.js",
+    "inputFiles": [
+      "Scripts/jquery.blockUI.js"
+    ]
   }
 ]
