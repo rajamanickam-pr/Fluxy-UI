@@ -19,5 +19,6 @@
         public const string Category = "Category";
         public const string VideoManagement = "VideoManagement";
         public const string UserManagement = "UserManagement";
+        public const string UserQueries = "UserQueries";
     }
 }

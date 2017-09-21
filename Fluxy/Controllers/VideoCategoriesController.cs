@@ -7,7 +7,8 @@ using Fluxy.Services.Video;
 using PagedList;
 using Fluxy.ViewModels.Video;
 using Fluxy.Core.Constants.VideoCategories;
-
+using System.Threading.Tasks;
+using System.Linq;
 namespace Fluxy.Controllers
 {
     [RoutePrefix("videos")]
@@ -27,48 +28,56 @@ namespace Fluxy.Controllers
 
         [HttpGet]
         [Route("AutoVehicles", Name = VideoCategoriesRoute.GetAutoVehicles)]
-        public ActionResult AutoVehicles(int? page)
+        public async Task<ActionResult> AutoVehicles(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var autoVehicleList = _videoAttributesService.GetList(i => i.Category.Name == "Autos and Vehicles");
-            var autoVehicleVM = _mapper.Map<List<VideoAttributesViewModel>>(autoVehicleList);
-            var autoVehiclePagedList = autoVehicleVM.ToPagedList(pageIndex, _pageSize);
-            return View(VideoCategoriesAction.AutoVehicles,autoVehiclePagedList);
+            var autoVehicleList = await _videoAttributesService.GetListAsync(i => i.Category.Name == "Autos and Vehicles");
+            var autoVehicleVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(autoVehicleList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
+            return View(VideoCategoriesAction.AutoVehicles, autoVehicleVM);
         }
 
         [HttpGet]
         [Route("TravelEvents", Name = VideoCategoriesRoute.GetTravelEvents)]
-        public ActionResult TravelEvents(int? page)
+        public async Task<ActionResult> TravelEvents(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var travelEventsList = _videoAttributesService.GetList(i => i.Category.Name == "Travel & Events");
-            var travelEventsVM = _mapper.Map<List<VideoAttributesViewModel>>(travelEventsList).ToPagedList(pageIndex, _pageSize);
-            return View(VideoCategoriesAction.TravelEvents, travelEventsVM);
+            var travelEventsList = await _videoAttributesService.GetListAsync(i => i.Category.Name == "Travel & Events");
+            var travelEventsVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(travelEventsList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
 
+            return View(VideoCategoriesAction.TravelEvents, travelEventsVM);
         }
 
         [HttpGet]
         [Route("PeopleBlogs", Name = VideoCategoriesRoute.GetPeopleBlogs)]
-        public ActionResult PeopleBlogs(int? page)
+        public async Task<ActionResult> PeopleBlogs(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var peopleBlogsList = _videoAttributesService.GetList(i => i.Category.Name == "People & Blogs");
-            var peopleBlogsVM = _mapper.Map<List<VideoAttributesViewModel>>(peopleBlogsList).ToPagedList(pageIndex, _pageSize);
-            return View(VideoCategoriesAction.PeopleBlogs, peopleBlogsVM);
+            var peopleBlogsList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "People & Blogs");
+            var peopleBlogsVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(peopleBlogsList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
 
+            return View(VideoCategoriesAction.PeopleBlogs, peopleBlogsVM);
         }
 
         [HttpGet]
         [Route("PetsAnimals", Name = VideoCategoriesRoute.GetPetsAnimals)]
-        public ActionResult PetsAnimals(int? page)
+        public async Task<ActionResult> PetsAnimals(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var petsAnimalsList = _videoAttributesService.GetList(i => i.Category.Name == "Pets & Animals");
-            var petsAnimalsVM = _mapper.Map<List<VideoAttributesViewModel>>(petsAnimalsList).ToPagedList(pageIndex, _pageSize);
+            var petsAnimalsList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Pets & Animals");
+            var petsAnimalsVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(petsAnimalsList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
+
             return View(VideoCategoriesAction.PetsAnimals, petsAnimalsVM);
         }
 
@@ -78,68 +87,80 @@ namespace Fluxy.Controllers
 
         [HttpGet]
         [Route("ScienceTechnology", Name = VideoCategoriesRoute.GetScienceTechnology)]
-        public ActionResult ScienceTechnology(int? page)
+        public async Task<ActionResult> ScienceTechnology(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var scienceTechList = _videoAttributesService.GetList(i => i.Category.Name == "Science & Technology");
-            var scienceTechVM = _mapper.Map<List<VideoAttributesViewModel>>(scienceTechList).ToPagedList(pageIndex, _pageSize);
+            var scienceTechList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Science & Technology");
+            var scienceTechVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(scienceTechList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.ScienceTechnology, scienceTechVM);
 
         }
 
         [HttpGet]
         [Route("NewsPolitics", Name = VideoCategoriesRoute.GetNewsPolitics)]
-        public ActionResult NewsPolitics(int? page)
+        public async Task<ActionResult> NewsPolitics(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var newsPoliticsList = _videoAttributesService.GetList(i => i.Category.Name == "News & Politics");
-            var newsPoliticsVM = _mapper.Map<List<VideoAttributesViewModel>>(newsPoliticsList).ToPagedList(pageIndex, _pageSize);
+            var newsPoliticsList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "News & Politics");
+            var newsPoliticsVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(newsPoliticsList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.NewsPolitics, newsPoliticsVM);
         }
 
         [HttpGet]
         [Route("Health", Name = VideoCategoriesRoute.GetHealth)]
-        public ActionResult Health(int? page)
+        public async Task<ActionResult> Health(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var healthist = _videoAttributesService.GetList(i => i.Category.Name == "Health");
-            var healthVM = _mapper.Map<List<VideoAttributesViewModel>>(healthist).ToPagedList(pageIndex, _pageSize);
+            var healthist =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Health");
+            var healthVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(healthist.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.Health, healthVM);
         }
 
         [HttpGet]
         [Route("Devotional", Name = VideoCategoriesRoute.GetDevotional)]
-        public ActionResult Devotional(int? page)
+        public async Task<ActionResult> Devotional(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var devotionalList = _videoAttributesService.GetList(i => i.Category.Name == "Devotional");
-            var devotionalVM = _mapper.Map<List<VideoAttributesViewModel>>(devotionalList).ToPagedList(pageIndex, _pageSize);
+            var devotionalList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Devotional");
+            var devotionalVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(devotionalList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.Devotional, devotionalVM);
         }
 
         [HttpGet]
         [Route("Documentary", Name = VideoCategoriesRoute.GetDocumentary)]
-        public ActionResult Documentary(int? page)
+        public async Task<ActionResult> Documentary(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var documentaryList = _videoAttributesService.GetList(i => i.Category.Name == "Documentary");
-            var documentaryVM = _mapper.Map<List<VideoAttributesViewModel>>(documentaryList).ToPagedList(pageIndex, _pageSize);
+            var documentaryList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Documentary");
+            var documentaryVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(documentaryList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.Documentary, documentaryVM);
         }
 
         [HttpGet]
         [Route("Education", Name = VideoCategoriesRoute.GetEducation)]
-        public ActionResult Education(int? page)
+        public async Task<ActionResult> Education(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var educationList = _videoAttributesService.GetList(i => i.Category.Name == "Education");
-            var educationVM = _mapper.Map<List<VideoAttributesViewModel>>(educationList).ToPagedList(pageIndex, _pageSize);
+            var educationList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Education");
+            var educationVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(educationList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.Education, educationVM);
         }
 
@@ -149,56 +170,66 @@ namespace Fluxy.Controllers
 
         [HttpGet]
         [Route("Music", Name = VideoCategoriesRoute.GetMusic)]
-        public ActionResult Music(int? page)
+        public async Task<ActionResult> Music(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var musicList = _videoAttributesService.GetList(i => i.Category.Name == "Music");
-            var musicVM = _mapper.Map<List<VideoAttributesViewModel>>(musicList).ToPagedList(pageIndex, _pageSize);
+            var musicList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Music");
+            var musicVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(musicList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.Music, musicVM);
         }
 
         [HttpGet]
         [Route("Gaming", Name = VideoCategoriesRoute.GetGaming)]
-        public ActionResult Gaming(int? page)
+        public async Task<ActionResult> Gaming(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var gamingList = _videoAttributesService.GetList(i => i.Category.Name == "Gaming");
-            var gamingVM = _mapper.Map<List<VideoAttributesViewModel>>(gamingList).ToPagedList(pageIndex, _pageSize);
+            var gamingList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Gaming");
+            var gamingVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(gamingList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.Gaming, gamingVM);
         }
 
         [HttpGet]
         [Route("Sports", Name = VideoCategoriesRoute.GetSports)]
-        public ActionResult Sports(int? page)
+        public async Task<ActionResult> Sports(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var sportsList = _videoAttributesService.GetList(i => i.Category.Name == "Sports");
-            var sportsVM = _mapper.Map<List<VideoAttributesViewModel>>(sportsList).ToPagedList(pageIndex, _pageSize);
+            var sportsList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Sports");
+            var sportsVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(sportsList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.Sports, sportsVM);
         }
 
         [HttpGet]
         [Route("FilmAnimation", Name = VideoCategoriesRoute.GetFilmAnimation)]
-        public ActionResult FilmAnimation(int? page)
+        public async Task<ActionResult> FilmAnimation(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var filmAnimationList = _videoAttributesService.GetList(i => i.Category.Name == "Film & Animation");
-            var filmAnimationVM = _mapper.Map<List<VideoAttributesViewModel>>(filmAnimationList).ToPagedList(pageIndex, _pageSize);
+            var filmAnimationList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Film & Animation");
+            var filmAnimationVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(filmAnimationList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.FilmAnimation, filmAnimationVM);
         }
 
         [HttpGet]
         [Route("Entertainment", Name = VideoCategoriesRoute.GetEntertainment)]
-        public ActionResult Entertainment(int? page)
+        public async Task<ActionResult> Entertainment(int? page)
         {
             int pageIndex = 1;
             pageIndex = page ?? 1;
-            var entertainmentList = _videoAttributesService.GetList(i => i.Category.Name == "Entertainment");
-            var entertainmentVM = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentList).ToPagedList(pageIndex, _pageSize);
+            var entertainmentList =await _videoAttributesService.GetListAsync(i => i.Category.Name == "Entertainment");
+            var entertainmentVM = _mapper
+                .Map<List<VideoAttributesViewModel>>(entertainmentList.OrderByDescending(i => i.CreatedDate))
+                .ToPagedList(pageIndex, _pageSize);
             return View(VideoCategoriesAction.Entertainment, entertainmentVM);
         }
 

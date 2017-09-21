@@ -6,6 +6,7 @@ using AutoMapper;
 using Fluxy.Services.Logging;
 using Fluxy.ViewModels.Logging;
 using Fluxy.Core.Constants.Log;
+using System.Threading.Tasks;
 
 namespace Fluxy.Controllers.Administration
 {
@@ -25,32 +26,32 @@ namespace Fluxy.Controllers.Administration
         // GET: Admin/Log
         [HttpGet]
         [Route("", Name = LogControllerRoutes.GetIndex)]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var exceptionsDto = _logService.GetAll();
+            var exceptionsDto =await _logService.GetAllAsync();
             var exceptions = _mapper.Map<List<LogViewModel>>(exceptionsDto);
             return View(LogControllerAction.Index, exceptions);
         }
 
         [HttpGet]
         [Route("Details", Name = LogControllerRoutes.GetDetails)]
-        public ActionResult Details(string id)
+        public async Task<ActionResult> Details(string id)
         {
-            var logDto = _logService.GetSingle(i => i.Id == id);
+            var logDto = await _logService.GetSingleAsync(i => i.Id == id);
             var log = _mapper.Map<LogViewModel>(logDto);
             return View(log);
         }
 
         [HttpGet]
         [Route("Delete", Name = LogControllerRoutes.GetDelete)]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
-                var logDto = _logService.GetSingle(i => i.Id == id);
+                var logDto =await _logService.GetSingleAsync(i => i.Id == id);
                 if (logDto != null)
                 {
-                    _logService.Delete(logDto);
+                    await _logService.DeleteAsync(logDto);
                 }
                 return RedirectToAction(LogControllerAction.Index);
             }

@@ -10,6 +10,7 @@ using Fluxy.ViewModels.Localization;
 using Fluxy.Services.Localization;
 using Fluxy.Core.Models.Localization;
 using Fluxy.Core.Constants.Language;
+using System.Threading.Tasks;
 
 namespace Fluxy.Controllers.Administration
 {
@@ -28,9 +29,9 @@ namespace Fluxy.Controllers.Administration
 
         [HttpGet]
         [Route("", Name = LanguageControllerRoute.GetIndex)]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var languages = _languageService.GetAll();
+            var languages = await _languageService.GetAllAsync();
             var menuList = _mapper.Map<List<LanguageViewModel>>(languages);
             return View(LanguageControllerAction.Index,menuList);
         }
@@ -44,7 +45,7 @@ namespace Fluxy.Controllers.Administration
 
         [HttpPost]
         [Route("Create", Name = LanguageControllerRoute.PostCreate)]
-        public ActionResult Create(LanguageViewModel LanguageViewModel)
+        public async Task<ActionResult> Create(LanguageViewModel LanguageViewModel)
         {
             try
             {
@@ -53,11 +54,11 @@ namespace Fluxy.Controllers.Administration
                     var languageDto = _mapper.Map<Language>(LanguageViewModel);
                     if (!string.IsNullOrEmpty(languageDto.Id))
                     {
-                        _languageService.Update(languageDto);
+                       await _languageService.UpdateAsync(languageDto);
                     }
                     else
                     {
-                        _languageService.Create(languageDto);
+                       await _languageService.CreateAsync(languageDto);
                     }
                     return RedirectToAction(LanguageControllerAction.Index);
                 }
@@ -72,19 +73,19 @@ namespace Fluxy.Controllers.Administration
 
         [HttpGet]
         [Route("Edit", Name = LanguageControllerRoute.GetEdit)]
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException("Language id is null  or empty");
 
-            var languageDto = _languageService.GetSingle(i => i.Id == id);
+            var languageDto =await _languageService.GetSingleAsync(i => i.Id == id);
             var language = _mapper.Map<LanguageViewModel>(languageDto);
             return View(LanguageControllerAction.Edit, language);
         }
 
         [HttpPost]
         [Route("Edit", Name = LanguageControllerRoute.PostEdit)]
-        public ActionResult Edit(LanguageViewModel LanguageViewModel)
+        public async Task<ActionResult> Edit(LanguageViewModel LanguageViewModel)
         {
             try
             {
@@ -93,11 +94,11 @@ namespace Fluxy.Controllers.Administration
                     var languageDto = _mapper.Map<Language>(LanguageViewModel);
                     if (!string.IsNullOrEmpty(languageDto.Id))
                     {
-                        _languageService.Update(languageDto);
+                       await _languageService.UpdateAsync(languageDto);
                     }
                     else
                     {
-                        _languageService.Create(languageDto);
+                       await _languageService.CreateAsync(languageDto);
                     }
                     return RedirectToAction(LanguageControllerAction.Index);
                 }
@@ -111,14 +112,14 @@ namespace Fluxy.Controllers.Administration
 
         [HttpGet]
         [Route("Delete", Name = LanguageControllerRoute.GetDelete)]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
                 var languageDto = _languageService.GetSingle(i => i.Id == id);
                 if (languageDto != null)
                 {
-                    _languageService.Delete(languageDto);
+                   await _languageService.DeleteAsync(languageDto);
                 }
                 return RedirectToAction(LanguageControllerAction.Index);
             }

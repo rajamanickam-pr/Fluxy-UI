@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -30,9 +31,9 @@ namespace Fluxy.Controllers.Administration
         // GET: Banner
         [HttpGet]
         [Route("", Name = BannerControllerRoutes.GetIndex)]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var bannerDto = _bannerDetailsService.GetAll();
+            var bannerDto = await _bannerDetailsService.GetAllAsync();
             var banner = _mapper.Map<List<BannerDetailsViewModel>>(bannerDto);
             return View(BannerControllerAction.Index, banner);
         }
@@ -47,7 +48,7 @@ namespace Fluxy.Controllers.Administration
         // POST: Banner/Create
         [HttpPost]
         [Route("Create", Name = BannerControllerRoutes.PostCreate)]
-        public ActionResult Create(BannerDetailsViewModel bannerDetailsViewModel)
+        public async Task<ActionResult> Create(BannerDetailsViewModel bannerDetailsViewModel)
         {
             try
             {
@@ -73,11 +74,11 @@ namespace Fluxy.Controllers.Administration
                         {
                             bannerDto.Image = oldPicture;
                         }
-                        _bannerDetailsService.Update(bannerDto);
+                        await _bannerDetailsService.UpdateAsync(bannerDto);
                     }
                     else
                     {
-                        _bannerDetailsService.Create(bannerDto);
+                        await _bannerDetailsService.CreateAsync(bannerDto);
                     }
                     return RedirectToAction(BannerControllerAction.Index);
                 }
@@ -92,20 +93,20 @@ namespace Fluxy.Controllers.Administration
         // GET: Banner/Edit/5
         [HttpGet]
         [Route("Edit", Name = BannerControllerRoutes.GetEdit)]
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException("Banner id is null  or empty");
 
-            var bannerDto = _bannerDetailsService.GetSingle(i => i.Id == id);
+            var bannerDto = await _bannerDetailsService.GetSingleAsync(i => i.Id == id);
             var banner = _mapper.Map<BannerDetailsViewModel>(bannerDto);
-            return View(BannerControllerAction.Edit,banner);
+            return View(BannerControllerAction.Edit, banner);
         }
 
         // POST: Banner/Edit/5
         [HttpPost]
         [Route("Edit", Name = BannerControllerRoutes.PostEdit)]
-        public ActionResult Edit(BannerDetailsViewModel bannerDetailsViewModel)
+        public async Task<ActionResult> Edit(BannerDetailsViewModel bannerDetailsViewModel)
         {
             try
             {
@@ -131,11 +132,11 @@ namespace Fluxy.Controllers.Administration
                         {
                             bannerDto.Image = oldPicture;
                         }
-                        _bannerDetailsService.Update(bannerDto);
+                        await _bannerDetailsService.UpdateAsync(bannerDto);
                     }
                     else
                     {
-                        _bannerDetailsService.Create(bannerDto);
+                        await _bannerDetailsService.CreateAsync(bannerDto);
                     }
                     return RedirectToAction(BannerControllerAction.Index);
                 }
@@ -150,14 +151,14 @@ namespace Fluxy.Controllers.Administration
         // POST: Banner/Delete/5
         [HttpGet]
         [Route("Delete", Name = BannerControllerRoutes.GetDelete)]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
-                var bannerDto = _bannerDetailsService.GetSingle(i => i.Id == id);
+                var bannerDto =await _bannerDetailsService.GetSingleAsync(i => i.Id == id);
                 if (bannerDto != null)
                 {
-                    _bannerDetailsService.Delete(bannerDto);
+                  await  _bannerDetailsService.DeleteAsync(bannerDto);
                 }
                 return RedirectToAction(BannerControllerAction.Index);
             }

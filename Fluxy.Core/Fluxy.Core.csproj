@@ -94,6 +94,7 @@
     <Compile Include="Constants\Profile\ProfileControllerRoute.cs" />
     <Compile Include="Constants\UserManagement\UserManagementRoutes.cs" />
     <Compile Include="Constants\UserManagement\UserManagementActions.cs" />
+    <Compile Include="Constants\UserQueries\UserQueriesControllerRoute.cs" />
     <Compile Include="Constants\VideoCategories\VideoCategoriesAction.cs" />
     <Compile Include="Constants\VideoCategories\VideoCategoriesRoute.cs" />
     <Compile Include="Constants\VideoManagement\VideoManagementControllerActions.cs" />

@@ -237,6 +237,7 @@
     <Compile Include="Controllers\Administration\LanguageController.cs" />
     <Compile Include="Controllers\Administration\LogController.cs" />
     <Compile Include="Controllers\Administration\UserMangementController.cs" />
+    <Compile Include="Controllers\Administration\UserQueriesController.cs" />
     <Compile Include="Controllers\Administration\VideoManagementController.cs" />
     <Compile Include="Controllers\Administration\VideoSettingsController.cs" />
     <Compile Include="Controllers\ErrorHandlerController.cs" />
@@ -279,10 +280,6 @@
     <Content Include="App_Data\Templates\ForgotPasswordMailTemplate.txt" />
     <Content Include="App_Data\Templates\AccountConfirmationMailTemplate.txt" />
     <Content Include="Content\jquery.dataTables.min.css" />
-    <Content Include="Scripts\jquery.blockUI.js" />
-    <Content Include="Scripts\jquery.blockUI.min.js">
-      <DependentUpon>jquery.blockUI.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -466,6 +463,8 @@
     <Content Include="Views\UserMangement\Details.cshtml" />
     <Content Include="Views\UserMangement\ChangeRole.cshtml" />
     <Content Include="Views\Home\SiteSearch.cshtml" />
+    <Content Include="Views\UserQueries\Index.cshtml" />
+    <Content Include="Views\UserQueries\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

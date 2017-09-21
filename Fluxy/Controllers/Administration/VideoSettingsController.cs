@@ -7,6 +7,7 @@ using Fluxy.Services.Video;
 using Fluxy.ViewModels.Video;
 using Fluxy.Core.Models.Video;
 using Fluxy.Core.Constants.VideoSettings;
+using System.Threading.Tasks;
 
 namespace Fluxy.Controllers.Administration
 {
@@ -28,9 +29,9 @@ namespace Fluxy.Controllers.Administration
         // GET: Admin/Menu
         [HttpGet]
         [Route("", Name = VideoSettingsControllerRoutes.GetIndex)]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var videoSettings = _videoSettingsService.GetAll();
+            var videoSettings =await _videoSettingsService.GetAllAsync();
             var menuList = _mapper.Map<List<VideoSettingsViewModel>>(videoSettings);
             return View(VideoSettingsControllerAction.Index, menuList);
         }
@@ -44,18 +45,18 @@ namespace Fluxy.Controllers.Administration
 
         [HttpPost]
         [Route("Create", Name = VideoSettingsControllerRoutes.PostCreate)]
-        public ActionResult Create(VideoSettingsViewModel videoSettingsViewModel)
+        public async Task<ActionResult> Create(VideoSettingsViewModel videoSettingsViewModel)
         {
             if (ModelState.IsValid)
             {
                 var videoSettingsDto = _mapper.Map<VideoSettings>(videoSettingsViewModel);
                 if (!string.IsNullOrEmpty(videoSettingsDto.Id))
                 {
-                    _videoSettingsService.Update(videoSettingsDto);
+                   await _videoSettingsService.UpdateAsync(videoSettingsDto);
                 }
                 else
                 {
-                    _videoSettingsService.Create(videoSettingsDto);
+                  await  _videoSettingsService.CreateAsync(videoSettingsDto);
                 }
                 return RedirectToAction(VideoSettingsControllerAction.Index);
             }
@@ -65,27 +66,27 @@ namespace Fluxy.Controllers.Administration
 
         [HttpGet]
         [Route("Edit", Name = VideoSettingsControllerRoutes.GetEdit)]
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
-            var videoSettingsDto = _videoSettingsService.GetSingle(i => i.Id == id);
+            var videoSettingsDto =await _videoSettingsService.GetSingleAsync(i => i.Id == id);
             var videoSettings = _mapper.Map<VideoSettingsViewModel>(videoSettingsDto);
             return View(videoSettings);
         }
 
         [HttpPost]
         [Route("Edit", Name = VideoSettingsControllerRoutes.PostEdit)]
-        public ActionResult Edit(VideoSettingsViewModel videoSettingsViewModel)
+        public async Task<ActionResult> Edit(VideoSettingsViewModel videoSettingsViewModel)
         {
             if (ModelState.IsValid)
             {
                 var videoSettingsDto = _mapper.Map<VideoSettings>(videoSettingsViewModel);
                 if (!string.IsNullOrEmpty(videoSettingsDto.Id))
                 {
-                    _videoSettingsService.Update(videoSettingsDto);
+                   await _videoSettingsService.UpdateAsync(videoSettingsDto);
                 }
                 else
                 {
-                    _videoSettingsService.Create(videoSettingsDto);
+                   await _videoSettingsService.CreateAsync(videoSettingsDto);
                 }
                 return RedirectToAction(VideoSettingsControllerAction.Index);
             }
@@ -94,12 +95,12 @@ namespace Fluxy.Controllers.Administration
 
         [HttpGet]
         [Route("Delete", Name = VideoSettingsControllerRoutes.GetDelete)]
-        public ActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
             var videoSettingsDto = _videoSettingsService.GetSingle(i => i.Id == id);
             if (videoSettingsDto != null)
             {
-                _videoSettingsService.Delete(videoSettingsDto);
+               await _videoSettingsService.DeleteAsync(videoSettingsDto);
             }
             return RedirectToAction(VideoSettingsControllerAction.Index);
         }
