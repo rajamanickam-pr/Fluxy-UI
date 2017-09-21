@@ -31,6 +31,7 @@ namespace Fluxy.Controllers
         [Route("{videoId}/{title}", Name = VideoControllerRoutes.GetIndex)]
         public async Task<ActionResult> Index(string videoId, string title)
         {
+            if (string.IsNullOrEmpty(title)) throw new ArgumentNullException(nameof(title));
             if (string.IsNullOrEmpty(title))
                 throw new ArgumentNullException(nameof(videoId));
             SqlParameter[] sqlParam = {

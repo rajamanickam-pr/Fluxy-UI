@@ -15,6 +15,7 @@ using Fluxy.ViewModels.Video;
 using System;
 using PagedList;
 using System.Linq;
+using System.Threading.Tasks;
 using Fluxy.Services.Mail;
 using Fluxy.Services.Categories;
 using Fluxy.ViewModels.Categories;
@@ -59,14 +60,7 @@ namespace Fluxy.Controllers
             var currentUserId = User.Identity.GetUserId();
             if (!string.IsNullOrEmpty(userId))
             {
-                if (currentUserId != userId)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return currentUserId == userId;
             }
             return true;
         }
@@ -75,16 +69,8 @@ namespace Fluxy.Controllers
         [Route("", Name = ProfileControllerRoute.GetIndex)]
         public ActionResult Index(string message, string userId)
         {
-            var user = string.Empty;
             var currentUserId = User.Identity.GetUserId();
-            if (!string.IsNullOrEmpty(userId))
-            {
-                user = userId;
-            }
-            else
-            {
-                user = currentUserId;
-            }
+            var user = !string.IsNullOrEmpty(userId) ? userId : currentUserId;
 
             ViewBag.IsProfileOwner = IsProfileOwner(userId);
             var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == user);
@@ -104,23 +90,12 @@ namespace Fluxy.Controllers
         [Route("ProfileVideos", Name = ProfileControllerRoute.GetProfileVideos)]
         public ActionResult ProfileVideos(int? page, string userId)
         {
-            var user = string.Empty;
-            if (!string.IsNullOrEmpty(userId))
-            {
-                user = userId;
-            }
-            else
-            {
-                user = User.Identity.GetUserId();
-            }
-
-            int pageSize = 5;
-            int pageIndex = 1;
-            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            const int pageSize = 5;
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var userPostedVideo = _videoAttributesService.GetList(i => i.UserId == userId).OrderByDescending(i => i.CreatedDate);
-            var userPostedVideoVM = _mapper.Map<List<VideoAttributesViewModel>>(userPostedVideo).ToPagedList(pageIndex, pageSize);
+            var userPostedVideoVm = _mapper.Map<List<VideoAttributesViewModel>>(userPostedVideo).ToPagedList(pageIndex, pageSize);
             ViewBag.IsProfileOwner = IsProfileOwner(userId);
-            return PartialView("_ProfileVideo", userPostedVideoVM);
+            return PartialView("_ProfileVideo", userPostedVideoVm);
         }
 
         [HttpGet]
@@ -154,7 +129,6 @@ namespace Fluxy.Controllers
                     }
                 }
             }
-            UserProfileExtend profile;
             var userProfileDto = _mapper.Map<UserProfileExtend>(userMangementViewModel);
             userProfileDto.UserId = User.Identity.GetUserId();
             if (!string.IsNullOrEmpty(userProfileDto.Id))
@@ -164,13 +138,12 @@ namespace Fluxy.Controllers
                 {
                     userProfileDto.DisplayPicture = oldPicture;
                 }
-                profile = _userProfileService.Update(userProfileDto);
+                _userProfileService.Update(userProfileDto);
             }
             else
             {
-                profile = _userProfileService.Create(userProfileDto);
+                _userProfileService.Create(userProfileDto);
             }
-            var userProfile = _mapper.Map<UserMangementViewModel>(profile);
             return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.ProfileEditConfirmation });
         }
 
@@ -191,15 +164,19 @@ namespace Fluxy.Controllers
 
         [HttpPost]
         [Route("Privacy", Name = ProfileControllerRoute.PostPrivacy)]
-        public ActionResult Privacy(UserMangementViewModel userMangementViewModel)
+        public async Task<ActionResult> Privacy(UserMangementViewModel userMangementViewModel)
         {
             var userSettingsDto = _mapper.Map<UserSettingsExtend>(userMangementViewModel);
             userSettingsDto.UserId = User.Identity.GetUserId();
-            var profileSettings = !string.IsNullOrEmpty(userSettingsDto.Id)
-                ? _userSettingsService.Update(userSettingsDto)
-                : _userSettingsService.Create(userSettingsDto);
-            var userMangementVm = _mapper.Map<UserMangementViewModel>(profileSettings);
-            return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.ProfileEditConfirmation });
+            if (!string.IsNullOrEmpty(userSettingsDto.Id))
+            {
+              await  _userSettingsService.UpdateAsync(userSettingsDto);
+            }
+            else
+            {
+                await _userSettingsService.CreateAsync(userSettingsDto);
+            }
+            return RedirectToAction(ProfileControllerAction.Index, new { message = Messages.ProfileEditConfirmation });
         }
 
         [HttpGet]
@@ -208,49 +185,49 @@ namespace Fluxy.Controllers
         {
             var userId = User.Identity.GetUserId();
             var newsletter = _newsletterService.GetSingle(i => i.UserId == userId);
-            var newsletterVM = _mapper.Map<NewsletterViewModel>(newsletter);
+            var newsletterVm = _mapper.Map<NewsletterViewModel>(newsletter);
 
             var categories = _categoryService.GetAll();
-            var categoriesVM = _mapper.Map<List<CategoryViewModel>>(categories);
+            var categoriesVm = _mapper.Map<List<CategoryViewModel>>(categories);
 
-            if (newsletterVM == null)
+            if (newsletterVm == null)
             {
-                newsletterVM = new NewsletterViewModel
+                newsletterVm = new NewsletterViewModel
                 {
-                    Categories = categoriesVM
+                    Categories = categoriesVm
                 };
             }
             else
             {
-                newsletterVM.Categories = categoriesVM;
+                newsletterVm.Categories = categoriesVm;
             }
 
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
-            return View(ProfileControllerAction.Newsletter, newsletterVM);
+            return View(ProfileControllerAction.Newsletter, newsletterVm);
         }
 
         [HttpPost]
         [Route("Newsletter", Name = ProfileControllerRoute.PostNewsletter)]
         public ActionResult Newsletter(string[] selectedCategories)
         {
-            if (selectedCategories == null || selectedCategories.Count() <= 0)
+            if (selectedCategories == null || !selectedCategories.Any())
                 return RedirectToAction("Newsletter", routeValues: new { message = Messages.NewsletterSubscription });
             var categories = string.Join(",", selectedCategories);
-            var newletterVM = new NewsletterViewModel
+            var newletterVm = new NewsletterViewModel
             {
                 Active = true,
                 Subscription = categories,
                 UserId = User.Identity.GetUserId()
             };
-            var newsletter = _mapper.Map<NewsletterExtend>(newletterVM);
+            var newsletter = _mapper.Map<NewsletterExtend>(newletterVm);
 
             var userId = User.Identity.GetUserId();
             var newsletterValue = _newsletterService.GetSingle(i => i.UserId == userId);
             if (newsletterValue != null)
             {
-                newsletterValue.Subscription = newletterVM.Subscription;
-                newsletterValue.Active = newletterVM.Active;
+                newsletterValue.Subscription = newletterVm.Subscription;
+                newsletterValue.Active = newletterVm.Active;
                 _newsletterService.Update(newsletterValue);
             }
             else
@@ -312,7 +289,7 @@ namespace Fluxy.Controllers
             {
                 _videoAttributesService.Delete(video);
             }
-            return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.VideoDeleteConfirmation,userId=string.Empty });
+            return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.VideoDeleteConfirmation, userId = string.Empty });
         }
 
         public byte[] GetYouTubeThumbnail(string videoId)
