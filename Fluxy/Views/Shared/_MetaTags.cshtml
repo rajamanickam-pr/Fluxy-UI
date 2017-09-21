@@ -42,7 +42,8 @@
 
     <link rel="manifest" href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')">
     <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml">
-    <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
+    <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="Fluxy Pictures Search" type="application/opensearchdescription+xml">
+    <link href="@Url.RouteUrl(HomeControllerRoute.GetSitemapXml).TrimEnd('/')" rel="search" title="Fluxy Pictures Sitemap" type="application/opensearchdescription+xml">
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/vendorcss")
     @Styles.Render("~/Content/fa")

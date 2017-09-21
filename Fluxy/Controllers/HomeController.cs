@@ -76,7 +76,7 @@ namespace Fluxy.Controllers
         }
 
         [Route("", Name = HomeControllerRoute.GetIndex)]
-        public ActionResult Index(string message)
+        public async Task<ActionResult> Index(string message)
         {
             var isAdultContent = false;
             IEnumerable<VideoAttributesExtend> recentlyAdded;
@@ -84,7 +84,7 @@ namespace Fluxy.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var userId = User.Identity.GetUserId();
-                var userSettings = _userSettingsService.GetSingle(i => i.UserId == userId);
+                var userSettings = await _userSettingsService.GetSingleAsync(i => i.UserId == userId);
                 if (userSettings != null)
                 {
                     isAdultContent = userSettings.CanISeeEPContent;
@@ -93,34 +93,34 @@ namespace Fluxy.Controllers
 
             if (isAdultContent)
             {
-                recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.CreatedDate).Take(9);
-                popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
+                recentlyAdded = await _videoAttributesService.GetListAsync(i => i.IsPublicVideo);
+                popularVideos = await _videoAttributesService.GetListAsync(i => i.IsPublicVideo);
             }
             else
             {
-                recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
-                popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                recentlyAdded = await _videoAttributesService.GetListAsync(i => i.IsPublicVideo && !i.IsAdultContent);
+                popularVideos = await _videoAttributesService.GetListAsync(i => i.IsPublicVideo && !i.IsAdultContent);
             }
 
-            var generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs")
-             && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+            var generalVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("People & Blogs")
+              && i.IsPublicVideo && i.IsAdultContent == isAdultContent);
 
-            var infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education")
-             && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+            var infoVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("Education")
+              && i.IsPublicVideo && i.IsAdultContent == isAdultContent);
 
-            var entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Music")
-             && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+            var entertainmentVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("Music")
+             && i.IsPublicVideo && i.IsAdultContent == isAdultContent);
 
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
 
             HomeViewModel homeViewModel = new HomeViewModel
             {
-                RecentVideos = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded),
-                PopularVideos = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos),
-                General = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos),
-                Infotainment = _mapper.Map<List<VideoAttributesViewModel>>(infoVideos),
-                Entertainment = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos),
+                RecentVideos = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded.OrderByDescending(i => i.CreatedDate).Take(9)),
+                PopularVideos = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos.OrderByDescending(i => i.ViewCount).Take(9)),
+                General = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos.OrderByDescending(i => i.ViewCount).Take(9)),
+                Infotainment = _mapper.Map<List<VideoAttributesViewModel>>(infoVideos.OrderByDescending(i => i.ViewCount).Take(9)),
+                Entertainment = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos.OrderByDescending(i => i.ViewCount).Take(9)),
                 Banners = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll())
             };
 
@@ -153,7 +153,7 @@ namespace Fluxy.Controllers
         [Route("SiteSearch", Name = HomeControllerRoute.GetSiteSearch)]
         public virtual ActionResult SiteSearch()
         {
-            return View(HomeControllerAction.SiteSearch,null);
+            return View(HomeControllerAction.SiteSearch, null);
         }
 
         [HttpPost]
@@ -161,9 +161,17 @@ namespace Fluxy.Controllers
         public async Task<ActionResult> SiteSearch(FormCollection data)
         {
             var searchText = data["searchText"].ToString().ToLower();
-            var videos = await _videoAttributesService.GetListAsync(i => i.Title.ToLower().Contains(searchText));
-            var searchVideos = _mapper.Map<List<VideoAttributesViewModel>>(videos.Take(12));
-            return View(HomeControllerAction.SiteSearch, searchVideos);
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                var videos = await _videoAttributesService.GetListAsync(i => i.Title.ToLower().Contains(searchText));
+                var searchVideos = _mapper.Map<List<VideoAttributesViewModel>>(videos.Take(12));
+                return View(HomeControllerAction.SiteSearch, searchVideos);
+            }
+            else
+            {
+                Danger("Text should not be empty.");
+                return View();
+            }
         }
 
         [Route("helpdesk", Name = HomeControllerRoute.GetHelpDesk)]

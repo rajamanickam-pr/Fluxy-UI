@@ -10,6 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fluxy.Services.Cache;
+using Fluxy.Core.Constants.Account;
+using Fluxy.Core.Constants.Manage;
+using Fluxy.Core.Constants.Profile;
+using Fluxy.Core.Constants.VideoCategories;
 
 namespace Fluxy.Services.Sitemap
 {
@@ -100,6 +104,113 @@ namespace Fluxy.Services.Sitemap
                 new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetContact))
                 {
                     Priority = 0.9
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetFAQ))
+                {
+                    Priority = 1
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetFeed))
+                {
+                    Priority = 0.9
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSiteSearch))
+                {
+                    Priority = 0.9
+                },
+                 new SitemapNode(this.urlHelper.AbsoluteRouteUrl(AccountControllerRoute.GetLogin))
+                {
+                    Priority = 0.9
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(AccountControllerRoute.GetRegister))
+                {
+                    Priority = 1
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(AccountControllerRoute.GetForgotPassword))
+                {
+                    Priority = 0.9
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(AccountControllerRoute.GetResetPassword))
+                {
+                    Priority = 0.9
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ManageControllerRoutes.GetIndex))
+                {
+                    Priority = 0.9
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ManageControllerRoutes.GetChangePassword))
+                {
+                    Priority = 1
+                },
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ManageControllerRoutes.GetManageLogins))
+                {
+                    Priority = 0.9
+                },
+
+                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProfileControllerRoute.GetIndex))
+                {
+                    Priority = 0.9
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProfileControllerRoute.GetNewsletter))
+                {
+                    Priority = 0.9
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProfileControllerRoute.GetProfileVideos))
+                {
+                    Priority = 0.9
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProfileControllerRoute.GetPrivacy))
+                {
+                    Priority = 0.9
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProfileControllerRoute.GetDeleteVideo))
+                {
+                    Priority = 0.9
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProfileControllerRoute.GetEdit))
+                {
+                    Priority = 0.9
+                },
+
+                 new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetAutoVehicles))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetDevotional))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetDocumentary))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetEducation))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetEntertainment))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetFilmAnimation))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetGaming))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetHealth))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetMusic))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetNewsPolitics))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetPeopleBlogs))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetPetsAnimals))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetScienceTechnology))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetSports))
+                {
+                    Priority = 1
+                },new SitemapNode(this.urlHelper.AbsoluteRouteUrl(VideoCategoriesRoute.GetTravelEvents))
+                {
+                    Priority = 1
                 }
             };
 
