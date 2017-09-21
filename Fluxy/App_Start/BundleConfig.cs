@@ -30,20 +30,13 @@ namespace Fluxy
                      "~/Scripts/bootstrap.js",
                      "~/Scripts/holder.min.js",
                      "~/Scripts/pace.min.js",
-                     "~/Scripts/jquery.unobtrusive-ajax.min.js"
+                     "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                      "~/Scripts/jquery.dataTables.min.js"
                       ));
-
-            bundles.Add(new ScriptBundle("~/bundles/adminScript").Include(
-                       "~/Scripts/jquery.dataTables.min.js"));
         }
 
         private static void AddCss(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/Content/admincss").Include(
-                       "~/Content/AdminStyles.css",
-                       "~/Content/jquery.dataTables.min.css"
-                        ));
-
             bundles.Add(new StyleBundle("~/Content/vendorcss").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/pace-theme-flash.css"
@@ -56,7 +49,8 @@ namespace Fluxy
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css",
-                      "~/Content/PagedList.css"
+                      "~/Content/PagedList.css",
+                       "~/Content/jquery.dataTables.min.css"
                       ));
         }
     }

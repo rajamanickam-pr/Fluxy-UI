@@ -18,8 +18,19 @@
             </li>
             @if (HttpContext.Current.User.IsInRole("Admin"))
             {
-                <li class="nav-item">
-                    @Html.RouteLink("Admininstration!", new { action = "Index", controller = "Admin" }, new { title = "Administration", @class = "nav-link" })
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="alerts.html" id="EntertainmentMenu" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Admininstration!</a>
+                    <div class="dropdown-menu" aria-labelledby="EntertainmentMenu">
+                        <a class="dropdown-item" href="@Url.Action("Index", "Admin")"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "Banner")"><i class="fa fa-picture-o" aria-hidden="true"></i> Banner Settings</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "Category")"><i class="fa fa-list-alt" aria-hidden="true"></i> Category Settings</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "Language")"><i class="fa fa-language" aria-hidden="true"></i> Language Settings</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "Log")"><i class="fa fa-history" aria-hidden="true"></i> Logs</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "UserManagement")"><i class="fa fa-users" aria-hidden="true"></i> User Management</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "VideoSettings")"><i class="fa fa-play-circle-o" aria-hidden="true"></i> Video Settings</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "VideoManagement")"><i class="fa fa-play-circle" aria-hidden="true"></i> Video Management</a>
+                    </div>
                 </li>
             }
         </ul>
