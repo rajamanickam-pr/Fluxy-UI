@@ -8,8 +8,8 @@ using Fluxy.ViewModels.Video;
 using System.Data.SqlClient;
 using System;
 using Fluxy.Core.Constants.Video;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Fluxy.Controllers
 {
@@ -29,31 +29,31 @@ namespace Fluxy.Controllers
         // GET: Video
         [HttpGet]
         [Route("{videoId}/{title}", Name = VideoControllerRoutes.GetIndex)]
-        public ActionResult Index(string videoId, string title)
+        public async Task<ActionResult> Index(string videoId, string title)
         {
             if (string.IsNullOrEmpty(title))
-                throw new ArgumentNullException("videoId is null or empty");
+                throw new ArgumentNullException(nameof(videoId));
             SqlParameter[] sqlParam = {
                 new SqlParameter("videoId",videoId)
             };
-            var query = "UPDATE VideoAttributes SET ViewCount+=1 WHERE Id=@videoId";
+            const string query = "UPDATE VideoAttributes SET ViewCount+=1 WHERE Id=@videoId";
             _videoAttributesService.ExecuteNonQuery(query, sqlParam);
 
             var videoAttribute = _videoAttributesService.GetSingle(i => i.Id == videoId);
-            var recentlyAdded = _videoAttributesService.GetAll().Take(9).OrderByDescending(i => i.CreatedDate);
-            var popularVideo = _videoAttributesService.GetAll().Take(6).OrderBy(i => i.ViewCount);
-            var userMayLike = _videoAttributesService.GetAll().Take(9).OrderBy(i => i.Tags == videoAttribute.Tags);
-            var videoAttributeVM = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
-            var recentlyAddedVM = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded);
-            var popularVideoVM = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(popularVideo);
-            var userMayLikeVM = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(userMayLike);
+            var recentlyAdded = await _videoAttributesService.GetAllAsync();
+            var popularVideo = await _videoAttributesService.GetAllAsync();
+            var userMayLike = await _videoAttributesService.GetAllAsync();
+            var videoAttributeVm = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
+            var recentlyAddedVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded.Take(9).OrderByDescending(i => i.CreatedDate));
+            var popularVideoVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(popularVideo.Take(6).OrderBy(i => i.ViewCount));
+            var userMayLikeVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(userMayLike.Take(9).OrderBy(i => i.Tags == videoAttribute.Tags));
 
             var showVideoViewModel = new ShowVideoViewModel
             {
-                SelectedVideo = videoAttributeVM,
-                PopularVideo = popularVideoVM,
-                RecentlyAdded = recentlyAddedVM,
-                UserMayLike = userMayLikeVM
+                SelectedVideo = videoAttributeVm,
+                PopularVideo = popularVideoVm,
+                RecentlyAdded = recentlyAddedVm,
+                UserMayLike = userMayLikeVm
             };
 
             return View(VideoControllerAction.Index, showVideoViewModel);

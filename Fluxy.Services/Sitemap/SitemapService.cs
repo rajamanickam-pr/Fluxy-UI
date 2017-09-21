@@ -1,13 +1,7 @@
 ﻿using Boilerplate.Web.Mvc;
 using Boilerplate.Web.Mvc.Sitemap;
 using Fluxy.Core.Constants.HomeController;
-using Fluxy.Core.Constants;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fluxy.Services.Cache;
 using Fluxy.Core.Constants.Account;

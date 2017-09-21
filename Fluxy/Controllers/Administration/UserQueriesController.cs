@@ -4,12 +4,10 @@ using Fluxy.Infrastructure;
 using Fluxy.Services.Logging;
 using Fluxy.Services.Mail;
 using Fluxy.ViewModels.Mail;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Fluxy.Controllers.Administration

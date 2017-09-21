@@ -4,8 +4,6 @@ using AutoMapper;
 using Fluxy.Services.Logging;
 using Fluxy.Services.Categories;
 using Fluxy.ViewModels.Categories;
-using System;
-using System.Linq;
 using System.Collections.Generic;
 using Fluxy.Core.Models.Categories;
 using System.Threading.Tasks;

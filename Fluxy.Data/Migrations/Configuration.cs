@@ -3,11 +3,8 @@ namespace Fluxy.Data.Migrations
     using Fluxy.Core.Models.Categories;
     using Fluxy.Core.Models.Localization;
     using Fluxy.Core.Models.Video;
-    using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Fluxy.Data.FluxyContext>
     {

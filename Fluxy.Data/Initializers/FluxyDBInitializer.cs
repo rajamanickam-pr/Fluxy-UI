@@ -1,8 +1,4 @@
-﻿using Fluxy.Core.Models.Categories;
-using Fluxy.Core.Models.Localization;
-using Fluxy.Core.Models.Video;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 
 namespace Fluxy.Data.Initializers
 {

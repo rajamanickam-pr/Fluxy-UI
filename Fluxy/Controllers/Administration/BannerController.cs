@@ -8,9 +8,7 @@ using Fluxy.ViewModels.Banners;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Fluxy.Controllers.Administration
@@ -153,19 +151,12 @@ namespace Fluxy.Controllers.Administration
         [Route("Delete", Name = BannerControllerRoutes.GetDelete)]
         public async Task<ActionResult> Delete(string id)
         {
-            try
-            {
                 var bannerDto =await _bannerDetailsService.GetSingleAsync(i => i.Id == id);
                 if (bannerDto != null)
                 {
                   await  _bannerDetailsService.DeleteAsync(bannerDto);
                 }
                 return RedirectToAction(BannerControllerAction.Index);
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

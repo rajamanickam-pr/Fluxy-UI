@@ -1,5 +1,4 @@
 ﻿using Fluxy.Core.Constants;
-using System;
 using System.Web.Optimization;
 
 namespace Fluxy
