@@ -36,7 +36,7 @@ namespace Fluxy.Data
         public FluxyContext()
             : base("Name=FluxyContext")
         {
-            Database.SetInitializer(new FluxyDBInitializer());
+            Database.SetInitializer(new FluxyDbInitializer());
         }
 
         public static FluxyContext Create()

@@ -1,12 +1,12 @@
 namespace Fluxy.Data.Migrations
 {
-    using Fluxy.Core.Models.Categories;
-    using Fluxy.Core.Models.Localization;
-    using Fluxy.Core.Models.Video;
+    using Core.Models.Categories;
+    using Core.Models.Localization;
+    using Core.Models.Video;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Fluxy.Data.FluxyContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<FluxyContext>
     {
         public Configuration()
         {
@@ -14,7 +14,7 @@ namespace Fluxy.Data.Migrations
             AutomaticMigrationDataLossAllowed = false;
         }
 
-        protected override void Seed(Fluxy.Data.FluxyContext context)
+        protected override void Seed(FluxyContext context)
         {
             IList<Category> defaultCategory = new List<Category>
             {
@@ -43,11 +43,17 @@ namespace Fluxy.Data.Migrations
             {
                 new Language {Name="French",Rtl=false,DefaultCurrency="EUR",LanguageCulture="fr-BE" },
                 new Language {Name="English(United Kingdom)",Rtl=false,DefaultCurrency="EUR",LanguageCulture="en-GB" },
+                new Language {Name="German",Rtl=false,DefaultCurrency="EUR",LanguageCulture="de-DE" },
                 new Language {Name="Hindi",Rtl=false,DefaultCurrency="INR",LanguageCulture="hi-IN"},
                 new Language {Name="Telugu",Rtl=false,DefaultCurrency="INR",LanguageCulture="te-IN" },
                 new Language {Name="Tamil",Rtl=false,DefaultCurrency="INR",LanguageCulture="ta-IN" },
                 new Language {Name="Malayalam",Rtl=false,DefaultCurrency="INR",LanguageCulture="ma-IN" },
-                new Language {Name="Kannada",Rtl=false,DefaultCurrency="INR",LanguageCulture="ka-IN" }
+                new Language {Name="Kannada",Rtl=false,DefaultCurrency="INR",LanguageCulture="ka-IN" },
+                new Language {Name="Bengali",Rtl=false,DefaultCurrency="INR",LanguageCulture="be-IN" },
+                new Language {Name="Marathi",Rtl=false,DefaultCurrency="INR",LanguageCulture="ma-IN" },
+                new Language {Name="Gujarati",Rtl=false,DefaultCurrency="INR",LanguageCulture="gu-IN" },
+                new Language {Name="Punjabi",Rtl=false,DefaultCurrency="INR",LanguageCulture="pa-IN" },
+                new Language {Name="Kashmiri",Rtl=false,DefaultCurrency="INR",LanguageCulture="ka-IN" }
             };
             foreach (Language lang in defaultLanguage)
                 context.Set<Language>().Add(lang);
