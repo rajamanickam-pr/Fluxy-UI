@@ -8,7 +8,7 @@ namespace Fluxy.Data.Mappings.Video
         {
             this.ToTable("VideoAttributes");
             this.HasKey(pm => pm.Id);
-            this.Property(pm => pm.Description).HasMaxLength(500);
+            this.Property(pm => pm.Description);
             this.Property(pm => pm.Title).HasMaxLength(200);
             this.Property(pm => pm.ShortName).HasMaxLength(100);
             this.Property(pm => pm.Tags).HasMaxLength(100);
