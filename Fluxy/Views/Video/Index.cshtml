@@ -3,6 +3,8 @@
     var videoUrl = Model.SelectedVideo.Url + Model?.SelectedVideo.VideoSettings?.FrameFilters;
     ViewBag.Title = Model.SelectedVideo.ShortName + " Video";
     ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples| " + Model.SelectedVideo.Title;
+    var domainName = Fluxy.Core.Constants.Configurations.DomainName;
+    var pageAddress = domainName + "Video/" + Model.SelectedVideo.Id + "/" + Model.SelectedVideo.Slug + "/";
 }
 <div class="container">
     <div class="row">
@@ -37,7 +39,7 @@
             </div>
 
             <div class="fb-like"
-                 data-href="http://localhost/Fluxy/Video?videoId='@Model.SelectedVideo.Id'"
+                 data-href="@pageAddress"
                  data-layout="standard"
                  data-action="like"
                  data-size="small"
@@ -54,7 +56,7 @@
                 </blockquote>
             </div>
             <div class="fb-comments"
-                 data-href="http://localhost/Fluxy/Video?videoId='@Model.SelectedVideo.Id'"
+                 data-href="@pageAddress"
                  data-numposts="10">
             </div>
             <div class="alert alert-info" role="alert">
@@ -82,9 +84,9 @@
         </div>
 
         <div class="col-md-4">
-            <div class="fb-page" data-href="https://www.facebook.com/fluxypictures" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                <blockquote cite="https://www.facebook.com/fluxypictures" class="fb-xfbml-parse-ignore">
-                    <a href="https://www.facebook.com/fluxypictures">Fluxy Pictures</a>
+            <div class="fb-page" data-href="@Fluxy.Core.Constants.Configurations.FacebookUrl" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <blockquote cite="@Fluxy.Core.Constants.Configurations.FacebookUrl" class="fb-xfbml-parse-ignore">
+                    <a href="@Fluxy.Core.Constants.Configurations.FacebookUrl">Fluxy Pictures</a>
                 </blockquote>
             </div>
 
@@ -98,9 +100,3 @@
         </div>
     </div>
 </div>
-<script>
-    FB.ui({
-        method: 'share',
-        href: 'https://developers.facebook.com/docs/',
-    }, function (response) { });
-</script>

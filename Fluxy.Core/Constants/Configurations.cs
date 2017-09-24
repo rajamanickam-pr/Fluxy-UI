@@ -19,12 +19,20 @@ namespace Fluxy.Core.Constants
                 return ConfigurationManager.AppSettings["youtubeUrl"].ToString();
             }
         }
-
+        
         public static string TwitterUrl
         {
             get
             {
                 return ConfigurationManager.AppSettings["twitterUrl"].ToString();
+            }
+        }
+
+        public static string DomainName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["domainName"].ToString();
             }
         }
     }
