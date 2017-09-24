@@ -1,4 +1,6 @@
 ﻿@model  PagedList.IPagedList<Fluxy.ViewModels.Video.VideoAttributesViewModel>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Devotional";
@@ -18,5 +20,7 @@
             </div>
         }
     </div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Devotional", new { page }))
 </div>
 

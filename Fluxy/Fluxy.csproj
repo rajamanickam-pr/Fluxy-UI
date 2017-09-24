@@ -281,7 +281,8 @@
     <Content Include="App_Data\Templates\AccountConfirmationMailTemplate.txt" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
-    <Content Include="Images\fp-logo.jpg" />
+    <Content Include="Images\fp_logo-purple.png" />
+    <Content Include="Images\fp_logo_white.png" />
     <Content Include="Scripts\Custom\ProfileVideos.min.es5.js">
       <DependentUpon>ProfileVideos.min.js</DependentUpon>
     </Content>

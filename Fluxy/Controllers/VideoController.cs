@@ -47,7 +47,7 @@ namespace Fluxy.Controllers
             var videoAttributeVm = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
             var recentlyAddedVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded.Take(9).OrderByDescending(i => i.CreatedDate));
             var popularVideoVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(popularVideo.Take(6).OrderBy(i => i.ViewCount));
-            var userMayLikeVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(userMayLike.Take(9).OrderBy(i => i.Tags == videoAttribute.Tags));
+            var userMayLikeVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(userMayLike.Where(i => i.Tags == videoAttribute.Tags).Take(9).OrderBy(i => i.ViewCount));
 
             var showVideoViewModel = new ShowVideoViewModel
             {
