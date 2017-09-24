@@ -32,6 +32,15 @@
             </div>
 
             <div class="form-group">
+                @Html.Label("Paste your embed code", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-10">
+                    @Html.TextBox("embedCode", null, htmlAttributes: new { @class = "form-control" })
+                    <small>Url is auto generated from embed code. Do not modify.</small>
+                    <small>embed code with iframe</small>
+                </div>
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
@@ -111,7 +120,21 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div>
+<script>
+    $('#embedCode').change(function () {
+        var url = $(this).val();
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = url.match(regExp);
 
+        if (match && match[2].length == 11) {
+            var exactUrl = "https://www.youtube.com/embed/" + match[2];
+            $('#VideoId').val(match[2]);
+            $('#Url').val(exactUrl);
+        } else {
+            return 'error';
+        }
+    })
+</script>
 <script src="~/Scripts/Custom/ProfileVideos.min.js"></script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
