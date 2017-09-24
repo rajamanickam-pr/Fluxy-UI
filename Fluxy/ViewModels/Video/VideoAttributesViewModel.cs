@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace Fluxy.ViewModels.Video
 {
@@ -26,6 +27,7 @@ namespace Fluxy.ViewModels.Video
         public string Length { get; set; }
         public string Tags { get; set; }
         [Required]
+        [AllowHtml]
         public string Description { get; set; }
         public string VideoId { get; set; }
 

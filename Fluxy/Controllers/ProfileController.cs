@@ -241,9 +241,9 @@ namespace Fluxy.Controllers
         [Route("PostVideos", Name = ProfileControllerRoute.GetPostVideos)]
         public virtual ActionResult PostVideos()
         {
-            var categories = _categoryService.GetAll();
-            var videoSettings = _videoSettingsService.GetAll();
-            var language = _languageService.GetAll();
+            var categories = _categoryService.GetAll().OrderBy(i => i.Name);
+            var videoSettings = _videoSettingsService.GetAll().OrderBy(i => i.Name);
+            var language = _languageService.GetAll().OrderBy(i=>i.Name);
             var videoAttribute = new VideoAttributesViewModel
             {
                 Categories = _mapper.Map<IEnumerable<CategoryViewModel>>(categories),

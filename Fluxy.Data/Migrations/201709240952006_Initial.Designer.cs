@@ -13,7 +13,7 @@ namespace Fluxy.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201709110643455_Initial"; }
+            get { return "201709240952006_Initial"; }
         }
         
         string IMigrationMetadata.Source

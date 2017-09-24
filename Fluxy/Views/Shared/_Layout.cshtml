@@ -18,6 +18,8 @@
 }
 @Html.Partial("_MetaTags")
 <body>
+    <script src="~/Scripts/summernote/summernote.min.js"></script>
+    <link href="~/Scripts/summernote/summernote.css" rel="stylesheet" />
     <div id="fb-root"></div>
     <script src="~/Scripts/Custom/Layout.min.js"></script>
     @Html.Partial("_NavigationBar")
@@ -29,6 +31,12 @@
     @RenderSection("scripts", required: false)
     <script>
         $('.admin-table').dataTable();
+        $('.textarea-editor').summernote({
+            height: 300, // set editor height  
+            minHeight: null, // set minimum height of editor  
+            maxHeight: null, // set maximum height of editor  
+            focus: true // set focus to editable area after initializing summernote  
+        }); 
     </script>
 </body>
 </html>

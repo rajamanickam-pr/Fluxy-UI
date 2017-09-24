@@ -59,7 +59,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control  textarea-editor" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -122,18 +122,24 @@
 </div>
 <script>
     $('#embedCode').change(function () {
-        var url = $(this).val();
-        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        var match = url.match(regExp);
-
-        if (match && match[2].length == 11) {
-            var exactUrl = "https://www.youtube.com/embed/" + match[2];
-            $('#VideoId').val(match[2]);
-            $('#Url').val(exactUrl);
-        } else {
-            return 'error';
-        }
+        var url = YouTubeGetID($(this).val());
+        var exactUrl = "https://www.youtube.com/embed/" + url;
+        $('#VideoId').val(url);
+        $('#Url').val(exactUrl);
     })
+
+    function YouTubeGetID(url) {
+        var ID = '';
+        url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+        if (url[2] !== undefined) {
+            ID = url[2].split(/[^0-9a-z_\-]/i);
+            ID = ID[0];
+        }
+        else {
+            ID = url;
+        }
+        return ID;
+    }
 </script>
 <script src="~/Scripts/Custom/ProfileVideos.min.js"></script>
 @section Scripts {

@@ -1,4 +1,5 @@
 ﻿using Fluxy.Core.Common;
+using System.Web.Mvc;
 
 namespace Fluxy.Core.Models.Video
 {
@@ -9,6 +10,7 @@ namespace Fluxy.Core.Models.Video
         public string Url { get; set; }
         public string Length { get; set; }
         public string Tags { get; set; }
+        [AllowHtml]
         public string Description { get; set; }
 
         public byte[] Thumbunail { get; set; }
