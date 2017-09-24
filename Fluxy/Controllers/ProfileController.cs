@@ -75,7 +75,11 @@ namespace Fluxy.Controllers
             ViewBag.IsProfileOwner = IsProfileOwner(userId);
             var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == user);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
-            if (userProfile != null)
+            if(string.IsNullOrEmpty(userId)&& userProfile==null)
+            {
+               return RedirectToAction(ProfileControllerAction.Edit);
+            }
+            else if (userProfile != null)
             {
                 userProfile.TotalVideo = _videoAttributesService.GetList(i => i.UserId == user).Count();
             }

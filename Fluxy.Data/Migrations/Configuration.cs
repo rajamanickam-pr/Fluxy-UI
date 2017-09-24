@@ -1,19 +1,17 @@
 namespace Fluxy.Data.Migrations
 {
-    using Fluxy.Core.Models.Categories;
-    using Fluxy.Core.Models.Localization;
-    using Fluxy.Core.Models.Video;
-    using System;
+    using Core.Models.Categories;
+    using Core.Models.Localization;
+    using Core.Models.Video;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Fluxy.Data.FluxyContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<FluxyContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(FluxyContext context)
@@ -62,7 +60,7 @@ namespace Fluxy.Data.Migrations
 
             IList<VideoSettings> defaultVideoSettings = new List<VideoSettings>
             {
-                new VideoSettings {Name="Video Setting-1",FrameFilters="?modestbranding=1&rel=0&showinfo=0&fs=0",FrameHeight=380,FrameWidth=720},
+                new VideoSettings {Name="Video Settings-1",FrameFilters="?modestbranding=1&rel=0&showinfo=0&fs=0",FrameHeight=380,FrameWidth=720},
             };
             foreach (VideoSettings settings in defaultVideoSettings)
                 context.Set<VideoSettings>().Add(settings);

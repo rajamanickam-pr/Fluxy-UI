@@ -142,7 +142,7 @@ namespace Fluxy.Data.Migrations
                         Url = c.String(),
                         Length = c.String(),
                         Tags = c.String(maxLength: 100),
-                        Description = c.String(maxLength: 500),
+                        Description = c.String(),
                         Thumbunail = c.Binary(),
                         IsPublicVideo = c.Boolean(nullable: false),
                         IsAdultContent = c.Boolean(nullable: false),

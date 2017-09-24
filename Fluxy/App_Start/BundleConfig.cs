@@ -30,7 +30,8 @@ namespace Fluxy
                      "~/Scripts/holder.min.js",
                      "~/Scripts/pace.min.js",
                      "~/Scripts/jquery.unobtrusive-ajax.min.js",
-                      "~/Scripts/jquery.dataTables.min.js"
+                      "~/Scripts/jquery.dataTables.min.js",
+                      "~/Scripts/summernote/summernote.min.js"
                       ));
         }
 
@@ -49,7 +50,8 @@ namespace Fluxy
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css",
                       "~/Content/PagedList.css",
-                       "~/Content/jquery.dataTables.min.css"
+                       "~/Content/jquery.dataTables.min.css",
+                       "~/Scripts/summernote/summernote.css"
                       ));
         }
     }

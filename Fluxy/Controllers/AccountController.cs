@@ -219,7 +219,7 @@ namespace Fluxy.Controllers
                         var body = sr.ReadToEnd();
                         try
                         {
-                            string messageBody = string.Format(body, user.Email, callbackUrl, callbackUrl);
+                            string messageBody = string.Format(body, user.Email, callbackUrl);
                             await UserManager.SendEmailAsync(user.Id, "Confirm your account", messageBody);
                         }
                         catch (System.Exception ex)
@@ -240,6 +240,7 @@ namespace Fluxy.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
+        [Boilerplate.Web.Mvc.Filters.NoLowercaseQueryString]
         [Route("ConfirmEmail", Name = AccountControllerRoute.GetConfirmEmail)]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -248,7 +249,7 @@ namespace Fluxy.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(AccountControllerAction.ConfirmEmail, result.Succeeded ? "ConfirmEmail" : "Error");
+            return View(AccountControllerAction.ConfirmEmail);
         }
 
         //

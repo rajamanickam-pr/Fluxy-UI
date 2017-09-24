@@ -78,9 +78,9 @@
     <Compile Include="Mappings\Video\PrivateVideoMap.cs" />
     <Compile Include="Mappings\Video\VideoAttributesMap.cs" />
     <Compile Include="Mappings\Video\VideoSettingsMap.cs" />
-    <Compile Include="Migrations\201709240952006_Initial.cs" />
-    <Compile Include="Migrations\201709240952006_Initial.Designer.cs">
-      <DependentUpon>201709240952006_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201709241050599_Initial.cs" />
+    <Compile Include="Migrations\201709241050599_Initial.Designer.cs">
+      <DependentUpon>201709241050599_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,8 +96,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709240952006_Initial.resx">
-      <DependentUpon>201709240952006_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709241050599_Initial.resx">
+      <DependentUpon>201709241050599_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
