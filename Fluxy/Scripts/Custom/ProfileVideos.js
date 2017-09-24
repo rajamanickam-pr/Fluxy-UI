@@ -1,5 +1,6 @@
-﻿$('#Url').change(function () {
-    var urlValue = $(this).val();
+﻿function GetThumbunailUrl() {
+    debugger;
+    var urlValue = $('#Url').val();
     if (urlValue) {
         if (urlValue.indexOf("youtube") >= 0) {
             $('#VideoId').val(Getvideoid(urlValue));
@@ -9,7 +10,7 @@
             return false;
         }
     }
-})
+}
 
 function Getvideoid(videolink) {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;

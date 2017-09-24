@@ -7,7 +7,9 @@
 @foreach (var item in Model)
 {
     <div class="card card-custom">
-        <img class="card-img-top" src="data:image/png;base64,@item.ThumbunailString" alt="@item.ShortName">
+        <a href="@Url.Action("Index", "Video", routeValues: new { videoId = item.Id, title = item.Slug })">
+            <img class="card-img-top" style="width:100%;" src="data:image/png;base64,@item.ThumbunailString" alt="@item.ShortName">
+        </a>
         <div class="card-block">
             @if (IsProfileOwner)
             {

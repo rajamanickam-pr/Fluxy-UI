@@ -40,6 +40,7 @@ namespace Fluxy.Controllers
         private readonly IMapper _mapper;
         private readonly IVideoAttributesService _videoAttributesService;
         private readonly IUserSettingsService _userSettingsService;
+        private readonly IUserProfileService _userProfileService;
         private readonly IContactUsService _contactUsService;
         private readonly IManifestService _manifestService;
         private readonly IRobotsService _robotsService;
@@ -53,6 +54,7 @@ namespace Fluxy.Controllers
             IManifestService manifestService,
             IContactUsService contactUsService,
             IUserSettingsService userSettingsService,
+            IUserProfileService userProfileService,
             ILogService logService, IMapper mapper,
             IVideoAttributesService videoAttributesService,
             IBannerDetailsService bannerDetailsService,
@@ -65,6 +67,7 @@ namespace Fluxy.Controllers
             _videoAttributesService = videoAttributesService;
             _mapper = mapper;
             _userSettingsService = userSettingsService;
+            _userProfileService = userProfileService;
             _bannerDetailsService = bannerDetailsService;
             _contactUsService = contactUsService;
             _manifestService = manifestService;
@@ -85,9 +88,13 @@ namespace Fluxy.Controllers
             {
                 var userId = User.Identity.GetUserId();
                 var userSettings = await _userSettingsService.GetSingleAsync(i => i.UserId == userId);
+                var userProfile = await _userProfileService.GetSingleAsync(i => i.UserId == userId);
                 if (userSettings != null)
                 {
-                    isAdultContent = userSettings.CanISeeEPContent;
+                    if (userProfile?.Age > 18)
+                    {
+                        isAdultContent = userSettings.CanISeeEPContent;
+                    }
                 }
             }
 
