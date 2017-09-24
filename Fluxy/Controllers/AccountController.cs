@@ -317,6 +317,7 @@ namespace Fluxy.Controllers
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         [Route("ResetPassword", Name = AccountControllerRoute.GetResetPassword)]
+        [Boilerplate.Web.Mvc.Filters.NoLowercaseQueryString]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View(AccountControllerAction.ResetPassword);
