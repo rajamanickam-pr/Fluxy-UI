@@ -35,8 +35,7 @@
                 @Html.Label("Paste your embed code", htmlAttributes: new { @class = "control-label col-md-4" })
                 <div class="col-md-10">
                     @Html.TextBox("embedCode", null, htmlAttributes: new { @class = "form-control" })
-                    <small>Url is auto generated from embed code. Do not modify.</small>
-                    <small>embed code with iframe</small>
+                    <small>Paste url or embed code here</small>
                 </div>
             </div>
 
@@ -44,6 +43,7 @@
                 @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                    <small>Url is auto generated from embed code. Do not modify.</small>
                     @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
                 </div>
             </div>
