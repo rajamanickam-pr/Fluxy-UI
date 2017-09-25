@@ -19,7 +19,7 @@
             @if (HttpContext.Current.User.IsInRole("Admin"))
             {
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="alerts.html" id="EntertainmentMenu" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="#" id="EntertainmentMenu" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">Admininstration!</a>
                     <div class="dropdown-menu" aria-labelledby="EntertainmentMenu">
                         <a class="dropdown-item" href="@Url.Action("Index", "Admin")"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
