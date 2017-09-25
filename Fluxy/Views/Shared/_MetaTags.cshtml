@@ -5,10 +5,20 @@
 @using Boilerplate.Web.Mvc.OpenGraph
 
 <head @(ViewBag.OpenGraph == null ? null : Html.OpenGraphNamespace((OpenGraphMetadata)ViewBag.OpenGraph))>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106962312-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments) };
+        gtag('js', new Date());
+
+        gtag('config', 'UA-106962312-1');
+    </script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title - @Application.Name</title>
-    <link rel="canonical" href="http://www.fluxypictures.com"/>
+    <link rel="canonical" href="http://www.fluxypictures.com" />
     <meta name="title" content="FluxyPictures - Videos" />
     <meta name="keywords" content="music videos,videos,educational videos,entertainment videos,infotainment videos,health videos,travel videos,people videos,sports and politics videos">
     <meta property="bt:keywords" content="music videos,videos,educational videos,entertainment videos,infotainment videos,health videos,travel videos,people videos,sports and politics videos">
@@ -29,10 +39,10 @@
     {
         @Html.OpenGraph((OpenGraphMetadata)ViewBag.OpenGraph);
     }
-   @if (ViewBag.ReferrerMode != null)
-   {
-    @Html.ReferrerMeta((ReferrerMode)ViewBag.ReferrerMode)
-   }
+    @if (ViewBag.ReferrerMode != null)
+    {
+        @Html.ReferrerMeta((ReferrerMode)ViewBag.ReferrerMode)
+    }
     <meta http-equiv="Content-Language" content="en-US">
     <meta name="rating" content="kids,adults,aged peoples">
     <meta name="distribution" content="global" />
