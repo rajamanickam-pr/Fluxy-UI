@@ -24,13 +24,13 @@ namespace Fluxy.Services.BrowserConfig
         public string GetBrowserConfigXml()
         {
             // The URL to the 70x70 small tile image.
-            string square70x70logoUrl = this.urlHelper.Content("~/content/icons/mstile-70x70.png");
+            string square70x70logoUrl = this.urlHelper.Content("~/Images/fp_logo-purple.png");
             // The URL to the 150x150 medium tile image.
-            string square150x150logoUrl = this.urlHelper.Content("~/content/icons/mstile-150x150.png");
+            string square150x150logoUrl = this.urlHelper.Content("~/Images/fp_logo-purple.png");
             // The URL to the 310x310 large tile image.
-            string square310x310logoUrl = this.urlHelper.Content("~/content/icons/mstile-310x310.png");
+            string square310x310logoUrl = this.urlHelper.Content("~/Images/fp_logo-purple.png");
             // The URL to the 310x150 wide tile image.
-            string wide310x150logoUrl = this.urlHelper.Content("~/content/icons/mstile-310x150.png");
+            string wide310x150logoUrl = this.urlHelper.Content("~/Images/fp_logo-purple.png");
             // The colour of the tile. This colour only shows if part of your images above are transparent.
             string tileColour = "#1E1E1E";
             // Update the tile every 1440 minutes. Defines the frequency, in minutes, between poll requests. Must be 

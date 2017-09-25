@@ -35,5 +35,13 @@ namespace Fluxy.Core.Constants
                 return ConfigurationManager.AppSettings["domainName"].ToString();
             }
         }
+
+        public static string Version
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["version"].ToString();
+            }
+        }
     }
 }
