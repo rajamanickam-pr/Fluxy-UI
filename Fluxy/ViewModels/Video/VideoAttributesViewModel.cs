@@ -80,5 +80,10 @@ namespace Fluxy.ViewModels.Video
         public virtual IEnumerable<CategoryViewModel> Categories { get; set; }
         public virtual IEnumerable<LanguageViewModel> Languages { get; set; }
         public virtual IEnumerable<VideoSettingsViewModel> VideoSettingses { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

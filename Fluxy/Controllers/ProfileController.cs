@@ -75,9 +75,9 @@ namespace Fluxy.Controllers
             ViewBag.IsProfileOwner = IsProfileOwner(userId);
             var userProfileDetails = _userProfileService.GetSingle(i => i.UserId == user);
             var userProfile = _mapper.Map<UserMangementViewModel>(userProfileDetails);
-            if(string.IsNullOrEmpty(userId)&& userProfile==null)
+            if (string.IsNullOrEmpty(userId) && userProfile == null)
             {
-               return RedirectToAction(ProfileControllerAction.Edit);
+                return RedirectToAction(ProfileControllerAction.Edit);
             }
             else if (userProfile != null)
             {
@@ -174,7 +174,7 @@ namespace Fluxy.Controllers
             userSettingsDto.UserId = User.Identity.GetUserId();
             if (!string.IsNullOrEmpty(userSettingsDto.Id))
             {
-              await  _userSettingsService.UpdateAsync(userSettingsDto);
+                await _userSettingsService.UpdateAsync(userSettingsDto);
             }
             else
             {
@@ -247,7 +247,7 @@ namespace Fluxy.Controllers
         {
             var categories = _categoryService.GetAll().OrderBy(i => i.Name);
             var videoSettings = _videoSettingsService.GetAll().OrderBy(i => i.Name);
-            var language = _languageService.GetAll().OrderBy(i=>i.Name);
+            var language = _languageService.GetAll().OrderBy(i => i.Name);
             var videoAttribute = new VideoAttributesViewModel
             {
                 Categories = _mapper.Map<IEnumerable<CategoryViewModel>>(categories),
@@ -261,27 +261,31 @@ namespace Fluxy.Controllers
         [Route("PostVideos", Name = ProfileControllerRoute.PostPostVideos)]
         public virtual ActionResult PostVideos(VideoAttributesViewModel videoAttributesViewModel)
         {
-            var duplicationCheck = _videoAttributesService.GetSingle(i => i.Url.ToLower().Contains(videoAttributesViewModel.VideoId.ToLower()));
-            if (duplicationCheck == null)
+            if (ModelState.IsValid)
             {
-                var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
-                videoAttributes.UserId = User.Identity.GetUserId();
-                if (!string.IsNullOrEmpty(videoAttributes.Id))
+                var duplicationCheck = _videoAttributesService.GetSingle(i => i.Url.ToLower().Contains(videoAttributesViewModel.VideoId.ToLower()));
+                if (duplicationCheck == null)
                 {
-                    videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
-                    _videoAttributesService.Update(videoAttributes);
+                    var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
+                    videoAttributes.UserId = User.Identity.GetUserId();
+                    if (!string.IsNullOrEmpty(videoAttributes.Id))
+                    {
+                        videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                        _videoAttributesService.Update(videoAttributes);
+                    }
+                    else
+                    {
+                        videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                        _videoAttributesService.Create(videoAttributes);
+                    }
+                    return RedirectToAction(ProfileControllerAction.Index);
                 }
                 else
                 {
-                    videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
-                    _videoAttributesService.Create(videoAttributes);
+                    return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.VideoDuplication, userId = string.Empty });
                 }
-                return RedirectToAction(ProfileControllerAction.Index);
             }
-            else
-            {
-                return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.VideoDuplication, userId = string.Empty });
-            }
+            return View(ProfileControllerAction.PostVideos, videoAttributesViewModel);
         }
 
         [HttpGet]

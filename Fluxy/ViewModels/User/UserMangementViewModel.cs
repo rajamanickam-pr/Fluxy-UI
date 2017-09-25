@@ -42,5 +42,10 @@ namespace Fluxy.ViewModels.User
         public virtual ApplicationUser ApplicationUser { get; set; }
         public int TotalVideo { get; set; }
         public bool IsProfileOwner { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

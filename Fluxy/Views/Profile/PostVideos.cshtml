@@ -46,7 +46,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Title, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Title, htmlAttributes: new { @class = "form-control", required = "required" })
                     <small>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <div class="form-group">
                 @Html.Label("Paste your embed code", htmlAttributes: new { @class = "control-label col-md-4" })
                 <div class="col-md-10">
-                    @Html.TextBox("embedCode", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBox("embedCode", null, htmlAttributes: new { @class = "form-control", required = "required" })
                     <small>Paste url or embed code here</small>
                 </div>
             </div>
@@ -70,7 +70,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Url, htmlAttributes: new { @class = "form-control", @readonly="readonly" })
+                    @Html.TextBoxFor(model => model.Url, htmlAttributes: new { @class = "form-control", @readonly="readonly", required = "required" })
                     <small>Url is auto generated from embed code. Do not modify.</small>
                     <small id="urlValidator">@Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })</small>
                 </div>
@@ -79,7 +79,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Tags, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Tags, htmlAttributes: new { @class = "form-control", required = "required" })
                     <small>@Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
@@ -87,7 +87,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control textarea-editor" })
+                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control textarea-editor", required = "required" })
                     <small>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })</small>
                 </div>
             </div>

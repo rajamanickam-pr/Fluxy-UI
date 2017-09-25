@@ -10,6 +10,9 @@
                 <th>
                     <label>From</label>
                 </th>
+                <th>
+                    <label>On</label>
+                </th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -21,6 +24,9 @@
                     <tr>
                         <td>
                             <a onclick="ShowMessage(event)" data-msg="@item.Message"> @item.Email</a>
+                        </td>
+                        <td>
+                             @item.CreatedDate
                         </td>
                         <td>
                             @Html.ActionLink("Details", "Details", new { id = item.Id }) |

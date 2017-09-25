@@ -386,7 +386,12 @@
     <Content Include="Scripts\summernote\plugin\summernote-ext-video.js" />
     <Content Include="Scripts\summernote\summernote.css" />
     <Content Include="Scripts\summernote\summernote.js" />
-    <Content Include="Scripts\summernote\summernote.min.js" />
+    <Content Include="Scripts\summernote\summernote.min.css">
+      <DependentUpon>summernote.css</DependentUpon>
+    </Content>
+    <Content Include="Scripts\summernote\summernote.min.js">
+      <DependentUpon>summernote.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tether.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

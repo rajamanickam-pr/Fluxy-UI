@@ -58,5 +58,17 @@
     "inputFiles": [
       "Scripts/jquery.blockUI.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/summernote/summernote.min.js",
+    "inputFiles": [
+      "Scripts/summernote/summernote.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/summernote/summernote.min.css",
+    "inputFiles": [
+      "Scripts/summernote/summernote.css"
+    ]
   }
 ]

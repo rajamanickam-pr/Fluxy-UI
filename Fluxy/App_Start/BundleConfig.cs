@@ -51,7 +51,7 @@ namespace Fluxy
                       "~/Content/site.css",
                       "~/Content/PagedList.css",
                        "~/Content/jquery.dataTables.min.css",
-                       "~/Scripts/summernote/summernote.css"
+                       "~/Scripts/summernote/summernote.min.css"
                       ));
         }
     }
