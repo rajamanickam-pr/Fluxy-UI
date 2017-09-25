@@ -115,7 +115,7 @@ namespace Fluxy.Controllers
             var infoVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("Education")
               && i.IsPublicVideo && i.IsAdultContent == isAdultContent);
 
-            var entertainmentVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("Music")
+            var entertainmentVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("Entertainment")
              && i.IsPublicVideo && i.IsAdultContent == isAdultContent);
 
             if (!string.IsNullOrEmpty(message))
