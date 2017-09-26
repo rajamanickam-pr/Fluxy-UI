@@ -108,6 +108,7 @@
     <Compile Include="Helpers\Alerts.cs" />
     <Compile Include="Constants\ContentDeliveryNetwork.cs" />
     <Compile Include="Constants\Messages.cs" />
+    <Compile Include="Helpers\ImageHelpers.cs" />
     <Compile Include="Models\Banners\BannerDetails.cs" />
     <Compile Include="Models\Categories\Category.cs" />
     <Compile Include="Models\Localization\Language.cs" />

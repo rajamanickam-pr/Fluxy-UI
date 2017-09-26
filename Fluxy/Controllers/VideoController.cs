@@ -45,6 +45,7 @@ namespace Fluxy.Controllers
             var popularVideo = await _videoAttributesService.GetAllAsync();
             var userMayLike = await _videoAttributesService.GetAllAsync();
             var videoAttributeVm = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
+            Fluxy.Core.Helpers.ImageHelpers.GetThumbnail(videoAttributeVm.Thumbunail, videoAttributeVm.Slug);
             var recentlyAddedVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded.Take(9).OrderByDescending(i => i.CreatedDate));
             var popularVideoVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(popularVideo.Take(6).OrderBy(i => i.ViewCount));
             var userMayLikeVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(userMayLike.Where(i => i.Tags == videoAttribute.Tags).Take(9).OrderBy(i => i.ViewCount));

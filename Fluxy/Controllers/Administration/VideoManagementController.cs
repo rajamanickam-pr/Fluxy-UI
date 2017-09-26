@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Fluxy.Services.Localization;
 using Fluxy.Services.Categories;
 using Fluxy.Core.Constants.VideoManagement;
+using Boilerplate.Web.Mvc;
 
 namespace Fluxy.Controllers.Administration
 {
@@ -74,7 +75,8 @@ namespace Fluxy.Controllers.Administration
                 {
                     var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
                     videoAttributes.UserId = User.Identity.GetUserId();
-                    videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                    var friendlyTitle = FriendlyUrlHelper.GetFriendlyTitle(videoAttributes.Title);
+                    videoAttributes.Thumbunail =await Fluxy.Core.Helpers.ImageHelpers.GetYouTubeThumbnail(videoAttributesViewModel.VideoId, friendlyTitle);
                     await _videoAttributesService.CreateAsync(videoAttributes);
                     return RedirectToAction(VideoManagementControllerActions.Index);
                 }
@@ -92,18 +94,6 @@ namespace Fluxy.Controllers.Administration
             ViewBag.CategoryId = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
             ViewBag.LanguageId = new SelectList(await _languageService.GetAllAsync(), "Id", "Name");
             return View(VideoManagementControllerActions.Create,videoAttributesViewModel);
-        }
-
-        public byte[] GetYouTubeThumbnail(string videoId)
-        {
-            if (!string.IsNullOrWhiteSpace(videoId))
-            {
-                var url = $"https://img.youtube.com/vi/{videoId}/hqdefault.jpg";
-                WebClient wc = new WebClient();
-                byte[] originalData = wc.DownloadData(url);
-                return originalData;
-            }
-            return null;
         }
 
         //// GET: VideoAttributesViewModels/Edit/5
@@ -139,7 +129,8 @@ namespace Fluxy.Controllers.Administration
             {
                 var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
                 videoAttributes.UserId = User.Identity.GetUserId();
-                videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
+                var friendlyTitle = FriendlyUrlHelper.GetFriendlyTitle(videoAttributes.Title);
+                videoAttributes.Thumbunail =await Fluxy.Core.Helpers.ImageHelpers.GetYouTubeThumbnail(videoAttributesViewModel.VideoId, friendlyTitle);
                 await _videoAttributesService.UpdateAsync(videoAttributes);
                 return RedirectToAction(VideoManagementControllerActions.Index);
             }

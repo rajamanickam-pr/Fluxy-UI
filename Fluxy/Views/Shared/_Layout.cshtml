@@ -8,9 +8,14 @@
     ViewBag.Author = "Fluxy Pictures";
     ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
     ViewBag.TwitterCard = new SummaryLargeImageTwitterCard(User.Identity.Name);
+    var imgUrl =ViewBag.ImageUrl as string;
+    if(string.IsNullOrEmpty(imgUrl))
+    {
+        imgUrl = System.Web.Hosting.HostingEnvironment.MapPath($"~/Images/fp_logo-purple.png");
+    }
     ViewBag.OpenGraph = new OpenGraphWebsite(
-      ViewBag.Title,
-      new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
+    ViewBag.Title,
+      new OpenGraphImage(Url.AbsoluteContent(imgUrl)) { Height = 630, Type = ContentType.Png, Width = 1200 })
     {
         Determiner = OpenGraphDeterminer.Auto,
         SiteName = Application.Name

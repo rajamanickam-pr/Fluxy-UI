@@ -24,6 +24,7 @@ using Fluxy.Services.Localization;
 using Fluxy.ViewModels.Localization;
 using Fluxy.Core.Constants;
 using Fluxy.Core.Constants.Profile;
+using Boilerplate.Web.Mvc;
 
 namespace Fluxy.Controllers
 {
@@ -259,24 +260,26 @@ namespace Fluxy.Controllers
 
         [HttpPost]
         [Route("PostVideos", Name = ProfileControllerRoute.PostPostVideos)]
-        public virtual ActionResult PostVideos(VideoAttributesViewModel videoAttributesViewModel)
+        public async Task<ActionResult> PostVideos(VideoAttributesViewModel videoAttributesViewModel)
         {
             if (ModelState.IsValid)
             {
-                var duplicationCheck = _videoAttributesService.GetSingle(i => i.Url.ToLower().Contains(videoAttributesViewModel.VideoId.ToLower()));
+                var duplicationCheck =await _videoAttributesService.GetSingleAsync(i => i.Url.ToLower().Contains(videoAttributesViewModel.VideoId.ToLower()));
                 if (duplicationCheck == null)
                 {
                     var videoAttributes = _mapper.Map<VideoAttributesExtend>(videoAttributesViewModel);
                     videoAttributes.UserId = User.Identity.GetUserId();
+                    var friendlyTitle = FriendlyUrlHelper.GetFriendlyTitle(videoAttributes.Title);
+
                     if (!string.IsNullOrEmpty(videoAttributes.Id))
                     {
-                        videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
-                        _videoAttributesService.Update(videoAttributes);
+                        videoAttributes.Thumbunail = await Fluxy.Core.Helpers.ImageHelpers.GetYouTubeThumbnail(videoAttributesViewModel.VideoId, friendlyTitle);
+                        await _videoAttributesService.UpdateAsync(videoAttributes);
                     }
                     else
                     {
-                        videoAttributes.Thumbunail = GetYouTubeThumbnail(videoAttributesViewModel.VideoId);
-                        _videoAttributesService.Create(videoAttributes);
+                        videoAttributes.Thumbunail =await Fluxy.Core.Helpers.ImageHelpers.GetYouTubeThumbnail(videoAttributesViewModel.VideoId, friendlyTitle);
+                        await _videoAttributesService.CreateAsync(videoAttributes);
                     }
                     return RedirectToAction(ProfileControllerAction.Index);
                 }
@@ -298,18 +301,6 @@ namespace Fluxy.Controllers
                 _videoAttributesService.Delete(video);
             }
             return RedirectToAction(ProfileControllerAction.Index, routeValues: new { message = Messages.VideoDeleteConfirmation, userId = string.Empty });
-        }
-
-        public byte[] GetYouTubeThumbnail(string videoId)
-        {
-            if (!string.IsNullOrWhiteSpace(videoId))
-            {
-                var url = $"https://img.youtube.com/vi/{videoId}/hqdefault.jpg";
-                WebClient wc = new WebClient();
-                byte[] originalData = wc.DownloadData(url);
-                return originalData;
-            }
-            return null;
         }
     }
 }
