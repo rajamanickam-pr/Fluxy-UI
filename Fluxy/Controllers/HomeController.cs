@@ -31,6 +31,7 @@ using Fluxy.Services.OpenSearch;
 using Fluxy.Services.BrowserConfig;
 using Fluxy.Services.Feed;
 using Fluxy.Data.ExtentedDTO;
+using System.Web.Hosting;
 
 namespace Fluxy.Controllers
 {
@@ -276,13 +277,15 @@ namespace Fluxy.Controllers
         [Route("sitemap.xml", Name = HomeControllerRoute.GetSitemapXml), OutputCache(Duration = 86400)]
         public ActionResult SitemapXml(int? index = null)
         {
-            string content = this._sitemapService.GetSitemapXml(index);
+            //string content = this._sitemapService.GetSitemapXml(index);
 
-            if (content == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Sitemap index is out of range.");
-            }
-
+            //if (content == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Sitemap index is out of range.");
+            //}
+            //return this.Content(content, ContentType.Xml, Encoding.UTF8);
+            var path = HostingEnvironment.MapPath(Url.Content("~/App_Data/Sitemap/Sitemap.xml"));
+            string content = System.IO.File.ReadAllText(path);
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }
     }
