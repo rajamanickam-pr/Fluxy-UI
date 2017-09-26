@@ -255,6 +255,32 @@ button, .button-1, .button-2 {
         color: #00aced;
     }
 
+
+/* Play on Image
+-------------------------------------------------- */
+.video-thumbnail {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+    .video-thumbnail:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        content: "\f01d";
+        font-family: FontAwesome;
+        font-size: 100px;
+        color: #fff;
+        opacity: .8;
+        text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-thumbnail:hover:before {
+        color: #eee;
+    }
 /* BUTTON CSS
 -------------------------------------------------- */
 .btn-bd-yellow {

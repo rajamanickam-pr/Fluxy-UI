@@ -4,7 +4,7 @@
 {
     <div class="video-card card">
         <p class="text-center" data-toggle="tooltip" data-placement="top" title="Video Title"> @Model.Title</p>
-        <a href="@Url.Action("Index", "Video", routeValues: new { videoId = Model.Id, title = Model.Slug })">
+        <a class="video-thumbnail" href="@Url.Action("Index", "Video", routeValues: new { videoId = Model.Id, title = Model.Slug })">
             @if (!string.IsNullOrEmpty(Model.ThumbunailString))
             {
                 <img src="data:image/png;base64,@Model.ThumbunailString" data-src="holder.js/340x240" alt='@Model.Title' class="img-thumbnail img-responsive">
