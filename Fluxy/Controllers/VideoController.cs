@@ -31,9 +31,7 @@ namespace Fluxy.Controllers
         [Route("{videoId}/{title}", Name = VideoControllerRoutes.GetIndex)]
         public async Task<ActionResult> Index(string videoId, string title)
         {
-            if (string.IsNullOrEmpty(title)) throw new ArgumentNullException(nameof(title));
-            if (string.IsNullOrEmpty(title))
-                throw new ArgumentNullException(nameof(videoId));
+            if (string.IsNullOrEmpty(videoId)) throw new ArgumentNullException(nameof(videoId));
             SqlParameter[] sqlParam = {
                 new SqlParameter("videoId",videoId)
             };
@@ -45,6 +43,9 @@ namespace Fluxy.Controllers
             var popularVideo = await _videoAttributesService.GetAllAsync();
             var userMayLike = await _videoAttributesService.GetAllAsync();
             var videoAttributeVm = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
+            if (!string.Equals(title, videoAttributeVm.Slug))
+               return RedirectToAction("Index", routeValues: new { videoId = videoId, title = videoAttributeVm.Slug });
+
             Fluxy.Core.Helpers.ImageHelpers.GetThumbnail(videoAttributeVm.Thumbunail, videoAttributeVm.Slug);
             var recentlyAddedVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded.Take(9).OrderByDescending(i => i.CreatedDate));
             var popularVideoVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(popularVideo.Take(6).OrderBy(i => i.ViewCount));
