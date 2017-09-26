@@ -11,7 +11,7 @@
     var imgUrl =ViewBag.ImageUrl as string;
     if(string.IsNullOrEmpty(imgUrl))
     {
-        imgUrl = System.Web.Hosting.HostingEnvironment.MapPath($"~/Images/fp_logo-purple.png");
+        imgUrl = $"~/Images/fp_logo-purple.png";
     }
     ViewBag.OpenGraph = new OpenGraphWebsite(
     ViewBag.Title,

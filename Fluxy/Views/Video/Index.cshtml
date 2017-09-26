@@ -5,7 +5,7 @@
     ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples| " + Model.SelectedVideo.Title;
     var domainName = Fluxy.Core.Constants.Configurations.DomainName;
     var pageAddress = domainName + "Video/" + Model.SelectedVideo.Id + "/" + Model.SelectedVideo.Slug + "/";
-    ViewBag.ImageUrl = System.Web.Hosting.HostingEnvironment.MapPath($"~/Images/{Model.SelectedVideo.Slug}{".png"}");
+    ViewBag.ImageUrl = $"~/Images/{Model.SelectedVideo.Slug}{".png"}";
 }
 <div class="container">
     <div class="row">
