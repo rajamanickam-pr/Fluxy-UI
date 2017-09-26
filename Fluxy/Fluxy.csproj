@@ -393,6 +393,16 @@
       <DependentUpon>summernote.js</DependentUpon>
     </Content>
     <Content Include="Scripts\tether.min.js" />
+    <Content Include="Scripts\widgets.es5.js">
+      <DependentUpon>widgets.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\widgets.es5.min.js">
+      <DependentUpon>widgets.es5.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\widgets.js" />
+    <Content Include="Scripts\widgets.min.js">
+      <DependentUpon>widgets.js</DependentUpon>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

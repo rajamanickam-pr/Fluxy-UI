@@ -14,7 +14,7 @@
 
         gtag('config', 'UA-106962312-1');
     </script>
-
+    <meta name="p:domain_verify" content="dc3a176a1a4846838e98dd44c1ec314d" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title - @Application.Name</title>
@@ -44,12 +44,9 @@
         @Html.ReferrerMeta((ReferrerMode)ViewBag.ReferrerMode)
     }
     <meta http-equiv="Content-Language" content="en-US">
-    <meta name="rating" content="kids,adults,aged peoples">
+    <meta name="rating" content="kids,adults,all age group peoples">
     <meta name="distribution" content="global" />
-
-
     <link rel="icon" href="../../favicon.ico">
-
     <link rel="manifest" href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')">
     <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml">
     <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="Fluxy Pictures Search" type="application/opensearchdescription+xml">

@@ -70,5 +70,11 @@
     "inputFiles": [
       "Scripts/summernote/summernote.css"
     ]
+  },
+  {
+    "outputFileName": "Scripts/widgets.min.js",
+    "inputFiles": [
+      "Scripts/widgets.js"
+    ]
   }
 ]

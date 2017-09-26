@@ -43,5 +43,13 @@ namespace Fluxy.Core.Constants
                 return ConfigurationManager.AppSettings["version"].ToString();
             }
         }
+
+        public static string PinterestUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["pinterestUrl"].ToString();
+            }
+        }
     }
 }

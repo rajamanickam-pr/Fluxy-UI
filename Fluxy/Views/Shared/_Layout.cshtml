@@ -7,7 +7,7 @@
 @{
     ViewBag.Author = "Fluxy Pictures";
     ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
-    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard(User.Identity.Name);
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("fluxy_pictures");
     var imgUrl =ViewBag.ImageUrl as string;
     if(string.IsNullOrEmpty(imgUrl))
     {

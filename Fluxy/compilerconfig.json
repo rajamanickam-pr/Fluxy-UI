@@ -10,5 +10,9 @@
   {
     "outputFile": "Scripts/Custom/ProfileVideos.min.es5.js",
     "inputFile": "Scripts/Custom/ProfileVideos.min.js"
+  },
+  {
+    "outputFile": "Scripts/widgets.es5.js",
+    "inputFile": "Scripts/widgets.js"
   }
 ]
