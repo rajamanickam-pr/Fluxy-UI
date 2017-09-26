@@ -1,7 +1,7 @@
 ﻿@model List<Fluxy.ViewModels.Banners.BannerDetailsViewModel>
 
 @{
-    var bannerClasses = new string[] { "first-class", "second-class", "third-class", "fourth-class", "fifth-class" };
+    var bannerClasses = new string[] { "first-slide", "second-slide", "third-slide", "fourth-slide", "fifth-slide" };
     var bannerButtonClasses = new string[] { "text-left", "text-right", "text-left", "", "text-right" };
 }
 
@@ -27,7 +27,7 @@
             if (i == 0)
             {
                 <div class="carousel-item active">
-                    <img class="@bannerClasses[i]" src="data:image/gif;base64,@Model[i].ImageString">
+                    <img class="@bannerClasses[i]" src="data:image/gif;base64,@Model[i].ImageString" alt="@bannerClasses[i]">
                     <div class="container">
                         <div class="carousel-caption d-none d-md-block @bannerButtonClasses[i]">
                             <h1>@Model[i].Headline</h1>
@@ -39,18 +39,21 @@
                     </div>
                 </div>
             }
-            <div class="carousel-item">
-                <img class="@bannerClasses[i]" src="data:image/gif;base64,@Model[i].ImageString">
-                <div class="container">
-                    <div class="carousel-caption d-none d-md-block @bannerButtonClasses[i]">
-                        <h1>@Model[i].Headline</h1>
-                        <p>
-                            @Model[i].Slogans
-                        </p>
-                        <p><a class="btn btn-lg btn-primary" href="@Model[i].ButtonUrl" role="button">@Model[i].ButtonText</a></p>
+            else
+            {
+                <div class="carousel-item">
+                    <img class="@bannerClasses[i]" src="data:image/gif;base64,@Model[i].ImageString" alt="@bannerClasses[i]">
+                    <div class="container">
+                        <div class="carousel-caption d-none d-md-block @bannerButtonClasses[i]">
+                            <h1>@Model[i].Headline</h1>
+                            <p>
+                                @Model[i].Slogans
+                            </p>
+                            <p><a class="btn btn-lg btn-primary" href="@Model[i].ButtonUrl" role="button">@Model[i].ButtonText</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
     </div>
 
