@@ -36,6 +36,7 @@ namespace Fluxy.Data
         public FluxyContext()
             : base("Name=FluxyContext")
         {
+            this.Configuration.LazyLoadingEnabled = true;
             Database.SetInitializer(new FluxyDbInitializer());
         }
 

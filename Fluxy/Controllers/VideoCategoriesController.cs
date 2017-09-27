@@ -27,7 +27,7 @@ namespace Fluxy.Controllers
         #region General
 
         [HttpGet]
-        [Route("AutoVehicles", Name = VideoCategoriesRoute.GetAutoVehicles)]
+        [Route("AutoVehicles/{page?}", Name = VideoCategoriesRoute.GetAutoVehicles)]
         public async Task<ActionResult> AutoVehicles(int? page)
         {
             int pageIndex = 1;
@@ -40,7 +40,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("TravelEvents", Name = VideoCategoriesRoute.GetTravelEvents)]
+        [Route("TravelEvents/{page?}", Name = VideoCategoriesRoute.GetTravelEvents)]
         public async Task<ActionResult> TravelEvents(int? page)
         {
             int pageIndex = 1;
@@ -54,7 +54,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("PeopleBlogs", Name = VideoCategoriesRoute.GetPeopleBlogs)]
+        [Route("PeopleBlogs/{page?}", Name = VideoCategoriesRoute.GetPeopleBlogs)]
         public async Task<ActionResult> PeopleBlogs(int? page)
         {
             int pageIndex = 1;
@@ -68,7 +68,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("PetsAnimals", Name = VideoCategoriesRoute.GetPetsAnimals)]
+        [Route("PetsAnimals/{page?}", Name = VideoCategoriesRoute.GetPetsAnimals)]
         public async Task<ActionResult> PetsAnimals(int? page)
         {
             int pageIndex = 1;
@@ -86,7 +86,7 @@ namespace Fluxy.Controllers
         #region Infotainment
 
         [HttpGet]
-        [Route("ScienceTechnology", Name = VideoCategoriesRoute.GetScienceTechnology)]
+        [Route("ScienceTechnology/{page?}", Name = VideoCategoriesRoute.GetScienceTechnology)]
         public async Task<ActionResult> ScienceTechnology(int? page)
         {
             int pageIndex = 1;
@@ -100,7 +100,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("NewsPolitics", Name = VideoCategoriesRoute.GetNewsPolitics)]
+        [Route("NewsPolitics/{page?}", Name = VideoCategoriesRoute.GetNewsPolitics)]
         public async Task<ActionResult> NewsPolitics(int? page)
         {
             int pageIndex = 1;
@@ -113,7 +113,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("Health", Name = VideoCategoriesRoute.GetHealth)]
+        [Route("Health/{page?}", Name = VideoCategoriesRoute.GetHealth)]
         public async Task<ActionResult> Health(int? page)
         {
             int pageIndex = 1;
@@ -126,7 +126,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("Devotional", Name = VideoCategoriesRoute.GetDevotional)]
+        [Route("Devotional/{page?}", Name = VideoCategoriesRoute.GetDevotional)]
         public async Task<ActionResult> Devotional(int? page)
         {
             int pageIndex = 1;
@@ -139,7 +139,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("Documentary", Name = VideoCategoriesRoute.GetDocumentary)]
+        [Route("Documentary/{page?}", Name = VideoCategoriesRoute.GetDocumentary)]
         public async Task<ActionResult> Documentary(int? page)
         {
             int pageIndex = 1;
@@ -152,7 +152,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("Education", Name = VideoCategoriesRoute.GetEducation)]
+        [Route("Education/{page?}", Name = VideoCategoriesRoute.GetEducation)]
         public async Task<ActionResult> Education(int? page)
         {
             int pageIndex = 1;
@@ -169,7 +169,7 @@ namespace Fluxy.Controllers
         #region Entertainment
 
         [HttpGet]
-        [Route("Music", Name = VideoCategoriesRoute.GetMusic)]
+        [Route("Music/{page?}", Name = VideoCategoriesRoute.GetMusic)]
         public async Task<ActionResult> Music(int? page)
         {
             int pageIndex = 1;
@@ -182,7 +182,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("Gaming", Name = VideoCategoriesRoute.GetGaming)]
+        [Route("Gaming/{page?}", Name = VideoCategoriesRoute.GetGaming)]
         public async Task<ActionResult> Gaming(int? page)
         {
             int pageIndex = 1;
@@ -195,7 +195,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("Sports", Name = VideoCategoriesRoute.GetSports)]
+        [Route("Sports/{page?}", Name = VideoCategoriesRoute.GetSports)]
         public async Task<ActionResult> Sports(int? page)
         {
             int pageIndex = 1;
@@ -208,7 +208,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("FilmAnimation", Name = VideoCategoriesRoute.GetFilmAnimation)]
+        [Route("FilmAnimation/{page?}", Name = VideoCategoriesRoute.GetFilmAnimation)]
         public async Task<ActionResult> FilmAnimation(int? page)
         {
             int pageIndex = 1;
@@ -221,7 +221,7 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("Entertainment", Name = VideoCategoriesRoute.GetEntertainment)]
+        [Route("Entertainment/{page?}", Name = VideoCategoriesRoute.GetEntertainment)]
         public async Task<ActionResult> Entertainment(int? page)
         {
             int pageIndex = 1;

@@ -80,6 +80,7 @@ namespace Fluxy.Controllers
         }
 
         [Route("", Name = HomeControllerRoute.GetIndex)]
+        [OutputCache(Duration = 300, VaryByParam = "none")]
         public async Task<ActionResult> Index(string message)
         {
             var isAdultContent = false;
@@ -101,34 +102,34 @@ namespace Fluxy.Controllers
 
             if (isAdultContent)
             {
-                recentlyAdded = await _videoAttributesService.GetListAsync(i => i.IsPublicVideo);
-                popularVideos = await _videoAttributesService.GetListAsync(i => i.IsPublicVideo);
+                recentlyAdded =  _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.CreatedDate).Take(9);
+                popularVideos =  _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
             }
             else
             {
-                recentlyAdded = await _videoAttributesService.GetListAsync(i => i.IsPublicVideo && !i.IsAdultContent);
-                popularVideos = await _videoAttributesService.GetListAsync(i => i.IsPublicVideo && !i.IsAdultContent);
+                recentlyAdded =  _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
+                popularVideos =  _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
             }
 
-            var generalVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("People & Blogs")
-              && i.IsPublicVideo && i.IsAdultContent == isAdultContent);
+            var generalVideos =  _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs")
+              && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
 
-            var infoVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("Education")
-              && i.IsPublicVideo && i.IsAdultContent == isAdultContent);
+            var infoVideos =  _videoAttributesService.GetList(i => i.Category.Name.Contains("Education")
+              && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
 
-            var entertainmentVideos = await _videoAttributesService.GetListAsync(i => i.Category.Name.Contains("Entertainment")
-             && i.IsPublicVideo && i.IsAdultContent == isAdultContent);
+            var entertainmentVideos =  _videoAttributesService.GetList(i => i.Category.Name.Contains("Entertainment")
+             && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
 
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
 
             HomeViewModel homeViewModel = new HomeViewModel
             {
-                RecentVideos = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded.OrderByDescending(i => i.CreatedDate).Take(9)),
-                PopularVideos = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos.OrderByDescending(i => i.ViewCount).Take(9)),
-                General = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos.OrderByDescending(i => i.ViewCount).Take(9)),
-                Infotainment = _mapper.Map<List<VideoAttributesViewModel>>(infoVideos.OrderByDescending(i => i.ViewCount).Take(9)),
-                Entertainment = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos.OrderByDescending(i => i.ViewCount).Take(9)),
+                RecentVideos = _mapper.Map<List<VideoAttributesViewModel>>(recentlyAdded),
+                PopularVideos = _mapper.Map<List<VideoAttributesViewModel>>(popularVideos),
+                General = _mapper.Map<List<VideoAttributesViewModel>>(generalVideos),
+                Infotainment = _mapper.Map<List<VideoAttributesViewModel>>(infoVideos),
+                Entertainment = _mapper.Map<List<VideoAttributesViewModel>>(entertainmentVideos),
                 Banners = _mapper.Map<List<BannerDetailsViewModel>>(_bannerDetailsService.GetAll())
             };
 
