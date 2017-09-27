@@ -12,6 +12,7 @@
                 @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new
            {
                @class = "nav-link"
+           })
                 <div class="dropdown-menu" aria-labelledby="GeneralMenu">
                     <a class="dropdown-item" href="@Url.Action("AutoVehicles", "VideoCategories", routeValues: new { page = 1 })"><i class="fa fa-cogs" aria-hidden="true"></i> Autos and Vehicles</a>
                     <a class="dropdown-item" href="@Url.Action("TravelEvents", "VideoCategories", routeValues: new { page = 1 })"><i class="fa fa-suitcase" aria-hidden="true"></i> Travel & Events</a>
