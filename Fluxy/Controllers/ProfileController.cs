@@ -67,8 +67,8 @@ namespace Fluxy.Controllers
         }
 
         [HttpGet]
-        [Route("", Name = ProfileControllerRoute.GetIndex)]
-        public ActionResult Index(string message, string userId)
+        [Route("{userId?}/{message?}", Name = ProfileControllerRoute.GetIndex)]
+        public ActionResult Index(string userId=null,string message=null)
         {
             var currentUserId = User.Identity.GetUserId();
             var user = !string.IsNullOrEmpty(userId) ? userId : currentUserId;
@@ -87,7 +87,7 @@ namespace Fluxy.Controllers
 
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
-
+            userId = string.Empty;
             return View(ProfileControllerAction.Index, userProfile);
         }
 

@@ -10,7 +10,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Hello @User.Identity.GetUserName()!</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="@Url.Action("Index", "Profile")"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+                    <a class="dropdown-item" href="@Url.Action("Index", "Profile",routeValues:new {userId=String.Empty })"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
                     <a class="dropdown-item" href="@Url.Action("ChangePassword", "Manage")"><i class="fa fa-key" aria-hidden="true"></i> Change password</a>
                     <a class="dropdown-item" href="@Url.Action("Edit", "Profile")"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
                     <a class="dropdown-item" id="btnLogout" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Log off</a>

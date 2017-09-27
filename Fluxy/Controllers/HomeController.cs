@@ -80,7 +80,6 @@ namespace Fluxy.Controllers
         }
 
         [Route("", Name = HomeControllerRoute.GetIndex)]
-        [OutputCache(Duration = 300, VaryByParam = "none")]
         public async Task<ActionResult> Index(string message)
         {
             var isAdultContent = false;
