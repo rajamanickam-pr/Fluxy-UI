@@ -20,7 +20,9 @@ namespace Fluxy
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval",
                 ContentDeliveryNetwork.Microsoft.JQueryValidateUrl).Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate.min.js",
+                        "~/Scripts/jquery.validate.unobtrusive.min.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -29,7 +31,6 @@ namespace Fluxy
                      "~/Scripts/bootstrap.js",
                      "~/Scripts/holder.min.js",
                      "~/Scripts/pace.min.js",
-                     "~/Scripts/jquery.unobtrusive-ajax.min.js",
                       "~/Scripts/jquery.dataTables.min.js",
                       "~/Scripts/summernote/summernote.min.js"
                       ));
