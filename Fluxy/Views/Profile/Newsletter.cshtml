@@ -9,15 +9,15 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Id)
         <div class="form-horizontal">
-            <h4>Newsletter Subscription</h4>
+            <h4 class="wow bounceInLeft">Newsletter Subscription</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
-            <small>Select your favorite channels for getting instant updates.</small>
+            <small class="wow fadeInRight">Select your favorite channels for getting instant updates.</small>
             <div class="row newsletter">
                 @foreach (var item in Model.Categories)
                 {
-                    <div class="col-md-4">
+                    <div class="col-md-4 wow fadeInRight">
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input id="@item.Id" name="@item.Name" type="checkbox" class="form-check-input">
@@ -28,7 +28,7 @@
                 }
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="button" onclick="return GetAllSubscription()" value="Save" class="btn btn-primary" />
                     @Html.ActionLink("Cancel", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-link" })

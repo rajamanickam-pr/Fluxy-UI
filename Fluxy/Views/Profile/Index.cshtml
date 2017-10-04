@@ -8,7 +8,7 @@
 <link href="~/Content/Custom/ProfileIndex.min.css" rel="stylesheet" />
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 wow bounceInLeft">
             <div class="card card-custom">
                 @if (!string.IsNullOrEmpty(Model?.DisplayPictureString))
                 {
@@ -104,7 +104,7 @@
         <div class="col-md-6">
             @if (IsProfileOwner)
             {
-                <div class="card card-custom">
+                <div class="card card-custom wow flipInX">
                     <div class="card-block">
                         <h4 class="card-title">Hello buddy!</h4>
                         <p class="card-text">Prmote your video here.</p>
@@ -116,7 +116,7 @@
             }
             else
             {
-                <div class="card card-custom">
+                <div class="card card-custom wow flipInX">
                     <div class="card-block">
                         <h4 class="card-title">Hello there!</h4>
                         <p class="card-text">Thanks for visiting my profile. Hope you have a good day!</p>
@@ -129,7 +129,7 @@
         </div>
         @if (IsProfileOwner)
         {
-            <div class="col-md-3">
+            <div class="col-md-3 wow bounceInRight">
                 <div class="card card-custom">
                     <div class="card-block">
                         <h4 class="card-title">Settings</h4>

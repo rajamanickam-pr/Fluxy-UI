@@ -3,18 +3,18 @@
     ViewBag.Title = "Parental Settings";
     ViewBag.Description = "A free community for sharing youtube videos and content for all age group peoples| Parental Settings";
 }
-<div class="container">
+<div class="container" style="margin-bottom:200px;">
     @using (Html.BeginForm("Privacy", "Profile", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.Id)
         <div class="form-horizontal">
-            <h4>Parental Settings</h4>
+            <h4 class="wow bounceInLeft">Parental Settings</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
 
-            <div class="form-group">
+            <div class="form-group wow fadeInRight">
                 <label class="form-check-label">
                     @Html.CheckBoxFor(model => model.CanISeeEPContent)
                     See 18+ Content
@@ -26,7 +26,7 @@
                     Is My Picture Public
                 </label>
             </div>*@
-            <div class="form-group">
+            <div class="form-group wow fadeInUp">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-primary" />
                     @Html.ActionLink("Cancel", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-link" })

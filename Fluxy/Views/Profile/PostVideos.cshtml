@@ -41,9 +41,9 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.VideoId)
         <div class="form-horizontal">
-            <h4>Share Video</h4>
+            <h4 class="wow bounceInLeft">Share Video</h4>
             <hr />
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="0.2s">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.Title, htmlAttributes: new { @class = "form-control", required = "required" })
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="0.4s">
                 @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.ShortName, htmlAttributes: new { @class = "form-control" })
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="0.6s">
                 @Html.Label("Paste your embed code", htmlAttributes: new { @class = "control-label col-md-4" })
                 <div class="col-md-10">
                     @Html.TextBox("embedCode", null, htmlAttributes: new { @class = "form-control", required = "required" })
@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="0.8s">
                 @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.Url, htmlAttributes: new { @class = "form-control", @readonly="readonly", required = "required" })
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="1s">
                 @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.Tags, htmlAttributes: new { @class = "form-control", required = "required" })
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="1.2s">
                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control textarea-editor", required = "required" })
@@ -92,27 +92,27 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="1.4s">
                 <label class="form-check-label">
                     @Html.CheckBoxFor(model => model.IsPublicVideo)
                     Public Video
                 </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="1.6s">
                 <label class="form-check-label">
                     @Html.CheckBoxFor(model => model.IsAdultContent)
                     Adult Content
                 </label>
             </div>
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="1.8s">
                 <label class="form-check-label">
                     @Html.CheckBoxFor(model => model.IsAllowFullScreen)
                     Full Screen
                 </label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="2s">
                 <label class="control-label col-md-2">Category</label>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.CategoryId, categoyList, htmlAttributes: new { @class = "form-control" })
@@ -120,7 +120,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="2.2s">
                 <label class="control-label col-md-2">Language</label>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.LanguageId, languageList, htmlAttributes: new { @class = "form-control" })
@@ -128,14 +128,14 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="2.4s">
                 <label class="control-label col-md-2">Video Settings</label>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.VideoSettingsId, videoSettingsList, htmlAttributes: new { @class = "form-control" })
                     <small>@Html.ValidationMessageFor(model => model.VideoSettingsId, "", new { @class = "text-danger" })</small>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group wow fadeInUp" data-wow-delay="2.6s">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" onclick="return GetThumbunailUrl()" value="Create" class="btn btn-primary" />
                     @Html.ActionLink("Cancel", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-link" })
