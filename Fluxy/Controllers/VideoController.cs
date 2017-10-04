@@ -29,7 +29,7 @@ namespace Fluxy.Controllers
         // GET: Video
         [HttpGet]
         [Route("{videoId}/{title}", Name = VideoControllerRoutes.GetIndex)]
-        public async Task<ActionResult> Index(string videoId, string title)
+        public ActionResult Index(string videoId, string title)
         {
             if (string.IsNullOrEmpty(videoId)) throw new ArgumentNullException(nameof(videoId));
             SqlParameter[] sqlParam = {
@@ -39,17 +39,17 @@ namespace Fluxy.Controllers
             _videoAttributesService.ExecuteNonQuery(query, sqlParam);
 
             var videoAttribute = _videoAttributesService.GetSingle(i => i.Id == videoId);
-            var recentlyAdded = await _videoAttributesService.GetAllAsync();
-            var popularVideo = await _videoAttributesService.GetAllAsync();
-            var userMayLike = await _videoAttributesService.GetAllAsync();
+            var recentlyAdded =  _videoAttributesService.GetAll().OrderByDescending(i => i.CreatedDate).Take(9);
+            var popularVideo =  _videoAttributesService.GetAll().OrderByDescending(i => i.ViewCount).Take(6);
+            var userMayLike =  _videoAttributesService.GetAll().Where(i => i.Tags == videoAttribute.Tags).OrderByDescending(i => i.ViewCount).Take(9);
             var videoAttributeVm = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
             if (!string.Equals(title, videoAttributeVm.Slug))
                return RedirectToAction("Index", routeValues: new { videoId = videoId, title = videoAttributeVm.Slug });
 
             Fluxy.Core.Helpers.ImageHelpers.GetThumbnail(videoAttributeVm.Thumbunail, videoAttributeVm.Slug);
-            var recentlyAddedVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded.Take(9).OrderByDescending(i => i.CreatedDate));
-            var popularVideoVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(popularVideo.Take(6).OrderBy(i => i.ViewCount));
-            var userMayLikeVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(userMayLike.Where(i => i.Tags == videoAttribute.Tags).Take(9).OrderBy(i => i.ViewCount));
+            var recentlyAddedVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded);
+            var popularVideoVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(popularVideo);
+            var userMayLikeVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(userMayLike);
 
             var showVideoViewModel = new ShowVideoViewModel
             {
