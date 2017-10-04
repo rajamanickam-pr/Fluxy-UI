@@ -280,6 +280,10 @@
     <Content Include="App_Data\Sitemap\sitemap.xml" />
     <Content Include="App_Data\Templates\ForgotPasswordMailTemplate.txt" />
     <Content Include="App_Data\Templates\AccountConfirmationMailTemplate.txt" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css">
+      <DependentUpon>animate.css</DependentUpon>
+    </Content>
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="Images\fp_logo-purple.png" />
@@ -403,6 +407,10 @@
     <Content Include="Scripts\widgets.js" />
     <Content Include="Scripts\widgets.min.js">
       <DependentUpon>widgets.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\wow.js" />
+    <Content Include="Scripts\wow.min.js">
+      <DependentUpon>wow.js</DependentUpon>
     </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>

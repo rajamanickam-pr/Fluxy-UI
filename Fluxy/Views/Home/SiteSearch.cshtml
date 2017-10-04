@@ -5,13 +5,13 @@
 }
 <div class="container">
 
-    <h2>Video Search</h2>
+    <h2 class="wow bounceInLeft">Video Search</h2>
     <hr />
     @using (Html.BeginForm("SiteSearch", "Home", FormMethod.Post))
     {
         <div class="row">
             <div class="col-md-12">
-                <div class="input-group">
+                <div class="input-group wow fadeInUp" data-wow-delay="0.4s">
                     <input type="text" class="form-control" name="searchText" required placeholder="Search for...">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Go!</button>
@@ -23,7 +23,7 @@
         if (Model != null)
         {
 
-            <div class="alert alert-info" style="margin-top:20px" role="alert">
+            <div class="alert alert-info wow flipInX" style="margin-top:20px" role="alert">
                 <strong>Search Result</strong>
             </div>
             if (Model.Count() > 0)

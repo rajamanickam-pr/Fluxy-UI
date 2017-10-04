@@ -34,6 +34,10 @@ namespace Fluxy
                       "~/Scripts/jquery.dataTables.min.js",
                       "~/Scripts/summernote/summernote.min.js"
                       ));
+
+            bundles.Add(new ScriptBundle("~/bundles/wow").Include(
+                      "~/Scripts/wow.min.js"
+                     ));
         }
 
         private static void AddCss(BundleCollection bundles)
@@ -52,7 +56,8 @@ namespace Fluxy
                       "~/Content/site.css",
                       "~/Content/PagedList.css",
                        "~/Content/jquery.dataTables.min.css",
-                       "~/Scripts/summernote/summernote.min.css"
+                       "~/Scripts/summernote/summernote.min.css",
+                       "~/Content/animate.min.css"
                       ));
         }
     }

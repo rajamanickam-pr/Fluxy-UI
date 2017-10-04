@@ -9,28 +9,28 @@
         <div class="col-md-8">
 
             <div class="card-group mb-0">
-                <div class="card p-4">
+                <div class="card p-4 wow bounceInLeft">
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                     {
+                    {
                         @Html.AntiForgeryToken()
                         <div class="card-body">
                             <h1>Login</h1>
                             <p class="text-muted">Sign In to your account</p>
                             <small> @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</small>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 wow fadeInUp" data-wow-delay="0.4s">
                                 <span class="input-group-addon">
                                     <i class="fa fa-user"></i>
                                 </span>
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Username",required="required" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Username", required = "required" })
                             </div>
                             <small> @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })</small>
-                            <div class="input-group mb-4">
+                            <div class="input-group mb-4 wow fadeInUp" data-wow-delay="0.8s">
                                 <span class="input-group-addon">
                                     <i class="fa fa-lock"></i>
                                 </span>
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "required" })
                             </div>
-                            <div class="row">
+                            <div class="row wow fadeInUp" data-wow-delay="1.2s">
                                 <div class="col-6">
                                     <input type="submit" class="btn btn-primary" value="Login" />
                                 </div>
@@ -41,21 +41,20 @@
                         </div>
                     }
                 </div>
-                <div class="card text-white bg-primary py-5 d-md-down-none">
+                <div class="card text-white bg-primary py-5 d-md-down-none wow bounceInRight">
                     <div class="card-body text-center">
                         <div>
                             <h2>External login</h2>
                             <p>Jump into to get more stuffs and fun.</p>
                             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                           @*@Html.ActionLink("Register Now!", "Register", routeValues: null, htmlAttributes: new { @class = "btn btn-bd-yellow active mt-3" })*@
+                            @*@Html.ActionLink("Register Now!", "Register", routeValues: null, htmlAttributes: new { @class = "btn btn-bd-yellow active mt-3" })*@
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <section id="socialLoginForm">
-                </section>
+                <section id="socialLoginForm"></section>
             </div>
         </div>
     </div>

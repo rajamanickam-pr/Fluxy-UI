@@ -76,5 +76,17 @@
     "inputFiles": [
       "Scripts/widgets.js"
     ]
+  },
+  {
+    "outputFileName": "Content/animate.min.css",
+    "inputFiles": [
+      "Content/animate.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/wow.min.js",
+    "inputFiles": [
+      "Scripts/wow.js"
+    ]
   }
 ]
