@@ -107,16 +107,16 @@ namespace Fluxy.Controllers
                 recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.CreatedDate).Take(9);
                 popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
                 generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs") && i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
-                infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education") && i.IsPublicVideo == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-                entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Entertainment") && i.IsPublicVideo == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education") && i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
+                entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Entertainment") && i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
             }
             else
             {
                 recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
                 popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
                 generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs") && i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-                infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education") && i.IsPublicVideo == isAdultContent && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-                entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Entertainment") && i.IsPublicVideo == isAdultContent && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education") && i.IsPublicVideo&& !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Entertainment") && i.IsPublicVideo&& !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
             }
 
             if (!string.IsNullOrEmpty(message))
