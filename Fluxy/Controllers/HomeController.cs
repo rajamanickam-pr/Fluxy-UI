@@ -85,6 +85,9 @@ namespace Fluxy.Controllers
             var isAdultContent = false;
             IEnumerable<VideoAttributesExtend> recentlyAdded;
             IEnumerable<VideoAttributesExtend> popularVideos;
+            IEnumerable<VideoAttributesExtend> generalVideos;
+            IEnumerable<VideoAttributesExtend> infoVideos;
+            IEnumerable<VideoAttributesExtend> entertainmentVideos;
             if (User.Identity.IsAuthenticated)
             {
                 var userId = User.Identity.GetUserId();
@@ -101,23 +104,20 @@ namespace Fluxy.Controllers
 
             if (isAdultContent)
             {
-                recentlyAdded =  _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.CreatedDate).Take(9);
-                popularVideos =  _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
+                recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.CreatedDate).Take(9);
+                popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
+                generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs") && i.IsPublicVideo).OrderByDescending(i => i.ViewCount).Take(9);
+                infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education") && i.IsPublicVideo == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Entertainment") && i.IsPublicVideo == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
             }
             else
             {
-                recentlyAdded =  _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
-                popularVideos =  _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                recentlyAdded = _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.CreatedDate).Take(9);
+                popularVideos = _videoAttributesService.GetList(i => i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                generalVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs") && i.IsPublicVideo && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                infoVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Education") && i.IsPublicVideo == isAdultContent && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
+                entertainmentVideos = _videoAttributesService.GetList(i => i.Category.Name.Contains("Entertainment") && i.IsPublicVideo == isAdultContent && !i.IsAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
             }
-
-            var generalVideos =  _videoAttributesService.GetList(i => i.Category.Name.Contains("People & Blogs")
-              && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-
-            var infoVideos =  _videoAttributesService.GetList(i => i.Category.Name.Contains("Education")
-              && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
-
-            var entertainmentVideos =  _videoAttributesService.GetList(i => i.Category.Name.Contains("Entertainment")
-             && i.IsPublicVideo && i.IsAdultContent == isAdultContent).OrderByDescending(i => i.ViewCount).Take(9);
 
             if (!string.IsNullOrEmpty(message))
                 Warning(message);
