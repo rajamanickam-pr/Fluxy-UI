@@ -39,12 +39,15 @@ namespace Fluxy.Controllers
             _videoAttributesService.ExecuteNonQuery(query, sqlParam);
 
             var videoAttribute = _videoAttributesService.GetSingle(i => i.Id == videoId);
-            var recentlyAdded =  _videoAttributesService.GetAll().OrderByDescending(i => i.CreatedDate).Take(9);
-            var popularVideo =  _videoAttributesService.GetAll().OrderByDescending(i => i.ViewCount).Take(6);
-            var userMayLike =  _videoAttributesService.GetAll().Where(i => i.Tags == videoAttribute.Tags).OrderByDescending(i => i.ViewCount).Take(9);
+            var recentlyAdded = _videoAttributesService.GetAll().OrderByDescending(i => i.CreatedDate).Take(9);
+            var popularVideo = _videoAttributesService.GetAll().OrderByDescending(i => i.ViewCount).Take(6);
+            var userMayLike = _videoAttributesService
+                .GetList(i => i.Tags.ToLower() == videoAttribute.Tags.ToLower())
+                .OrderByDescending(i => i.ViewCount).Take(9);
+
             var videoAttributeVm = _mapper.Map<VideoAttributesViewModel>(videoAttribute);
             if (!string.Equals(title, videoAttributeVm.Slug))
-               return RedirectToAction("Index", routeValues: new { videoId = videoId, title = videoAttributeVm.Slug });
+                return RedirectToAction("Index", routeValues: new { videoId = videoId, title = videoAttributeVm.Slug });
 
             Fluxy.Core.Helpers.ImageHelpers.GetThumbnail(videoAttributeVm.Thumbunail, videoAttributeVm.Slug);
             var recentlyAddedVm = _mapper.Map<IEnumerable<VideoAttributesViewModel>>(recentlyAdded);
